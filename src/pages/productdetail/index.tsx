@@ -84,10 +84,10 @@ const ProductDetail = (): JSX.Element => {
             </div>
             <div  >
               <div className="ending-soon">
-                {
+                {/* {
                          
-                }
                 <NFTCard cardData={item} key={idx}></NFTCard>
+                } */}
               </div>
             </div>
           </div>

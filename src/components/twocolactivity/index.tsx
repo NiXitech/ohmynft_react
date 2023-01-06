@@ -4,7 +4,7 @@ import { TimeInterval } from "../../libs/userAgent";
 import { AllActivityItem, CallBackData } from "../../types/types";
 
 const TwoColActivity = (): JSX.Element => {
-  const [activityList, setActivityList] = useState([])
+  const [activityList, setActivityList] = useState<any>([])
   const [loading, setLoading] = useState(true)
   const getAllActivityFun = async () => {
     // try {
@@ -101,7 +101,7 @@ const TwoColActivity = (): JSX.Element => {
                   {
                     activityList.length > 0
                       ?
-                      activityList.map((item: AllActivityItem, index) => {
+                      activityList.map((item: AllActivityItem, index:number) => {
                         return <article key={index} className="border-b border-slate-500 py-3 lg:py-1 hover:bg-slate-700 flex items-center flex-wrap">
                           <div className="py-3 w-6/12 md:w-4/12 relative">
                             <a href={`/mw/${item.display_name}`} className="flex items-center overflow-hidden mr-3 group">
