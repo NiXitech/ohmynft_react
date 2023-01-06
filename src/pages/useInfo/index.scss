@@ -1,0 +1,16 @@
+@import '../../style/index.scss';
+.mytable{
+    font-family: AvenirBlack;
+   th, td {
+    border-bottom: 1px solid rgb(63 139 255/.46);
+    border-collapse: collapse;
+    padding: .75rem .6rem;
+    min-width: 6em;
+    line-height: 2;
+  }
+  th{
+    background: linear-gradient(rgba(0, 73, 138, 0), rgb(13, 60, 111));
+    position: sticky;
+    top: 0;
+  }
+}

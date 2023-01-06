@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="18px" viewBox="0 0 12 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon</title>
+    <g id="网页" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="HOME" transform="translate(-1674.000000, -715.000000)">
+            <g id="编组-7备份-4" transform="translate(1504.000000, 205.000000)">
+                <g id="编组-4" transform="translate(105.000000, 506.000000)">
+                    <g id="icon" transform="translate(65.000000, 4.000000)">
+                        <polygon id="路径-28" fill="#2B93FF" points="6 0 6 12 12 9"></polygon>
+                        <polygon id="路径-28备份" fill="#2B93FF" transform="translate(3.000000, 6.000000) scale(-1, 1) translate(-3.000000, -6.000000) " points="0 0 0 12 6 9"></polygon>
+                        <polygon id="路径-32" fill="#2B93FF" points="6 13.5 12 10.5 6 18"></polygon>
+                        <polygon id="路径-32备份" fill="#2B93FF" transform="translate(3.000000, 14.250000) scale(-1, 1) translate(-3.000000, -14.250000) " points="0 13.5 6 10.5 0 18"></polygon>
+                        <polygon id="路径-33" fill="#FCA3A3" style="mix-blend-mode: multiply;" opacity="0.264657157" points="0 9 6 6.75 12 9 6 12"></polygon>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

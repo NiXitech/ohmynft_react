@@ -1,0 +1,37 @@
+.homepage {
+  padding: 2.25rem 0 0px 0;
+
+  .goods {
+    .slogen {
+      padding-top: 3.5rem;
+      width: 100%;
+      height: auto;
+    }
+
+    .feature-card {
+      margin-top: 1.9375rem;
+
+      .feature-title {
+        font-family: HarmonyOS_Sans_Bold;
+        font-size: 1.0625rem;
+        font-weight: bold;
+        line-height: 1.0625rem;
+        letter-spacing: 0px;
+        margin-bottom: 1.125rem;
+        color: #FFFFFF;
+      }
+
+      .card-List {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+    }
+
+    .card-referrals-dashborde {
+      margin-top: 2.25rem;
+      border: 2px dashed #4a4d57;
+    }
+  }
+}

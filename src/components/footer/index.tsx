@@ -1,0 +1,45 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import './index.scss'
+
+const Footer = (): JSX.Element => {
+  return (
+    <>
+      <div className="w-full mx-auto 5xl:container 5xl:mx-auto font-black text-white">
+        <footer className="px-3 pt-12 pb-16 lg:py-1 lg:rounded-3xl lg:px-4 2xl:px-6">
+          <nav className="flex flex-col lg:flex-row lg:align-middle lg:items-center">
+            <div className="text-center lg:order-3">
+              <ul className="lg:flex lg:justify-end">
+                {/* <li className="inline-block"><a href="" title=" Instagram" className="inline-block p-4 lg:px-2 2xl:p-4 text-cyan-500 text-shadow-cyan" target="_blank" rel="noreferrer"><span className="icon-ico-instagram text-[22px]"></span></a></li> */}
+                <li className="inline-block">
+                  <a href="#" title="Twitter" className="inline-block p-4 lg:px-2 2xl:p-4 text-white" target="_blank" rel="noreferrer">
+                    <span className="icon-ico-twitter text-[22px]">
+                    </span>
+                  </a>
+                </li>
+                {/* <li className="inline-block"><a href="a" title="Discord" className="inline-block p-4 lg:px-2 2xl:p-4 text-cyan-500 text-shadow-cyan" target="_blank" rel="noreferrer"><span className="icon-ico-discord text-[22px]"></span></a></li> */}
+              </ul>
+            </div>
+            <div className="lg:grow text-center mt-3 lg:order-2 lg:mt-0">
+              <ul className="lg:flex lg:justify-center 2xl:justify-end">
+                <li className="lg:inline-block"><a href="/FAQ" className="text-sm lg:text-xs 2xl:text-sm font-bold tracking-widest uppercase p-3 lg:px-2 xl:px-2 2xl:px-3 inline-block transition-opacity hover:opacity-90">FAQ</a></li>
+
+                <li className="lg:inline-block"><a href="/privacy-policy" className="text-sm lg:text-xs 2xl:text-sm font-bold tracking-widest uppercase p-3 lg:px-2 xl:px-2 2xl:px-3 inline-block transition-opacity hover:opacity-90">Privacy Policy</a></li>
+                <li className="lg:inline-block"><a href="/cookie-policy" className="text-sm lg:text-xs 2xl:text-sm font-bold tracking-widest uppercase p-3 lg:px-2 xl:px-2 2xl:px-3 inline-block transition-opacity hover:opacity-90">Cookie Policy</a></li>
+                <li className="lg:inline-block"><a href="/terms-and-conditions" className="text-sm lg:text-xs 2xl:text-sm font-bold tracking-widest uppercase p-3 lg:px-2 xl:px-2 2xl:px-3 inline-block transition-opacity hover:opacity-90">Terms and Conditions</a></li>
+              </ul>
+            </div>
+            <div className="text-center mt-10 lg:order-1 lg:mt-0 lg:flex lg:flex-wrap lg:justify-start lg:text-left lg:max-w-[240px] xl:max-w-[280px]">
+              <span className="text-xs 3xl:text-sm tracking-widest uppercase px-2 block w-full"> Copyright &copy; 2022 WINBIG </span>
+              <span className="text-xs 3xl:text-sm tracking-widest uppercase px-2 block"> Patent Pending </span>
+            </div>
+            <div className="text-center mt-14 lg:hidden">
+              <a aria-current="page" href="/" className="router-link-active router-link-exact-active"><img src={require('../../asstes/img/default_personal.png').default} alt="WinBig logo" width="80" height="80" className="inline m-0" /></a>
+            </div>
+          </nav>
+        </footer>
+      </div>
+    </>
+  );
+}
+
+export default Footer;
