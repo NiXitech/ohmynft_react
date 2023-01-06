@@ -4,7 +4,9 @@ import _ from "lodash";
 import { useEffect, useRef, useState } from "react";
 import Slogen from "./sloggen"
 import NFTCard from "./nftcard"
+import ReferralRard from '../referralcard'
 import './index.scss'
+
 
 
 /* eslint-disable jsx-a11y/img-redundant-alt */
@@ -27,6 +29,30 @@ const LiveNow = (): JSX.Element => {
 		]
 	});
 
+	const Cardlist = (): JSX.Element => {
+		return (
+			<>
+				{state.featureList.map((feature: any, index: any) => {
+					return <div className="feature-card" key={index}>
+						<div className="feature-title" >
+							{feature.title}
+						</div>
+						<div className="card-List">
+							{
+								feature.cardList.map(
+									(item: any, idx: any) => {
+										return <NFTCard cardData={item} key={idx}></NFTCard>
+									}
+								)
+							}
+						</div>
+					</div>
+				})}
+			</>
+		)
+
+	}
+
 
 	return (
 		<>
@@ -38,36 +64,13 @@ const LiveNow = (): JSX.Element => {
 							<Slogen></Slogen>
 						</div>
 
-						{state.featureList.map((feature, index) => {
-							return <div className="feature-card" >
-								<div className="feature-title" >
-									{feature.title}
-									
-								</div>
-								<div className="card-List">
-									{
-										feature.cardList.map(
-											(item, idx) => {
-												return <NFTCard cardData={item} key={idx}></NFTCard>
-											}
-										)
-									}
-								</div>
-							</div>
-						})}
+						<Cardlist />
 
 						<div className="card-referrals-dashborde">
-							{/* <referral-card> </referral-card> */}
+							<ReferralRard></ReferralRard>
 						</div>
 
-						<div className="feature-card">
-							<div className="feature-title">
-								ALL
-							</div>
-							<div className="card-List">
-								{/* <NFTCard :cardData="item" v-for="item in allCardList" :key="item.cardName"></NFTCard> */}
-							</div>
-						</div>
+						<Cardlist />
 					</div>
 				</div >
 			</section >
