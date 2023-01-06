@@ -38,6 +38,7 @@ export interface RegisterData {
   address: any;
   name: string;
   email: string;
+  referral: string;
 }
 
 export interface RegistrationCallBack {
