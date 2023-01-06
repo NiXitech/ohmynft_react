@@ -315,7 +315,7 @@ const MWPage = (): JSX.Element => {
                                                 <span className="whitespace-nowrap mr-1">Last sale:</span>
                                                 <div className="flex justify-end">
                                                   <div className="flex items-center justify-end mr-2">
-                                                    <img src="https://metawin.com/_nuxt/ico-eth-opacity-black.1761ffc0.svg" alt="WinBig logo" width="11" height="18" className="inline-block mr-[2px]" />
+                                                    <img src="https://metawin.com/_nuxt/ico-eth-opacity-black.1761ffc0.svg" alt="ohmynft logo" width="11" height="18" className="inline-block mr-[2px]" />
                                                     <span className="text-slate-800 font-bold text-ellipsis overflow-hidden">0.03</span>
                                                   </div>
                                                   <span className="text-slate-100 text-ellipsis overflow-hidden">$47.5</span>
@@ -359,7 +359,7 @@ const MWPage = (): JSX.Element => {
                                                     <h3 className="text-sm xl:text-base text-slate-800 font-bold relative mr-2">#6315</h3>
                                                     <div className="flex items-center justify-end">
                                                       <span className="text-slate-100 font-bold text-ellipsis overflow-hidden text-sm xl:text-base">∼</span>
-                                                      <img src="https://metawin.com/_nuxt/ico-eth-opacity-black.1761ffc0.svg" alt="WinBig logo" width="8" height="16" className="inline-block mr-[2px] opacity-80" />
+                                                      <img src="https://metawin.com/_nuxt/ico-eth-opacity-black.1761ffc0.svg" alt="ohmynft logo" width="8" height="16" className="inline-block mr-[2px] opacity-80" />
                                                       <span className="text-slate-100 font-bold text-ellipsis overflow-hidden text-sm xl:text-base">1.1</span>
                                                     </div>
                                                   </div>

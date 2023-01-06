@@ -41,11 +41,11 @@ const Header = (): JSX.Element => {
     return (
       <>
         <li className={['animate-slide-down-fade-in01s lg:flex lg:self-stretch'].join(' ')}>
-          <div className={["route-link lg:flex lg:self-stretch pb-2 px-2 lg:pb-0 lg:px-2 lg:mx-3 group relative cursor-pointer font-nft", isActive ? "router-link-active router-link-exact-active text-cyan-500" : 'text-white/90'].join(' ')} onClick={() => {
+          <div className={["route-link lg:flex lg:self-stretch pb-2 px-2 lg:pb-0 lg:px-2 lg:mx-3 group cursor-pointer font-nft", isActive ? "router-link-active router-link-exact-active text-cyan-500" : 'text-white/90'].join(' ')} onClick={() => {
             if (!isActive) navigate(to)
             setMobileOpenMenu(!mobileOpenMenu)
           }}>
-            <span className="inline-block py-1 my-3 text-2xl  uppercase tracking-wider lg:whitespace-nowrap lg:text-base lg:my-0 lg:py-0 lg:mx-0 lg:flex lg:self-center transition-all duration-100 group-hover:text-cyan-500">{title}</span>
+            <span className="inline-block py-1 my-3 uppercase tracking-wider lg:whitespace-nowrap lg:my-0 lg:py-0 lg:mx-0 lg:flex lg:self-center transition-all duration-100 group-hover:text-cyan-500">{title}</span>
           </div>
         </li>
       </>
@@ -119,8 +119,8 @@ const Header = (): JSX.Element => {
                     </div>
                   </div> */}
                   <div className="grow-0 text-center">
-                    <a href="/" className="router-link-active router-link-exact-active inline-block w-[100px] mx-1 lg:w-[110px]">
-                      <img src={require('../../asstes/img/logo.png').default} alt="winbig logo" className={["inline-block lg:py-3 transition-all py-3", mobileOpenMenu ? "!py-1" : ''].join(' ')} />
+                    <a href="/" className="router-link-active router-link-exact-active inline-block mx-1 ">
+                      <img src={require('../../asstes/img/ohmynftlogo.png').default} alt="ohmynft logo" className={["inline-block lg:py-3 transition-all py-3", mobileOpenMenu ? "!py-1" : ''].join(' ')} />
                     </a>
                   </div>
 
@@ -141,8 +141,8 @@ const Header = (): JSX.Element => {
               </a>
             </div> */}
                 </div>
-                <div className={["grow flex-col justify-evenly animate-fade-in lg:flex-row lg:flex lg:items-center lg:justify-end flex", mobileOpenMenu ? '' : 'hidden'].join(' ')}>
-                  <ul className="text-center mt-3 lg:flex lg:mt-0 lg:items-stretch lg:text-left lg:h-full empty:hidden">
+                <div className={["grow flex-col justify-evenly lg:flex-row lg:flex lg:items-center lg:justify-end flex", mobileOpenMenu ? '' : 'hidden'].join(' ')}>
+                  <ul className="text-center mt-3 lg:flex lg:mt-0 lg:items-stretch justify-center flex-1 lg:text-left lg:h-full empty:hidden">
                     {
                       // hasUser
                         // ? <>
@@ -150,6 +150,8 @@ const Header = (): JSX.Element => {
                           <NavItem to={'/'} title="COMPETITIONS"></NavItem>
                           <NavItem to={'/winners'} title="Winners"></NavItem>
                           <NavItem to={'/referrals'} title="referrals"></NavItem>
+                          {/* <NavItem to={'/home'} title="home"></NavItem> */}
+                          <NavItem to={'/comp'} title="comp"></NavItem>
                         </>
                         // : ''
                     }
@@ -159,15 +161,13 @@ const Header = (): JSX.Element => {
                     hasUser
                       ? ''
                       : <div className="block mx-auto text-center lg:text-left lg:mx-0 lg:flex justify-center lg:pl-4">
-                        <button className="font-play text-sm py-2 px-6 bg-register-btn-31 border-6 border-cyan-500 text-white rounded-full tracking-widest uppercase  transition-all focus:bg-slate-800 focus:border-cyan-200 relative shadow-[0_0_2px_0] shadow-cyan-500 disabled:bg-slate-800 disabled:hover:bg-slate-800 shadow-none"
+                        <button className="py-2 px-6  text-white rounded-full tracking-widest uppercase  transition-all focus:bg-slate-800 relative shadow-[0_0_2px_0] disabled:bg-slate-800 disabled:hover:bg-slate-800 shadow-none button-background"
                           onClick={() => { actions.openConnect() }}
                           onMouseEnter={() => { setTipHide(true) }}
                           onMouseLeave={() => { setTipHide(false) }}
                         >
                           <span className="transition-all">
                             <span className="pr-3">Connect Wallet</span>
-                            <span className="icon-ico-eth text-cyan-500 animate-glow-slow-cyan text-center absolute text-lg top-1/2 right-4 -translate-y-1/2"></span>
-
                             {
                               tipHide
                                 ? <div className="hidden lg:block absolute top-14 p-4 rounded-xl animate-slide-down-fade-in lg:w-[296px] lg:-right-4"
@@ -177,13 +177,12 @@ const Header = (): JSX.Element => {
                                 >
                                   <h2 className="text-slate-100 font-medium text-lg mb-2 leading-tight animate-fade-in text-white">Why connect?</h2>
                                   <p className="text-slate-100 font-medium text-sm normal-case tracking-normal animate-fade-in">
-                                    WinBig runs on the blockchain. Taking part requires a personal signature. No private data is shared with us. We will NEVER ask for an ‘Approve All’ state.
+                                    ohmynft runs on the blockchain. Taking part requires a personal signature. No private data is shared with us. We will NEVER ask for an ‘Approve All’ state.
                                   </p>
                                 </div>
 
                                 : ''
                             }
-
                           </span>
                           <div className="opacity-0 transition-all absolute flex justify-center align-middle left-0 top-0 w-full h-full pointer-events-none overflow-hidden" role="status">
                             <img className="inline-block spinner-border animate-spin-slowing" src={require('../../asstes/img/spinner-white.svg').default} alt="" width="30" height="30" />

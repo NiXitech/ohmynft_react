@@ -6,7 +6,7 @@ import './index.scss'
 
 
 /* eslint-disable jsx-a11y/img-redundant-alt */
-const LiveNow = (): JSX.Element => {
+const ReferralCard = (): JSX.Element => {
 	const [state, setstate] = useState({});
 
 
@@ -42,4 +42,4 @@ const LiveNow = (): JSX.Element => {
 	);
 }
 
-export default LiveNow;
+export default ReferralCard;

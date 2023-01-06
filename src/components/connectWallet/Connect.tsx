@@ -210,7 +210,7 @@ export function Connect() {
                   if (x.ready) {
                     connectWallect(x)
                   } else {
-                    window.open('https://metamask.app.link/dapp/winbig.space/')
+                    window.open('https://metamask.app.link/dapp/ohmynft.space/')
                   }
                 }}
                 className="text-md py-4 px-8 bg-blue-400 text-white rounded-full tracking-widest uppercase hover:bg-blue-500 transition-all focus:bg-blue-500 relative disabled:opacity-40 disabled:hover:bg-blue-500 w-full rounded-none first:rounded-t-3xl last:rounded-b-3xl normal-case bg-slate-500/50 hover:bg-slate-500/75 disabled:hover:bg-slate-500/50 focus:bg-slate-500/75 active:bg-slate-500/75 py-5 border-b-slate-100/25 border-b last:border-b-0"

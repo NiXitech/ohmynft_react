@@ -14,7 +14,7 @@ const FAQ = (): JSX.Element => {
 
 
                 <ul>
-                  <li>Entries are purchased with WinBig transactions only.</li>
+                  <li>Entries are purchased with ohmynft transactions only.</li>
 
                 </ul>
                 <ul>
@@ -38,7 +38,7 @@ const FAQ = (): JSX.Element => {
                 </li>
 
 
-                <p>Once a winner is drawn, your prize is automatically transferred to your wallet. Winners will be contacted by email, and an on-screen notification if they are currently viewing winbig.space. </p>
+                <p>Once a winner is drawn, your prize is automatically transferred to your wallet. Winners will be contacted by email, and an on-screen notification if they are currently viewing ohmynft.space. </p>
 
                 <li><h2 id='how-are-winners-drawn'>How are winners drawn?</h2>
                 </li>
@@ -52,7 +52,7 @@ const FAQ = (): JSX.Element => {
 
                 <p>A smart contract is an agreement written in a virtual language and has the power to execute and enforce itself, autonomously and automatically, based on a series of programmed parameters. Smart contracts are executed in the blockchain, which means the terms are stored in a distributed database and cannot be changed. They’re also viewable publicly, so you can verify the terms of the contract on the blockchain at any time.</p>
 
-                <li><h2 id='does-winbig-draw-the-winners'>Does WinBig draw the winners?</h2>
+                <li><h2 id='does-ohmynft-draw-the-winners'>Does ohmynft draw the winners?</h2>
                 </li>
 
 

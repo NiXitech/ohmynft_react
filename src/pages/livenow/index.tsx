@@ -2,9 +2,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import _ from "lodash";
 import { useEffect, useRef, useState } from "react";
+import Footer from "../../components/footer";
 import Slogen from "./sloggen"
 import NFTCard from "./nftcard"
-import ReferralRard from '../referralcard'
+import ReferralCard from '../referralcard'
 import './index.scss'
 
 
@@ -67,12 +68,20 @@ const LiveNow = (): JSX.Element => {
 						<Cardlist />
 
 						<div className="card-referrals-dashborde">
-							<ReferralRard></ReferralRard>
+							<ReferralCard></ReferralCard>
 						</div>
 
-						<Cardlist />
+						<div className="feature-card">
+							<div className="feature-title">
+								ALL
+							</div>
+							<div className="card-List">
+								<NFTCard cardData={state.allCardList}></NFTCard>
+							</div>
+						</div>
 					</div>
 				</div >
+				<Footer></Footer>
 			</section >
 		</>
 	);

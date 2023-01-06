@@ -430,7 +430,7 @@
 }
 
 .nav-main .route-link.router-link-active::after{
-  content: '';
+  // content: '';
   width: 50%;
   height: 5px;
   background-color: #2B93FF;
@@ -615,6 +615,9 @@ button, input, optgroup, select, textarea {
 }
 button, select {
   text-transform:none
+}
+button-background {
+  background-color: #3a8aff;
 }
 [type=button], [type=reset], [type=submit], button {
   -webkit-appearance:button;
@@ -2127,6 +2130,9 @@ select {
 }
 .max-w-\[500px\] {
   max-width:500px
+}
+.flex-1 {
+  flex: 1
 }
 .flex-none {
   flex:none

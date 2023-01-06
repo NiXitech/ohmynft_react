@@ -9,7 +9,7 @@ const CookiePolicy = (): JSX.Element => {
             <div>
               <h1>Cookie Policy</h1>
               <h2 id='10-introduction'>1.0 Introduction</h2>
-              <p>WinBig may use cookies, web beacons, tracking pixels, and other tracking technologies when you visit our website WinBig.space, including any other media form, media channel, mobile website, or mobile application related or connected thereto (collectively, the “Site”) to help customize the Site and improve your experience.</p>
+              <p>ohmynft may use cookies, web beacons, tracking pixels, and other tracking technologies when you visit our website ohmynft.space, including any other media form, media channel, mobile website, or mobile application related or connected thereto (collectively, the “Site”) to help customize the Site and improve your experience.</p>
               <p>We reserve the right to make changes to this Cookie Policy at any time and for any reason. We will alert you about any changes by updating the “Last Updated” date of this Cookie Policy. Any changes or modifications will be effective immediately upon posting the updated Cookie Policy on the Site, and you waive the right to receive specific notice of each such change or modification.</p>
               <p>You are encouraged to periodically review this Cookie Policy to stay informed of updates. You will be deemed to have been made aware of, will be subject to, and will be deemed to have accepted the changes in any revised Cookie Policy by your continued use of the Site after the date such revised Cookie Policy is posted.</p>
               <h2 id='20-use-of-cookies'>2.0 Use of Cookies</h2>
@@ -52,7 +52,7 @@ const CookiePolicy = (): JSX.Element => {
               <h2 id='60-privacy-policy'>6.0 Privacy Policy</h2>
               <p>For more information about how we use information collected by cookies and other tracking technologies, please refer to our Privacy Policy. This Cookie Policy is part of and is incorporated into our Privacy Policy. By using the Site, you agree to be bound by this Cookie Policy and our Privacy Policy</p>
               <h2 id='70-contact-us'>7.0 Contact us</h2>
-              <p>If you have questions or comments about this Cookie Policy, please contact us at: feedback@winbig.space</p>
+              <p>If you have questions or comments about this Cookie Policy, please contact us at: feedback@ohmynft.space</p>
             </div>
           </div>
         </div>

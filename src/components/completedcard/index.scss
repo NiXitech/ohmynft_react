@@ -1,0 +1,127 @@
+.card-content-completed {
+  width: 10.9375rem;
+  // height: 16.5625rem;
+  margin-bottom: 1.25rem;
+  border-radius: 0.75rem;
+  background: #443c4a;
+  display: flex;
+  flex-direction: column;
+
+  .card-img {
+    margin-top: 0.75rem;
+    margin-left: 0.75rem;
+    width: 9.6875rem;
+    height: 9.6875rem;
+    opacity: 1;
+
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 0.75rem;
+    }
+
+    .card-id {
+      width: 1.6875rem;
+      height: 0.9375rem;
+      line-height: 0.9375rem;
+      border-radius: 0.46875rem;
+      position: relative;
+      top: -1.25rem;
+      left: 8px;
+      background: #fff;
+      text-align: center;
+
+      font-family: AlibabaPuHuiTi-2-95-ExtraBold;
+      font-size: 0.4375rem;
+      font-weight: 800;
+      color: #3E3E3E;
+    }
+  }
+
+  .card-detail {
+    margin-top: 0.75rem;
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
+
+    .card-name-value {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      .card-name {
+        font-family: AlibabaPuHuiTi-2-115-Black;
+        font-size: 0.75rem;
+        font-weight: 1000;
+        line-height: 0.75rem;
+        color: #ffffff;
+      }
+
+      .card-value {
+        font-family: AlibabaPuHuiTi-2-55-Regular;
+        font-size: 0.75rem;
+        font-weight: normal;
+        line-height: 0.75rem;
+        text-align: right;
+        letter-spacing: 0px;
+        color: #ffffff;
+      }
+    }
+  }
+
+  .card-busd {
+    margin-top: 16px;
+    margin-left: 0.75rem;
+    font-family: AlibabaPuHuiTi_2_95_ExtraBold;
+    font-size: 0.75rem;
+    font-weight: 800;
+    line-height: 0.75rem;
+    letter-spacing: 0px;
+    color: #2395FF;
+
+    img {
+      width: 0.75rem;
+      height: 0.75rem;
+      margin-left: 5px;
+    }
+  }
+
+  .card-progress {
+    margin-top: 16px;
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .progress-bar {
+      width: 268px;
+      padding-top: 4px;
+    }
+
+    span {
+      font-family: AlibabaPuHuiTi-2-115-Black;
+      font-size: 0.4375rem;
+      font-weight: 1000;
+      line-height: 0.4375rem;
+      letter-spacing: 0px;
+      color: #3A8AFF;
+    }
+  }
+
+  .card-button {
+    button {
+      width: 9.6875rem;
+      height: 60px;
+      line-height: 60px;
+      border-radius: 0.9375rem;
+      opacity: 1;
+      background: #3A8AFF;
+      margin: 16px 0.75rem 0px;
+      text-align: center;
+      font-family: AlibabaPuHuiTi-2-95-ExtraBold;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: #fff;
+    }
+  }
+}

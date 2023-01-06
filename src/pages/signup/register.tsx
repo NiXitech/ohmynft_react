@@ -96,7 +96,7 @@ const RegisterComp = (): JSX.Element => {
       <div className="w-full">
         <div className="min-h-screen flex flex-col">
           {/* <header className="text-center pt-10">
-            <a href="/" className=""><img src={require('../../asstes/img/logo.png').default} alt="WinBig logo" width="166" height="24" className="inline-block" /></a>
+            <a href="/" className=""><img src={require('../../asstes/img/logo.png').default} alt="ohmynft logo" width="166" height="24" className="inline-block" /></a>
           </header> */}
 
           <main className="flex items-center justify-center py-10 grow">
@@ -114,7 +114,7 @@ const RegisterComp = (): JSX.Element => {
                       marginTop: '-7rem',
                     }}
                   >
-                    <a href="/" className=""><img src={require('../../asstes/img/logo.png').default} alt="WinBig logo" width="166" height="24" className="inline-block" /></a>
+                    <a href="/" className=""><img src={require('../../asstes/img/logo.png').default} alt="ohmynft logo" width="166" height="24" className="inline-block" /></a>
                   </header>
                   <h1 className="text-2xl uppercase tracking-widest mb-6 text-center font-play">Welcome</h1>
                   <div className={['mt-3 relative pb-3', checkName === null ? "" : checkName ? 'input-success-active' : 'input-error-active'].join(' ')}>
