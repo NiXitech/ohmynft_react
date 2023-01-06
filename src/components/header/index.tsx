@@ -160,8 +160,8 @@ const Header = (): JSX.Element => {
                   {
                     hasUser
                       ? ''
-                      : <div className="block mx-auto text-center lg:text-left lg:mx-0 lg:flex justify-center lg:pl-4">
-                        <button className="py-2 px-6  text-white rounded-full tracking-widest uppercase  transition-all focus:bg-slate-800 relative shadow-[0_0_2px_0] disabled:bg-slate-800 disabled:hover:bg-slate-800 shadow-none button-background"
+                      : <div className="block mx-auto text-center lg:text-left lg:mx-0 lg:flex justify-center lg:pl-4 button-background">
+                        <button className="py-2 px-6  text-white rounded-full tracking-widest uppercase  transition-all focus:bg-slate-800 relative shadow-[0_0_2px_0] disabled:bg-slate-800 disabled:hover:bg-slate-800 shadow-none"
                           onClick={() => { actions.openConnect() }}
                           onMouseEnter={() => { setTipHide(true) }}
                           onMouseLeave={() => { setTipHide(false) }}

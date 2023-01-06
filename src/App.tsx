@@ -11,7 +11,8 @@ import './App.scss';
 import 'react-toastify/dist/ReactToastify.css';
 import Home from './pages/Home';
 import LiveNow from './pages/livenow';
-import CompletedCard from './pages/completed'
+import CompletedCard from './pages/completed';
+import ProductDetail from './pages/productdetail'
 import HttpPage from './pages/Request';
 import Header from './components/header';
 import Competition from './pages/competition';
@@ -67,6 +68,7 @@ function App() {
               : <Routes>
                 <Route path="/home" element={<Home />} />
                 <Route path="/" element={<LiveNow />} />
+                <Route path="/productdetail" element={<ProductDetail />} />
                 <Route path="/comp" element={<CompletedCard />} />
                 <Route path="/competition/:id" element={<Competition />} />
                 <Route path="/mw/:name" element={<MWPage />} />

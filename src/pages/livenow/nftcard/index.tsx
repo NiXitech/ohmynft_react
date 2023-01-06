@@ -1,15 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import _ from "lodash";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import './index.scss';
 import cardImg from '../../../asstes/tmpImg/cardImg.png';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
 /* eslint-disable jsx-a11y/img-redundant-alt */
 const NFTCard = (props: any): JSX.Element => {
 	const [state, setstate] = useState({});
 	const { cardData } = props;
+	const navigate = useNavigate();
+
+	const routerToDetail = ()=> {
+		navigate('/productdetail')
+	}
 
 	return (
 		<div className="card-content-nft-card">
@@ -39,7 +45,7 @@ const NFTCard = (props: any): JSX.Element => {
 				</span>
 			</div>
 			<div className="card-button">
-				<button>
+				<button onClick={routerToDetail}>
 					Enter now
 				</button>
 			</div>
