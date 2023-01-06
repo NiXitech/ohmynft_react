@@ -98,7 +98,7 @@ export function Connect() {
           LStorage.set('LastAuthUser', {
             name: result.data.name,
             email: result.data.email,
-            address: addre
+            address: addre,
           })
           await signMessage({ message: `Hi ${result.data.name}! We just need you to sign this message to confirm that you have access to this wallet.` })
         } else {
@@ -128,6 +128,7 @@ export function Connect() {
         address: address,
         name: name,
         email: email,
+        referral: ''
       }) as any
       if (result.code === 200) {
         LStorage.set('LastAuthUser', {

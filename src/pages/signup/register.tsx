@@ -63,11 +63,13 @@ const RegisterComp = (): JSX.Element => {
   }
 
   const submitRegisterInfo = async () => {
+    console.log(address)
     try {
       const result: CallBackData = await Register({
         address: address,
         name: userInfo.name,
-        email: userInfo.email
+        email: userInfo.email,
+        referral: ''
       }) as any
       if (result.code === 200) {
         // await signMessage({ message: `Hi ${userInfo.name}! We just need you to sign this message to confirm that you have access to this wallet.` })
