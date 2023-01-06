@@ -114,7 +114,7 @@ const UserInfo = (): JSX.Element => {
                         marginTop: '-7rem',
                       }}
                     >
-                      <a href="/" className=""><img src={require('../../asstes/img/logo.png').default} alt="WinBig logo" width="166" height="24" className="inline-block" /></a>
+                      <a href="/" className=""><img src={require('../../asstes/img/logo.png').default} alt="ohmynft logo" width="166" height="24" className="inline-block" /></a>
                     </header>
                     <div className={['mt-3 relative pb-3'].join(' ')}>
                       <input

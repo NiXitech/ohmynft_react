@@ -179,7 +179,7 @@ const LiveNow = (): JSX.Element => {
                                 <span className="text-black font-heavy">Price </span>
                                 <span className="whitespace-nowrap font-black">
 
-                                  <img src={require('../../../asstes/img/ico-eth-opacity-blue.svg').default} alt="WinBig logo" width="11" height="18" className="inline-block relative -top-[2px] mr-[2px] h-4" />
+                                  <img src={require('../../../asstes/img/ico-eth-opacity-blue.svg').default} alt="ohmynft logo" width="11" height="18" className="inline-block relative -top-[2px] mr-[2px] h-4" />
                                   0.003
                                 </span>
                               </div>
@@ -261,7 +261,7 @@ const LiveNow = (): JSX.Element => {
                                           <span className="text-black font-heavy">Price </span>
                                           <span className="whitespace-nowrap font-black">
 
-                                            <img src={require('../../../asstes/img/ico-eth-opacity-blue.svg').default} alt="WinBig logo" width="11" height="18" className="inline-block relative -top-[2px] mr-[2px] h-4" />
+                                            <img src={require('../../../asstes/img/ico-eth-opacity-blue.svg').default} alt="ohmynft logo" width="11" height="18" className="inline-block relative -top-[2px] mr-[2px] h-4" />
                                             {item.price_structure[0].price}
                                           </span>
                                         </div>

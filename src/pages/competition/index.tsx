@@ -542,7 +542,7 @@ const Competition = (): JSX.Element => {
                               <span className="text-xs block uppercase tracking-widest font-heavy">Share this competition</span>
                               <ul className="flex justify-center">
                                 <li className="inline-block">
-                                  <a href={`http://twitter.com/share?text=Check out this competition on winbig.space ${infoData.prize.name.trim()}&url=https://winbig.space/competition/${infoData.raffle_id}&hashtags=winbig,nft`} title="Share on Twitter" className="inline-block p-4" target="_blank" rel="noopener noreferrer">
+                                  <a href={`http://twitter.com/share?text=Check out this competition on ohmynft.space ${infoData.prize.name.trim()}&url=https://ohmynft.space/competition/${infoData.raffle_id}&hashtags=ohmynft,nft`} title="Share on Twitter" className="inline-block p-4" target="_blank" rel="noopener noreferrer">
                                     <span className="icon-ico-twitter text-[22px]"></span>
                                   </a>
                                 </li>

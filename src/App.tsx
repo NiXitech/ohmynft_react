@@ -9,8 +9,9 @@ import {
 import { ToastContainer } from 'react-toastify';
 import './App.scss';
 import 'react-toastify/dist/ReactToastify.css';
-// import Home from './pages/Home';
+import Home from './pages/Home';
 import LiveNow from './pages/livenow';
+import CompletedCard from './pages/completed'
 import HttpPage from './pages/Request';
 import Header from './components/header';
 import Competition from './pages/competition';
@@ -64,8 +65,9 @@ function App() {
                 <img className="inline-block spinner-border animate-spin-slowing" src={require('./asstes/img/spinner-blue.svg').default} alt="" width="124" height="124" />
               </div>
               : <Routes>
-                {/* <Route path="/" element={<Home />} /> */}
+                <Route path="/home" element={<Home />} />
                 <Route path="/" element={<LiveNow />} />
+                <Route path="/comp" element={<CompletedCard />} />
                 <Route path="/competition/:id" element={<Competition />} />
                 <Route path="/mw/:name" element={<MWPage />} />
                 <Route path="/winners" element={<Winners />} />
