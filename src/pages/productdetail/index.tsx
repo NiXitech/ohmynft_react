@@ -4,14 +4,26 @@ import _ from "lodash";
 import { useState } from "react";
 import './index.scss'
 import TwoColActivity from "../../components/twocolactivity";
+import NFTCard from "../livenow/nftcard";
+import ConnectWallet from "../../components/connectWallet";
+import useStateHook from '../store';
 
 
 /* eslint-disable jsx-a11y/img-redundant-alt */
 const ProductDetail = (): JSX.Element => {
+  const [status, actions] = useStateHook();
   const [state, setstate] = useState({
     cardtitle: 'Apple Watch Series 8 - Starlight Aluminum Case with Sport Loop',
+    cardlist: [
+      { cardName: 'up coming01', cardValue: '1', BUSD: '0.01', unit: 'BUSD', progress: 60 },
+      { cardName: 'up coming02', cardValue: '2', BUSD: '0.01', unit: 'BUSD', progress: 60 }
+    ]
   });
 
+  // 连接钱包
+  const connectWallet = (item:any)=> {
+    actions.openConnect();
+  }
 
   return (
     <section className="w-full pb-4 pt-16 lg:px-8">
@@ -24,7 +36,7 @@ const ProductDetail = (): JSX.Element => {
         <div className="detail-content">
           <div className="grid grid-cols-2">
             <div>
-              <div className="card-img">
+              <div className="card-img-detail">
                 <img src={require('../../asstes/tmpImg/cardImg.png').default} alt="" />
               </div>
             </div>
@@ -66,7 +78,7 @@ const ProductDetail = (): JSX.Element => {
                           return (
                             <div
                               key={index}>
-                              <button> {item}</button>
+                              <button onClick={connectWallet}> {item}</button>
                             </div>
                           )
                         }
@@ -83,11 +95,19 @@ const ProductDetail = (): JSX.Element => {
               <TwoColActivity></TwoColActivity>
             </div>
             <div  >
-              <div className="ending-soon">
-                {/* {
-                         
-                <NFTCard cardData={item} key={idx}></NFTCard>
-                } */}
+              <div>
+                end soon
+              </div>
+              <div className="ending-soon grid grid-cols-2">
+                {
+                  state.cardlist.map(
+                    (item, index) => {
+                      return (
+                        <NFTCard cardData={item} key={index}></NFTCard>
+                      )
+                    }
+                  )
+                }
               </div>
             </div>
           </div>

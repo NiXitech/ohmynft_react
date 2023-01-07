@@ -6,11 +6,11 @@
   
     .card-left {
       .slogen-Info {
-        width: 476px;
-        height: 156px;
+        width: 14.875rem;
+        height: 4.875rem;
         opacity: 1;
         font-family: HarmonyOS_Sans_Bold;
-        font-size: 52px;
+        font-size: 1.625rem;
         font-weight: bold;
         line-height: 78px;
         color: #ffffff;
@@ -18,8 +18,8 @@
         .referrals {
           opacity: 1;
           /* oh字体/大装饰 */
-          font-family: HarmonyOS_Sans_SC_Bold;
-          font-size: 52px;
+          font-family: HarmonyOS_Sans_Bold;
+          font-size: 1.625rem;
           font-weight: bold;
           display: inline-block;
           background: linear-gradient(270deg, #F5DB45 0%, #F27300 99%);
@@ -30,32 +30,32 @@
       }
   
       .slogen-detail {
-        margin-top: 48px;
-        width: 476px;
-        height: 42px;
+        margin-top: 1.5rem;
+        width: 14.875rem;
+        height: 1.312rem;
         opacity: 1;
         font-family: HarmonyOS_Sans_Regular;
-        font-size: 14px;
+        font-size: 0.437rem;
         font-weight: normal;
-        line-height: 21px;
+        line-height: 0.656rem;
         color: #ffffff;
       }
   
       .button-share {
-        margin-top: 64px;
+        margin-top: 2rem;
   
         button {
-          width: 222px;
-          height: 48px;
-          border-radius: 24px;
+          width: 6.937rem;
+          height: 1.5rem;
+          border-radius: 0.75rem;
           opacity: 1;
           font-family: HarmonyOS_Sans_Medium;
-          font-size: 16px;
+          font-size: 0.5rem;
           font-weight: 500;
-          line-height: 16px;
+          line-height: 0.5rem;
           text-align: center;
           color: #ffffff;
-          margin-right: 32px;
+          margin-right: 1rem;
           cursor: pointer;
         }
   
@@ -64,9 +64,9 @@
         }
   
         button:nth-child(2) {
-          width: 222px;
-          height: 48px;
-          border-radius: 24px;
+          width: 6.937rem;
+          height: 1.5rem;
+          border-radius: 0.75rem;
           opacity: 1;
           background: rgba(255, 255, 255, 0);
           border: 1px solid #3A8AFF;
@@ -75,9 +75,9 @@
     }
   
     .card-right {
-      width: 740px;
-      height: 426px;
-  
-      background: url('../../../asstes/partImg/slogen.png') center 45% no-repeat;
+      width: 23.125rem;
+      height: 13.312rem;
+      background: url('../../../asstes/partImg/slogen.png') center center no-repeat;
+      background-size: cover;
     }
   }

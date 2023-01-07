@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import _ from "lodash";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import Footer from "../../components/footer";
 import Slogen from "./sloggen"
 import NFTCard from "./nftcard"
