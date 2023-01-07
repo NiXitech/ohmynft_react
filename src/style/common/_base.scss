@@ -1,8 +1,41 @@
-// body,
-// input,
-// button,
-// textarea,
-// select,
-// option {
-//   font: normal $font-size $font;
-// }
+.button-bg-bl {
+    background-color: #3A8AFF;
+}
+
+.button-sm {
+    // width: 159px;
+    padding: 0 20px;
+    height: 36px;
+    border-radius: 24px;
+    font-size: 16px;
+    font-family: HarmonyOS_Sans_Bold;
+    font-weight: bold;
+}
+
+.lg\:w-\[350px\] {
+    width: 350px;
+}
+
+.lg\:h-\[166px\] {
+    height: 166px;
+}
+
+.ft-18 {
+    font-family: HarmonyOS_Sans_Bold;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 18px;
+}
+
+.ft-14 {
+    font-family: HarmonyOS_Sans_Thin;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 21px;
+    text-align: justify;
+}
+
+.op-6 {
+    opacity: 0.6;
+}
+

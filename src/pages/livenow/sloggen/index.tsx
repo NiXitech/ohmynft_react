@@ -9,6 +9,11 @@ import './index.scss';
 const Slogen = (): JSX.Element => {
 	const [state, setstate] = useState({});
 
+	// 分享到推特
+	const shareTwitter = ()=> {
+		
+	}
+
 
 	return (
 		<div className="card-content-slogen">
@@ -27,7 +32,7 @@ const Slogen = (): JSX.Element => {
 					</div>
 				</div>
 				<div className="button-share">
-					<button>
+					<button onClick={shareTwitter}>
 						Share On Twitter
 					</button>
 					<button>

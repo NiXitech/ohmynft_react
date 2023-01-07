@@ -4,7 +4,8 @@ import _ from "lodash";
 import { useState } from "react";
 import './index.scss';
 import cardImg from '../../../asstes/tmpImg/cardImg.png';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { Progress } from 'antd';
 
 
 /* eslint-disable jsx-a11y/img-redundant-alt */
@@ -37,15 +38,14 @@ const NFTCard = (props: any): JSX.Element => {
 			</div>
 			<div className="card-progress">
 				<div className="progress-bar">
-					{/* <van-progress :percentage="cardData.progress" pivot-text="" stroke-width="8" color="#1F95FF" /> */}
-					<span>1234512341234</span>
+					<Progress percent={30} />
 				</div>
-				<span>
+				{/* <span>
 					{cardData.progress}%
-				</span>
+				</span> */}
 			</div>
 			<div className="card-button">
-				<button onClick={routerToDetail}>
+				<button className="uppercase" onClick={routerToDetail}>
 					Enter now
 				</button>
 			</div>
