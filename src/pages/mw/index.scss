@@ -1,0 +1,38 @@
+.mv-header{
+  .avator{
+    width: 4.4rem;
+    margin-right: 1.25rem;
+    border: 1px solid rgba(151, 151, 151, 1);
+    border-radius: 200rem;
+  }
+  .text{
+    h2{
+      font-size: .75rem;
+      margin-bottom: 0.5rem;
+      font-family: HarmonyOS_Sans_SC_Bold;
+    }
+    a{
+      font-size: .44rem;
+      font-family: HarmonyOS_Sans_SC;
+      margin-bottom: 0.5rem;
+      span{
+        font-size: .375rem;
+      }
+    }
+    h3{
+      font-size: .44rem;
+      font-family: HarmonyOS_Sans_SC;
+    }
+  }
+}
+.mv-tab{
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  margin-top: 1.5rem;
+  font-family: HarmonyOS_Sans_SC_Bold;
+  .content{
+    margin: 0 -1rem;
+  }
+  button{
+    padding: .388rem 1rem;
+  }
+}

@@ -33,6 +33,7 @@ import TermsAndConditions from './pages/termsAndConditions';
 import FAQ from './pages/FAQ';
 import { LStorage } from './api/services/cooike/storage';
 import UserInfo from './pages/useInfo';
+import Footer from './components/footer';
 
 
 function App() {
@@ -90,7 +91,7 @@ function App() {
 
 
         </div>
-
+        <Footer></Footer>
         <ToastContainer theme="dark" autoClose={3000} hideProgressBar />
       </Router>
     </>

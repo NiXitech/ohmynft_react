@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { getPrice, getRaffleList, getUserInfo } from "../../api/services/http/api";
 import { ActivityIsClosed, getClosedDate, getDetailClosedDate, getDollar, getQueryVariable, TimeInterval, updateUrl } from "../../libs/userAgent";
 import { CallBackData, RaffleItemData, UserInfoData } from "../../types/types";
+import './index.scss'
 
 /* eslint-disable jsx-a11y/img-redundant-alt */
 
@@ -120,17 +121,20 @@ const MWPage = (): JSX.Element => {
               </section>
               : <section className="animate-fade-in max-w-7xl mx-auto relative min-h-[50vh]">
                 <div className="flex flex-col mt-3 md:flex-row md:py-4">
-                  <div className="flex items-center">
-                    <figure className="mr-3 rounded-full overflow-hidden w-24 h-24 lg:w-32 lg:h-32 flex-none border-2 border-transparent group-hover:border-gray-300 transition-all relative">
-                      <img className="block relative z-10 w-full group-hover:opacity-50 transition-opacity" src={require('../../asstes/img/default_personal.png').default} width="64" height="64" alt="" loading="lazy" />
-                      <span className="icon-ico-edit text-2xl absolute top-3/4 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:top-1/2 transition-all duration-300"></span>
+                  <div className="flex items-center mv-header">
+                    <figure className=" avator overflow-hidden flex-none  transition-all relative">
+                      <img className="block relative z-10 w-full group-hover:opacity-50 transition-opacity" src={require('../../asstes/img/personal.png').default} width="100%" alt="" loading="lazy" />
+                      {/* <span className="icon-ico-edit text-2xl absolute top-3/4 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:top-1/2 transition-all duration-300"></span> */}
                     </figure>
-                    <div className="grow overflow-hidden font-heavy">
-                      <div className="block mb-1">
-                        <h2 className="text-white text-2xl md:text-3xl block truncate mb-1 font-black">{paramsName.name}
+                    <div className="grow overflow-hidden text">
+                      <div className="block">
+                        <h2 className="text-white block truncate font-black">{paramsName.name}
                         </h2>
-                        <a href={`https://goerli.etherscan.io/address/${userInfo?.address}`} className="hover:text-gray-300 transition-colors block truncate" target="_blank" rel="noreferrer" >{userInfo?.address} <span className="icon2-ico-share inline-block top-[2px] relative text-base"></span></a>
-                        <h3 className="text-slate-100 mt-2">{userInfo?.created_at && getClosedDate(userInfo?.created_at)}</h3>
+                        <a href={`https://goerli.etherscan.io/address/${userInfo?.address}`} className=" transition-colors block truncate" target="_blank" rel="noreferrer" >
+                          {userInfo?.address}
+                          <span className="icon-share inline-block relative ml-1"></span>
+                        </a>
+                        <h3 className="">{userInfo?.created_at && getClosedDate(userInfo?.created_at)}</h3>
                       </div>
                     </div>
                   </div>
@@ -153,10 +157,13 @@ const MWPage = (): JSX.Element => {
                 </div>
               </div> */}
                 </div>
-                <nav className="flex justify-center md:justify-start px-4 md:px-0 border-b border-slate-400 font-play">
-                  <button className={['uppercase text-sm tracking-wider py-5 grow max-w-[140px] md:grow-0 md:max-w-none md:px-6 md:text-base overflow-hidden relative transition-all hover:text-cyan-500 text-white', selectTypeVal === '' ? 'text-cyan-500' : ''].join(' ')} onClick={() => { selectType('') }}>
-                    <span>Competitions entered</span>
-                  </button>
+                <nav className=" mv-tab ">
+                  <div className="content flex justify-center md:justify-start">
+
+                    <button className={['uppercase text-sm tracking-wider grow max-w-[140px] md:grow-0 md:max-w-none overflow-hidden relative transition-all text-white', selectTypeVal === '' ? 'text-cyan-500' : ''].join(' ')} onClick={() => { selectType('') }}>
+                      <span>Competitions entered</span>
+                    </button>
+                  </div>
                   {/* <button className={['uppercase text-sm tracking-wider py-5 grow max-w-[140px] md:grow-0 md:max-w-none md:px-6 md:text-base overflow-hidden relative transition-all hover:text-cyan-500 text-white', selectTypeVal === 'owned' ? 'text-cyan-500' : ''].join(' ')} onClick={() => { selectType('owned') }}>
                 <span>NFTs owned</span>
               </button>

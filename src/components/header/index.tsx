@@ -120,7 +120,7 @@ const Header = (): JSX.Element => {
                   </div> */}
                   <div className="grow-0 text-center">
                     <a href="/" className="router-link-active router-link-exact-active inline-block mx-1 ">
-                      <img src={require('../../asstes/img/ohmynftlogo.png').default} alt="ohmynft logo" className={["inline-block lg:py-3 transition-all py-3", mobileOpenMenu ? "!py-1" : ''].join(' ')} />
+                      <img src={require('../../asstes/img/ohmynftlogo.png').default} alt="ohmynft logo" className={["inline-block transition-all nav-logo", mobileOpenMenu ? "!py-1" : ''].join(' ')} />
                     </a>
                   </div>
 
@@ -145,15 +145,15 @@ const Header = (): JSX.Element => {
                   <ul className="text-center mt-3 lg:flex lg:mt-0 lg:items-stretch justify-center flex-1 lg:text-left lg:h-full empty:hidden">
                     {
                       // hasUser
-                        // ? <>
-                        <>
-                          <NavItem to={'/'} title="COMPETITIONS"></NavItem>
-                          <NavItem to={'/winners'} title="Winners"></NavItem>
-                          <NavItem to={'/referrals'} title="referrals"></NavItem>
-                          {/* <NavItem to={'/home'} title="home"></NavItem> */}
-                          <NavItem to={'/comp'} title="comp"></NavItem>
-                        </>
-                        // : ''
+                      // ? <>
+                      <>
+                        <NavItem to={'/'} title="COMPETITIONS"></NavItem>
+                        <NavItem to={'/winners'} title="Winners"></NavItem>
+                        <NavItem to={'/referrals'} title="referrals"></NavItem>
+                        {/* <NavItem to={'/home'} title="home"></NavItem> */}
+                        <NavItem to={'/comp'} title="comp"></NavItem>
+                      </>
+                      // : ''
                     }
 
                   </ul>
@@ -202,23 +202,32 @@ const Header = (): JSX.Element => {
                     hasUser
                       ? <>
                         <div className="hidden lg:flex ml-3 lg:border-white/30 lg:pl-4 lg:ml-0">
-                          <div className="nav-main-avatar relative w-10 h-10 mr-2 cursor-pointer group">
+                          <div className="nav-main-avatar relative mr-2 cursor-pointer group">
                             <div className="relative" onClick={(e) => { e.stopPropagation(); setShowSocial(!showSocial) }}>
                               <img className="rounded-full border-2 border-white transition-all group-hover:border-cyan-500 p-[1px] border-white" src={require('../../asstes/img/default_personal.png').default} alt="Your avatar" decoding="async" />
                             </div>
-                            <ul className={['flex flex-col absolute z-20  shadow-2xl rounded-xl top-[52px] overflow-hidden -right-[84px] w-[250px] font-heavy', showSocial ? 'right-0' : 'left-0 hidden'].join(' ')} style={{
-                              background: '#253E59'
-                            }}>
-                              <li className="block whitespace-nowrap"><a href={`/mw/${lastUserName.name}`} className="flex w-full items-center px-3 py-3 hover:bg-slate-600 hover:text-cyan-500 transition-all duration-100">
-                                <span className="text-xl mr-3 icon2-ico-account"></span>
-                                <span className="text-lg">My profile</span>
-                              </a>
+                            <ul className={['flex flex-col absolute z-20 nav-dropdown shadow-2xl rounded-xl top-[52px] overflow-hidden', showSocial ? 'right-0' : 'left-0 hidden'].join(' ')}>
+                              <li className="block whitespace-nowrap">
+                                <a href={`/mw/${lastUserName.name}`} className="flex w-full items-center px-3 py-3 item transition-all duration-100">
+                                  <span className="mr-3 icon-ico icon-personal"></span>
+                                  <span className="">My profile</span>
+                                </a>
                               </li>
-                              {/* <li className="block whitespace-nowrap border-b border-slate-500"><a href="/referrals" className="flex w-full items-center px-3 py-3 hover:bg-slate-600 hover:text-cyan-500 transition-all duration-100"><span className="text-2xl mr-3 icon-ico-user-add"></span><span className="text-lg">Referrals</span></a></li> */}
-                              {/* <li className="block whitespace-nowrap border-b border-slate-500"><a href="/account" className="flex w-full items-center px-3 py-3 hover:bg-slate-600 hover:text-cyan-500 transition-all duration-100"><span className="text-2xl mr-3 icon-ico-settings"></span><span className="text-lg">Settings</span></a></li> */}
-                              <li className="block whitespace-nowrap"><button className="flex w-full items-center px-3 py-3 hover:bg-slate-600 hover:text-cyan-500 transition-all duration-100" onClick={Logout}>
-                                <span className="text-xl icon2-ico-logout mr-3"></span>
-                                <span className="text-lg">Logout</span>
+                              <li className="block whitespace-nowrap">
+                                <a href="/referrals" className="flex w-full items-center px-3 py-3 item transition-all duration-100">
+                                  <span className=" mr-3  icon-ico icon-referals"></span>
+                                  <span className="">Referrals</span>
+                                </a>
+                              </li>
+                              <li className="block whitespace-nowrap">
+                                <a href="/account" className="flex w-full items-center px-3 py-3 item transition-all duration-100">
+                                  <span className=" mr-3 icon-ico icon-settings"></span>
+                                  <span className="">Settings</span>
+                                </a>
+                              </li>
+                              <li className="block whitespace-nowrap"><button className="flex w-full items-center px-3 py-3 transition-all duration-100" onClick={Logout}>
+                                <span className="icon-logout icon-ico mr-3"></span>
+                                <span className="">Logout</span>
                               </button>
                               </li>
                             </ul>

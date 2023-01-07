@@ -46,212 +46,240 @@
 
 
 
-@font-face {
-  font-display:block;
-  font-family:icomoon;
-  font-style:normal;
-  font-weight:400;
-  src:url(../../asstes/fonts/icomoon.woff) format("woff")
-}
-[class*=" icon-"], [class^=icon-] {
-  speak:never;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  font-family:icomoon!important;
-  font-style:normal;
-  font-variant:normal;
-  font-weight:400;
-  line-height:1;
-  text-transform:none
-}
-.icon-ico-carret-left:before {
-  content:"\e92e"
-}
-.icon-ico-carret-right:before {
-  content:"\e92f"
-}
-.icon-ico-user-list:before {
-  content:"\e929"
-}
-.icon-ico-timer:before {
-  content:"\e92a"
-}
-.icon-ico-clock-clockwise:before {
-  content:"\e92b"
-}
-.icon-ico-wallet:before {
-  content:"\e92c"
-}
-.icon-ico-user:before {
-  content:"\e92d"
-}
-.icon-ico-speaker-disabled:before {
-  content:"\e923"
-}
-.icon-ico-speaker:before {
-  content:"\e928"
-}
-.icon-ico-whatsapp:before {
-  content:"\e925"
-}
-.icon-ico-copy:before {
-  content:"\e926"
-}
-.icon-ico-user-add:before {
-  content:"\e927"
-}
-.icon-ico-resize-down:before {
-  content:"\e924"
-}
-.icon-ico-resize-up:before {
-  content:"\e922"
-}
-.icon-ico-refresh:before {
-  content:"\e921"
-}
-.icon-ico-eye:before {
-  content:"\e91b"
-}
-.icon-ico-target:before {
-  content:"\e91c"
-}
-.icon-ico-thunder:before {
-  content:"\e91d"
-}
-.icon-ico-globe:before {
-  content:"\e91e"
-}
-.icon-ico-bookmark:before {
-  content:"\e91f"
-}
-.icon-ico-processor:before {
-  content:"\e920"
-}
-.icon-ico-sort-arrows:before {
-  content:"\e919"
-}
-.icon-ico-funnel:before {
-  content:"\e91a"
-}
-.icon-ico-logout:before {
-  content:"\e918"
-}
-.icon-ico-account:before {
-  content:"\e913"
-}
-.icon-ico-settings:before {
-  content:"\e915"
-}
-.icon-ico-share:before {
-  content:"\e911"
-}
-.icon-ico-hourglass:before {
-  content:"\e910"
-}
-.icon-ico-padlock:before {
-  content:"\e90c"
-}
-.icon-ico-link-external:before {
-  content:"\e90f"
-}
-.icon-ico-chat:before {
-  content:"\e90e"
-}
-.icon-ico-trophy:before {
-  content:"\e902"
-}
-.icon-ico-facebook:before {
-  content:"\e90d"
-}
-.icon-ico-badge:before {
-  content:"\e906"
-}
-.icon-ico-ticket:before {
-  content:"\e901"
-}
-.icon-ico-down-pointer:before {
-  content:"\e909"
-}
-.icon-ico-up-pointer:before {
-  content:"\e908"
-}
-.icon-ico-bell:before {
-  content:"\e907"
-}
-.icon-ico-plus:before {
-  content:"\e903"
-}
-.icon-ico-edit:before {
-  content:"\e904"
-}
-.icon-ico-eth:before {
-  content:"\e905"
-}
-.icon-ico-cart:before {
-  content:"\e90a"
-}
-.icon-ico-tick:before {
-  content:"\e900"
-}
-.icon-ico-discord:before {
-  content:"\e90b"
-}
-.icon-ico-instagram:before {
-  content:"\e912"
-}
-.icon-ico-send:before {
-  content:"\e914"
-}
-.icon-ico-twitter:before {
-  content:"\e916"
-}
-.icon-ico-x:before {
-  content:"\e917"
-}
+// @font-face {
+//   font-display:block;
+//   font-family:icomoon;
+//   font-style:normal;
+//   font-weight:400;
+//   src:url(../../asstes/fonts/icomoon.woff) format("woff")
+// }
+// [class*=" icon-"], [class^=icon-] {
+//   speak:never;
+//   -webkit-font-smoothing:antialiased;
+//   -moz-osx-font-smoothing:grayscale;
+//   font-family:icomoon!important;
+//   font-style:normal;
+//   font-variant:normal;
+//   font-weight:400;
+//   line-height:1;
+//   text-transform:none
+// }
+// .icon-ico-carret-left:before {
+//   content:"\e92e"
+// }
+// .icon-ico-carret-right:before {
+//   content:"\e92f"
+// }
+// .icon-ico-user-list:before {
+//   content:"\e929"
+// }
+// .icon-ico-timer:before {
+//   content:"\e92a"
+// }
+// .icon-ico-clock-clockwise:before {
+//   content:"\e92b"
+// }
+// .icon-ico-wallet:before {
+//   content:"\e92c"
+// }
+// .icon-ico-user:before {
+//   content:"\e92d"
+// }
+// .icon-ico-speaker-disabled:before {
+//   content:"\e923"
+// }
+// .icon-ico-speaker:before {
+//   content:"\e928"
+// }
+// .icon-ico-whatsapp:before {
+//   content:"\e925"
+// }
+// .icon-ico-copy:before {
+//   content:"\e926"
+// }
+// .icon-ico-user-add:before {
+//   content:"\e927"
+// }
+// .icon-ico-resize-down:before {
+//   content:"\e924"
+// }
+// .icon-ico-resize-up:before {
+//   content:"\e922"
+// }
+// .icon-ico-refresh:before {
+//   content:"\e921"
+// }
+// .icon-ico-eye:before {
+//   content:"\e91b"
+// }
+// .icon-ico-target:before {
+//   content:"\e91c"
+// }
+// .icon-ico-thunder:before {
+//   content:"\e91d"
+// }
+// .icon-ico-globe:before {
+//   content:"\e91e"
+// }
+// .icon-ico-bookmark:before {
+//   content:"\e91f"
+// }
+// .icon-ico-processor:before {
+//   content:"\e920"
+// }
+// .icon-ico-sort-arrows:before {
+//   content:"\e919"
+// }
+// .icon-ico-funnel:before {
+//   content:"\e91a"
+// }
+// .icon-ico-logout:before {
+//   content:"\e918"
+// }
+// .icon-ico-account:before {
+//   content:"\e913"
+// }
+// .icon-ico-settings:before {
+//   content:"\e915"
+// }
+// .icon-ico-share:before {
+//   content:"\e911"
+// }
+// .icon-ico-hourglass:before {
+//   content:"\e910"
+// }
+// .icon-ico-padlock:before {
+//   content:"\e90c"
+// }
+// .icon-ico-link-external:before {
+//   content:"\e90f"
+// }
+// .icon-ico-chat:before {
+//   content:"\e90e"
+// }
+// .icon-ico-trophy:before {
+//   content:"\e902"
+// }
+// .icon-ico-facebook:before {
+//   content:"\e90d"
+// }
+// .icon-ico-badge:before {
+//   content:"\e906"
+// }
+// .icon-ico-ticket:before {
+//   content:"\e901"
+// }
+// .icon-ico-down-pointer:before {
+//   content:"\e909"
+// }
+// .icon-ico-up-pointer:before {
+//   content:"\e908"
+// }
+// .icon-ico-bell:before {
+//   content:"\e907"
+// }
+// .icon-ico-plus:before {
+//   content:"\e903"
+// }
+// .icon-ico-edit:before {
+//   content:"\e904"
+// }
+// .icon-ico-eth:before {
+//   content:"\e905"
+// }
+// .icon-ico-cart:before {
+//   content:"\e90a"
+// }
+// .icon-ico-tick:before {
+//   content:"\e900"
+// }
+// .icon-ico-discord:before {
+//   content:"\e90b"
+// }
+// .icon-ico-instagram:before {
+//   content:"\e912"
+// }
+// .icon-ico-send:before {
+//   content:"\e914"
+// }
+// .icon-ico-twitter:before {
+//   content:"\e916"
+// }
+// .icon-ico-x:before {
+//   content:"\e917"
+// }
 
-@font-face {
-  font-display:block;
-  font-family:icomoon2;
-  font-style:normal;
-  font-weight:400;
-  src:url(../../asstes/fonts/icomoon_add.woff) format("woff")
-}
-[class*=" icon2-"], [class^=icon2-] {
-  speak:never;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  font-family:icomoon2!important;
-  font-style:normal;
-  font-variant:normal;
-  font-weight:400;
-  line-height:1;
-  text-transform:none
-}
+// @font-face {
+//   font-display:block;
+//   font-family:icomoon2;
+//   font-style:normal;
+//   font-weight:400;
+//   src:url(../../asstes/fonts/icomoon_add.woff) format("woff")
+// }
+// [class*=" icon2-"], [class^=icon2-] {
+//   speak:never;
+//   -webkit-font-smoothing:antialiased;
+//   -moz-osx-font-smoothing:grayscale;
+//   font-family:icomoon2!important;
+//   font-style:normal;
+//   font-variant:normal;
+//   font-weight:400;
+//   line-height:1;
+//   text-transform:none
+// }
 
-.icon2-ico-badge:before {
-  content:"\e900"
-}
-.icon2-ico-eth:before {
-  content:"\e901"
-}
-.icon2-ico-success:before {
-  content:"\e907"
-}
-.icon2-ico-error:before {
-  content:"\e908"
-}
-.icon2-ico-share:before {
-  content:"\e906"
-}
-.icon2-ico-account:before {
-  content:"\e909"
-}
-.icon2-ico-logout:before {
-  content:"\e90a"
-}
-.icon2-ico-hourglass:before {
-  content:"\e90b"
-}
+// .icon2-ico-badge:before {
+//   content:"\e900"
+// }
+// .icon2-ico-eth:before {
+//   content:"\e901"
+// }
+// .icon2-ico-success:before {
+//   content:"\e907"
+// }
+// .icon2-ico-error:before {
+//   content:"\e908"
+// }
+// .icon2-ico-share:before {
+//   content:"\e906"
+// }
+// .icon2-ico-account:before {
+//   content:"\e909"
+// }
+// .icon2-ico-logout:before {
+//   content:"\e90a"
+// }
+// .icon2-ico-hourglass:before {
+//   content:"\e90b"
+// }
+
+
+// @font-face {
+//   font-display:block;
+//   font-family:iconOhmynft;
+//   font-style:normal;
+//   font-weight:400;
+//   src:url(../../asstes/icomoon/icomoon.woff) format("woff")
+// }
+// [class*=" oicon-"], [class^=oicon-] {
+//   speak:never;
+//   -webkit-font-smoothing:antialiased;
+//   -moz-osx-font-smoothing:grayscale;
+//   font-family:iconOhmynft!important;
+//   font-style:normal;
+//   font-variant:normal;
+//   font-weight:400;
+//   line-height:1;
+//   text-transform:none
+// }
+
+// .oicon-ico-logout:before {
+//   content:"\e900"
+// }
+
+// .oicon-ico-setting:before {
+//   content:"\e901"
+// }
 // @font-face {
 //   font-display:swap;
 //   font-family:Play;
@@ -3221,7 +3249,7 @@ select {
 }
 .text-cyan-500 {
   --tw-text-opacity:1;
-  color:rgb(43 147 255/var(--tw-text-opacity))
+  color:rgb(58 138 255/var(--tw-text-opacity))
 }
 .text-slate-200 {
   --tw-text-opacity:1;

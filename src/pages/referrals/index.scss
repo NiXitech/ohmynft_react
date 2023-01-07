@@ -1,0 +1,82 @@
+.referrals-tab{
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  margin-top: 1.5rem;
+  font-family: HarmonyOS_Sans_SC_Bold;
+  .content{
+    margin: 0 -1rem;
+  }
+  button{
+    padding: .388rem 1rem;
+  }
+}
+
+.referrals-info{
+  padding: 2rem 0;
+  .left{
+    font-size: .6rem;
+    font-family: HarmonyOS_Sans_SC;
+    line-height: 0.8rem;
+    text-align: justify;
+    .head{
+      font-family: HarmonyOS_Sans_SC_Bold;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      line-height: 1;
+      img{
+        margin-right: .75rem;
+      }
+    }
+  }
+}
+
+.referrals-share{
+  background: rgba(68, 60, 74, 1);
+  border-radius: .75rem;
+  padding: 1.25rem;
+  input{
+    background-color: rgba(255, 255, 255, .1);
+    border: none;
+    font-size: .5rem;
+    color: #fff;
+    line-height: 1;
+    padding: .75rem 1.5rem;
+    &:disabled{
+      -webkit-text-fill-color: #fff;
+    }
+  }
+  button, a{
+    background-color: rgba(58, 138, 255, 1);
+    font-size: .5rem;
+    font-family: HarmonyOS_Sans_SC_Bold;
+    padding: .75rem 0;
+    line-height: 1;
+    .text{
+      padding-right: .25rem;
+    }
+    .icon{
+      font-size: 0.75rem;
+    }
+  }
+}
+
+.referral-statistics{
+  font-size: .5rem;
+  font-family: HarmonyOS_Sans_SC_Bold;
+  .title{
+    margin-bottom: 1.125rem;
+  }
+  .item{
+    background-color: rgba(68, 60, 74, 1);
+    color: #fff;
+    h2{
+      font-family: HarmonyOS_Sans_SC_Bold;
+      font-size: .5rem;
+    }
+    div{
+      border-top: 1px solid rgba(255, 255, 255, .4);
+      padding: .23rem;
+      font-family: HarmonyOS_Sans_SC;
+      font-size: .44rem;
+    }
+  }
+}

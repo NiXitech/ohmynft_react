@@ -81,7 +81,7 @@ const LiveNow = (): JSX.Element => {
 						</div>
 					</div>
 				</div >
-				<Footer></Footer>
+
 			</section >
 		</>
 	);

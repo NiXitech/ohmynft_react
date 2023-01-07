@@ -1,0 +1,21 @@
+
+.nav-logo{
+  padding: 0.375rem 0;
+}
+.nav-main-avatar{
+  width: 1.8rem;
+}
+
+.nav-dropdown{
+  font-size: 0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5.5rem;
+  background-color: #021222;
+  .item{
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  }
+  .icon-ico{
+    font-size: .65rem;
+  }
+}
