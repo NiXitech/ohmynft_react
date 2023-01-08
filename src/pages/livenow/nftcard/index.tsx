@@ -40,9 +40,6 @@ const NFTCard = (props: any): JSX.Element => {
 				<div className="progress-bar">
 					<Progress percent={30} />
 				</div>
-				{/* <span>
-					{cardData.progress}%
-				</span> */}
 			</div>
 			<div className="card-button">
 				<button className="uppercase" onClick={routerToDetail}>
