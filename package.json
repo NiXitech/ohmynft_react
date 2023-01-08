@@ -21,7 +21,7 @@
     "copy-to-clipboard": "^3.3.3",
     "crypto-js": "^4.1.1",
     "eth-sig-util": "3.0.1",
-    "ethereumjs-util": "^7.1.4",
+    "ethereumjs-util": "^7.1.5",
     "ethers": "^5.5.4",
     "http-proxy-middleware": "^2.0.3",
     "lodash": "^4.17.21",
