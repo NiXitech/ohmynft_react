@@ -69,51 +69,53 @@ const LiveNow = (props: any) => {
 
 	return (
 		<section className="w-full pb-4 pt-16 lg:px-8">
-			<Row>
-				<Col className="gutter-row" span={12}>
-					<Space direction="vertical" size="large" style={{ width: '100%' }}>
-						<BrText></BrText>
-						<div className="slogen-detail pt-2">
-							{state.slogenDetail}
-						</div>
-						<Row className="pt-6">
-							<Col span={6}>
-								<Button type="primary" block shape="round" size="large" >Share On Twitter</Button>
-							</Col>
-							<Col span={6}>
-								<Button type="primary" block shape="round" size="large" >Copy Link</Button>
-							</Col>
-						</Row>
-					</Space>
-				</Col>
-				<Col className="gutter-row" span={12}>
-					<img src={require('../../asstes/partImg/slogen.png').default} alt="" style={{ width: '63.187rem' }} />
-				</Col>
-			</Row>
-			{
-				state.featureList.map((feature: any, index: any) => {
-					return (
-						<>
-							<Row key={index}>
-								<div className='livenow-title'>
-									{feature.title}
-								</div>
+			<div className="container">
+				<Row>
+					<Col className="gutter-row" span={12}>
+						<Space direction="vertical" size="large" style={{ width: '100%' }}>
+							<BrText></BrText>
+							<div className="slogen-detail pt-2">
+								{state.slogenDetail}
+							</div>
+							<Row className="pt-6">
+								<Col span={6}>
+									<Button type="primary" block shape="round" size="large" >Share On Twitter</Button>
+								</Col>
+								<Col span={6}>
+									<Button type="primary" block shape="round" size="large" >Copy Link</Button>
+								</Col>
 							</Row>
-							<Row gutter={{ xs: 12, sm: 12, md: 18, lg: 24 }} wrap>
-								{
-									feature.cardList.map(
-										(item: any, idx: any) => {
-											return <Col md={{ span: 8 }} lg={{ span: 6 }} span={12}>
-												<NFTCard cardData={item} key={idx}></NFTCard>
-											</Col>
-										}
-									)
-								}
-							</Row>
-						</>
-					)
-				})
-			}
+						</Space>
+					</Col>
+					<Col className="gutter-row" span={12}>
+						<img src={require('../../asstes/partImg/slogen.png').default} alt="" style={{ width: '63.187rem' }} />
+					</Col>
+				</Row>
+				{
+					state.featureList.map((feature: any, index: any) => {
+						return (
+							<>
+								<Row key={index}>
+									<div className='livenow-title'>
+										{feature.title}
+									</div>
+								</Row>
+								<Row gutter={{ xs: 12, sm: 12, md: 18, lg: 24 }} wrap>
+									{
+										feature.cardList.map(
+											(item: any, idx: any) => {
+												return <Col md={{ span: 8 }} lg={{ span: 6 }} span={12}>
+													<NFTCard cardData={item} key={idx}></NFTCard>
+												</Col>
+											}
+										)
+									}
+								</Row>
+							</>
+						)
+					})
+				}
+			</div>
 		</section>
 	)
 }

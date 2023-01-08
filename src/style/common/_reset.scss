@@ -902,7 +902,8 @@ select {
   --tw-shadow-colored:0 0 #0000;
 }
 .container {
-  width:100%
+  width:96%;
+  margin: auto;
 }
 @media (min-width:640px) {
   .container {
@@ -924,9 +925,9 @@ select {
       max-width:1280px
   }
 }
-@media (min-width:1536px) {
+@media (min-width:1520px) {
   .container {
-      max-width:1536px
+      max-width:1520px
   }
 }
 @media (min-width:1800px) {
