@@ -33,30 +33,6 @@ const LiveNow = (props: any) => {
 		)
 	}
 
-	const Cardlist = (): JSX.Element => {
-		return (
-			<>
-				{state.featureList.map((feature: any, index: any) => {
-					return <div className="feature-card" key={index}>
-						<div className="feature-title" >
-							{feature.title}
-						</div>
-						<div className="card-List">
-							{
-								feature.cardList.map(
-									(item: any, idx: any) => {
-										return <NFTCard cardData={item} key={idx}></NFTCard>
-									}
-								)
-							}
-						</div>
-					</div>
-				})}
-			</>
-		)
-
-	}
-
 	useEffect(
 		() => {
 			const title = '';
@@ -70,25 +46,21 @@ const LiveNow = (props: any) => {
 	return (
 		<section className="w-full pb-4 pt-16 lg:px-8">
 			<div className="container">
-				<Row>
+				<Row align="middle">
 					<Col className="gutter-row" span={12}>
 						<Space direction="vertical" size="large" style={{ width: '100%' }}>
 							<BrText></BrText>
 							<div className="slogen-detail pt-2">
 								{state.slogenDetail}
 							</div>
-							<Row className="pt-6">
-								<Col span={6}>
-									<Button type="primary" block shape="round" size="large" >Share On Twitter</Button>
-								</Col>
-								<Col span={6}>
-									<Button type="primary" block shape="round" size="large" >Copy Link</Button>
-								</Col>
-							</Row>
+							<Space className="pt-6 " wrap>
+								<Button type="primary" shape="round" size="large" >Share On Twitter</Button>
+								<Button type="primary" shape="round" size="large" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copy Link&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Button>
+							</Space>
 						</Space>
 					</Col>
 					<Col className="gutter-row" span={12}>
-						<img src={require('../../asstes/partImg/slogen.png').default} alt="" style={{ width: '63.187rem' }} />
+						<img src={require('../../asstes/partImg/slogen.png').default} alt="loading" style={{ width: '63.187rem' }} />
 					</Col>
 				</Row>
 				{
@@ -100,7 +72,7 @@ const LiveNow = (props: any) => {
 										{feature.title}
 									</div>
 								</Row>
-								<Row gutter={{ xs: 12, sm: 12, md: 18, lg: 24 }} wrap>
+								<Row wrap gutter={[16, { xs: 12, sm: 12, md: 18, lg: 24 }]}>
 									{
 										feature.cardList.map(
 											(item: any, idx: any) => {

@@ -2,8 +2,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import _ from "lodash";
 import { useState } from "react";
+import { Col, Row } from 'antd';
 import './index.scss'
-import CompletedCard from '../../components/completedcard'
+// import CompletedCard from '../../components/completedcard'
+import NFTCard from '../livenow/nftcard/index'
+
 
 
 /* eslint-disable jsx-a11y/img-redundant-alt */
@@ -18,30 +21,33 @@ const Completed = (): JSX.Element => {
 
 
 	return (
-		<section className="w-full pb-4 pt-16 lg:px-8">
-			<div className="home-page-completed">
-				<div className="congratulations">
-					<div className="attention-info">
-						Earn Big Rewards With
-						<span>
-							Referrals！
-						</span>
+		<div className="container ">
+			<section className="w-full pb-4 pt-16">
+				<div className="home-page-completed w-fullpb-4 ">
+					<div className="congratulations">
+						<div className="attention-info">
+							Earn Big Rewards With
+							<span>
+								&nbsp;Referrals！
+							</span>
+						</div>
 					</div>
-				</div>
-				<div className="card-list">
-					{
-						state.allCardList.map(
-							(element, index) => {
-								return (
-									<CompletedCard cardData={element} key={index}></CompletedCard>
+					<div className="py-6">
+						<Row wrap gutter={[16, { xs: 12, sm: 12, md: 18, lg: 24 }]}>
+							{
+								state.allCardList.map(
+									(item: any, idx: any) => {
+										return <Col md={{ span: 8 }} lg={{ span: 6 }} span={12}>
+											<NFTCard cardData={item} key={idx}></NFTCard>
+										</Col>
+									}
 								)
 							}
-						)
-					}
-					{/* <completed-card cardData="item" v-for="item in allCardList" :key="item.cardName"></completed-card> */}
+						</Row>
+					</div>
 				</div>
-			</div>
-		</section>
+			</section>
+		</div>
 	);
 }
 

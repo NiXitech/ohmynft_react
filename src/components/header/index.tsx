@@ -148,11 +148,13 @@ const Header = (): JSX.Element => {
                         // hasUser
                         // ? <>
                         <>
-                          <NavItem to={'/'} title="COMPETITIONS"></NavItem>
+                          <NavItem to={'/'} title="Live Now"></NavItem>
+                          <NavItem to={'/completed'} title="Completed"></NavItem>
+                          <NavItem to={'/activity'} title="Activity"></NavItem>
                           <NavItem to={'/winners'} title="Winners"></NavItem>
                           <NavItem to={'/referrals'} title="referrals"></NavItem>
+
                           {/* <NavItem to={'/home'} title="home"></NavItem> */}
-                          <NavItem to={'/comp'} title="comp"></NavItem>
                         </>
                         // : ''
                       }
