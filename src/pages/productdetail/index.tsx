@@ -3,6 +3,7 @@
 import _ from "lodash";
 import { useState } from "react";
 import './index.scss'
+import { Progress, Divider, Button, InputNumber } from 'antd';
 import TwoColActivity from "../../components/twocolactivity";
 import NFTCard from "../livenow/nftcard";
 import ConnectWallet from "../../components/connectWallet";
@@ -21,95 +22,132 @@ const ProductDetail = (): JSX.Element => {
   });
 
   // 连接钱包
-  const connectWallet = (item:any)=> {
+  const connectWallet = (item: any) => {
     actions.openConnect();
   }
 
-  return (
-    <section className="w-full pb-4 pt-16 lg:px-8">
-      <div className="home-page-detail">
-        <div className="congratulations">
-          <div className="attention-info">
-            Earn Big Rewards With Referrals！
-          </div>
-        </div>
-        <div className="detail-content">
-          <div className="grid grid-cols-2">
-            <div>
-              <div className="card-img-detail">
-                <img src={require('../../asstes/tmpImg/cardImg.png').default} alt="" />
-              </div>
-            </div>
-            <div>
-              <div className="card-info">
-                <div className="info-top">
-                  <div className="card-title" title="cardtitle">
-                    {state.cardtitle}
-                  </div>
-                  <div className="card-number">
-                    {
-                      [1, 2, 3].map(
-                        (item, index) => {
-                          return (
-                            <span key={index}>
-                              <img src={require('../../asstes/partImg/binance.png').default} alt="" />
-                              <span> {item}</span>
-                            </span>
-                          )
-                        }
-                      )
-                    }
-                  </div>
-                </div>
-                <div className="info-bottom">
-                  <div className="choosing-winner">
-                    <div className="choosing-pic">
+  // 数字输入框
+  const onChange = (value: any) => {
+    console.log('input number:', value);
+  }
 
-                    </div>
-                    <div className="choosing-text">
-                      FULL
-                    </div>
-                    <div className="choosing-status">Winner is being drawn</div>
+  return (
+    <section className="w-full pt-16 pb-4 lg:px-8">
+      <div className="container pt-14">
+        <div className="detail-content">
+          <div className="grid grid-cols-2 flex-center-detail">
+            <div className="card-img-detail">
+              <img src={require('../../asstes/tmpImg/cardImg.png').default} alt="loading" />
+            </div>
+            <div className="card-info">
+              <div className="info-top">
+                <div className="card-title" title="cardtitle">
+                  {state.cardtitle}
+                </div>
+                {/* <Divider /> */}
+                <div className="card-cols-2 pt-8">
+                  <div className="color-title">
+                    123
                   </div>
-                  <div className="button-list">
-                    {
-                      ['choosing a winner', 'share on twitter', 'contract:0X4D6283B4198C0039F2ADDC6A8784BBDEF6E259EB'].map(
-                        (item, index) => {
-                          return (
-                            <div
-                              key={index}>
-                              <button onClick={connectWallet}> {item}</button>
-                            </div>
-                          )
-                        }
-                      )
-                    }
+                  <div className="white-title">
+                    456
                   </div>
                 </div>
+
+                <div className="card-cols-2 pt-4">
+                  <div className="attention-number pt-2 pb-2">
+                    Total Entries:
+                    <span>&nbsp;1000</span>
+                  </div>
+                </div>
+
+                <div className="card-cols-2 pt-2">
+                  <Progress percent={60} showInfo={false} trailColor="#fff" />
+                </div>
+
+                <div className="card-cols-2 pt-2">
+                  <div className="attention-number pt-2 pb-2">
+                    Current Entries:
+                    <span>&nbsp;500</span>
+                  </div>
+                  <div className="attention-number pt-2 pb-2">
+                    Remaining Entries:
+                    <span>&nbsp;600</span>
+                  </div>
+                </div>
+
+                <div className="card-cols-2 pt-2">
+                  <div className="attention-number pb-2">
+                    Buying more entries increases your odds of winning!
+                  </div>
+                </div>
+
+                <div className="card-cols-2">
+                  <div className="attention-number pt-2 pb-2">
+                    BUSD:
+                    <span>&nbsp;0.05</span>
+                    <label className="lable-button">
+                      <Button type="primary" size="small">Maximum limit exceeded.</Button>
+                    </label>
+                  </div>
+                </div>
+
+                <div className="card-cols-2">
+                  <div className="attention-number pt-2 pb-2">
+                    Entries:&nbsp;&nbsp;
+                    <InputNumber size="small" min={1} max={10} defaultValue={3} onChange={onChange} />
+                    &nbsp;&nbsp;You used 0 of 400 entries
+                  </div>
+                </div>
+
+                <div className="card-cols-2 pt-4">
+                  <div className="detail-buy-button">
+                    <Button type="primary" size="large">BUY ENTRY</Button>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
-          <div className="split-line"></div>
-          <div className="grid grid-cols-2">
-            <div className="activity-participants">
+
+          <Divider />
+
+          <div className="grid grid-cols-2 flex-center-detail">
+            <div className="activity-participants px-4">
               <TwoColActivity></TwoColActivity>
             </div>
-            <div  >
-              <div>
-                end soon
+
+            <div className="share-twitter pl-6">
+              <div className="detail-share-twitter-button pb-10">
+                <Button ghost size="large">Share On Twitter &nbsp;
+                  <span className=" icon-twitter icon"></span>
+                </Button>
               </div>
-              <div className="ending-soon grid grid-cols-2">
-                {
-                  state.cardlist.map(
-                    (item, index) => {
-                      return (
-                        <NFTCard cardData={item} key={index}></NFTCard>
-                      )
-                    }
-                  )
-                }
+              <div className="detail-copy-button pb-10">
+                <Button ghost size="large">
+                  CONTRACT: j3hd8vned8vjd89d33jj333azvvooemmeladjk
+                  &nbsp;
+                  <span className="icon-copy icon"></span>
+                </Button>
+              </div>
+              <div>
+                <div className="end-soon-detail pb-10">
+                  End soon
+                </div>
+                <div className="grid grid-cols-2 flex flex-row justify-between">
+                  {
+                    state.cardlist.map(
+                      (item, index) => {
+                        return (
+                          <NFTCard cardData={item} key={index}></NFTCard>
+                        )
+                      }
+                    )
+                  }
+                </div>
               </div>
             </div>
+
           </div>
         </div>
       </div>

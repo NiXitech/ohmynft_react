@@ -70,7 +70,6 @@ const TwoColActivity = (): JSX.Element => {
   })
   return (
     <>
-
       <section className="w-full mx-auto lg:screnHeight">
         <div className="lg:overflow-y-auto overflow-y-auto overflow-x-hidden lg:overflow-x-hidden relative pb-0 hideScrollbar"
           style={{
