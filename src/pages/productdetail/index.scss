@@ -1,30 +1,22 @@
 
   .detail-content {
-    min-height: 100vh;
-    padding-left: 10rem;
-    padding-right: 10rem;
-
-    .flex-center-detail {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
+      min-height: 100vh;
+      padding-left: 0rem;
+      padding-right: 0rem;
+      @media (min-width:1240px) {
+        padding: 0 10rem;
+      }
     
     .card-img-detail {
       padding: 1.5rem;
-      flex: 4;
       border-radius: 1.5rem;
-
       img {
         width: 100%;
       }
     }
 
     .card-info {
-      padding: 1.5rem;
-      
-      flex: 6;
+      padding: 1.5rem 0 1.5rem 1.5rem;
 
       .info-top {
         .card-title {
@@ -64,6 +56,8 @@
           }
 
           .attention-number {
+            display: flex;
+            align-items: center;
             font-family: HarmonyOS_Sans_Thin;
             font-size: 1rem;
             line-height: 1rem;
@@ -81,6 +75,68 @@
               span {
                 font-size: 1rem;
               }
+            }
+
+            .count{
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+            .inputGroup{
+              text-align: center;
+              line-height: 1;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              box-sizing: border-box;
+            }
+
+            .inputGroup button{
+                width: 2.5rem;
+                height: 2.5rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: .12rem;
+                color: rgba(0, 0, 0, 0.6);
+                background-color: #fff;
+                font-size: 1.5rem;
+                font-family: HarmonyOS_Sans_Bold;
+                border-radius: 0.25rem;
+            }
+
+            .inputGroup .cont-input {
+              margin: 0 0.5rem;
+              background-color: #FFFFFF;
+              input{
+                min-width: 1px;
+                width: 5.75rem;
+                height: 2.5rem;
+                font-family: DDBFont;
+                text-align: center;
+                font-family: HarmonyOS_Sans_Bold;
+                font-size: 1.5rem;
+                color: rgba(255, 255, 255, 0.5);
+                background: linear-gradient(103deg, #EC0F00 0%, #FCDC66 99%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                background-color: rgb(85, 28, 28);
+                border: .01rem solid #ffffff71;
+                position: relative;
+                
+              
+                // pointer-events: none;
+                border-radius: 0.25rem;
+                &:focus,&:hover,&:active{
+                border: .01rem solid #ffffff71;
+                }
+            }
+            }
+
+            .inputGroup input:focus{
+                border: none;
+                outline: none;
             }
           }
 
@@ -101,15 +157,9 @@
       }
     }
 
-    .activity-participants {
-      // width: 30rem;
-      // height: 46.25rem;
-      flex: 4;
-    }
+    
 
     .share-twitter {
-      // width: 46.25rem;
-      flex: 6;
       .detail-buy-button {
         width: 100%;
         button {

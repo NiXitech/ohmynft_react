@@ -66,7 +66,7 @@ const Activity = (): JSX.Element => {
   }
   useEffect(() => {
     getAllActivityFun()
-  })
+  }, [])
   return (
     <>
       <div className="container">

@@ -89,7 +89,7 @@ const Header = (): JSX.Element => {
       }
 
     }
-  })
+  }, [])
 
   const Logout = () => {
     disconnect()

@@ -37,7 +37,7 @@ const Completed = (): JSX.Element => {
 							{
 								state.allCardList.map(
 									(item: any, idx: any) => {
-										return <Col md={{ span: 8 }} lg={{ span: 6 }} span={12}>
+										return <Col  md={{ span: 8 }} lg={{ span: 8 }} xl={{ span: 6 }} span={12} key={idx}>
 											<NFTCard cardData={item} key={idx}></NFTCard>
 										</Col>
 									}

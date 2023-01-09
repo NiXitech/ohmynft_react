@@ -20,6 +20,7 @@ const ProductDetail = (): JSX.Element => {
       { cardName: 'up coming02', cardValue: '2', BUSD: '0.01', unit: 'BUSD', progress: 60 }
     ]
   });
+  const [Quantity, setQuantity] = useState(1)
 
   // 连接钱包
   const connectWallet = (item: any) => {
@@ -35,119 +36,153 @@ const ProductDetail = (): JSX.Element => {
     <section className="w-full pt-16 pb-4 lg:px-8">
       <div className="container pt-14">
         <div className="detail-content">
-          <div className="grid grid-cols-2 flex-center-detail">
-            <div className="card-img-detail">
-              <img src={require('../../asstes/tmpImg/cardImg.png').default} alt="loading" />
-            </div>
-            <div className="card-info">
-              <div className="info-top">
-                <div className="card-title" title="cardtitle">
-                  {state.cardtitle}
-                </div>
-                {/* <Divider /> */}
-                <div className="card-cols-2 pt-8">
-                  <div className="color-title">
-                    123
-                  </div>
-                  <div className="white-title">
-                    456
-                  </div>
-                </div>
+          <div className="grid grid-cols-1 flex-center-detail sm:grid-cols-4-6">
+            <div>
+              <div className="card-img-detail">
+                <img src={require('../../asstes/tmpImg/cardImg.png').default} alt="loading" />
+              </div>
 
-                <div className="card-cols-2 pt-4">
-                  <div className="attention-number pt-2 pb-2">
-                    Total Entries:
-                    <span>&nbsp;1000</span>
-                  </div>
-                </div>
-
-                <div className="card-cols-2 pt-2">
-                  <Progress percent={60} showInfo={false} trailColor="#fff" />
-                </div>
-
-                <div className="card-cols-2 pt-2">
-                  <div className="attention-number pt-2 pb-2">
-                    Current Entries:
-                    <span>&nbsp;500</span>
-                  </div>
-                  <div className="attention-number pt-2 pb-2">
-                    Remaining Entries:
-                    <span>&nbsp;600</span>
-                  </div>
-                </div>
-
-                <div className="card-cols-2 pt-2">
-                  <div className="attention-number pb-2">
-                    Buying more entries increases your odds of winning!
-                  </div>
-                </div>
-
-                <div className="card-cols-2">
-                  <div className="attention-number pt-2 pb-2">
-                    BUSD:
-                    <span>&nbsp;0.05</span>
-                    <label className="lable-button">
-                      <Button type="primary" size="small">Maximum limit exceeded.</Button>
-                    </label>
-                  </div>
-                </div>
-
-                <div className="card-cols-2">
-                  <div className="attention-number pt-2 pb-2">
-                    Entries:&nbsp;&nbsp;
-                    <InputNumber size="small" min={1} max={10} defaultValue={3} onChange={onChange} />
-                    &nbsp;&nbsp;You used 0 of 400 entries
-                  </div>
-                </div>
-
-                <div className="card-cols-2 pt-4">
-                  <div className="detail-buy-button">
-                    <Button type="primary" size="large">BUY ENTRY</Button>
-                  </div>
-                </div>
-
+              <div className="activity-participants px-4 pt-10 md:block hidden ">
+                <TwoColActivity></TwoColActivity>
               </div>
             </div>
-          </div>
 
-          <Divider />
+            <div>
+              <div className="card-info">
+                <div className="info-top">
+                  <div className="card-title" title="cardtitle">
+                    {state.cardtitle}
+                  </div>
+                  <Divider className="bg-white/40" />
+                  <div className="card-cols-2">
+                    <div className="color-title">
+                      123
+                    </div>
+                    <div className="white-title">
+                      456
+                    </div>
+                  </div>
 
-          <div className="grid grid-cols-2 flex-center-detail">
-            <div className="activity-participants px-4">
-              <TwoColActivity></TwoColActivity>
-            </div>
+                  <div className="card-cols-2 pt-4">
+                    <div className="attention-number pt-4 pb-2">
+                      Total Entries:
+                      <span>&nbsp;1000</span>
+                    </div>
+                  </div>
 
-            <div className="share-twitter pl-6">
-              <div className="detail-share-twitter-button pb-10">
-                <Button ghost size="large">Share On Twitter &nbsp;
-                  <span className=" icon-twitter icon"></span>
-                </Button>
-              </div>
-              <div className="detail-copy-button pb-10">
-                <Button ghost size="large">
-                  CONTRACT: j3hd8vned8vjd89d33jj333azvvooemmeladjk
-                  &nbsp;
-                  <span className="icon-copy icon"></span>
-                </Button>
-              </div>
-              <div>
-                <div className="end-soon-detail pb-10">
-                  End soon
+                  <div className="card-cols-2 pt-2">
+                    <Progress percent={60} showInfo={false} trailColor="#fff" />
+                  </div>
+
+                  <div className="card-cols-2 pt-2">
+                    <div className="attention-number pt-4 pb-2">
+                      Current Entries:
+                      <span>&nbsp;500</span>
+                    </div>
+                    <div className="attention-number pt-4 pb-2">
+                      Remaining Entries:
+                      <span>&nbsp;600</span>
+                    </div>
+                  </div>
+
+                  <div className="card-cols-2 pt-6">
+                    <div className="attention-number pb-2">
+                      Buying more entries increases your odds of winning!
+                    </div>
+                  </div>
+
+                  <div className="card-cols-2">
+                    <div className="attention-number pt-6 pb-2">
+                      BUSD:
+                      <span>&nbsp;0.05</span>
+                      <label className="lable-button">
+                        <Button type="primary" size="small">Maximum limit exceeded.</Button>
+                      </label>
+                    </div>
+                  </div>
+
+                  <div className="card-cols-2">
+                    <div className="attention-number pt-6 pb-2">
+                      Entries:&nbsp;&nbsp;
+                      {/* <InputNumber size="small" min={1} max={10} defaultValue={3} onChange={onChange} /> */}
+                      <div className="count">
+                        <div className="inputGroup">
+                          <button onClick={() => { if (Quantity > 1) { setQuantity(Quantity - 1) } }}>-</button>
+                          <div className="cont-input">
+                            <input id="tentacles" name="tentacles" type="number" value={Quantity} step={1} min="1" max="300"
+                              onBlur={(e) => {
+                                if (e.target.value === '') setQuantity(1)
+                              }}
+                              onChange={(e) => {
+                                console.log('number:--->', e.target.value);
+                                var patrn = /^([1-9]\d*)(\.\d*[1-9])?$/;
+                                if (!patrn.exec(e.target.value)) {
+                                  JSON.stringify(e.target.value).substr(1);
+                                  setQuantity(Number(JSON.stringify(e.target.value).substr(1)));
+                                } else if (Number(e.target.value) > 100) {
+                                  setQuantity(100);
+                                } else {
+                                  setQuantity(Number(e.target.value));
+                                }
+                              }} />
+                          </div>
+                          <button onClick={() => { if (Quantity < 300) { setQuantity(Quantity + 1) } }}>+</button>
+                        </div>
+                      </div>
+                      &nbsp;&nbsp;You used 0 of 400 entries
+                    </div>
+                  </div>
+
+                  <div className="card-cols-2 pt-8">
+                    <div className="detail-buy-button">
+                      <Button type="primary" size="large">BUY ENTRY</Button>
+                    </div>
+                  </div>
+
+                  <div className="md:block lg:block pt-6 font-thin text-xs">
+                    Quick Tip! Gas fees are required for each purchase. You can save a lot of money on gas fees by purchasing multiple entries at once.
+                  </div>
+
                 </div>
-                <div className="grid grid-cols-2 flex flex-row justify-between">
-                  {
-                    state.cardlist.map(
-                      (item, index) => {
-                        return (
-                          <NFTCard cardData={item} key={index}></NFTCard>
+              </div>
+
+              <div className="flex-center-detail">
+                <div className="share-twitter pl-6">
+                  <div className="detail-share-twitter-button pb-10">
+                    <Button ghost size="large">Share On Twitter &nbsp;
+                      <span className=" icon-twitter icon"></span>
+                    </Button>
+                  </div>
+                  <div className="detail-copy-button pb-10">
+                    <Button ghost size="large">
+                      CONTRACT: j3hd8vned8vjd89d33jj333azvvooemmeladjk
+                      &nbsp;
+                      <span className="icon-copy icon"></span>
+                    </Button>
+                  </div>
+                  <div>
+                    <div className="activity-participants px-4 pt-10 md:hidden block">
+                      <TwoColActivity></TwoColActivity>
+                    </div>
+                    <div className="end-soon-detail pb-10 pt-4">
+                      End soon
+                    </div>
+                    <div className="grid grid-cols-2 gap-4 flex flex-row justify-between">
+                      {
+                        state.cardlist.map(
+                          (item, index) => {
+                            return (
+                              <NFTCard cardData={item} key={index}></NFTCard>
+                            )
+                          }
                         )
                       }
-                    )
-                  }
+                    </div>
+                  </div>
                 </div>
+
               </div>
             </div>
-
           </div>
         </div>
       </div>

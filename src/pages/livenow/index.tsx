@@ -53,7 +53,7 @@ const LiveNow = (props: any) => {
 							<div className="slogen-detail pt-2">
 								{state.slogenDetail}
 							</div>
-							<Space className="pt-6 " wrap>
+							<Space className="pt-6" wrap>
 								<Button type="primary" shape="round" size="large" >Share On Twitter</Button>
 								<Button type="primary" shape="round" size="large" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copy Link&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Button>
 							</Space>
@@ -67,22 +67,24 @@ const LiveNow = (props: any) => {
 					state.featureList.map((feature: any, index: any) => {
 						return (
 							<>
-								<Row key={index}>
-									<div className='livenow-title'>
-										{feature.title}
-									</div>
-								</Row>
-								<Row wrap gutter={[16, { xs: 12, sm: 12, md: 18, lg: 24 }]}>
-									{
-										feature.cardList.map(
-											(item: any, idx: any) => {
-												return <Col md={{ span: 8 }} lg={{ span: 6 }} span={12}>
-													<NFTCard cardData={item} key={idx}></NFTCard>
-												</Col>
-											}
-										)
-									}
-								</Row>
+								<div key={index}>
+									<Row key={index}>
+										<div className='livenow-title'>
+											{feature.title}
+										</div>
+									</Row>
+									<Row wrap gutter={[16, { xs: 12, sm: 12, md: 18, lg: 24 }]}>
+										{
+											feature.cardList.map(
+												(item: any, idx: any) => {
+													return <Col md={{ span: 8 }} lg={{ span: 8 }} xl={{ span: 6 }} span={12} key={idx}>
+														<NFTCard cardData={item} key={idx}></NFTCard>
+													</Col>
+												}
+											)
+										}
+									</Row>
+								</div>
 							</>
 						)
 					})
