@@ -9,33 +9,33 @@ const Referrals = (): JSX.Element => {
           <section className="animate-fade-in max-w-7xl mx-auto relative min-h-[50vh]">
             <nav className="flex justify-center md:justify-start referrals-tab">
               <div className="content flex justify-center md:justify-start">
-                <button className="uppercase text-sm tracking-wider py-5 grow max-w-[150px] md:grow-0 md:max-w-none md:px-6 md:text-base overflow-hidden relative transition-all hover:text-cyan-500 text-cyan-500"><span>Summary</span>
+                <button className="uppercase text-base tracking-wider py-5 grow max-w-[150px] md:grow-0 md:max-w-none md:px-6 md:text-base overflow-hidden relative transition-all hover:text-cyan-500 text-cyan-500"><span>Summary</span>
                 </button>
-                <button className="uppercase text-sm tracking-wider py-5 grow max-w-[150px] md:grow-0 md:max-w-none md:px-6 md:text-base overflow-hidden relative transition-all hover:text-cyan-500 text-white"><span>Referrals</span>
+                <button className="uppercase text-base tracking-wider py-5 grow max-w-[150px] md:grow-0 md:max-w-none md:px-6 md:text-base overflow-hidden relative transition-all hover:text-cyan-500 text-white"><span>Referrals</span>
                 </button>
               </div>
 
             </nav>
             <div>
-              <div className="grid grid-cols-2 referrals-info">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 referrals-info">
                 <div className=" text-white rounded-xl mt-5 max-w-4xl mx-auto  left">
                   <h2 className="head flex justify-start items-center">
                     <img src={require('../../asstes/img/coin.png').default} alt="" />
-                    <p>Earn Big Rewards With Referrals!</p>
+                    <span>Earn Big Rewards With Referrals!</span>
                   </h2>
                   <p className="mb-3">
                     Earn up to 2.5% commission on each purchase made when your friends use your referral link to connect their wallets and buy entries. Join us now at the most convenient platform jam-packed with the best real-world giveaway prizes, changing the way you win in Web3.
                   </p>
                 </div>
-                <div className="w-full max-w-sm m-auto mt-3 md:mt-3 animate-fade-in">
+                <div className="w-full mt-3 md:mt-3 animate-fade-in">
                   <section className="referrals-share">
                     <input className="block relative w-full rounded-full outline-none transition-all appearance-none hover:appearance-none text-white" name="referralLink" type="text" placeholder="Referral link" disabled value={'https://ohmynft.xyz/home/username'} />
-                    <div className="grid grid-cols-2 gap-4">
-                      <a href="http://twitter.com/share?text=Take%20a%20look%20at%20MetaWin%2C%20the%20first%20decentralized%20NFT%20Competition%20marketplace%20where%20you%20can%20win%20NFTs%20from%20Blue%20Chip%20collections%20like%20Bored%20Ape%20and%20more&amp;url=https://metawin.com/t/will-zhao&amp;hashtags=WinninginWeb3" rel="noopener noreferrer" target="_blank" className=" text-white rounded-full tracking-widest uppercase  transition-all relative disabled:opacity-40  mt-3 relative flex justify-center items-center mx-auto w-full">
+                    <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+                      <a href="http://twitter.com/share?text=Take%20a%20look%20at%20MetaWin%2C%20the%20first%20decentralized%20NFT%20Competition%20marketplace%20where%20you%20can%20win%20NFTs%20from%20Blue%20Chip%20collections%20like%20Bored%20Ape%20and%20more&amp;url=https://metawin.com/t/will-zhao&amp;hashtags=WinninginWeb3" rel="noopener noreferrer" target="_blank" className=" text-white rounded-full tracking-widest uppercase  transition-all relative disabled:opacity-40  relative flex justify-center items-center mx-auto w-full">
                         <span className="text">Share on Twitter</span>
                         <span className=" icon-twitter icon "></span>
                       </a>
-                      <button className=" text-white rounded-full tracking-widest uppercase  transition-all relative disabled:opacity-40  mt-3 relative flex justify-center items-center mx-auto w-full">
+                      <button className=" text-white rounded-full tracking-widest uppercase  transition-all relative disabled:opacity-40  relative flex justify-center items-center mx-auto w-full">
                         <span className="transition-all">
                           <span className="text">Copy link</span>
                           <span className=" icon-copy icon"></span>
