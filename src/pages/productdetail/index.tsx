@@ -32,6 +32,29 @@ const ProductDetail = (): JSX.Element => {
     console.log('input number:', value);
   }
 
+  // 连接推特
+  const connectTwitter = () => {
+    // (async () => {
+    //   try {
+    //     const postTweet = await twitterClient.tweets.createTweet({
+    //       // The text of the Tweet
+    //       text: "Are you excited for the weekend?",
+
+    //       // Options for a Tweet with a poll
+    //       poll: {
+    //         options: ["Yes", "Maybe", "No"],
+    //         duration_minutes: 120,
+    //       },
+    //     });
+    //     console.dir(postTweet, {
+    //       depth: null,
+    //     });
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // })();
+  }
+
   return (
     <section className="w-full pt-16 pb-4 lg:px-8">
       <div className="container pt-14">
@@ -64,7 +87,7 @@ const ProductDetail = (): JSX.Element => {
                   </div>
 
                   <div className="card-cols-2 pt-4">
-                    <div className="attention-number pt-4 pb-2">
+                    <div className="attention-number pt-6 pb-2">
                       Total Entries:
                       <span>&nbsp;1000</span>
                     </div>
@@ -85,7 +108,7 @@ const ProductDetail = (): JSX.Element => {
                     </div>
                   </div>
 
-                  <div className="card-cols-2 pt-6">
+                  <div className="card-cols-2 pt-8">
                     <div className="attention-number pb-2">
                       Buying more entries increases your odds of winning!
                     </div>
@@ -135,7 +158,10 @@ const ProductDetail = (): JSX.Element => {
 
                   <div className="card-cols-2 pt-8">
                     <div className="detail-buy-button">
-                      <Button type="primary" size="large">BUY ENTRY</Button>
+                      <Button type="primary" size="large">BUY ENTRY </Button>
+                      <a href="https://twitter.com/intent/tweet?in_reply_to=463440424141459456" className="router-link-active router-link-exact-active inline-block mx-1">Reply</a>
+                      <a className="router-link-active router-link-exact-active inline-block mx-1" href="https://twitter.com/intent/retweet?tweet_id=463440424141459456">Retweet</a>
+                      <a className="router-link-active router-link-exact-active inline-block mx-1" href="https://twitter.com/intent/like?tweet_id=463440424141459456">Like</a>
                     </div>
                   </div>
 
@@ -148,8 +174,8 @@ const ProductDetail = (): JSX.Element => {
 
               <div className="flex-center-detail">
                 <div className="share-twitter pl-6">
-                  <div className="detail-share-twitter-button pb-10">
-                    <Button ghost size="large">Share On Twitter &nbsp;
+                  <div className="detail-share-twitter-button pb-10 pt-12">
+                    <Button ghost size="large" onClick={connectTwitter}>Share On Twitter &nbsp;
                       <span className=" icon-twitter icon"></span>
                     </Button>
                   </div>

@@ -19,3 +19,18 @@
     font-size: .65rem;
   }
 }
+
+.attention-info {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: rgb(255, 255, 255);
+  font-family: HarmonyOS_Sans_Regular;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.1875rem;
+  text-align: center;
+  letter-spacing: 0px;
+
+  span {
+    color: #3A8AFF;
+  }
+}

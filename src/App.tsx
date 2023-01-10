@@ -48,7 +48,21 @@ function App() {
 
   const [loading, setLoading] = useState(true)
 
-
+//   useEffect(() => {
+//     let script2 = document.createElement('script');
+//     script2.type = 'text/javascript';
+//     script2.src = 'https://static.zdassets.com/ekr/snippet.js?key=e4c74970-fc71-4c36-8e68-85ad01771e84';
+    
+//     script2.onerror = reject
+//     script2.onload = function () {
+//       isLoaded = true
+//       resolve(window.AMap)
+//     }
+//     document.head.appendChild(script)
+//   })
+// }
+//     // appendChild(script2);
+//   });
 
   useEffect(() => {
     setTimeout(() => {

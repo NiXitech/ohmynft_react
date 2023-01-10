@@ -122,7 +122,7 @@ const FAQ = (): JSX.Element => {
           </div>
         </div>
       </main>
-      <Footer></Footer>
+      {/* <Footer></Footer> */}
     </>
   );
 }

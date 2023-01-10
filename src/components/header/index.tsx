@@ -6,7 +6,9 @@ import { useAccount, useDisconnect } from 'wagmi';
 import { LStorage } from '../../api/services/cooike/storage';
 import useStateHook from '../../pages/store';
 import ConnectWallet from '../connectWallet';
+// import ZenDesk from '../zendesk'
 import './index.scss'
+// import Script from 'react-load-script';
 
 export type NavItemProps = {
   to: string,
@@ -24,8 +26,7 @@ const Header = (): JSX.Element => {
   const [hasUser, setHasUser] = useState(false)
   const { disconnect } = useDisconnect()
   const location = useLocation();
-  const [tipHide, setTipHide] = useState(false)
-
+  const [tipHide, setTipHide] = useState(false);
 
 
   const NavItem = (props: NavItemProps): JSX.Element => {
@@ -101,6 +102,9 @@ const Header = (): JSX.Element => {
 
   return (
     <>
+      {/* <Script id="ze-snippet"
+        src="https://static.zdassets.com/ekr/snippet.js?key=e4c74970-fc71-4c36-8e68-85ad01771e84"> </Script> */}
+
       {
         location.pathname === '/signup/register' || location.pathname === '/signup/verification'
           ? ''
@@ -151,8 +155,8 @@ const Header = (): JSX.Element => {
                           <NavItem to={'/'} title="Live Now"></NavItem>
                           <NavItem to={'/completed'} title="Completed"></NavItem>
                           <NavItem to={'/activity'} title="Activity"></NavItem>
-                          <NavItem to={'/winners'} title="Winners"></NavItem>
-                          <NavItem to={'/referrals'} title="referrals"></NavItem>
+                          {/* <NavItem to={'/winners'} title="Winners"></NavItem>
+                          <NavItem to={'/referrals'} title="referrals"></NavItem> */}
 
                           {/* <NavItem to={'/home'} title="home"></NavItem> */}
                         </>
@@ -164,7 +168,7 @@ const Header = (): JSX.Element => {
                       hasUser
                         ? ''
                         : <div className="block mx-auto lg:mx-0 lg:flex justify-center lg:pl-4">
-                          <button className="button-bg-bl button-sm text-white rounded-full tracking-widest uppercase  transition-all focus:bg-slate-800 relative shadow-[0_0_2px_0] disabled:bg-slate-800 disabled:hover:bg-slate-800 shadow-none"
+                          <button className="button-bg-bl button-sm text-white rounded-full tracking-widest uppercase  transition-all relative shadow-[0_0_2px_0] disabled:bg-slate-800 disabled:hover:bg-slate-800 shadow-none"
                             onClick={() => { actions.openConnect() }}
                             onMouseEnter={() => { setTipHide(true) }}
                             onMouseLeave={() => { setTipHide(false) }}
@@ -173,7 +177,7 @@ const Header = (): JSX.Element => {
                               <span className="">Connect Wallet</span>
                               {
                                 tipHide
-                                  ? <div className="hidden lg:block absolute top-10 p-4 rounded-xl animate-slide-down-fade-in lg:w-[350px] lg:-right-25"
+                                  ? <div className="hidden lg:block absolute top-13 p-4 rounded-xl animate-slide-down-fade-in lg:w-[350px] lg:-right-25"
                                     style={{
                                       background: '#021222'
                                     }}
@@ -292,12 +296,20 @@ const Header = (): JSX.Element => {
 
                 </div>
               </div>
-
             </div>
-
+            <div className="pt-16 attention-info fixed w-full">
+              <div className="py-2 text-center">
+                Earn Big Rewards With
+                <span>
+                  &nbsp;Referrals！
+                </span>
+              </div>
+            </div>
+            {/* <div className='fixed top-80 -right-8 cursor-pointer'>
+              <ZenDesk></ZenDesk>
+            </div> */}
           </>
       }
-
     </>
   );
 }
