@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { getAllActivity } from "../../../api/services/http/api";
+// import { getAllActivity } from "../../../api/services/http/api";
 import { TimeInterval } from "../../../libs/userAgent";
-import { AllActivityItem, CallBackData } from "../../../types/types";
+import { AllActivityItem } from "../../../types/types";
+// import { CallBackData } from "../../../types/types";
 
 const Activity = (): JSX.Element => {
   const [activityList, setActivityList] = useState([])

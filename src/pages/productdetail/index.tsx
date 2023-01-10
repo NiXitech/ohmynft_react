@@ -6,9 +6,10 @@ import './index.scss'
 import { Progress, Divider, Button, InputNumber } from 'antd';
 import TwoColActivity from "../../components/twocolactivity";
 import NFTCard from "../livenow/nftcard";
-import ConnectWallet from "../../components/connectWallet";
+// import ConnectWallet from "../../components/connectWallet";
 import useStateHook from '../store';
 
+// const client = new Client('AAAAAAAAAAAAAAAAAAAAAMBDdwEAAAAA2BsYVQVgTt6DGuhpdjJBwkHDAMo%3Dch3BD48OENuJ5jEKU8QtTYVhGLKOzP3Mr9PZTLUO8Pn22DdH0K');
 
 /* eslint-disable jsx-a11y/img-redundant-alt */
 const ProductDetail = (): JSX.Element => {
@@ -34,6 +35,62 @@ const ProductDetail = (): JSX.Element => {
 
   // 连接推特
   const connectTwitter = () => {
+    // debugger
+    // (async ()=> {
+    //   // try {
+    //     const tweet = await client.tweets.findTweetById("1460323737035677698");
+    //     console.log(tweet.data.text);
+    //   // }catch(err: any) {
+    //   //   console.log('twitter:', err)
+    //   // }
+    // })();
+
+    // (async ()=> {
+    //   const tweetId = await findTweetById({id: '1460323737035677698'}) as any;
+    //   console.log('tweetIdData:', tweetId.data)
+    // })()
+    // var axios = require('axios');
+
+    var config = {
+      method: 'get',
+      url: 'https://api.twitter.com/2/users/2873008978/followers',
+      headers: {
+        'Authorization': 'Bearer AAAAAAAAAAAAAAAAAAAAAMBDdwEAAAAA2BsYVQVgTt6DGuhpdjJBwkHDAMo%3Dch3BD48OENuJ5jEKU8QtTYVhGLKOzP3Mr9PZTLUO8Pn22DdH0K',
+        'Cookie': 'guest_id=v1%3A167307959388924842; guest_id_ads=v1%3A167307959388924842; guest_id_marketing=v1%3A167307959388924842; personalization_id="v1_31/mIcn+cScehvYyAjM0rQ=="'
+      }
+    };
+
+    // (async () => {
+    //   const result = await axios
+    //     .get("https://api.twitter.com/2/users/2873008978", {
+    //       headers: {
+    //         'Authorization': 'Bearer AAAAAAAAAAAAAAAAAAAAAMBDdwEAAAAA2BsYVQVgTt6DGuhpdjJBwkHDAMo%3Dch3BD48OENuJ5jEKU8QtTYVhGLKOzP3Mr9PZTLUO8Pn22DdH0K',
+    //         'Cookie': 'guest_id=v1%3A167307959388924842; guest_id_ads=v1%3A167307959388924842; guest_id_marketing=v1%3A167307959388924842; personalization_id="v1_31/mIcn+cScehvYyAjM0rQ=="'
+    //       }
+    //     });
+    //   console.log('----------->', result);
+    // })()
+    // axios
+    //   .get("https://api.twitter.com/2/users/2873008978/followers", {
+    //     headers: {
+    //       'Authorization': 'Bearer AAAAAAAAAAAAAAAAAAAAAMBDdwEAAAAA2BsYVQVgTt6DGuhpdjJBwkHDAMo%3Dch3BD48OENuJ5jEKU8QtTYVhGLKOzP3Mr9PZTLUO8Pn22DdH0K',
+    //       'Cookie': 'guest_id=v1%3A167307959388924842; guest_id_ads=v1%3A167307959388924842; guest_id_marketing=v1%3A167307959388924842; personalization_id="v1_31/mIcn+cScehvYyAjM0rQ=="'
+    //     }
+    //   })
+    //   .then(function (response: any) {
+    //     console.log(JSON.stringify(response.data));
+    //   })
+    //   .catch(function (error: any) {
+    //     console.log(error);
+    //   })
+
+
+
+
+    // (async () => {
+    //   const tweetId = await oauthTweet({ oauth_callback: 'localhost:3000' }) as any;
+    //   console.log('tweetIdData:', tweetId.data)
+    // })()
     // (async () => {
     //   try {
     //     const postTweet = await twitterClient.tweets.createTweet({
@@ -53,6 +110,7 @@ const ProductDetail = (): JSX.Element => {
     //     console.log(error);
     //   }
     // })();
+
   }
 
   return (
@@ -159,9 +217,9 @@ const ProductDetail = (): JSX.Element => {
                   <div className="card-cols-2 pt-8">
                     <div className="detail-buy-button">
                       <Button type="primary" size="large">BUY ENTRY </Button>
-                      <a href="https://twitter.com/intent/tweet?in_reply_to=463440424141459456" className="router-link-active router-link-exact-active inline-block mx-1">Reply</a>
+                      {/* <a href="https://twitter.com/intent/tweet?in_reply_to=463440424141459456" className="router-link-active router-link-exact-active inline-block mx-1">Reply</a>
                       <a className="router-link-active router-link-exact-active inline-block mx-1" href="https://twitter.com/intent/retweet?tweet_id=463440424141459456">Retweet</a>
-                      <a className="router-link-active router-link-exact-active inline-block mx-1" href="https://twitter.com/intent/like?tweet_id=463440424141459456">Like</a>
+                      <a className="router-link-active router-link-exact-active inline-block mx-1" href="https://twitter.com/intent/like?tweet_id=463440424141459456">Like</a> */}
                     </div>
                   </div>
 

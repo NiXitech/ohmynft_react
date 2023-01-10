@@ -102,9 +102,6 @@ const Header = (): JSX.Element => {
 
   return (
     <>
-      {/* <Script id="ze-snippet"
-        src="https://static.zdassets.com/ekr/snippet.js?key=e4c74970-fc71-4c36-8e68-85ad01771e84"> </Script> */}
-
       {
         location.pathname === '/signup/register' || location.pathname === '/signup/verification'
           ? ''
