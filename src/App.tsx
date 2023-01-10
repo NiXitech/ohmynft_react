@@ -35,6 +35,7 @@ import FAQ from './pages/FAQ';
 import { LStorage } from './api/services/cooike/storage';
 import UserInfo from './pages/useInfo';
 import Footer from './components/footer';
+import Twitter from './pages/twitter';
 
 
 function App() {
@@ -48,21 +49,21 @@ function App() {
 
   const [loading, setLoading] = useState(true)
 
-//   useEffect(() => {
-//     let script2 = document.createElement('script');
-//     script2.type = 'text/javascript';
-//     script2.src = 'https://static.zdassets.com/ekr/snippet.js?key=e4c74970-fc71-4c36-8e68-85ad01771e84';
-    
-//     script2.onerror = reject
-//     script2.onload = function () {
-//       isLoaded = true
-//       resolve(window.AMap)
-//     }
-//     document.head.appendChild(script)
-//   })
-// }
-//     // appendChild(script2);
-//   });
+  //   useEffect(() => {
+  //     let script2 = document.createElement('script');
+  //     script2.type = 'text/javascript';
+  //     script2.src = 'https://static.zdassets.com/ekr/snippet.js?key=e4c74970-fc71-4c36-8e68-85ad01771e84';
+
+  //     script2.onerror = reject
+  //     script2.onload = function () {
+  //       isLoaded = true
+  //       resolve(window.AMap)
+  //     }
+  //     document.head.appendChild(script)
+  //   })
+  // }
+  //     // appendChild(script2);
+  //   });
 
   useEffect(() => {
     setTimeout(() => {
@@ -100,6 +101,7 @@ function App() {
                 <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
                 <Route path="/userinfo" element={<UserInfo />} />
                 <Route path="/faq" element={<FAQ />} />
+                <Route path="/twitter" element={<Twitter />} />
                 <Route path="/http" element={<HttpPage />} />
                 <Route path="*" element={<Navigate to="/" replace={true} />} />
               </Routes>
