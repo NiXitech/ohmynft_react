@@ -93,16 +93,16 @@ const LiveNow = (props: any) => {
 
 	return (
 		<section className="w-full pb-4 pt-16 lg:px-8">
-			<div className="container">
+			<div className="container pt-16">
 				<Row align="middle">
 					<Col className="gutter-row" span={24} md={{ span: 12 }} lg={{ span: 12 }} xl={{ span: 12 }}>
 						<Space direction="vertical" size="large" style={{ width: '100%' }}>
 							<BrText></BrText>
-							<div className="slogen-detail pt-2">
+							<div className="slogen-detail pt-2 ">
 								{state.slogenDetail}
 							</div>
-							<Space className="pt-6 grid lg:grid-cols-4 grid-cols-2" wrap>
-								<Button type="primary" shape="round" size="large" >Share On Twitter &nbsp; <span className=" icon-twitter icon"></span></Button>
+							<Space className="pt-6 flex justify-center md:justify-start">
+								<Button className='pr-4' type="primary" shape="round" size="large" >Share On Twitter &nbsp; <span className=" icon-twitter icon"></span></Button>
 								<Button type="primary" ghost shape="round" size="large" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copy Link&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Button>
 							</Space>
 						</Space>

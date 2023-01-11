@@ -4670,6 +4670,11 @@ background-color:rgb(0 55 138/var(--tw-bg-opacity))
       margin-bottom: 1rem
   }
 
+  .md\:mb-0 {
+    margin-bottom: 0rem
+  }
+
+
   .md\:mt-1 {
       margin-top: .25rem
   }
@@ -4869,6 +4874,8 @@ background-color:rgb(0 55 138/var(--tw-bg-opacity))
       padding-right: .75rem
   }
 
+  
+
   .md\:px-7 {
       padding-left: 1.75rem;
       padding-right: 1.75rem
@@ -4878,6 +4885,10 @@ background-color:rgb(0 55 138/var(--tw-bg-opacity))
       padding-left: 1rem;
       padding-right: 1rem
   }
+
+  .md\:pr-4 {
+    padding-right: 1rem
+}
 
   .md\:py-4 {
       padding-bottom: 1rem;
