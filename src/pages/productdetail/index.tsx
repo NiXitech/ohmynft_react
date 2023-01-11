@@ -43,7 +43,7 @@ const ProductDetail = (): JSX.Element => {
     getPriceFun()
     getRaffleActivityFun()
   }, [])
-  
+
   const getRaffleActivityFun = async () => {
     setSubLoading(true)
     try {
@@ -57,14 +57,14 @@ const ProductDetail = (): JSX.Element => {
         setActivityData(result.data)
       }
     } catch (error) {
-      
+
     }
     setSubLoading(false)
   }
 
   const debouncedTokenId = useDebounce(infoData, 0)
 
-	const { isConnected, address } = useAccount()
+  const { isConnected, address } = useAccount()
 
   // 合约查询
   const { data: totalSupplyData, refetch: refetchSupply } = useContractRead(
@@ -146,7 +146,7 @@ const ProductDetail = (): JSX.Element => {
         }
       ],
       functionName: 'raffles',
-      args: [debouncedTokenId?.raffle_id],
+      args: [BigNumber.from(debouncedTokenId?.raffle_id || 0)],
       chainId: 97,
       enabled: false,
       onSuccess(data: any) {
@@ -179,6 +179,63 @@ const ProductDetail = (): JSX.Element => {
   const connectWallet = (item: any) => {
     actions.openConnect();
   }
+
+  const {
+    config,
+    error: prepareError,
+    isError: isPrepareError,
+    isSuccess: perSuccess
+  } = usePrepareContractWrite({
+    address: debouncedTokenId.contractddress,
+    abi: [
+      {
+        name: 'buyEntry',
+        type: 'function',
+        stateMutability: 'payable',
+        inputs: [
+          { internalType: "uint256", name: "_raffleId", type: "uint256" },
+          { internalType: "uint256", name: "_id", type: "uint256" },
+          { internalType: "address", name: "_collection", type: "address" },
+          { internalType: "uint256", name: "_tokenIdUsed", type: "uint256" },
+        ],
+        outputs: [],
+      },
+    ],
+    functionName: 'buyEntry',
+    args: [BigNumber.from(debouncedTokenId.entryId), BigNumber.from(debouncedTokenId.priceOrd), debouncedTokenId.collection, BigNumber.from(0)],
+    overrides: {
+      from: address,
+      value: ethers.utils.parseEther(JSON.stringify(debouncedTokenId.price)),
+    },
+    chainId: 5,
+    // cacheTime: 2_000,
+    // enabled: Boolean(debouncedTokenId.contractddress),
+    // staleTime: 2_000,
+    onSuccess(data: any) {
+      console.log('Success', data)
+    },
+    onError(error: any) {
+      console.log('Error1212122211', error.message)
+    },
+  })
+  const { data, error, isError, write, isLoading } = useContractWrite({
+    ...config,
+    onSuccess(data: any) {
+      console.log('Success useContractWrite', data)
+      toast.success('The transaction is successful, waiting for block confirmation！')
+    },
+    onError(error: any) {
+      console.log('Error1212122211 useContractWrite', error.message)
+      toast.error(error.message)
+      setMintParams({
+        ...mintParams,
+        contractddress: ''
+      })
+    },
+  })
+
+
+
 
   // 数字输入框
   const onChange = (value: any) => {
@@ -336,7 +393,7 @@ const ProductDetail = (): JSX.Element => {
                       {
                         infoData?.winner.display_name === '' ? 'Buying more entries increases your odds of winning!' : '已经开奖'
                       }
-                      
+
                     </div>
                   </div>
 
@@ -384,7 +441,9 @@ const ProductDetail = (): JSX.Element => {
 
                   <div className="card-cols-2 pt-8">
                     <div className="detail-buy-button">
-                      <Button type="primary" size="large">BUY ENTRY </Button>
+                      <Button type="primary" size="large"
+
+                      >BUY ENTRY </Button>
                       {/* <a href="https://twitter.com/intent/tweet?in_reply_to=463440424141459456" className="router-link-active router-link-exact-active inline-block mx-1">Reply</a>
                       <a className="router-link-active router-link-exact-active inline-block mx-1" href="https://twitter.com/intent/retweet?tweet_id=463440424141459456">Retweet</a>
                       <a className="router-link-active router-link-exact-active inline-block mx-1" href="https://twitter.com/intent/like?tweet_id=463440424141459456">Like</a> */}
@@ -413,9 +472,9 @@ const ProductDetail = (): JSX.Element => {
                     </Button>
                   </div>
                   <div>
-                    <div className="activity-participants px-4 pt-10 md:hidden block">
+                    {/* <div className="activity-participants px-4 pt-10 md:hidden block">
                       <TwoColActivity tableData={activityData}></TwoColActivity>
-                    </div>
+                    </div> */}
                     <div className="end-soon-detail pb-10 pt-4">
                       End soon
                     </div>
