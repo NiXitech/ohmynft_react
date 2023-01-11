@@ -7,7 +7,7 @@ import { getRaffleList } from '../../api/services/http/api';
 import { RaffleItemData } from '../../types/types';
 
 const LiveNow = (props: any) => {
-	const [state, setState] = useState({
+	const [state] = useState({
 		title: 'Feature',
 		textHead: 'COME ON ！',
 		textWrap: 'Be A',
@@ -147,6 +147,23 @@ const LiveNow = (props: any) => {
 							})
 						}
 					</Row> */}
+
+					<Row >
+						<div className='livenow-title'>
+							All
+						</div>
+					</Row>
+					<Row wrap gutter={[24, { xs: 12, sm: 12, md: 18, lg: 24 }]}>
+						{
+							liveNowData.all.map((feature: RaffleItemData, index: any) => {
+								return <>
+									<Col md={{ span: 8 }} lg={{ span: 8 }} xl={{ span: 6 }} span={12} key={index}>
+										<NFTCard cardData={feature}></NFTCard>
+									</Col>
+								</>
+							})
+						}
+					</Row>
 
 
 				</div>

@@ -251,7 +251,7 @@ const ProductDetail = (): JSX.Element => {
                     <div className="end-soon-detail pb-10 pt-4">
                       End soon
                     </div>
-                    <div className="grid grid-cols-2 gap-4 flex flex-row justify-between">
+                    {/* <div className="grid grid-cols-2 gap-4 flex flex-row justify-between">
                       {
                         state.cardlist.map(
                           (item, index) => {
@@ -261,7 +261,7 @@ const ProductDetail = (): JSX.Element => {
                           }
                         )
                       }
-                    </div>
+                    </div> */}
                   </div>
                 </div>
 
