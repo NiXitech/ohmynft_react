@@ -83,7 +83,7 @@ function App() {
               : <Routes>
                 <Route path="/" element={<LiveNow />} />
                 <Route path="/activity" element={<Activity />} />
-                <Route path="/productdetail" element={<ProductDetail />} />
+                <Route path="/productdetail/:raffle_id" element={<ProductDetail />} />
                 <Route path="/completed" element={<CompletedCard />} />
                 <Route path="/mw/:name" element={<MWPage />} />
                 <Route path="/winners" element={<Winners />} />

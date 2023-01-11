@@ -75,7 +75,7 @@ export interface RaffleItemData {
   contract_address: string;
   participants: [];
   prize: PrizeDataItem;
-  price_structure: PriceStructureItem[];
+  price_structure: PriceStructureItem;
   max_entries_per_user: number;
   winner: WinnerInfo;
   total_entries: number;

@@ -116,7 +116,7 @@ const LiveNow = (props: any) => {
 				<div>
 					<Row >
 						<div className='livenow-title'>
-							featured
+							Featured
 						</div>
 					</Row>
 					<Row wrap gutter={[24, { xs: 12, sm: 12, md: 18, lg: 24 }]}>
@@ -131,9 +131,9 @@ const LiveNow = (props: any) => {
 						}
 					</Row>
 
-					{/* <Row >
+					<Row >
 						<div className='livenow-title'>
-							up comming
+							Ending Soon
 						</div>
 					</Row>
 					<Row wrap gutter={[24, { xs: 12, sm: 12, md: 18, lg: 24 }]}>
@@ -146,13 +146,16 @@ const LiveNow = (props: any) => {
 								</>
 							})
 						}
-					</Row> */}
-
-					<Row >
-						<div className='livenow-title'>
-							All
-						</div>
 					</Row>
+
+					{
+						liveNowData.all.length > 0 ? <Row >
+							<div className='livenow-title'>
+								All
+							</div>
+						</Row> : <></>
+					}
+
 					<Row wrap gutter={[24, { xs: 12, sm: 12, md: 18, lg: 24 }]}>
 						{
 							liveNowData.all.map((feature: RaffleItemData, index: any) => {

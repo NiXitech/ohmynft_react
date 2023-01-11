@@ -111,7 +111,7 @@ const NFTCard = (props: propspromise): JSX.Element => {
 				}
 			],
 			functionName: 'raffles',
-			args: [debouncedTokenId.raffle_id],
+			args: [BigNumber.from(debouncedTokenId.raffle_id)],
 			chainId: 97,
 			enabled: false,
 			onSuccess(data: any) {
@@ -176,7 +176,7 @@ const NFTCard = (props: propspromise): JSX.Element => {
 			</div>
 			<div className="card-button">
 				<div className="uppercase link">
-					<Link to={'/productdetail'} >
+					<Link to={`/productdetail/${props.cardData.id}`} >
 						Enter now
 					</Link>
 				</div>

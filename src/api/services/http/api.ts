@@ -228,13 +228,13 @@ export async function getRaffleInfo(raffleId: number) {
 
 export async function getRaffleActivity(params: {
   raffleId: number;
-  skip: number;
-  take: number;
+  offset: number;
+  limit: number;
 }) {
   return new Promise((resolve, reject) => {
     http({
       method: "get",
-      url: `/raffle/${params.raffleId}/activity?skip=${params.skip}&take=${params.take}`,
+      url: `/raffle/${params.raffleId}/activity?limit=${params.limit}&offset=${params.offset}`,
     }).then(
       (res) => {
         resolve(res);

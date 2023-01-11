@@ -1,19 +1,26 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import _ from "lodash";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import './index.scss'
 import { Progress, Divider, Button, InputNumber } from 'antd';
 import TwoColActivity from "../../components/twocolactivity";
 import NFTCard from "../livenow/nftcard";
 // import ConnectWallet from "../../components/connectWallet";
 import useStateHook from '../store';
-
+import { ActivityItem, CallBackData, RaffleItemData } from "../../types/types";
+import { useAccount, useContractRead, useContractWrite, usePrepareContractWrite } from "wagmi";
+import { getPrice, getRaffleActivity, getRaffleInfo } from "../../api/services/http/api";
+import { useParams } from "react-router-dom"
+import { BigNumber } from "ethers";
+import useDebounce from "../../libs/usehooks";
 // const client = new Client('AAAAAAAAAAAAAAAAAAAAAMBDdwEAAAAA2BsYVQVgTt6DGuhpdjJBwkHDAMo%3Dch3BD48OENuJ5jEKU8QtTYVhGLKOzP3Mr9PZTLUO8Pn22DdH0K');
 
 /* eslint-disable jsx-a11y/img-redundant-alt */
 const ProductDetail = (): JSX.Element => {
   const [status, actions] = useStateHook();
+  let { raffle_id } = useParams();
+  const [subLoading, setSubLoading] = useState(false)
   const [state, setstate] = useState({
     cardtitle: 'Apple Watch Series 8 - Starlight Aluminum Case with Sport Loop',
     cardlist: [
@@ -22,6 +29,151 @@ const ProductDetail = (): JSX.Element => {
     ]
   });
   const [Quantity, setQuantity] = useState(1)
+  const [price, setPrice] = useState({
+    usd: 0
+  })
+  const [infoData, setInfoData] = useState<RaffleItemData>()
+  const [loading, setLiading] = useState(true)
+  const [activityData, setActivityData] = useState<ActivityItem[]>([])
+  const [selectType, setSelectType] = useState('')
+
+  useEffect(() => {
+    actions.setGlobalLoading()
+    getRaffleInfoFun()
+    getPriceFun()
+    getRaffleActivityFun()
+  }, [])
+  
+  const getRaffleActivityFun = async () => {
+    setSubLoading(true)
+    try {
+
+      const result: CallBackData = await getRaffleActivity({
+        raffleId: Number(raffle_id),
+        offset: 0,
+        limit: 100000000
+      }) as any
+      if (result.code === 200 && result.data !== null) {
+        setActivityData(result.data)
+      }
+    } catch (error) {
+      
+    }
+    setSubLoading(false)
+  }
+
+  const debouncedTokenId = useDebounce(infoData, 0)
+
+	const { isConnected, address } = useAccount()
+
+  // 合约查询
+  const { data: totalSupplyData, refetch: refetchSupply } = useContractRead(
+    {
+      address: `0xb8Ce6900827C2718E6b07685492Eb75ea08eFEa3`,
+      abi: [
+        {
+          name: 'raffles',
+          type: 'function',
+          stateMutability: 'view',
+          inputs: [
+            { internalType: 'uint256', name: '', type: 'uint256' }
+          ],
+          outputs:
+            [
+              {
+                internalType: "enum Manager.STATUS",
+                name: "status",
+                type: "uint8"
+              },
+              {
+                internalType: "uint256",
+                name: "totalEntries",
+                type: "uint256"
+              },
+              {
+                internalType: "uint256",
+                name: "maxEntries",
+                type: "uint256"
+              },
+              {
+                internalType: "address",
+                name: "collateralAddress",
+                type: "address"
+              },
+              {
+                internalType: "uint256",
+                name: "collateralId",
+                type: "uint256"
+              },
+              {
+                internalType: "address",
+                name: "winner",
+                type: "address"
+              },
+              {
+                internalType: "uint256",
+                name: "randomNumber",
+                type: "uint256"
+              },
+              {
+                internalType: "uint256",
+                name: "amountRaisedInBNB",
+                type: "uint256"
+              },
+              {
+                internalType: "uint256",
+                name: "amountRaisedInBUSD",
+                type: "uint256"
+              },
+              {
+                internalType: "address",
+                name: "seller",
+                type: "address"
+              },
+              {
+                internalType: "uint256",
+                name: "entriesLength",
+                type: "uint256"
+              },
+              {
+                internalType: "uint256",
+                name: "cancellingDate",
+                type: "uint256"
+              }
+            ]
+
+
+        }
+      ],
+      functionName: 'raffles',
+      args: [debouncedTokenId?.raffle_id],
+      chainId: 97,
+      enabled: false,
+      onSuccess(data: any) {
+        console.log('Success', data)
+      },
+      onError(error: any) {
+        console.log('Error1212122211', error)
+      },
+    })
+
+  const getRaffleInfoFun = async () => {
+    try {
+      const result: CallBackData = await getRaffleInfo(Number(raffle_id)) as any
+      if (result.code === 200) {
+        setInfoData(result.data)
+        console.log('-----------555------>', result)
+        // if()
+        // if (isConnected) {
+        //   refetchSupply()
+        // }
+      }
+    } catch (error) {
+      console.log('%c🀁 error', 'color: #ff0000; font-size: 20px;', error);
+    }
+    setLiading(false)
+
+  }
 
   // 连接钱包
   const connectWallet = (item: any) => {
@@ -31,6 +183,19 @@ const ProductDetail = (): JSX.Element => {
   // 数字输入框
   const onChange = (value: any) => {
     console.log('input number:', value);
+  }
+
+  const getPriceFun = async () => {
+    try {
+      const data: CallBackData = await getPrice() as any
+      setPrice(data.data.BUSD)
+    } catch (error) {
+      console.log('nftcard-getPriceFun:', error)
+    }
+  }
+
+  const shareontweet = () => {
+
   }
 
   // 连接推特
@@ -124,7 +289,7 @@ const ProductDetail = (): JSX.Element => {
               </div>
 
               <div className="activity-participants px-4 pt-10 md:block hidden ">
-                <TwoColActivity></TwoColActivity>
+                <TwoColActivity subLoading={subLoading} tableData={activityData} participants={infoData?.participants}></TwoColActivity>
               </div>
             </div>
 
@@ -132,22 +297,22 @@ const ProductDetail = (): JSX.Element => {
               <div className="card-info">
                 <div className="info-top">
                   <div className="card-title" title="cardtitle">
-                    {state.cardtitle}
+                    {infoData?.prize.name}
                   </div>
                   <Divider className="bg-white/40" />
                   <div className="card-cols-2">
                     <div className="color-title">
-                      123
+                      #{infoData?.prize.token_id}
                     </div>
                     <div className="white-title">
-                      456
+                      {infoData?.prize.value}
                     </div>
                   </div>
 
                   <div className="card-cols-2 pt-4">
                     <div className="attention-number pt-6 pb-2">
                       Total Entries:
-                      <span>&nbsp;1000</span>
+                      <span>&nbsp;{infoData?.total_entries}</span>
                     </div>
                   </div>
 
@@ -168,14 +333,17 @@ const ProductDetail = (): JSX.Element => {
 
                   <div className="card-cols-2 pt-8">
                     <div className="attention-number pb-2">
-                      Buying more entries increases your odds of winning!
+                      {
+                        infoData?.winner.display_name === '' ? 'Buying more entries increases your odds of winning!' : '已经开奖'
+                      }
+                      
                     </div>
                   </div>
 
                   <div className="card-cols-2">
                     <div className="attention-number pt-6 pb-2">
                       BUSD:
-                      <span>&nbsp;0.05</span>
+                      <span>&nbsp;{infoData?.prize.value}</span>
                       <label className="lable-button">
                         <Button type="primary" size="small">Maximum limit exceeded.</Button>
                       </label>
@@ -233,7 +401,7 @@ const ProductDetail = (): JSX.Element => {
               <div className="flex-center-detail">
                 <div className="share-twitter pl-6">
                   <div className="detail-share-twitter-button pb-10 pt-12">
-                    <Button ghost size="large" onClick={connectTwitter}>Share On Twitter &nbsp;
+                    <Button ghost size="large" onClick={shareontweet}>Share On Twitter &nbsp;
                       <span className=" icon-twitter icon"></span>
                     </Button>
                   </div>
@@ -246,7 +414,7 @@ const ProductDetail = (): JSX.Element => {
                   </div>
                   <div>
                     <div className="activity-participants px-4 pt-10 md:hidden block">
-                      <TwoColActivity></TwoColActivity>
+                      <TwoColActivity tableData={activityData}></TwoColActivity>
                     </div>
                     <div className="end-soon-detail pb-10 pt-4">
                       End soon
