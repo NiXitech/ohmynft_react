@@ -63,11 +63,11 @@ export interface CallBackData {
 }
 
 export interface RaffleItemData {
-  id:number;
+  id: number;
   price: number;
   raffle_id: number;
   is_show: boolean;
-  allow_air_drop:boolean;
+  allow_air_drop: boolean;
   category: string;
   close_time: string;
   start_time: string;
@@ -161,4 +161,19 @@ export interface AllActivityItem {
   nft_vale: string;
   win_tx: string;
   create_time: string;
+}
+
+export interface summaryReferralsItem {
+  last7Days: "0",
+  lastMonth: "0",
+  lifetime: "0",
+  thisMonth: "0",
+  today: "0",
+  yesterday: "0",
+}
+
+export interface summaryReferrals {
+  clicks: summaryReferralsItem,
+  referrals: summaryReferralsItem,
+  revenue: summaryReferralsItem
 }

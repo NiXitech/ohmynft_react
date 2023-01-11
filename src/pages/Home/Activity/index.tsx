@@ -1,73 +1,35 @@
 import { useEffect, useState } from "react";
-// import { getAllActivity } from "../../../api/services/http/api";
+import { getAllActivity } from "../../../api/services/http/api";
 import { TimeInterval } from "../../../libs/userAgent";
-import { AllActivityItem } from "../../../types/types";
+import { AllActivityItem, CallBackData } from "../../../types/types";
 // import { CallBackData } from "../../../types/types";
 
 const Activity = (): JSX.Element => {
   const [activityList, setActivityList] = useState([])
   const [loading, setLoading] = useState(true)
+
   const getAllActivityFun = async () => {
-    // try {
-    //   const result: CallBackData = await getAllActivity({
-    //     category: 'BuyEntry',
-    //     skip: 0,
-    //     take: 100000000,
-    //   }) as any
+    try {
+      const result: CallBackData = await getAllActivity({
+        category: 'BuyEntry',
+        offset: 0,
+        limit: 20,
+      }) as any
 
-    //   if (result.data !== null) {
-    //     setActivityList(result.data)
-    //   }
+      if (result.data !== null) {
+        setActivityList(result.data)
+      }
 
-    // } catch (error) {
-    //   console.log('%c🀂 error', 'color: #006dcc; font-size: 20px;', error);
-
-    // }
-    const data:any = [
-      {
-        category: "BuyEntry",
-        entry_info: {
-          count: 6,
-          tx_hash: "0x20996273bbc0334eac636286abf1fc22b4f47a495fb9051cca6882642b1cb11d"
-        },
-        win_tx: "",
-        display_name: "1231232",
-        create_time: "2023-01-04 12:58:01",
-        raffle_id: 9,
-        prize: {
-          name: "Berry Bear ",
-          token_address: "0x944C5F7C4D6a978c8bF344DfF9dB35C86F684b5c",
-          token_id: 39,
-          image_url: "https://i.seadn.io/gae/3sXT3S-V2hwPxJ3ThmEkUhGctExD2iOXtle8GfiIzZKP4S8deNLzw9B0fVfMb5hKMrj_0xoptAy_H4piItHJV3XegriRJvSzir7r?auto=format&w=1000",
-          value: "0.05"
-        },
-        nft_vale: ""
-      },
-      {
-        category: "BuyEntry",
-        entry_info: {
-          count: 1,
-          tx_hash: "0xa85731cd506bc7c8fbd9b7243b403da46f2384a3e953b07aaaef8f575630aa2f"
-        },
-        win_tx: "",
-        display_name: "1231232",
-        create_time: "2023-01-04 10:15:37",
-        raffle_id: 9,
-        prize: {
-          name: "Berry Bear ",
-          token_address: "0x944C5F7C4D6a978c8bF344DfF9dB35C86F684b5c",
-          token_id: 39,
-          image_url: "https://i.seadn.io/gae/3sXT3S-V2hwPxJ3ThmEkUhGctExD2iOXtle8GfiIzZKP4S8deNLzw9B0fVfMb5hKMrj_0xoptAy_H4piItHJV3XegriRJvSzir7r?auto=format&w=1000",
-          value: "0.05"
-        },
-        nft_vale: ""
-      }]
-    setActivityList(data);
+    } catch (error) {
+      console.log('%c🀂 error', 'color: #006dcc; font-size: 20px;', error);
+    }
     setLoading(false)
   }
+
   useEffect(() => {
     getAllActivityFun()
   }, [])
+
   return (
     <>
       <div className="container">

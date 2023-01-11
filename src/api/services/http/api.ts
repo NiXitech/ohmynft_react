@@ -282,13 +282,13 @@ export async function getRaffleParticipant(params: {
 
 export async function getAllActivity(params: {
   category: string;
-  skip: number;
-  take: number;
+  offset: number;
+  limit: number;
 }) {
   return new Promise((resolve, reject) => {
     http({
       method: "get",
-      url: `/activity?category=${params.category}&skip=${params.skip}&take=${params.take}`,
+      url: `/activity?category=${params.category}&limit=${params.limit}&offset=${params.offset}`,
     }).then(
       (res) => {
         resolve(res);
@@ -468,6 +468,28 @@ export async function getRegisterUserInfo(params: {
       (res) => {
         resolve(res);
 
+        return res;
+      },
+      (error) => {
+        reject(error);
+      }
+    );
+  });
+}
+
+/**
+ * 获取referral Summary信息
+ * @returns
+ */
+
+export async function getReferralSummay(ethereum_address: string) {
+  return new Promise((resolve, reject) => {
+    http({
+      method: "get",
+      url: `/referral/statistics/${ethereum_address}`,
+    }).then(
+      (res) => {
+        resolve(res);
         return res;
       },
       (error) => {

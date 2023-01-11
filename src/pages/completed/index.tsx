@@ -1,11 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import _ from "lodash";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Col, Row } from 'antd';
 import './index.scss'
 // import CompletedCard from '../../components/completedcard'
 import NFTCard from '../livenow/nftcard/index'
+import { getRaffleList } from "../../api/services/http/api";
+import { RaffleItemData } from "../../types/types";
 
 
 
@@ -19,26 +21,71 @@ const Completed = (): JSX.Element => {
 		]
 	});
 
+	const [completedData, setCompletedData] = useState({
+		featured: [],
+		upcoming: [],
+		endsoon: [],
+		all: []
+	})
+
+	useEffect(
+		()=> {
+			getRaffleListFun();
+		}, []
+	)
+
+
+	const getRaffleListFun = async () => {
+		try {
+			// 获取全站activity
+			const { code, data: { items } } = await getRaffleList({
+				status: 'live',
+				offset: 0,
+				limit: 100,
+			}) as any
+			if (code === 200) {
+				seletSortLiveNowData(items);
+			} else {
+				// 提示弹框
+			}
+		} catch (err) {
+			console.log('getRaffleListFun:', err)
+		}
+	}
+
+	const seletSortLiveNowData = (data: RaffleItemData[]) => {
+		if (data === null) return
+		let completedDataTmp: any = {
+			featured: [],
+			upcoming: [],
+			endsoon: [],
+			all: []
+		};
+		data.forEach((ele: any) => {
+			console.log(ele)
+			if (ele.category === "featured") {
+				completedDataTmp.featured.push(ele)
+			} else if (ele.category === 'upcoming') {
+				completedDataTmp.upcoming.push(ele)
+			} else {
+				completedDataTmp.all.push(ele)
+			}
+		})
+		setCompletedData(completedDataTmp)
+	}
+
 
 	return (
 		<div className="container ">
 			<section className="w-full pb-4 pt-16">
 				<div className="home-page-completed w-fullpb-4 ">
-					<div className="congratulations">
-						<div className="attention-info">
-							Earn Big Rewards With
-							<span>
-								&nbsp;Referrals！
-							</span>
-						</div>
-					</div>
 					<div className="py-6">
 						<Row wrap gutter={[16, { xs: 12, sm: 12, md: 18, lg: 24 }]}>
 							{
-								state.allCardList.map(
-									(item: any, idx: any) => {
-										return <Col  md={{ span: 8 }} lg={{ span: 8 }} xl={{ span: 6 }} span={12} key={idx}>
-											<NFTCard cardData={item} key={idx}></NFTCard>
+								completedData.featured.map(
+									(completed: RaffleItemData, index: any) => {
+										return <Col  md={{ span: 8 }} lg={{ span: 8 }} xl={{ span: 6 }} span={12} key={index}>
+											<NFTCard cardData={completed}></NFTCard>
 										</Col>
 									}
 								)

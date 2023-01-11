@@ -31,64 +31,62 @@ const NFTCard = (props: propspromise): JSX.Element => {
 	const { isConnected, address } = useAccount()
 
 	// 合约查询
-	const {
-		config,
-		error: prepareError,
-		isError: isPrepareError,
-		isSuccess: perSuccess
-	} = usePrepareContractWrite({
-		address: debouncedTokenId.contract_address,
-		abi: [
-			{
-				"inputs": [{
-					"internalType": "uint256",
-					"name": "",
-					"type": "uint256"
-				}
-				],
-				"name": "raffles",
-				"outputs": [],
-				"stateMutability": "view",
-				"type": "function"
-			},
-		],
-		functionName: 'raffles',
-		args: [BigNumber.from(debouncedTokenId.raffle_id)],
+	// const {
+	// 	config,
+	// 	error: prepareError,
+	// 	isError: isPrepareError,
+	// 	isSuccess: perSuccess
+	// } = usePrepareContractWrite({
+	// 	address: debouncedTokenId.contract_address,
+	// 	abi: [
+	// 		{
+	// 			"inputs": [{
+	// 				"internalType": "uint256",
+	// 				"name": "",
+	// 				"type": "uint256"
+	// 			}
+	// 			],
+	// 			"name": "raffles",
+	// 			"outputs": [],
+	// 			"stateMutability": "view",
+	// 			"type": "function"
+	// 		},
+	// 	],
+	// 	functionName: 'raffles',
+	// 	args: [BigNumber.from(debouncedTokenId.raffle_id)],
 
-		chainId: 97,
-		// cacheTime: 2_000,
-		// enabled: Boolean(debouncedTokenId.contractddress),
-		// staleTime: 2_000,
-		onSuccess(data: any) {
-			console.log('Success', data)
-		},
-		onError(error: any) {
-			console.log('Error1212122211', error.message)
-		},
-	});
+	// 	chainId: 97,
+	// 	// cacheTime: 2_000,
+	// 	// enabled: Boolean(debouncedTokenId.contractddress),
+	// 	// staleTime: 2_000,
+	// 	onSuccess(data: any) {
+	// 		console.log('Success', data)
+	// 	},
+	// 	onError(error: any) {
+	// 		console.log('Error1212122211', error.message)
+	// 	},
+	// });
 
-	const { data, error, isError, write, isLoading } = useContractWrite({
-		...config,
-		onSuccess(data: any) {
-			console.log('Success useContractWrite', data)
-			toast.success('The transaction is successful, waiting for block confirmation！')
-		},
-		onError(error: any) {
-			console.log('Error1212122211 useContractWrite', error.message)
-			toast.error(error.message)
+	// const { data, error, isError, write, isLoading } = useContractWrite({
+	// 	...config,
+	// 	onSuccess(data: any) {
+	// 		console.log('Success useContractWrite', data)
+	// 		toast.success('The transaction is successful, waiting for block confirmation！')
+	// 	},
+	// 	onError(error: any) {
+	// 		console.log('Error1212122211 useContractWrite', error.message)
+	// 		toast.error(error.message)
 			
-		},
-	})
+	// 	},
+	// })
 
 
 	const getPriceFun = async () => {
 		try {
 			const data: CallBackData = await getPrice() as any
 			setPrice(data.data.BUSD)
-
 		} catch (error) {
-			console.log('%c🀀 error', 'color: #e50000; font-size: 20px;', error);
-
+			console.log('nftcard-getPriceFun:', error)
 		}
 	}
 
@@ -102,11 +100,11 @@ const NFTCard = (props: propspromise): JSX.Element => {
 	)
 
 	useEffect(()=> {
-		console.log(write, config)
-		if(write !== undefined) {
-			// @ts-ignore
-			write()
-		}
+		// console.log(write, config)
+		// if(write !== undefined) {
+		// 	// @ts-ignore
+		// 	write()
+		// }
 		
 	})
 
