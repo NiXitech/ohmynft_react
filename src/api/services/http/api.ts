@@ -176,14 +176,15 @@ export async function getPrice() {
 
 export async function getRaffleList(params: {
   status: string;
-  skip: number;
-  take: number;
-  username: string;
+  offset: number;
+  limit: number;
+  username?: string,
+  win?:string
 }) {
   return new Promise((resolve, reject) => {
     http({
       method: "get",
-      url: `/raffle?status=${params.status}&skip=${params.skip}&take=${params.take}&username=${params.username}`,
+      url: `/raffle?status=${params.status}&offset=${params.offset}&limit=${params.limit}&username=${params.username||''}&win=${params.win||''}`,
     }).then(
       (res) => {
         resolve(res);

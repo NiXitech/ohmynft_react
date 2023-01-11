@@ -63,8 +63,11 @@ export interface CallBackData {
 }
 
 export interface RaffleItemData {
+  id:number;
+  price: number;
   raffle_id: number;
   is_show: boolean;
+  allow_air_drop:boolean;
   category: string;
   close_time: string;
   start_time: string;
@@ -75,6 +78,8 @@ export interface RaffleItemData {
   price_structure: PriceStructureItem[];
   max_entries_per_user: number;
   winner: WinnerInfo;
+  total_entries: number;
+  airdrop_users: [];
 }
 
 export interface PrizeDataItem {
@@ -86,9 +91,8 @@ export interface PrizeDataItem {
 }
 
 export interface PriceStructureItem {
-  entry_count: number;
-  recommended: boolean;
-  price: string;
+  price_in_busd: string;
+  price_in_bnb: string;
 }
 
 export interface WinnerInfo {

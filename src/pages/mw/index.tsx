@@ -90,22 +90,22 @@ const MWPage = (): JSX.Element => {
 
 
   const getRaffleListFun = async () => {
-    try {
-      const result: CallBackData = await getRaffleList({
-        status: 'completed',
-        skip: 0,
-        take: 100000000,
-        username: paramsName.name || ''
-      }) as any
+    // try {
+    //   const result: CallBackData = await getRaffleList({
+    //     status: 'completed',
+    //     skip: 0,
+    //     take: 100000000,
+    //     username: paramsName.name || ''
+    //   }) as any
 
-      if (result.code === 200 && result.data.items !== null) {
-        setCompletedData(result.data.items)
-      }
-    } catch (error: any) {
-      toast.error(error.message, {
-        hideProgressBar: false,
-      })
-    }
+    //   if (result.code === 200 && result.data.items !== null) {
+    //     setCompletedData(result.data.items)
+    //   }
+    // } catch (error: any) {
+    //   toast.error(error.message, {
+    //     hideProgressBar: false,
+    //   })
+    // }
     setLoading(false)
   }
 
