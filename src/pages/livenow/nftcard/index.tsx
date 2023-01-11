@@ -8,7 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Progress } from 'antd';
 import { CallBackData, RaffleItemData } from "../../../types/types";
 import { getPrice } from "../../../api/services/http/api";
-import { useAccount, useContractWrite, usePrepareContractWrite } from "wagmi";
+import { useAccount, useContractRead, useContractWrite, usePrepareContractWrite } from "wagmi";
 import { BigNumber } from "ethers";
 import useDebounce from "../../../libs/usehooks";
 import { toast } from "react-toastify";
@@ -24,6 +24,7 @@ const NFTCard = (props: propspromise): JSX.Element => {
 	const [price, setPrice] = useState({
 		usd: 0
 	})
+
 	const navigate = useNavigate();
 
 	const debouncedTokenId = useDebounce(props.cardData, 0)
@@ -31,60 +32,106 @@ const NFTCard = (props: propspromise): JSX.Element => {
 	const { isConnected, address } = useAccount()
 
 	// 合约查询
-	const {
-		config,
-		error: prepareError,
-		isError: isPrepareError,
-		isSuccess: perSuccess
-	} = usePrepareContractWrite({
-		address: debouncedTokenId.contract_address,
-		abi: [
-			{
-				"inputs": [{
-					"internalType": "uint256",
-					"name": "",
-					"type": "uint256"
+	const { data: totalSupplyData, refetch: refetchSupply } = useContractRead(
+		{
+			address: `0xb8Ce6900827C2718E6b07685492Eb75ea08eFEa3`,
+			abi: [
+				{
+					name: 'raffles',
+					type: 'function',
+					stateMutability: 'view',
+					inputs: [
+						{ internalType: 'uint256', name: '', type: 'uint256' }
+					],
+					outputs:
+						[
+							{
+								internalType: "enum Manager.STATUS",
+								name: "status",
+								type: "uint8"
+							},
+							{
+								internalType: "uint256",
+								name: "totalEntries",
+								type: "uint256"
+							},
+							{
+								internalType: "uint256",
+								name: "maxEntries",
+								type: "uint256"
+							},
+							{
+								internalType: "address",
+								name: "collateralAddress",
+								type: "address"
+							},
+							{
+								internalType: "uint256",
+								name: "collateralId",
+								type: "uint256"
+							},
+							{
+								internalType: "address",
+								name: "winner",
+								type: "address"
+							},
+							{
+								internalType: "uint256",
+								name: "randomNumber",
+								type: "uint256"
+							},
+							{
+								internalType: "uint256",
+								name: "amountRaisedInBNB",
+								type: "uint256"
+							},
+							{
+								internalType: "uint256",
+								name: "amountRaisedInBUSD",
+								type: "uint256"
+							},
+							{
+								internalType: "address",
+								name: "seller",
+								type: "address"
+							},
+							{
+								internalType: "uint256",
+								name: "entriesLength",
+								type: "uint256"
+							},
+							{
+								internalType: "uint256",
+								name: "cancellingDate",
+								type: "uint256"
+							}
+						]
+
+
 				}
-				],
-				"name": "raffles",
-				"outputs": [],
-				"stateMutability": "view",
-				"type": "function"
+			],
+			functionName: 'raffles',
+			args: [debouncedTokenId.raffle_id],
+			chainId: 97,
+			enabled: false,
+			onSuccess(data: any) {
+				console.log('Success', data)
 			},
-		],
-		functionName: 'raffles',
-		args: [BigNumber.from(debouncedTokenId.raffle_id)],
-
-		chainId: 97,
-		// cacheTime: 2_000,
-		// enabled: Boolean(debouncedTokenId.contractddress),
-		// staleTime: 2_000,
-		onSuccess(data: any) {
-			console.log('Success', data)
-		},
-		onError(error: any) {
-			console.log('Error1212122211', error.message)
-		},
-	});
-
-	const { data, error, isError, write, isLoading } = useContractWrite({
-		...config,
-		onSuccess(data: any) {
-			console.log('Success useContractWrite', data)
-			toast.success('The transaction is successful, waiting for block confirmation！')
-		},
-		onError(error: any) {
-			console.log('Error1212122211 useContractWrite', error.message)
-			toast.error(error.message)
-			
-		},
-	})
-
+			onError(error: any) {
+				console.log('Error1212122211', error)
+			},
+		})
 
 	const getPriceFun = async () => {
 		try {
 			const data: CallBackData = await getPrice() as any
 			setPrice(data.data.BUSD)
+
+
+			console.log('%c🀃 { }', 'color: #00e600; font-size: 20px;', isConnected, address);
+			if (isConnected) {
+				refetchSupply()
+			}
 
 		} catch (error) {
 			console.log('%c🀀 error', 'color: #e50000; font-size: 20px;', error);
@@ -97,24 +144,16 @@ const NFTCard = (props: propspromise): JSX.Element => {
 	useEffect(
 		() => {
 			getPriceFun()
-			
 		}, []
 	)
 
-	useEffect(()=> {
-		console.log(write, config)
-		if(write !== undefined) {
-			// @ts-ignore
-			write()
-		}
-		
-	})
+
 
 	return (
 		<div className="card-content-nft-card">
 			<div className="card-img">
 				<img src={props.cardData.prize.image_url} alt="" />
-				<div className="card-id" onClick={()=>{
+				<div className="card-id" onClick={() => {
 					// @ts-ignore
 					write()
 				}}>
