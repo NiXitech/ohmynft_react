@@ -6,7 +6,7 @@ import { getQueryVariable, updateUrl  } from "../../libs/userAgent"
 interface propsType {
   tableData: ActivityItem[],
   subLoading: boolean,
-  participants: ParticipantItem[]
+  participants?: ParticipantItem[]
 }
 
 const TwoColActivity = (props: propsType): JSX.Element => {

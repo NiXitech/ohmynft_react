@@ -146,7 +146,7 @@ const ProductDetail = (): JSX.Element => {
         }
       ],
       functionName: 'raffles',
-      args: [debouncedTokenId?.raffle_id],
+      args: [BigNumber.from(debouncedTokenId?.raffle_id)],
       chainId: 97,
       enabled: false,
       onSuccess(data: any) {
@@ -413,23 +413,12 @@ const ProductDetail = (): JSX.Element => {
                     </Button>
                   </div>
                   <div>
-                    <div className="activity-participants px-4 pt-10 md:hidden block">
+                    {/* <div className="activity-participants px-4 pt-10 md:hidden block">
                       <TwoColActivity tableData={activityData}></TwoColActivity>
-                    </div>
+                    </div> */}
                     <div className="end-soon-detail pb-10 pt-4">
                       End soon
                     </div>
-                    {/* <div className="grid grid-cols-2 gap-4 flex flex-row justify-between">
-                      {
-                        state.cardlist.map(
-                          (item, index) => {
-                            return (
-                              <NFTCard cardData={item} key={index}></NFTCard>
-                            )
-                          }
-                        )
-                      }
-                    </div> */}
                   </div>
                 </div>
 
