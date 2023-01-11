@@ -28,6 +28,7 @@ export function Connect() {
   })
   const { connect, isLoading, connectors, error, pendingConnector } =
     useConnect({
+      chainId: 97,
       onSuccess: async (data) => {
         getRegistrationFun(data.account)
       },

@@ -9,11 +9,12 @@ import NFTCard from "../livenow/nftcard";
 // import ConnectWallet from "../../components/connectWallet";
 import useStateHook from '../store';
 import { ActivityItem, CallBackData, RaffleItemData } from "../../types/types";
-import { useAccount, useContractRead, useContractWrite, usePrepareContractWrite } from "wagmi";
+import { erc20ABI, useAccount, useContractRead, useContractWrite, useNetwork, usePrepareContractWrite, useSwitchNetwork } from "wagmi";
 import { getPrice, getRaffleActivity, getRaffleInfo } from "../../api/services/http/api";
 import { useParams } from "react-router-dom"
-import { BigNumber } from "ethers";
+import { BigNumber, ethers } from "ethers";
 import useDebounce from "../../libs/usehooks";
+import { toast } from "react-toastify";
 // const client = new Client('AAAAAAAAAAAAAAAAAAAAAMBDdwEAAAAA2BsYVQVgTt6DGuhpdjJBwkHDAMo%3Dch3BD48OENuJ5jEKU8QtTYVhGLKOzP3Mr9PZTLUO8Pn22DdH0K');
 
 /* eslint-disable jsx-a11y/img-redundant-alt */
@@ -36,11 +37,12 @@ const ProductDetail = (): JSX.Element => {
   const [loading, setLiading] = useState(true)
   const [activityData, setActivityData] = useState<ActivityItem[]>([])
   const [selectType, setSelectType] = useState('')
+  const [currentEntryLens, setCurrentEntryLens] = useState<number>(0)
 
   useEffect(() => {
     actions.setGlobalLoading()
     getRaffleInfoFun()
-    getPriceFun()
+    // getPriceFun()
     getRaffleActivityFun()
   }, [])
 
@@ -150,7 +152,8 @@ const ProductDetail = (): JSX.Element => {
       chainId: 97,
       enabled: false,
       onSuccess(data: any) {
-        console.log('Success', data)
+        console.log('Success', data.entriesLength)
+        setCurrentEntryLens(parseInt(data.entriesLength._hex, 10))
       },
       onError(error: any) {
         console.log('Error1212122211', error)
@@ -162,11 +165,9 @@ const ProductDetail = (): JSX.Element => {
       const result: CallBackData = await getRaffleInfo(Number(raffle_id)) as any
       if (result.code === 200) {
         setInfoData(result.data)
-        console.log('-----------555------>', result)
-        // if()
-        // if (isConnected) {
-        //   refetchSupply()
-        // }
+        console.log('-----------555------>', result, isConnected)
+
+
       }
     } catch (error) {
       console.log('%c🀁 error', 'color: #ff0000; font-size: 20px;', error);
@@ -175,10 +176,30 @@ const ProductDetail = (): JSX.Element => {
 
   }
 
+  useEffect(() => {
+
+    console.log('%c🀆 ', 'color: #e50000; font-size: 20px;', BigNumber.from(100));
+    if (isConnected && debouncedTokenId) {
+      refetchSupply()
+    }
+  }, [debouncedTokenId])
+
   // 连接钱包
   const connectWallet = (item: any) => {
     actions.openConnect();
   }
+
+  const [ApproveStatus, setApproveStatus] = useState<boolean>(false)
+  const [EntryStatus, setEntryStatus] = useState<boolean>(false)
+
+  const [mintLoading, setMintLoading] = useState<boolean>(false)
+
+  const debouncedPrice = useDebounce({
+    price: infoData?.price_structure.price_in_bnb || 0,
+    raffleId: infoData?.raffle_id || 0,
+    count: Quantity,
+    collection: '0x0000000000000000000000000000000000000000',
+  }, 0)
 
   const {
     config,
@@ -186,7 +207,7 @@ const ProductDetail = (): JSX.Element => {
     isError: isPrepareError,
     isSuccess: perSuccess
   } = usePrepareContractWrite({
-    address: debouncedTokenId.contractddress,
+    address: `0xb8Ce6900827C2718E6b07685492Eb75ea08eFEa3`,
     abi: [
       {
         name: 'buyEntry',
@@ -202,14 +223,15 @@ const ProductDetail = (): JSX.Element => {
       },
     ],
     functionName: 'buyEntry',
-    args: [BigNumber.from(debouncedTokenId.entryId), BigNumber.from(debouncedTokenId.priceOrd), debouncedTokenId.collection, BigNumber.from(0)],
+    args: [BigNumber.from(debouncedPrice.raffleId), BigNumber.from(debouncedPrice.count), '0x0000000000000000000000000000000000000000', BigNumber.from(0)],
     overrides: {
       from: address,
-      value: ethers.utils.parseEther(JSON.stringify(debouncedTokenId.price)),
+      value: ethers.utils.parseEther(JSON.stringify(0)),
+      gasLimit: BigNumber.from(200)
     },
-    chainId: 5,
+    chainId: 97,
     // cacheTime: 2_000,
-    // enabled: Boolean(debouncedTokenId.contractddress),
+    enabled: EntryStatus,
     // staleTime: 2_000,
     onSuccess(data: any) {
       console.log('Success', data)
@@ -222,17 +244,76 @@ const ProductDetail = (): JSX.Element => {
     ...config,
     onSuccess(data: any) {
       console.log('Success useContractWrite', data)
+      setMintLoading(false)
       toast.success('The transaction is successful, waiting for block confirmation！')
     },
     onError(error: any) {
       console.log('Error1212122211 useContractWrite', error.message)
       toast.error(error.message)
-      setMintParams({
-        ...mintParams,
-        contractddress: ''
-      })
+      setMintLoading(false)
     },
   })
+
+
+  const {
+    config: configApprove
+  } = usePrepareContractWrite({
+    address: '0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee',
+    abi: erc20ABI,
+    functionName: 'approve',
+    args: ["0xb8Ce6900827C2718E6b07685492Eb75ea08eFEa3", BigNumber.from(1000000000000000)],
+    overrides: {
+      from: address,
+    },
+    chainId: 97,
+    enabled: ApproveStatus,
+    onSuccess(data: any) {
+      console.log('Success', data)
+    },
+    onError(error: any) {
+      console.log('Error1212122211', error.message)
+    },
+  })
+
+
+  const { write: nbtTokenApprove, reset: resetNbtTokenApprove } = useContractWrite({
+    ...configApprove,
+    onSuccess(data: any) {
+      console.log('Success ApproveFun', data)
+      toast.success('The transaction is successful, waiting for block confirmation！')
+      setEntryStatus(true)
+      write?.()
+    },
+    onError(error: any) {
+      console.log('Error1212122211 ApproveFun', error.message)
+      setMintLoading(false)
+      toast.error(error.message)
+    },
+  })
+
+  const { chain } = useNetwork()
+  const { chains, pendingChainId, switchNetwork } =
+    useSwitchNetwork()
+
+  const mint = async () => {
+    if (!isConnected) {
+      actions.openConnect()
+      return
+    }
+    setMintLoading(true)
+
+    if (chain?.id !== 97) {
+      await switchNetwork?.(97)
+    }
+    console.log('%c🀂 ', 'color: #aa00ff; font-size: 20px;', address, address);
+    setApproveStatus(true)
+    await runApprove()
+  }
+
+  const runApprove = async () => {
+
+    await nbtTokenApprove?.();
+  }
 
 
 
@@ -374,17 +455,17 @@ const ProductDetail = (): JSX.Element => {
                   </div>
 
                   <div className="card-cols-2 pt-2">
-                    <Progress percent={60} showInfo={false} trailColor="#fff" />
+                    <Progress percent={infoData?.total_entries ? currentEntryLens / infoData?.total_entries : 0} showInfo={false} trailColor="#fff" />
                   </div>
 
                   <div className="card-cols-2 pt-2">
                     <div className="attention-number pt-4 pb-2">
                       Current Entries:
-                      <span>&nbsp;500</span>
+                      <span>&nbsp;{currentEntryLens}</span>
                     </div>
                     <div className="attention-number pt-4 pb-2">
                       Remaining Entries:
-                      <span>&nbsp;600</span>
+                      <span>&nbsp;{infoData?.total_entries ? infoData?.total_entries - currentEntryLens : 0}</span>
                     </div>
                   </div>
 
@@ -441,9 +522,21 @@ const ProductDetail = (): JSX.Element => {
 
                   <div className="card-cols-2 pt-8">
                     <div className="detail-buy-button">
-                      <Button type="primary" size="large"
+                      <Button type="primary" size="large" className="relative"
+                        onClick={() => {
+                          mint()
+                        }}
+                        disabled={mintLoading}
+                      >
 
-                      >BUY ENTRY </Button>
+
+                        <div className={['absolute z-10 flex justify-center align-middle w-full transition-all', mintLoading ? 'opacity-1' : 'opacity-0'].join(' ')}>
+                          <img className="inline-block spinner-border animate-spin-slowing" src={require('../../asstes/img/spinner-white.svg').default} alt="" width="30" height="30" />
+                        </div>
+
+                        <span className={[' transition-all', mintLoading ? 'opacity-0' : 'opacity-1'].join(' ')}>BUY ENTRY</span>
+
+                      </Button>
                       {/* <a href="https://twitter.com/intent/tweet?in_reply_to=463440424141459456" className="router-link-active router-link-exact-active inline-block mx-1">Reply</a>
                       <a className="router-link-active router-link-exact-active inline-block mx-1" href="https://twitter.com/intent/retweet?tweet_id=463440424141459456">Retweet</a>
                       <a className="router-link-active router-link-exact-active inline-block mx-1" href="https://twitter.com/intent/like?tweet_id=463440424141459456">Like</a> */}
