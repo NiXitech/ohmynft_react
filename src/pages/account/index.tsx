@@ -1,14 +1,80 @@
 import Footer from "../../components/footer";
+import { useState } from 'react';
+import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
+import { message, Upload } from 'antd';
+import type { UploadChangeParam } from 'antd/es/upload';
+import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface';
+
 
 const AccountPage = (): JSX.Element => {
+  const [imageUrl, setImageUrl] = useState<string>();
+  const [loading, setLoading] = useState(false);
+
+  const handleChange: UploadProps['onChange'] = (info: UploadChangeParam<UploadFile>) => {
+    if (info.file.status === 'uploading') {
+      setLoading(true);
+      return;
+    }
+    if (info.file.status === 'done') {
+      // Get this url from response in real world.
+      getBase64(info.file.originFileObj as RcFile, (url) => {
+        setLoading(false);
+        setImageUrl(url);
+      });
+    }
+  };
+
+  const getBase64 = (img: RcFile, callback: (url: string) => void) => {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => callback(reader.result as string));
+    reader.readAsDataURL(img);
+  };
+
+  const beforeUpload = (file: RcFile) => {
+    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+    if (!isJpgOrPng) {
+      message.error('You can only upload JPG/PNG file!');
+    }
+    const isLt2M = file.size / 1024 / 1024 < 2;
+    if (!isLt2M) {
+      message.error('Image must smaller than 2MB!');
+    }
+    return isJpgOrPng && isLt2M;
+  };
+
+  const uploadButton = (
+    <div>
+      {loading ? <LoadingOutlined /> : <PlusOutlined />}
+      <div style={{ marginTop: 8 }}>Upload</div>
+    </div>
+  );
+
   return (
     <>
       <main className="flex flex-wrap grow mt-20 lg:mt-16 px-2 lg:px-8 transition-all duration-300 page-enter:opacity-0 page-enter:-translate-y-4 layout-enter:opacity-0 layout-enter:-translate-y-4 pt-16">
         <div className="w-full max-w-md m-auto">
           <section className="text-center mb-6">
             <figure className="relative w-24 h-24 mb-4 cursor-pointer lg:w-32 lg:h-32 inline-block margin-x-auto group animate-fade-in">
-              <img className="w-full rounded-full border-2 border-transparent transition-all group-hover:border-white" src="https://content.prod.platform.metawin.com/avatars/template/default.png" alt="Yout avatar" decoding="async" />
-              <button className="absolute -right-9 top-1/2 -mt-4 w-12 h-8 text-right transition-all opacity-80 group-hover:opacity-100"><span className="icon-ico-edit text-2xl"></span></button>
+              {/* <img className="w-full rounded-full border-2 border-transparent transition-all group-hover:border-white" src="https://content.prod.platform.metawin.com/avatars/template/default.png" alt="Yout avatar" decoding="async" />
+
+
+
+
+              <button className="absolute -right-9 top-1/2 -mt-4 w-12 h-8 text-right transition-all opacity-80 group-hover:opacity-100"><span className="icon-ico-edit text-2xl"></span></button> */}
+              <Upload
+                name="avatar"
+                listType="picture-card"
+                className="avatar-uploader"
+                showUploadList={false}
+                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                beforeUpload={beforeUpload}
+                onChange={handleChange}
+              >
+                {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
+              </Upload>
+
+
+
             </figure>
             <h1 className="text-white text-3xl block truncate">WillZhao</h1>
             <p className="text-slate-200 mt-2 block truncate">0x3dd4045668fbadcaee4d849a244e5094859acf0f</p>
