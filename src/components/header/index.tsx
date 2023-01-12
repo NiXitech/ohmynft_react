@@ -112,7 +112,7 @@ const Header = (): JSX.Element => {
                 : ''
             }
             <div className={["header-bg nav-main w-full top-0 left-0 fixed z-30 lg:border-cyan-500 lg:px-8 before:w-full before:h-full before:absolute before:-z-10 before:left-0 before:backdrop-blur-md before:transition-all before:duration-500 lg:before:hidden lg:backdrop-blur-md transition-all duration-500", mobileOpenMenu ? 'before:!bg-black' : ''].join(' ')}>
-              <div className="container">
+              <div className="container xxl:px-6rem66 xxxl:px-6rem66">
                 <div className={['flex flex-col lg:flex-row lg:min-h-0 5xl:container 5xl:mx-auto', mobileOpenMenu ? 'min-h-screen' : ''].join(' ')}>
                   <div className={["flex justify-center lg:items-center border-b border-transparent transition-all lg:!bg-transparent lg:border-0 border-cyan-500", mobileOpenMenu ? '!border-transparent' : ''].join(' ')}  >
                     {/* <div className="grow w-14 flex items-center lg:hidden">
@@ -294,14 +294,17 @@ const Header = (): JSX.Element => {
                 </div>
               </div>
             </div>
-            <div className="pt-16 attention-info fixed w-full">
-              <div className="py-2 text-center">
-                Earn Big Rewards With
-                <span>
-                  &nbsp;Referrals！
-                </span>
-              </div>
-            </div>
+            {
+              location.pathname === '/' ? <></> :
+                <div className="pt-16 attention-info fixed w-full">
+                  <div className="py-2 text-center">
+                    Earn Big Rewards With
+                    <span>
+                      &nbsp;Referrals！
+                    </span>
+                  </div>
+                </div>
+            }
             {/* <div className='fixed top-80 -right-8 cursor-pointer'>
               <ZenDesk></ZenDesk>
             </div> */}

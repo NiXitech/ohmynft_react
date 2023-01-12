@@ -32,7 +32,7 @@ const Activity = (): JSX.Element => {
 
   return (
     <>
-      <div className="container">
+      <div className="container xxl:px-6rem66 xxxl:px-6rem66">
         <section className="w-full mx-auto lg:screnHeight pt-16">
 
           <div className="lg:overflow-y-auto overflow-y-auto overflow-x-hidden lg:overflow-x-hidden relative pb-0 hideScrollbar"

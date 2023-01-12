@@ -71,7 +71,6 @@ function App() {
   }, [isConnected])
   return (
     <>
-
       <Router>
         <Header></Header>
         <div className="min-h-screen flex flex-col">
@@ -102,8 +101,6 @@ function App() {
                 <Route path="*" element={<Navigate to="/" replace={true} />} />
               </Routes>
           }
-
-
         </div>
         <Footer></Footer>
         <ToastContainer theme="dark" autoClose={3000} hideProgressBar />

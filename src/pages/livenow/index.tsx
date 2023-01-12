@@ -5,6 +5,9 @@ import NFTCard from "./nftcard"
 import './index.scss';
 import { getRaffleList } from '../../api/services/http/api';
 import { RaffleItemData } from '../../types/types';
+import { LStorage } from '../../api/services/cooike/storage';
+import copy from 'copy-to-clipboard';
+import { toast } from 'react-toastify';
 
 const LiveNow = (props: any) => {
 	const [state] = useState({
@@ -22,6 +25,23 @@ const LiveNow = (props: any) => {
 		endsoon: [],
 		all: []
 	})
+
+	const [tweetShareInfo, setTweetShareInfo] = useState('')
+
+	const sharetweet = () => {
+		let userinfo = LStorage.get('LastAuthUser') || {};
+		let userLink = 'https://ohmynft.xyz/home/' + userinfo.name;
+		let shareLink = 'http://twitter.com/share?' +
+			'text=Join me at OH MY NFT, the most convenient place packed with the best giveaway prizes of real-world goods changing the way you win in Web3' +
+			'&url=' + userLink + '&hashtags=WinninginWeb3';
+		setTweetShareInfo(shareLink)
+	}
+
+	// copy link
+	const copyLink = () => {
+		copy('https://ohmynft.xyz/home/');
+		toast.success('Copy succeeded!');
+	}
 
 	const BrText = () => {
 		return (
@@ -87,23 +107,28 @@ const LiveNow = (props: any) => {
 	useEffect(
 		() => {
 			getRaffleListFun();
+			sharetweet()
 		}, []
 	)
 
 
 	return (
 		<section className="w-full pb-4 pt-16 lg:px-8">
-			<div className="container pt-16">
+			<div className="container pt-16 xxl:px-6rem66 xxxl:px-6rem66">
 				<Row align="middle">
 					<Col className="gutter-row" span={24} md={{ span: 12 }} lg={{ span: 12 }} xl={{ span: 12 }}>
 						<Space direction="vertical" size="large" style={{ width: '100%' }}>
 							<BrText></BrText>
-							<div className="slogen-detail pt-2 ">
+							<div className="slogen-detail pt-2">
 								{state.slogenDetail}
 							</div>
 							<Space className="pt-6 flex justify-center md:justify-start">
-								<Button className='pr-4' type="primary" shape="round" size="large" >Share On Twitter &nbsp; <span className=" icon-twitter icon"></span></Button>
-								<Button type="primary" ghost shape="round" size="large" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copy Link&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Button>
+								<a href={tweetShareInfo} rel="noopener noreferrer" target="_blank" className=" text-white rounded-full tracking-widest uppercase  transition-all relative disabled:opacity-40  relative flex justify-center items-center mx-auto w-full">
+									<Button className='pr-6' type="primary" shape="round" size="large" >
+										Share On Twitter &nbsp;<span className=" icon-twitter icon"></span>
+									</Button>
+								</a>
+								<Button type="primary" ghost shape="round" size="large" onClick={copyLink}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copy Link&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Button>
 							</Space>
 						</Space>
 					</Col>
@@ -119,7 +144,7 @@ const LiveNow = (props: any) => {
 							Featured
 						</div>
 					</Row>
-					<Row wrap gutter={[24, { xs: 12, sm: 12, md: 18, lg: 24 }]}>
+					<Row wrap gutter={[32, { xs: 12, sm: 12, md: 18, lg: 24 }]}>
 						{
 							liveNowData.featured.map((feature: RaffleItemData, index: any) => {
 								return <>
@@ -136,7 +161,7 @@ const LiveNow = (props: any) => {
 							Ending Soon
 						</div>
 					</Row>
-					<Row wrap gutter={[24, { xs: 12, sm: 12, md: 18, lg: 24 }]}>
+					<Row wrap gutter={[32, { xs: 12, sm: 12, md: 18, lg: 24 }]}>
 						{
 							liveNowData.upcoming.map((feature: RaffleItemData, index: any) => {
 								return <>
@@ -156,7 +181,7 @@ const LiveNow = (props: any) => {
 						</Row> : <></>
 					}
 
-					<Row wrap gutter={[24, { xs: 12, sm: 12, md: 18, lg: 24 }]}>
+					<Row wrap gutter={[32, { xs: 12, sm: 12, md: 18, lg: 24 }]}>
 						{
 							liveNowData.all.map((feature: RaffleItemData, index: any) => {
 								return <>

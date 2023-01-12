@@ -112,7 +112,7 @@ const MWPage = (): JSX.Element => {
   return (
     <>
       <main className="flex flex-wrap grow px-2 pb-10 lg:px-8 transition-all duration-300 page-enter:opacity-0 page-enter:-translate-y-4 layout-enter:opacity-0 layout-enter:-translate-y-4 pt-16">
-        <div className="w-full mx-auto 5xl:container">
+        <div className="w-full mx-auto 5xl:container ">
           {
             hasUser
               ? <section className="pt-32 pb-20 flex items-center justify-center flex-col py-10 grow">

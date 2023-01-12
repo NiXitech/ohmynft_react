@@ -6,7 +6,7 @@ const Footer = (): JSX.Element => {
     <>
       <div className="w-full pt-14 mx-auto 5xl:container 5xl:mx-auto font-black text-white">
         <footer className="py-4 lg:px-8 border-t border-blue ">
-          <div className='container'>
+          <div className='container xxl:px-6rem66 xxxl:px-6rem66'>
             <nav className="flex flex-col lg:flex-row lg:align-middle lg:items-center">
               <div className="text-center lg:order-3">
                 <ul className="lg:flex lg:justify-end">

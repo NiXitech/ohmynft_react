@@ -3059,6 +3059,9 @@ select {
   padding-right:0
 }
 .pr-4 {
+  padding-right:1.5rem
+}
+.pr-6 {
   padding-right:1rem
 }
 .pt-20 {
@@ -5807,6 +5810,11 @@ background-color:rgb(0 55 138/var(--tw-bg-opacity))
       font-size: .875rem;
       line-height: 1.25rem
   }
+
+  .xxl\:px-6rem66 {
+    padding-left: 6.666rem;
+    padding-right: 6.666rem;
+  }
 }
 
 @media (min-width:1800px) {
@@ -5825,6 +5833,10 @@ background-color:rgb(0 55 138/var(--tw-bg-opacity))
   .\33xl\:text-sm {
       font-size: .875rem;
       line-height: 1.25rem
+  }
+  .xxxl\:px-6rem66 {
+    padding-left: 6.666rem;
+    padding-right: 6.666rem;
   }
 }
 

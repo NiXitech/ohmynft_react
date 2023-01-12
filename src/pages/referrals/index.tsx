@@ -50,7 +50,7 @@ const Referrals = (): JSX.Element => {
   return (
     <>
       <main className="flex flex-wrap grow px-2 pb-10 lg:px-8 transition-all duration-300 page-enter:opacity-0 page-enter:-translate-y-4 layout-enter:opacity-0 layout-enter:-translate-y-4 pt-16">
-        <div className="w-full mx-auto 5xl:container">
+        <div className="w-full mx-auto 5xl:container xxl:px-6rem66 xxxl:px-6rem66">
           <section className="animate-fade-in max-w-7xl mx-auto relative min-h-[50vh]">
 
             <nav className="flex justify-center md:justify-start referrals-tab">

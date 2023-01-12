@@ -39,7 +39,7 @@ const Completed = (): JSX.Element => {
 		try {
 			// 获取全站activity
 			const { code, data: { items } } = await getRaffleList({
-				status: 'live',
+				status: 'completed',
 				offset: 0,
 				limit: 100,
 			}) as any
@@ -76,7 +76,7 @@ const Completed = (): JSX.Element => {
 
 
 	return (
-		<div className="container ">
+		<div className="container xxl:px-6rem66 xxxl:px-6rem66">
 			<section className="w-full pb-4 pt-16">
 				<div className="home-page-completed w-fullpb-4 ">
 					<div className="py-6">
