@@ -11,11 +11,12 @@ import useStateHook from '../store';
 import { ActivityItem, CallBackData, RaffleItemData } from "../../types/types";
 import { erc20ABI, useAccount, useContractRead, useContractWrite, useNetwork, usePrepareContractWrite, useSwitchNetwork } from "wagmi";
 import { getPrice, getRaffleActivity, getRaffleInfo } from "../../api/services/http/api";
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { BigNumber, ethers } from "ethers";
 import useDebounce from "../../libs/usehooks";
 import { toast } from "react-toastify";
 import { LStorage } from "../../api/services/cooike/storage";
+import { TimeInterval } from '../../libs/userAgent'
 
 // const client = new Client('AAAAAAAAAAAAAAAAAAAAAMBDdwEAAAAA2BsYVQVgTt6DGuhpdjJBwkHDAMo%3Dch3BD48OENuJ5jEKU8QtTYVhGLKOzP3Mr9PZTLUO8Pn22DdH0K');
 
@@ -464,133 +465,233 @@ const ProductDetail = (): JSX.Element => {
                   <div className="card-title" title="cardtitle">
                     {infoData?.prize.name}
                   </div>
-                  <Divider className="bg-white/40" />
-                  <div className="card-cols-2">
-                    <div className="color-title">
-                      #{infoData?.prize.token_id}
-                    </div>
-                    <div className="white-title">
-                      {infoData?.prize.value}
-                    </div>
-                  </div>
+                  <Divider className="bg-white/40 my-4" />
 
-                  <div className="card-cols-2 pt-4">
-                    <div className="attention-number pt-6 pb-2">
-                      Total Entries:
-                      <span>&nbsp;{infoData?.total_entries}</span>
-                    </div>
-                  </div>
-
-                  <div className="card-cols-2 pt-2">
-                    <Progress percent={infoData?.total_entries ? (currentEntryLens / infoData?.total_entries) * 100 : 0} showInfo={false} trailColor="#fff" success={{ strokeColor: '#FDE23B' }} />
-                  </div>
-
-                  <div className="card-cols-2 pt-2">
-                    <div className="attention-number pt-4 pb-2">
-                      Current Entries:
-                      <span>&nbsp;{currentEntryLens}</span>
-                    </div>
-                    <div className="attention-number pt-4 pb-2">
-                      Remaining Entries:
-                      <span>&nbsp;{infoData?.total_entries ? infoData?.total_entries - currentEntryLens : 0}</span>
-                    </div>
-                  </div>
-
-                  <div className="card-cols-2 pt-8">
-                    <div className="attention-number pb-2">
-                      {
-                        infoData?.winner.display_name === '' ? 'Buying more entries increases your odds of winning!' : '已经开奖'
-                      }
-
-                    </div>
-                  </div>
-
-                  <div className="card-cols-2">
-                    <div className="attention-number pt-6 pb-2">
-                      BUSD:
-                      <span>&nbsp;{infoData?.prize.value}</span>
-                      <label className="lable-button">
-                        <Button type="primary" size="small">Maximum limit exceeded.</Button>
-                      </label>
-                    </div>
-                  </div>
-
-                  <div className="card-cols-2">
-                    <div className="attention-number pt-6 pb-2">
-                      Entries:&nbsp;&nbsp;
-                      {/* <InputNumber size="small" min={1} max={10} defaultValue={3} onChange={onChange} /> */}
-                      <div className="count">
-                        <div className="inputGroup">
-                          <button disabled={getCurrentUserEntries(infoData?.participants)} onClick={() => { if (Quantity > 1) { setQuantity(Quantity - 1) } }}>-</button>
-                          <div className="cont-input">
-                            <input
-                              id="tentacles"
-                              name="tentacles"
-                              type="number"
-                              disabled={infoData ? (getCurrentUserEntries(infoData?.participants) >= infoData?.max_entries_per_user ? true : false) : false}
-                              value={Quantity}
-                              step={1} min="1"
-                              max="300"
-                              onBlur={(e) => {
-                                if (e.target.value === '') setQuantity(1)
-                              }}
-                              onChange={(e) => {
-                                console.log('number:--->', e.target.value);
-                                var patrn = /^([1-9]\d*)(\.\d*[1-9])?$/;
-                                if (!patrn.exec(e.target.value)) {
-                                  JSON.stringify(e.target.value).substr(1);
-                                  setQuantity(Number(JSON.stringify(e.target.value).substr(1)));
-                                } else if (Number(e.target.value) > 100) {
-                                  setQuantity(100);
-                                } else {
-                                  setQuantity(Number(e.target.value));
-                                }
-                              }} />
+                  {
+                    infoData?.winner.display_name === ''
+                      ? currentEntryLens === infoData.total_entries
+                        ? <div className="flex justify-between w-full font-thin font-bold text-white">
+                          <div className="">
+                            <i className="icon icon-referals mr-1"></i>
+                            {infoData?.participants.length}
                           </div>
-                          <button disabled={getCurrentUserEntries(infoData?.participants)} onClick={() => { if (Quantity < 300) { setQuantity(Quantity + 1) } }}>+</button>
+                          <div className="">
+                            <span className="mr-1">$</span>{infoData?.prize.value}
+                          </div>
+                          <div className="">
+                            <span className="mr-1">#</span>{infoData?.prize.token_id}
+                          </div>
+                        </div>
+                        : <div className="card-cols-2">
+                          <div className="color-title">
+                            ${infoData?.prize.value}
+                          </div>
+                          <div className="white-title">
+                            #{infoData?.prize.token_id}
+                          </div>
+                        </div>
+                      : <div className="flex justify-between w-full font-thin font-bold text-white">
+                        <div className="">
+                          <i className="icon icon-referals mr-1"></i>
+                          {infoData?.participants.length}
+                        </div>
+                        <div className="">
+                          <span className="mr-1">$</span>{infoData?.prize.value}
+                        </div>
+                        <div className="">
+                          <span className="mr-1">#</span>{infoData?.prize.token_id}
                         </div>
                       </div>
-                      &nbsp;&nbsp;
-                      {
-                        infoData
-                          ? <>
-                            You used {getCurrentUserEntries(infoData?.participants)} of {infoData?.max_entries_per_user} entries
-                          </>
-                          : ''
-                      }
-                    </div>
-                  </div>
 
-                  <div className="card-cols-2 pt-8">
-                    <div className="detail-buy-button">
-                      <Button type="primary" size="large" className="relative"
-                        onClick={() => {
-                          mint()
-                        }}
-                        disabled={mintLoading}
-                      >
+                  }
 
 
-                        <div className={['absolute z-10 flex justify-center align-middle w-full transition-all', mintLoading ? 'opacity-1' : 'opacity-0'].join(' ')}>
-                          <img className="inline-block spinner-border animate-spin-slowing" src={require('../../asstes/img/spinner-white.svg').default} alt="" width="30" height="30" />
+
+                  {
+                    infoData?.winner.display_name === ''
+                      ? currentEntryLens === infoData.total_entries
+                        ? <>
+                          <div className="chooseWinner py-8">
+                            <div className="w-full items-center flex justify-center">
+                              <img src={require('../../asstes/img/hourglass.png').default} alt="" />
+                            </div>
+                            <h1 className="color-title">
+                              FULL
+                            </h1>
+                          </div>
+                        </>
+                        : <>
+                          <div className="card-cols-2 pt-4">
+                            <div className="attention-number pt-6 pb-2">
+                              Total Entries:
+                              <span>&nbsp;{infoData?.total_entries}</span>
+                            </div>
+                          </div>
+
+                          <div className="card-cols-2 pt-2">
+                            <Progress percent={infoData?.total_entries ? (currentEntryLens / infoData?.total_entries) * 100 : 0} showInfo={false} trailColor="#fff" success={{ strokeColor: '#FDE23B' }} />
+                          </div>
+
+                          <div className="card-cols-2 pt-2">
+                            <div className="attention-number pt-4 pb-2">
+                              Current Entries:
+                              <span>&nbsp;{currentEntryLens}</span>
+                            </div>
+                            <div className="attention-number pt-4 pb-2">
+                              Remaining Entries:
+                              <span>&nbsp;{infoData?.total_entries ? infoData?.total_entries - currentEntryLens : 0}</span>
+                            </div>
+                          </div>
+
+                          <div className="card-cols-2 pt-8">
+                            <div className="attention-number pb-2">
+                              Buying more entries increases your odds of winning!
+                            </div>
+                          </div>
+
+                          <div className="card-cols-2">
+                            <div className="attention-number pt-6 pb-2">
+                              BUSD:
+                              <span>&nbsp;{infoData?.prize.value}</span>
+                            </div>
+                          </div>
+                          <div className="card-cols-2">
+                            <div className="attention-number pt-6 pb-2">
+                              Entries:&nbsp;&nbsp;
+                              {/* <InputNumber size="small" min={1} max={10} defaultValue={3} onChange={onChange} /> */}
+                              <div className="count">
+                                <div className="inputGroup">
+                                  <button disabled={getCurrentUserEntries(infoData?.participants)} onClick={() => { if (Quantity > 1) { setQuantity(Quantity - 1) } }}>-</button>
+                                  <div className="cont-input">
+                                    <input
+                                      id="tentacles"
+                                      name="tentacles"
+                                      type="number"
+                                      disabled={infoData ? (getCurrentUserEntries(infoData?.participants) >= infoData?.max_entries_per_user ? true : false) : false}
+                                      value={Quantity}
+                                      step={1} min="1"
+                                      max="300"
+                                      onBlur={(e) => {
+                                        if (e.target.value === '') setQuantity(1)
+                                      }}
+                                      onChange={(e) => {
+                                        console.log('number:--->', e.target.value);
+                                        var patrn = /^([1-9]\d*)(\.\d*[1-9])?$/;
+                                        if (!patrn.exec(e.target.value)) {
+                                          JSON.stringify(e.target.value).substr(1);
+                                          setQuantity(Number(JSON.stringify(e.target.value).substr(1)));
+                                        } else if (Number(e.target.value) > 100) {
+                                          setQuantity(100);
+                                        } else {
+                                          setQuantity(Number(e.target.value));
+                                        }
+                                      }} />
+                                  </div>
+                                  <button
+                                    disabled={getCurrentUserEntries(infoData?.participants)}
+                                    onClick={
+                                      () => {
+                                        if (infoData) {
+                                          if (Quantity < infoData.max_entries_per_user && Quantity < infoData?.total_entries - currentEntryLens) {
+                                            setQuantity(Quantity + 1)
+                                          } else {
+                                            toast.error('Maximum limit exceeded.')
+                                          }
+                                        }
+
+                                      }}
+                                  >+</button>
+                                </div>
+                              </div>
+                              &nbsp;&nbsp;
+                              {
+                                infoData
+                                  ? <>
+                                    You used {getCurrentUserEntries(infoData?.participants)} of {infoData?.max_entries_per_user} entries
+                                  </>
+                                  : ''
+                              }
+                            </div>
+                          </div>
+                        </>
+                      : <>
+                        <div className="winner_info text-center font-Bold">
+                          <h1>ENDED</h1>
+                          <span>{TimeInterval(infoData ? infoData?.close_time : JSON.stringify(new Date()))}</span>
+                          <div className="wineer">
+                            <span className="text-right">Won By</span>
+                            <img src={require('../../asstes/img/personal.png').default} alt="" />
+                            <span className="text-left">Richard Fitzgerald</span>
+                          </div>
                         </div>
+                      </>
+                  }
 
-                        <span className={[' transition-all', mintLoading ? 'opacity-0' : 'opacity-1'].join(' ')}>BUY ENTRY</span>
 
-                      </Button>
-                      {/* <a href="https://twitter.com/intent/tweet?in_reply_to=463440424141459456" className="router-link-active router-link-exact-active inline-block mx-1">Reply</a>
-                      <a className="router-link-active router-link-exact-active inline-block mx-1" href="https://twitter.com/intent/retweet?tweet_id=463440424141459456">Retweet</a>
-                      <a className="router-link-active router-link-exact-active inline-block mx-1" href="https://twitter.com/intent/like?tweet_id=463440424141459456">Like</a> */}
-                    </div>
-                  </div>
 
-                  <div className="md:block lg:block pt-6 font-thin text-xs">
-                    Quick Tip! Gas fees are required for each purchase. You can save a lot of money on gas fees by purchasing multiple entries at once.
-                  </div>
+                  {
+                    infoData?.winner.display_name === ''
+                      ? currentEntryLens === infoData.total_entries
+                        ? <>
+                          <div className="w-full">
+                            <div className=' font-Bold w-full '>
+                              CHOOSING WINNER...
+                            </div>
+
+                          </div>
+                          <div className="md:block lg:block pt-6 font-thin text-xs text-center">
+                            Winner is being drawn！
+                          </div>
+                        </>
+                        :
+                        <>
+                          <div className="card-cols-2 pt-8">
+                            <div className="detail-buy-button">
+                              <Button type="primary" size="large" className="relative"
+                                onClick={() => {
+                                  mint()
+                                }}
+                                disabled={mintLoading}
+                              >
+
+
+                                <div className={['absolute z-10 flex justify-center align-middle w-full transition-all', mintLoading ? 'opacity-1' : 'opacity-0'].join(' ')}>
+                                  <img className="inline-block spinner-border animate-spin-slowing" src={require('../../asstes/img/spinner-white.svg').default} alt="" width="30" height="30" />
+                                </div>
+
+                                <span className={[' transition-all', mintLoading ? 'opacity-0' : 'opacity-1'].join(' ')}>BUY ENTRY</span>
+
+                              </Button>
+
+                            </div>
+                          </div>
+                          <div className="md:block lg:block pt-6 font-thin text-xs">
+                            Quick Tip! Gas fees are required for each purchase. You can save a lot of money on gas fees by purchasing multiple entries at once.
+                          </div>
+                        </>
+
+                      : <>
+                        <div className="w-full">
+                          <Link to={'/completed'} className='hyperlink font-Bold w-full block'>
+                            VIEW MORE COMPETITIONS
+                          </Link>
+
+                        </div>
+                        <div className="md:block lg:block pt-6 font-thin text-xs text-center">
+                          Check out other competitions with BIG rewards waiting for you!
+                        </div>
+                      </>
+                  }
+
+
 
                 </div>
               </div>
 
+
+              {/* <a href="https://twitter.com/intent/tweet?in_reply_to=463440424141459456" className="router-link-active router-link-exact-active inline-block mx-1">Reply</a>
+                      <a className="router-link-active router-link-exact-active inline-block mx-1" href="https://twitter.com/intent/retweet?tweet_id=463440424141459456">Retweet</a>
+                      <a className="router-link-active router-link-exact-active inline-block mx-1" href="https://twitter.com/intent/like?tweet_id=463440424141459456">Like</a> */}
               <div className="flex-center-detail">
                 <div className="share-twitter pl-6">
                   <div className="detail-share-twitter-button pb-10 pt-12">

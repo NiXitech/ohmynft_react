@@ -64,6 +64,7 @@
             letter-spacing: 0px;
             color: #FFFFFF;
             
+            
             span {
               font-family: HarmonyOS_Sans_Bold;
               font-weight: bold;
@@ -89,6 +90,22 @@
               align-items: center;
               justify-content: center;
               box-sizing: border-box;
+              button{
+                &:disabled {
+                  cursor:not-allowed;
+                  background-color: #eee;
+                  color: #6D6D6D;
+                }
+              }
+              input{
+                &:disabled{
+                  cursor:not-allowed;
+                  // background: #6D6D6D!important;
+                  -webkit-text-fill-color: #6D6D6D!important;
+                  color: #6D6D6D!important;
+                  // background-clip: ;
+                }
+              }
             }
 
             .inputGroup button{
@@ -207,4 +224,61 @@
         padding-bottom: 2.25rem;
       }
     }
+  }
+
+
+  .chooseWinner{
+    margin-top: 4.4rem;
+    img{
+      width: 3rem;
+      margin-bottom: 3rem;
+    }
+    .color-title {
+      background: linear-gradient(103deg, #EC0F00 0%, #FCDC66 99%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 4.4rem;
+    }
+  }
+
+  .winner_info{
+    padding: 4rem 0;
+    h1{
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .wineer{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: 2rem;
+      img{
+        width: 7rem;
+        margin: 0 2rem;
+      }
+      span{
+        flex: 1;
+      }
+    }
+
+  }
+
+  .hyperlink{
+    text-align: center;
+    padding: 1.75rem;
+    font-size: 2rem;
+    background-color: #3A8AFF;
+    border-radius: 3.2rem;
+  }
+
+
+  .chossing-await{
+    text-align: center;
+    padding: 1.75rem;
+    font-size: 2rem;
+    border-radius: 3.2rem;
+background: linear-gradient(97deg, #EC0F00 0%, #FCDC66 100%);
   }
