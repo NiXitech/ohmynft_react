@@ -227,7 +227,7 @@ const ProductDetail = (): JSX.Element => {
     overrides: {
       from: address,
       value: ethers.utils.parseEther(JSON.stringify(0)),
-      gasLimit: BigNumber.from(200)
+      gasLimit: BigNumber.from('3100000')
     },
     chainId: 97,
     // cacheTime: 2_000,
@@ -240,7 +240,7 @@ const ProductDetail = (): JSX.Element => {
       console.log('Error1212122211', error.message)
     },
   })
-  const { data, error, isError, write, isLoading } = useContractWrite({
+  const { data, error, isError, write: enterWrite, isLoading } = useContractWrite({
     ...config,
     onSuccess(data: any) {
       console.log('Success useContractWrite', data)
@@ -261,7 +261,7 @@ const ProductDetail = (): JSX.Element => {
     address: '0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee',
     abi: erc20ABI,
     functionName: 'approve',
-    args: ["0xb8Ce6900827C2718E6b07685492Eb75ea08eFEa3", BigNumber.from(1000000000000000)],
+    args: ["0xb8Ce6900827C2718E6b07685492Eb75ea08eFEa3", BigNumber.from('1000000000000000000')],
     overrides: {
       from: address,
     },
@@ -280,9 +280,9 @@ const ProductDetail = (): JSX.Element => {
     ...configApprove,
     onSuccess(data: any) {
       console.log('Success ApproveFun', data)
-      toast.success('The transaction is successful, waiting for block confirmation！')
+      // toast.success('The transaction is successful, waiting for block confirmation！')
       setEntryStatus(true)
-      write?.()
+      enterWrite?.()
     },
     onError(error: any) {
       console.log('Error1212122211 ApproveFun', error.message)
