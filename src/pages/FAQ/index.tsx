@@ -1,4 +1,4 @@
-import Footer from "../../components/footer";
+// import Footer from "../../components/footer";
 
 const FAQ = (): JSX.Element => {
   return (
@@ -122,7 +122,7 @@ const FAQ = (): JSX.Element => {
           </div>
         </div>
       </main>
-      <Footer></Footer>
+      {/* <Footer></Footer> */}
     </>
   );
 }

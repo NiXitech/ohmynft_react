@@ -42,7 +42,7 @@ const UserInfo = (): JSX.Element => {
       {
         verify
           ? <main className="flex flex-wrap grow px-2 pb-10 lg:px-8 transition-all duration-300 page-enter:opacity-0 page-enter:-translate-y-4 layout-enter:opacity-0 layout-enter:-translate-y-4 pt-16">
-            <div className="w-full mx-auto 5xl:container lg:screnHeight lg:screnHeight-10 mt-4">
+            <div className="w-full mx-auto 5xl:container xxl:px-6rem66 xxxl:px-6rem66 lg:screnHeight lg:screnHeight-10 mt-4">
               <section className="animate-fade-in lg:overflow-y-auto overflow-y-auto overflow-x-hidden lg:overflow-x-hidde relative min-h-[50vh] hideScrollbar"
                 style={{
                   height: '100%',

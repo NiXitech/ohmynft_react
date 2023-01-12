@@ -176,14 +176,15 @@ export async function getPrice() {
 
 export async function getRaffleList(params: {
   status: string;
-  skip: number;
-  take: number;
-  username: string;
+  offset: number;
+  limit: number;
+  username?: string,
+  win?:string
 }) {
   return new Promise((resolve, reject) => {
     http({
       method: "get",
-      url: `/raffle?status=${params.status}&skip=${params.skip}&take=${params.take}&username=${params.username}`,
+      url: `/raffle?status=${params.status}&offset=${params.offset}&limit=${params.limit}&username=${params.username||''}&win=${params.win||''}`,
     }).then(
       (res) => {
         resolve(res);
@@ -227,13 +228,13 @@ export async function getRaffleInfo(raffleId: number) {
 
 export async function getRaffleActivity(params: {
   raffleId: number;
-  skip: number;
-  take: number;
+  offset: number;
+  limit: number;
 }) {
   return new Promise((resolve, reject) => {
     http({
       method: "get",
-      url: `/raffle/${params.raffleId}/activity?skip=${params.skip}&take=${params.take}`,
+      url: `/raffle/${params.raffleId}/activity?limit=${params.limit}&offset=${params.offset}`,
     }).then(
       (res) => {
         resolve(res);
@@ -281,13 +282,13 @@ export async function getRaffleParticipant(params: {
 
 export async function getAllActivity(params: {
   category: string;
-  skip: number;
-  take: number;
+  offset: number;
+  limit: number;
 }) {
   return new Promise((resolve, reject) => {
     http({
       method: "get",
-      url: `/activity?category=${params.category}&skip=${params.skip}&take=${params.take}`,
+      url: `/activity?category=${params.category}&limit=${params.limit}&offset=${params.offset}`,
     }).then(
       (res) => {
         resolve(res);
@@ -467,6 +468,28 @@ export async function getRegisterUserInfo(params: {
       (res) => {
         resolve(res);
 
+        return res;
+      },
+      (error) => {
+        reject(error);
+      }
+    );
+  });
+}
+
+/**
+ * 获取referral Summary信息
+ * @returns
+ */
+
+export async function getReferralSummay(ethereum_address: string) {
+  return new Promise((resolve, reject) => {
+    http({
+      method: "get",
+      url: `/referral/statistics/${ethereum_address}`,
+    }).then(
+      (res) => {
+        resolve(res);
         return res;
       },
       (error) => {

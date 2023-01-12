@@ -3,6 +3,7 @@ import axios, { AxiosRequestConfig } from "axios";
 import _ from "lodash";
 import { toast } from "react-toastify";
 import { HttpRequestParams } from "../../../types/types";
+import { LStorage } from "../cooike/storage";
 // import { LStorage } from "../cooike/storage";
 
 // import { LoginUserCookie } from "../cooike/cookie";
@@ -20,8 +21,8 @@ axios.interceptors.request.use(
         config.headers = {
           "Content-Type": "application/json",
         };
-      // let accessToken: string = LStorage.get('accessToken')
-      // accessToken && (config.headers.authorization = accessToken)
+      let accessToken: string = LStorage.get('accessToken')
+      accessToken && (config.headers.authorization = accessToken)
     return config;
   },
   (error) => {

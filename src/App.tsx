@@ -9,12 +9,11 @@ import {
 import { ToastContainer } from 'react-toastify';
 import './App.scss';
 import 'react-toastify/dist/ReactToastify.css';
-import Home from './pages/Home';
-import LiveNow from './pages/livenow';
-import CompletedCard from './pages/completed'
+import LiveNow from './pages/livenow/index';
+import CompletedCard from './pages/completed';
+import ProductDetail from './pages/productdetail'
 import HttpPage from './pages/Request';
 import Header from './components/header';
-import Competition from './pages/competition';
 import MWPage from './pages/mw';
 import Winners from './pages/Winners';
 import Referrals from './pages/referrals';
@@ -32,6 +31,9 @@ import TermsAndConditions from './pages/termsAndConditions';
 import FAQ from './pages/FAQ';
 import { LStorage } from './api/services/cooike/storage';
 import UserInfo from './pages/useInfo';
+import Footer from './components/footer';
+import Twitter from './pages/twitter';
+import Activity from './pages/Home/Activity';
 
 
 function App() {
@@ -45,7 +47,21 @@ function App() {
 
   const [loading, setLoading] = useState(true)
 
+  //   useEffect(() => {
+  //     let script2 = document.createElement('script');
+  //     script2.type = 'text/javascript';
+  //     script2.src = 'https://static.zdassets.com/ekr/snippet.js?key=e4c74970-fc71-4c36-8e68-85ad01771e84';
 
+  //     script2.onerror = reject
+  //     script2.onload = function () {
+  //       isLoaded = true
+  //       resolve(window.AMap)
+  //     }
+  //     document.head.appendChild(script)
+  //   })
+  // }
+  //     // appendChild(script2);
+  //   });
 
   useEffect(() => {
     setTimeout(() => {
@@ -55,7 +71,6 @@ function App() {
   }, [isConnected])
   return (
     <>
-
       <Router>
         <Header></Header>
         <div className="min-h-screen flex flex-col">
@@ -65,10 +80,10 @@ function App() {
                 <img className="inline-block spinner-border animate-spin-slowing" src={require('./asstes/img/spinner-blue.svg').default} alt="" width="124" height="124" />
               </div>
               : <Routes>
-                <Route path="/home" element={<Home />} />
                 <Route path="/" element={<LiveNow />} />
-                <Route path="/comp" element={<CompletedCard />} />
-                <Route path="/competition/:id" element={<Competition />} />
+                <Route path="/activity" element={<Activity />} />
+                <Route path="/productdetail/:raffle_id" element={<ProductDetail />} />
+                <Route path="/completed" element={<CompletedCard />} />
                 <Route path="/mw/:name" element={<MWPage />} />
                 <Route path="/winners" element={<Winners />} />
                 <Route path="/referrals" element={<Referrals />} />
@@ -81,14 +96,13 @@ function App() {
                 <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
                 <Route path="/userinfo" element={<UserInfo />} />
                 <Route path="/faq" element={<FAQ />} />
+                <Route path="/twitter" element={<Twitter />} />
                 <Route path="/http" element={<HttpPage />} />
                 <Route path="*" element={<Navigate to="/" replace={true} />} />
               </Routes>
           }
-
-
         </div>
-
+        <Footer></Footer>
         <ToastContainer theme="dark" autoClose={3000} hideProgressBar />
       </Router>
     </>

@@ -1,45 +1,40 @@
 .card-content-nft-card {
-  width: 10.937rem;
-  border-radius: 0.75rem;
+  border-radius: 1.5rem;
   background: #443c4a;
   display: flex;
   flex-direction: column;
+  padding: 1.25rem;
 
   .card-img {
-    width: 9.687rem;
-    height: 9.687rem;
-    margin-top: 0.625rem;
-    margin-left: 0.625rem;
     opacity: 1;
+    position: relative;
 
     img {
       width: 100%;
       height: 100%;
-      border-radius: 0.75rem;
+      border-radius: 1.5rem;
     }
 
     .card-id {
-      width: 1.687rem;
-      height: 0.9375rem;
-      line-height: 0.9375rem;
-      border-radius: 0.4687rem;
-      position: relative;
-      top: -40px;
-      left: 8px;
+      // min-width: 100px;
+      padding: 0.5rem 1rem;
+      display: inline-block;
+      border-radius: 15px;
+      position: absolute;
+      bottom: 1rem;
+      left: 1rem;
       background: #fff;
       text-align: center;
 
       font-family: HarmonyOS_Sans_Bold;
-      font-size: 0.4375rem;
+      font-size: 14px;
       font-weight: bold;
       color: #3E3E3E;
     }
   }
 
   .card-detail {
-    margin-top: 0.625rem;
-    margin-left: 0.625rem;
-    margin-right: 0.625rem;
+    margin-top: 1.25rem;
 
     .card-name-value {
       display: flex;
@@ -48,17 +43,17 @@
 
       .card-name {
         font-family: HarmonyOS_Sans_Bold;
-        font-size: 0.625rem;
+        font-size: 1.25rem;
         font-weight: bold;
-        line-height: 0.625rem;
+        line-height: 1.25rem;
         color: #ffffff;
       }
 
       .card-value {
         font-family: HarmonyOS_Sans_Regular;
-        font-size: 0.625rem;
+        font-size: 1.25rem;
         font-weight: normal;
-        line-height: 0.625rem;
+        line-height: 1.25rem;
         text-align: right;
         color: #ffffff;
       }
@@ -66,55 +61,50 @@
   }
 
   .card-busd {
-    margin-top: 0.5rem;
-    margin-left: 0.625rem;
+    margin-top: 1rem;
     font-family: HarmonyOS_Sans_Bold;
-    font-size: 0.75rem;
+    font-size: 1.5rem;
     font-weight: bold;
-    line-height: 0.75rem;
     color: #2395FF;
 
     img {
-      width: 0.625rem;
-      height: 0.625rem;
+      display: inline-block;
+      //  width: 1.25rem;
+      height: 1.25rem;
       margin-left: 5px;
+      margin-bottom: 5px;
     }
   }
 
   .card-progress {
-    margin-top: 0.5rem;
-    margin-left: 0.625rem;
-    margin-right: 0.625rem;
+    padding: 0.5rem 0;
     display: inline-flex;
     flex-direction: row;
     justify-content: space-between;
 
     .progress-bar {
-      width: 8.375rem;
-      // padding-top: 4px;
+      width: 100%;
     }
 
     span {
       font-family: HarmonyOS_Sans_Bold;
-      font-size: 0.4375rem;
+      font-size: 14px;
       font-weight: bold;
-      line-height: 0.4375rem;
+      line-height: 14px;
       color: #3A8AFF;
     }
   }
 
   .card-button {
-    button {
-      width: 9.687rem;
-      height: 1.875rem;
-      line-height: 1.875rem;
-      border-radius: 0.9375rem;
+    .link {
+      width: 100%;
+      padding: 1rem 0rem;
+      border-radius: 30px;
       opacity: 1;
       background: #3A8AFF;
-      margin: 0.5rem 0.625rem 0px;
       text-align: center;
       font-family: HarmonyOS_Sans_Bold;
-      font-size: 0.625rem;
+      font-size: 1.25rem;
       font-weight: bold;
       color: #fff;
     }

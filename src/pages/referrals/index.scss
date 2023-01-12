@@ -1,0 +1,85 @@
+.referrals-tab{
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  margin-top: 4.5rem;
+  font-family: HarmonyOS_Sans_SC_Bold;
+  .content{
+    margin: 0 -2.25rem;
+  }
+  button{
+    padding: 1.5rem 2.25rem;
+    background-color: transparent;
+  }
+}
+
+.referrals-info{
+  padding: 2rem 0;
+  .left{
+    font-size: .875rem;
+    font-family: HarmonyOS_Sans_SC;
+    line-height: 1.5;
+    text-align: left;
+    .head{
+      font-family: HarmonyOS_Sans_SC_Bold;
+      font-size: 2.125rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+      img{
+        margin-right: .75rem;
+        width: 6.25rem;
+      }
+    }
+  }
+}
+
+.referrals-share{
+  background: rgba(68, 60, 74, 1);
+  border-radius: .75rem;
+  padding: 2.5rem;
+  input{
+    background-color: rgba(255, 255, 255, .1);
+    border: none;
+    font-size: 1rem;
+    color: #fff;
+    line-height: 1.2;
+    padding: 1.5rem 3rem;
+    margin-bottom: 1.5rem;
+    &:disabled{
+      -webkit-text-fill-color: #fff;
+    }
+  }
+  button, a{
+    background-color: rgba(58, 138, 255, 1);
+    font-size: 1rem;
+    font-family: HarmonyOS_Sans_SC_Bold;
+    padding: 1.5rem 0;
+    line-height: 1.2;
+    .text{
+      padding-right: .5rem;
+    }
+    .icon{
+      font-size: 1.5rem;
+    }
+  }
+}
+
+.referral-statistics{
+  font-size: 1rem;
+  font-family: HarmonyOS_Sans_SC_Bold;
+  .title{
+    margin-bottom: 2.25rem;
+  }
+  .item{
+    background-color: rgba(68, 60, 74, 1);
+    color: #fff;
+    h2{
+      font-family: HarmonyOS_Sans_SC_Bold;
+      font-size: 1rem;
+    }
+    div{
+      border-top: 1px solid rgba(255, 255, 255, .4);
+      padding: .46rem;
+      font-family: HarmonyOS_Sans_SC;
+      font-size: .88rem;
+    }
+  }
+}

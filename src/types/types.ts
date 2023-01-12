@@ -63,8 +63,11 @@ export interface CallBackData {
 }
 
 export interface RaffleItemData {
+  id: number;
+  price: number;
   raffle_id: number;
   is_show: boolean;
+  allow_air_drop: boolean;
   category: string;
   close_time: string;
   start_time: string;
@@ -72,9 +75,11 @@ export interface RaffleItemData {
   contract_address: string;
   participants: [];
   prize: PrizeDataItem;
-  price_structure: PriceStructureItem[];
+  price_structure: PriceStructureItem;
   max_entries_per_user: number;
   winner: WinnerInfo;
+  total_entries: number;
+  airdrop_users: [];
 }
 
 export interface PrizeDataItem {
@@ -86,9 +91,8 @@ export interface PrizeDataItem {
 }
 
 export interface PriceStructureItem {
-  entry_count: number;
-  recommended: boolean;
-  price: string;
+  price_in_busd: string;
+  price_in_bnb: string;
 }
 
 export interface WinnerInfo {
@@ -157,4 +161,19 @@ export interface AllActivityItem {
   nft_vale: string;
   win_tx: string;
   create_time: string;
+}
+
+export interface summaryReferralsItem {
+  last7Days: "0",
+  lastMonth: "0",
+  lifetime: "0",
+  thisMonth: "0",
+  today: "0",
+  yesterday: "0",
+}
+
+export interface summaryReferrals {
+  clicks: summaryReferralsItem,
+  referrals: summaryReferralsItem,
+  revenue: summaryReferralsItem
 }

@@ -10,8 +10,9 @@ import './style/index.scss';
 import ReactDOM from 'react-dom';
 import { WagmiConfig } from 'wagmi';
 import './asstes/fonts/harmonyos_font/font.css';
+import './asstes/icomoon/style.css'
 
-import VConsole from 'vconsole';
+// import VConsole from 'vconsole';
 
 
 // const vConsole = new VConsole({ theme: 'dark' });
