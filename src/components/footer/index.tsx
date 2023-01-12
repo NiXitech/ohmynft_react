@@ -24,6 +24,7 @@ const Footer = (): JSX.Element => {
                 <ul className="lg:flex lg:justify-center 2xl:justify-end font-nft">
                   <li className="lg:inline-block"><a href="/FAQ" className="text-sm lg:text-xs 2xl:text-sm font-bold tracking-widest uppercase p-3 lg:px-2 xl:px-2 2xl:px-3 inline-block transition-opacity hover:opacity-90">FAQ</a></li>
 
+<<<<<<< HEAD
                   <li className="lg:inline-block"><a href="/privacy-policy" className="text-sm lg:text-xs 2xl:text-sm font-bold tracking-widest uppercase p-3 lg:px-2 xl:px-2 2xl:px-3 inline-block transition-opacity hover:opacity-90">Privacy Policy</a></li>
                   <li className="lg:inline-block"><a href="/cookie-policy" className="text-sm lg:text-xs 2xl:text-sm font-bold tracking-widest uppercase p-3 lg:px-2 xl:px-2 2xl:px-3 inline-block transition-opacity hover:opacity-90">Cookie Policy</a></li>
                   <li className="lg:inline-block"><a href="/terms-and-conditions" className="text-sm lg:text-xs 2xl:text-sm font-bold tracking-widest uppercase p-3 lg:px-2 xl:px-2 2xl:px-3 inline-block transition-opacity hover:opacity-90">Terms and Conditions</a></li>
@@ -39,6 +40,21 @@ const Footer = (): JSX.Element => {
               </div>
             </nav>
           </div>
+=======
+                <li className="lg:inline-block"><a href="/privacy-policy" className="text-sm lg:text-xs 2xl:text-sm font-bold tracking-widest uppercase p-3 lg:px-2 xl:px-2 2xl:px-3 inline-block transition-opacity hover:opacity-90">Privacy Policy</a></li>
+                <li className="lg:inline-block"><a href="/cookie-policy" className="text-sm lg:text-xs 2xl:text-sm font-bold tracking-widest uppercase p-3 lg:px-2 xl:px-2 2xl:px-3 inline-block transition-opacity hover:opacity-90">Cookie Policy</a></li>
+                <li className="lg:inline-block"><a href="/terms-and-conditions" className="text-sm lg:text-xs 2xl:text-sm font-bold tracking-widest uppercase p-3 lg:px-2 xl:px-2 2xl:px-3 inline-block transition-opacity hover:opacity-90">Terms and Conditions</a></li>
+              </ul>
+            </div>
+            <div className="text-center mt-10 lg:order-1 lg:mt-0 lg:flex lg:flex-wrap lg:justify-start lg:text-left lg:max-w-[240px] xl:max-w-[280px]">
+              <span className="text-xs 3xl:text-sm tracking-widest uppercase px-2 block w-full"> Copyright &copy; 2022 ohmynft </span>
+              <span className="text-xs 3xl:text-sm tracking-widest uppercase px-2 block"> Patent Pending </span>
+            </div>
+            <div className="text-center mt-14 lg:hidden">
+              <a aria-current="page" href="/" className="router-link-active router-link-exact-active"><img src={require('../../asstes/img/default_personal.png').default} alt="ohmynft logo" width="80" height="80" className="inline m-0" /></a>
+            </div>
+          </nav>
+>>>>>>> 638cbb62986ea15ab3257c82cfd59aae635e0c74
         </footer>
       </div>
     </>

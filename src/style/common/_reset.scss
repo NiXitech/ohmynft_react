@@ -652,6 +652,9 @@ button, input, optgroup, select, textarea {
 button, select {
   text-transform:none
 }
+button-background {
+  background-color: #3a8aff;
+}
 [type=button], [type=reset], [type=submit], button {
   -webkit-appearance:button;
   // background-color:transparent;
