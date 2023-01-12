@@ -1,6 +1,6 @@
 import { SetStateAction, useState } from 'react';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
-import { message, Upload } from 'antd';
+import { message, Switch, Upload } from 'antd';
 import type { UploadChangeParam } from 'antd/es/upload';
 import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface';
 import { uploadAvatar } from '../../api/services/http/api';
@@ -65,6 +65,24 @@ const AccountPage = (): JSX.Element => {
 
   }
 
+  const onChangeTwitter = (checked: boolean) => {
+    console.log('ckckckckc:', checked)
+    if (checked) {
+      
+    } else {
+
+    }
+  }
+
+  const onChangeEmail = (checked: boolean) => {
+    console.log('ckckckckc:', checked)
+    if (checked) {
+
+    } else {
+
+    }
+  }
+
   return (
     <>
       <main className="flex flex-wrap grow mt-20 lg:mt-16 px-2 lg:px-8 transition-all duration-300 page-enter:opacity-0 page-enter:-translate-y-4 layout-enter:opacity-0 layout-enter:-translate-y-4 pt-16">
@@ -121,17 +139,21 @@ const AccountPage = (): JSX.Element => {
 
               <div className="mt-3 relative input-success-active">
                 <input className="rounded-full bg-grey-6 block relative w-full rounded-lg py-3 px-4 outline-none focus:border-slate-200 focus:ring-0 autofill:bg-slate-600 transition-all appearance-none hover:appearance-none disabled:text-slate-100" name="username" id="username" type="text" step="" placeholder="Connect Twitter" disabled />
-                <span className="icon-ico-tick text-green text-2xl top-2 left-2 absolute z-10 transition-all pointer-events-none duration-300 -translate-y-2 opacity-0 input-success:opacity-100 input-success:translate-y-0 icon-twitter icon"></span>
-                <span className="icon-ico-tick text-green text-2xl top-2 right-2 absolute z-10 transition-all pointer-events-none duration-300 -translate-y-2 opacity-0 input-success:opacity-100 input-success:translate-y-0">
-                  pppppppp
-                  </span>
+                <span className="icon-ico-tick text-base top-5 left-30 absolute z-10 transition-all pointer-events-none duration-300 -translate-y-2 opacity-0 input-success:opacity-100 input-success:translate-y-0 icon-twitter icon">
+
+                </span>
+                <span className="icon-ico-tick text-2xl top-2 right-4 absolute z-10 transition-all duration-300 -translate-y-2 opacity-0 input-success:opacity-100 input-success:translate-y-0">
+                  <Switch defaultChecked onChange={onChangeTwitter} />
+                </span>
                 <span className="icon-ico-x text-red text-sm top-4 right-3 absolute z-10 transition-all pointer-events-none duration-300 translate-y-2 opacity-0 input-error:opacity-100 input-error:translate-y-0"></span>
                 <p className="w-full inline-block text-red text-sm mt-1" ></p>
               </div>
 
               <div className="mt-3 relative input-success-active">
-                <input className="rounded-full bg-grey-6 block relative w-full rounded-lg py-3 px-4 outline-none focus:border-slate-200 focus:ring-0 autofill:bg-slate-600 transition-all appearance-none hover:appearance-none disabled:text-slate-100" name="username" id="username" type="text" step="" placeholder={userData.name} disabled />
-                <span className="icon-ico-tick text-green text-2xl top-2 right-2 absolute z-10 transition-all pointer-events-none duration-300 -translate-y-2 opacity-0 input-success:opacity-100 input-success:translate-y-0">qqqqqqq</span>
+                <input className="rounded-full bg-grey-6 block relative w-full rounded-lg py-3 px-4 outline-none focus:border-slate-200 focus:ring-0 autofill:bg-slate-600 transition-all appearance-none hover:appearance-none disabled:text-slate-100 text-ellipsis truncate" name="username" id="username" type="text" step="" placeholder="Send me marketing emails from time to time" disabled />
+                <span className="icon-ico-tick text-green text-2xl top-2 right-4 absolute z-10 transition-all  duration-300 -translate-y-2 opacity-0 input-success:opacity-100 input-success:translate-y-0">
+                  <Switch defaultChecked onChange={onChangeEmail} />
+                </span>
               </div>
             </form>
           </section>

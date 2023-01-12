@@ -171,7 +171,7 @@ const NFTCard = (props: propspromise): JSX.Element => {
 			<div className="card-progress">
 				<div className="progress-bar">
 					{/* countEntire/total */}
-					<Progress percent={Number(Number(props.cardData.max_entries_per_user / props.cardData.total_entries * 100).toFixed(2))} trailColor="#fff"/>
+					<Progress percent={Number(Number(props.cardData.max_entries_per_user / props.cardData.total_entries * 100).toFixed(2))} trailColor="#fff" success={{ strokeColor: '#FDE23B' }}/>
 				</div>
 			</div>
 			<div className="card-button">

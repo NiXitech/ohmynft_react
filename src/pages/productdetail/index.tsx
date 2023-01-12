@@ -482,7 +482,7 @@ const ProductDetail = (): JSX.Element => {
                   </div>
 
                   <div className="card-cols-2 pt-2">
-                    <Progress percent={infoData?.total_entries ? (currentEntryLens / infoData?.total_entries) * 100 : 0} showInfo={false} trailColor="#fff" />
+                    <Progress percent={infoData?.total_entries ? (currentEntryLens / infoData?.total_entries) * 100 : 0} showInfo={false} trailColor="#fff" success={{ strokeColor: '#FDE23B' }} />
                   </div>
 
                   <div className="card-cols-2 pt-2">

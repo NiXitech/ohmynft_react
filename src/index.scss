@@ -25,15 +25,14 @@ body{
     color: #fff;
     line-height: 1;
     background: url(./asstes/ohmynftimg/background.png) no-repeat top center;
-    background-size: 100% 100%;
+    background-size: cover;
     background-position: top center;
-    background-attachment: fixed;
 }
 
 .header-bg{
   background-image: url(./asstes/ohmynftimg/background.png);
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background-size: cover;
   background-position: top center;
   border-bottom: 1px solid #3F8BFF;
 }
