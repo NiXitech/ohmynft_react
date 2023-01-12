@@ -491,7 +491,6 @@ const ProductDetail = (): JSX.Element => {
                       <span>&nbsp;{currentEntryLens}</span>
                     </div>
                     <div className="attention-number pt-4 pb-2">
-                      Remaining Entries:
                       <span>&nbsp;{infoData?.total_entries ? infoData?.total_entries - currentEntryLens : 0}</span>
                     </div>
                   </div>

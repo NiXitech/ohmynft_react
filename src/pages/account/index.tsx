@@ -1,11 +1,12 @@
-import { SetStateAction, useState } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { message, Switch, Upload } from 'antd';
 import type { UploadChangeParam } from 'antd/es/upload';
 import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface';
-import { uploadAvatar } from '../../api/services/http/api';
+import { emailNotification, getNotification, tweetNotification, uploadAvatar } from '../../api/services/http/api';
 import { LStorage } from '../../api/services/cooike/storage';
 import './index.scss'
+import { toast } from 'react-toastify';
 
 
 const AccountPage = (): JSX.Element => {
@@ -16,6 +17,18 @@ const AccountPage = (): JSX.Element => {
   );
   const [loading, setLoading] = useState(false);
   const [userImgUrl, setuserImgUrl] = useState('')
+  const [status, setStatus] = useState(
+    {
+      marketing_notify: true,
+      twitter_account: true
+    }
+  )
+  const [loadingStatus, setLoadingStatus] = useState(
+    {
+      marketing_notify_status: false,
+      twitter_account_status: false
+    }
+  )
 
   const getBase64 = (img: RcFile, callback: (url: string) => void) => {
     const reader = new FileReader();
@@ -65,28 +78,75 @@ const AccountPage = (): JSX.Element => {
 
   }
 
-  const onChangeTwitter = (checked: boolean) => {
-    console.log('ckckckckc:', checked)
-    if (checked) {
-      
-    } else {
-
+  const onChangeTwitter = async (checked: boolean) => {
+    try {
+      const userinfo = LStorage.get('LastAuthUser') || {};
+      const { code } = await tweetNotification({
+        twitter: {
+          connect: checked
+        },
+        ethereum_address: userinfo.address || ''
+      }) as any
+      if (code === 200) {
+        setLoadingStatus({ ...loadingStatus, twitter_account_status: false })
+        toast.success('change success');
+      } else {
+        toast.error('change failed, please try later!')
+      }
+    } catch (err) {
+      console.log('tweetNotification:', err)
     }
   }
 
-  const onChangeEmail = (checked: boolean) => {
-    console.log('ckckckckc:', checked)
-    if (checked) {
-
-    } else {
-
+  const onChangeEmail = async (checked: boolean) => {
+    try {
+      const userinfo = LStorage.get('LastAuthUser') || {};
+      const { code } = await emailNotification({
+        marketing: checked,
+        ethereum_address: userinfo.address || ''
+      }) as any
+      if (code === 200) {
+        setLoadingStatus({ ...loadingStatus, marketing_notify_status: false })
+        toast.success('change success');
+      } else {
+        toast.error('change failed, please try later!')
+      }
+    } catch (err) {
+      console.log('emailNotification:', err)
     }
   }
+
+  const getStatus = async () => {
+    try {
+      const userinfo = LStorage.get('LastAuthUser') || {};
+      const { code, data } = await getNotification(userinfo.address || '') as any
+      if (code === 200) {
+        console.log('=========>', data)
+        setStatus(
+          {
+            marketing_notify: data.marketing_notify || true,
+            twitter_account: data.twitter_account || true
+          }
+        )
+      } else {
+
+      }
+    } catch (err) {
+      console.log('emailNotification:', err)
+    }
+  }
+
+  useEffect(
+    () => {
+      getStatus()
+    }, []
+  )
+
 
   return (
     <>
       <main className="flex flex-wrap grow mt-20 lg:mt-16 px-2 lg:px-8 transition-all duration-300 page-enter:opacity-0 page-enter:-translate-y-4 layout-enter:opacity-0 layout-enter:-translate-y-4 pt-16">
-        <div className="w-full max-w-md m-auto">
+        <div className="w-full max-w-[600px] m-auto">
           <section className="text-center mb-6">
             <figure className="relative w-24 h-24 mb-4 cursor-pointer lg:w-32 lg:h-32 inline-block margin-x-auto group animate-fade-in">
               {/* <img className="w-full rounded-full border-2 border-transparent transition-all group-hover:border-white" src="https://content.prod.platform.metawin.com/avatars/template/default.png" alt="Yout avatar" decoding="async" />
@@ -124,35 +184,34 @@ const AccountPage = (): JSX.Element => {
           <section className="mb-6">
             <form>
               <div className="mt-6 relative input-success-active">
-                <input className="rounded-full bg-grey-6 block relative w-full rounded-lg py-3 px-4 outline-none focus:border-slate-200 focus:ring-0 autofill:bg-slate-600 transition-all appearance-none hover:appearance-none disabled:text-slate-100" name="email" id="email" type="email" step="" placeholder={userData.email} disabled />
+                <input className="h-16 rounded-full bg-grey-6 block relative w-full rounded-lg py-3 px-4 outline-none focus:border-slate-200 focus:ring-0 autofill:bg-slate-600 transition-all appearance-none hover:appearance-none " name="email" id="email" type="email" step="" placeholder={userData.email} disabled />
                 <span className="icon-ico-tick text-green text-2xl top-2 right-2 absolute z-10 transition-all pointer-events-none duration-300 -translate-y-2 opacity-0 input-success:opacity-100 input-success:translate-y-0"></span>
                 <span className="icon-ico-x text-red text-sm top-4 right-3 absolute z-10 transition-all pointer-events-none duration-300 translate-y-2 opacity-0 input-error:opacity-100 input-error:translate-y-0"></span>
                 <p className="w-full inline-block text-red text-sm mt-1" ></p>
               </div>
 
               <div className="mt-3 relative input-success-active">
-                <input className="rounded-full bg-grey-6 block relative w-full rounded-lg py-3 px-4 outline-none focus:border-slate-200 focus:ring-0 autofill:bg-slate-600 transition-all appearance-none hover:appearance-none disabled:text-slate-100" name="username" id="username" type="text" step="" placeholder={userData.name} disabled />
+                <input className="h-16 rounded-full bg-grey-6 block relative w-full rounded-lg py-3 px-4 outline-none focus:border-slate-200 focus:ring-0 autofill:bg-slate-600 transition-all appearance-none hover:appearance-none " name="username" id="username" type="text" step="" placeholder={userData.name} disabled />
                 <span className="icon-ico-tick text-green text-2xl top-2 right-2 absolute z-10 transition-all pointer-events-none duration-300 -translate-y-2 opacity-0 input-success:opacity-100 input-success:translate-y-0"></span>
                 <span className="icon-ico-x text-red text-sm top-4 right-3 absolute z-10 transition-all pointer-events-none duration-300 translate-y-2 opacity-0 input-error:opacity-100 input-error:translate-y-0"></span>
                 <p className="w-full inline-block text-red text-sm mt-1" ></p>
               </div>
 
               <div className="mt-3 relative input-success-active">
-                <input className="rounded-full bg-grey-6 block relative w-full rounded-lg py-3 px-4 outline-none focus:border-slate-200 focus:ring-0 autofill:bg-slate-600 transition-all appearance-none hover:appearance-none disabled:text-slate-100" name="username" id="username" type="text" step="" placeholder="Connect Twitter" disabled />
-                <span className="icon-ico-tick text-base top-5 left-30 absolute z-10 transition-all pointer-events-none duration-300 -translate-y-2 opacity-0 input-success:opacity-100 input-success:translate-y-0 icon-twitter icon">
-
+                <input className=" h-16 rounded-full bg-grey-6 block relative w-full rounded-lg py-3 px-4 outline-none focus:border-slate-200 focus:ring-0 autofill:bg-slate-600 transition-all appearance-none hover:appearance-none " name="username" id="username" type="text" step="" placeholder="Connect Twitter" disabled />
+                <span className="icon-ico-tick text-base top-6 left-30 absolute z-10 transition-all pointer-events-none duration-300 -translate-y-2 opacity-0 input-success:opacity-100 input-success:translate-y-0 icon-twitter icon">
                 </span>
-                <span className="icon-ico-tick text-2xl top-2 right-4 absolute z-10 transition-all duration-300 -translate-y-2 opacity-0 input-success:opacity-100 input-success:translate-y-0">
-                  <Switch defaultChecked onChange={onChangeTwitter} />
+                <span className="icon-ico-tick text-2xl top-4 right-4 absolute z-10 transition-all duration-300 -translate-y-2 opacity-0 input-success:opacity-100 input-success:translate-y-0">
+                  <Switch loading={loadingStatus.twitter_account_status} defaultChecked={status.twitter_account} onChange={onChangeTwitter} />
                 </span>
                 <span className="icon-ico-x text-red text-sm top-4 right-3 absolute z-10 transition-all pointer-events-none duration-300 translate-y-2 opacity-0 input-error:opacity-100 input-error:translate-y-0"></span>
                 <p className="w-full inline-block text-red text-sm mt-1" ></p>
               </div>
 
               <div className="mt-3 relative input-success-active">
-                <input className="rounded-full bg-grey-6 block relative w-full rounded-lg py-3 px-4 outline-none focus:border-slate-200 focus:ring-0 autofill:bg-slate-600 transition-all appearance-none hover:appearance-none disabled:text-slate-100 text-ellipsis truncate" name="username" id="username" type="text" step="" placeholder="Send me marketing emails from time to time" disabled />
-                <span className="icon-ico-tick text-green text-2xl top-2 right-4 absolute z-10 transition-all  duration-300 -translate-y-2 opacity-0 input-success:opacity-100 input-success:translate-y-0">
-                  <Switch defaultChecked onChange={onChangeEmail} />
+                <input className="h-16 rounded-full bg-grey-6 block relative w-full rounded-lg py-3 px-4 outline-none focus:border-slate-200 focus:ring-0 autofill:bg-slate-600 transition-all appearance-none hover:appearance-none text-ellipsis truncate" name="username" id="username" type="text" step="" placeholder="Send me marketing emails from time to time" disabled />
+                <span className="icon-ico-tick text-green text-2xl top-4 right-4 absolute z-10 transition-all  duration-300 -translate-y-2 opacity-0 input-success:opacity-100 input-success:translate-y-0">
+                  <Switch loading={loadingStatus.marketing_notify_status} defaultChecked={status.marketing_notify} onChange={onChangeEmail} />
                 </span>
               </div>
             </form>
