@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from "react";
 import { ActivityItem, ParticipantItem } from "../../types/types";
 import { getQueryVariable, TimeInterval, updateUrl } from "../../libs/userAgent"

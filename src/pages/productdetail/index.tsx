@@ -15,6 +15,7 @@ import { useParams } from "react-router-dom"
 import { BigNumber, ethers } from "ethers";
 import useDebounce from "../../libs/usehooks";
 import { toast } from "react-toastify";
+import { LStorage } from "../../api/services/cooike/storage";
 
 // const client = new Client('AAAAAAAAAAAAAAAAAAAAAMBDdwEAAAAA2BsYVQVgTt6DGuhpdjJBwkHDAMo%3Dch3BD48OENuJ5jEKU8QtTYVhGLKOzP3Mr9PZTLUO8Pn22DdH0K');
 
@@ -153,11 +154,8 @@ const ProductDetail = (): JSX.Element => {
       chainId: 97,
       enabled: false,
       onSuccess(data: any) {
-        console.log('Success', data.entriesLength)
         // @ts-ignore
         setCurrentEntryLens(parseInt(Number(data.entriesLength._hex), 10))
-
-        console.log('%c🀄︎ ', 'color: #733d00; font-size: 20px;', currentEntryLens);
       },
       onError(error: any) {
         console.log('Error1212122211', error)
@@ -169,9 +167,6 @@ const ProductDetail = (): JSX.Element => {
       const result: CallBackData = await getRaffleInfo(Number(raffle_id)) as any
       if (result.code === 200) {
         setInfoData(result.data)
-        console.log('-----------555------>', result, isConnected)
-
-
       }
     } catch (error) {
       console.log('%c🀁 error', 'color: #ff0000; font-size: 20px;', error);
@@ -182,7 +177,6 @@ const ProductDetail = (): JSX.Element => {
 
   useEffect(() => {
 
-    console.log('%c🀆 ', 'color: #e50000; font-size: 20px;', BigNumber.from(100));
     if (isConnected && debouncedTokenId) {
       refetchSupply()
     }
@@ -309,7 +303,6 @@ const ProductDetail = (): JSX.Element => {
     if (chain?.id !== 97) {
       await switchNetwork?.(97)
     }
-    console.log('%c🀂 ', 'color: #aa00ff; font-size: 20px;', address, address);
     setApproveStatus(true)
     await runApprove()
   }
@@ -319,6 +312,23 @@ const ProductDetail = (): JSX.Element => {
     await nbtTokenApprove?.();
   }
 
+
+
+  const getCurrentUserEntries = (list: any) => {
+    if (list) {
+      const userInfo = LStorage.get('LastAuthUser')
+      if (userInfo) {
+        let selectData = _.find(list, ['display_name', userInfo.name])
+
+        return selectData ? selectData.buy_entry_count : 0
+
+      }
+    }
+
+
+    return 0
+
+  }
 
 
 
@@ -420,6 +430,10 @@ const ProductDetail = (): JSX.Element => {
 
   }
 
+
+
+
+
   return (
     <section className="w-full pt-16 pb-4 lg:px-8">
       <div className="container pt-14">
@@ -507,9 +521,16 @@ const ProductDetail = (): JSX.Element => {
                       {/* <InputNumber size="small" min={1} max={10} defaultValue={3} onChange={onChange} /> */}
                       <div className="count">
                         <div className="inputGroup">
-                          <button onClick={() => { if (Quantity > 1) { setQuantity(Quantity - 1) } }}>-</button>
+                          <button disabled={getCurrentUserEntries(infoData?.participants)} onClick={() => { if (Quantity > 1) { setQuantity(Quantity - 1) } }}>-</button>
                           <div className="cont-input">
-                            <input id="tentacles" name="tentacles" type="number" value={Quantity} step={1} min="1" max="300"
+                            <input
+                              id="tentacles"
+                              name="tentacles"
+                              type="number"
+                              disabled={infoData ? (getCurrentUserEntries(infoData?.participants) >= infoData?.max_entries_per_user ? true : false) : false}
+                              value={Quantity}
+                              step={1} min="1"
+                              max="300"
                               onBlur={(e) => {
                                 if (e.target.value === '') setQuantity(1)
                               }}
@@ -526,10 +547,17 @@ const ProductDetail = (): JSX.Element => {
                                 }
                               }} />
                           </div>
-                          <button onClick={() => { if (Quantity < 300) { setQuantity(Quantity + 1) } }}>+</button>
+                          <button disabled={getCurrentUserEntries(infoData?.participants)} onClick={() => { if (Quantity < 300) { setQuantity(Quantity + 1) } }}>+</button>
                         </div>
                       </div>
-                      &nbsp;&nbsp;You used 0 of 400 entries
+                      &nbsp;&nbsp;
+                      {
+                        infoData
+                          ? <>
+                            You used {getCurrentUserEntries(infoData?.participants)} of {infoData?.max_entries_per_user} entries
+                          </>
+                          : ''
+                      }
                     </div>
                   </div>
 
