@@ -83,3 +83,7 @@ body{
 //     border: none !important;
 //   }
 //  }  
+
+:where(.css-dev-only-do-not-override-k83k30).ant-progress.ant-progress-status-success .ant-progress-bg {
+  background-color: #FDE23B;
+}
