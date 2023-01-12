@@ -2620,6 +2620,10 @@ select {
   --tw-border-opacity:.46;
   border-color:rgb(63 139 255/var(--tw-border-opacity))
 }
+.border-white-60 {
+  --tw-border-opacity:.6;
+  border-color:rgb(255 255 255/var(--tw-border-opacity))
+}
 .border-transparent {
   border-color:transparent
 }
@@ -3312,6 +3316,9 @@ select {
   --tw-text-opacity:1;
   color:rgb(41 153 255/var(--tw-text-opacity))
 }
+.text-blue {
+  color:#3A8AFF
+}
 .text-green {
   --tw-text-opacity:1;
   color:rgb(0 234 105/var(--tw-text-opacity))
@@ -3468,6 +3475,10 @@ select {
 }
 .shadow-black {
   --tw-shadow-color:#000;
+  --tw-shadow:var(--tw-shadow-colored)
+}
+.shadow-white-60 {
+  --tw-shadow-color:rgba(255, 255, 255, 0.6);
   --tw-shadow:var(--tw-shadow-colored)
 }
 .shadow-slate-500 {
