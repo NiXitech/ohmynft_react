@@ -498,3 +498,29 @@ export async function getReferralSummay(ethereum_address: string) {
     );
   });
 }
+
+/**
+ * user change avatar
+ * @returns
+ */
+
+export async function uploadAvatar(params: {
+  ethereum_address: string;
+  image_data: string;
+}) {
+  return new Promise((resolve, reject) => {
+    http({
+      method: "post",
+      url: `/user/setting/uploadImage`,
+      params,
+    }).then(
+      (res) => {
+        resolve(res);
+        return res;
+      },
+      (error) => {
+        reject(error);
+      }
+    );
+  });
+}

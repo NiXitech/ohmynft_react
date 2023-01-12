@@ -2694,6 +2694,9 @@ select {
   --tw-bg-opacity:1;
   background-color:rgb(255 226 179/var(--tw-bg-opacity))
 }
+.bg-grey-6 {
+  background: #443C4A;
+}
 .bg-moreInfo {
   --tw-bg-opacity:.76;
   background-color:rgb(0 59 115/var(--tw-bg-opacity))
@@ -4055,6 +4058,10 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 
 .hover\:z-40:hover {
   z-index: 40
+}
+
+.after\:edit {
+  background: url('../../asstes/partImg/edit.png') no-repeat;
 }
 
 .hover\:-translate-y-\[2px\]:hover {

@@ -296,7 +296,7 @@ const Header = (): JSX.Element => {
             </div>
             {
               location.pathname === '/' ? <></> :
-                <div className="pt-16 attention-info fixed w-full">
+                <div className="pt-16 attention-info fixed w-full z-0">
                   <div className="py-2 text-center">
                     Earn Big Rewards With
                     <span>
