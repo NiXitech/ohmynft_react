@@ -208,7 +208,7 @@ const Header = (): JSX.Element => {
                           <div className="hidden lg:flex ml-3 lg:border-white/30 lg:pl-4 lg:ml-0">
                             <div className="nav-main-avatar relative mr-2 cursor-pointer group">
                               <div className="relative" onClick={(e) => { e.stopPropagation(); setShowSocial(!showSocial) }}>
-                                <img className="rounded-full border-2 border-white transition-all group-hover:border-cyan-500 p-[1px] border-white" src={require('../../asstes/img/default_personal.png').default} alt="Your avatar" decoding="async" />
+                                <img className="rounded-full border-2 border-white transition-all group-hover:border-cyan-500 p-[1px] border-white" src={require('../../asstes/img/personal.png').default} alt="Your avatar" decoding="async" />
                               </div>
                               <ul className={['flex flex-col absolute z-20 nav-dropdown shadow-2xl rounded-xl top-[52px] overflow-hidden', showSocial ? 'right-0' : 'left-0 hidden'].join(' ')}>
                                 <li className="block whitespace-nowrap">

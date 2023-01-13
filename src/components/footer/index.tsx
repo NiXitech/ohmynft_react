@@ -35,7 +35,7 @@ const Footer = (): JSX.Element => {
                 {/* <span className="text-xs 3xl:text-sm tracking-widest uppercase px-2 block"> Patent Pending </span> */}
               </div>
               <div className="text-center mt-14 lg:hidden">
-                <a aria-current="page" href="/" className="router-link-active router-link-exact-active"><img src={require('../../asstes/img/default_personal.png').default} alt="ohmynft logo" width="80" height="80" className="inline m-0" /></a>
+                <a aria-current="page" href="/" className="router-link-active router-link-exact-active"><img src={require('../../asstes/img/personal.png').default} alt="ohmynft logo" width="80" height="80" className="inline m-0" /></a>
               </div>
             </nav>
           </div>

@@ -74,7 +74,7 @@ const ProductDetail = (): JSX.Element => {
   // 合约查询
   const { data: totalSupplyData, refetch: refetchSupply } = useContractRead(
     {
-      address: `0xb8Ce6900827C2718E6b07685492Eb75ea08eFEa3`,
+      address: `0x${debouncedTokenId?.raffle_id}`,
       abi: [
         {
           name: 'raffles',

@@ -2707,6 +2707,9 @@ select {
 .bg-grey-6 {
   background: #443C4A;
 }
+.bg-grey-radio {
+  background: #171133;
+}
 .bg-moreInfo {
   --tw-bg-opacity:.76;
   background-color:rgb(0 59 115/var(--tw-bg-opacity))
@@ -5649,6 +5652,10 @@ background-color:rgb(0 55 138/var(--tw-bg-opacity))
   .lg\:text-2xl {
       font-size: 1.5rem;
       line-height: 2rem
+  }
+
+  .lg\:text-2-5xl {
+    font-size: 1.6rem;
   }
 
   .lg\:text-lg {

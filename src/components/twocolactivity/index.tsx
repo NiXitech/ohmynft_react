@@ -92,7 +92,7 @@ const TwoColActivity = (props: propsType): JSX.Element => {
                                   return <div key={index} className="border-b border-white-60 last-of-type:border-none py-4 animate-fade-in flex items-center justify-between">
                                     <a href={`/mw/${item.display_name}`} className="flex items-center overflow-hidden mr-3 group min-h-[48px]">
                                       <span className="relative inline-block mr-3">
-                                        <img className="inline-block rounded-full rounded-full w-12 h-12 border-2 border-transparent group-hover:border-gray-300 transition-all" src={require('../../asstes/img/default_personal.png').default} alt="" width="28" height="28" loading="lazy" /></span>
+                                        <img className="inline-block rounded-full rounded-full w-12 h-12 border-2 border-transparent group-hover:border-gray-300 transition-all" src={require('../../asstes/img/personal.png').default} alt="" width="28" height="28" loading="lazy" /></span>
                                       <h3 className="text-ellipsis overflow-hidden group-hover:text-gray-300 transition-colors truncate">{item.display_name}
                                         <span className="uppercase tracking-wider block text-xs text-blue-500 group-hover:text-blue-400">{item.entry_info.count} {item.entry_info.count > 1 ? "entries" : "entry"}</span>
                                       </h3>
@@ -126,7 +126,7 @@ const TwoColActivity = (props: propsType): JSX.Element => {
                                   return <div key={index} className="border-b border-white-60 last-of-type:border-none py-4  animate-fade-in flex items-center justify-between">
                                     <a href={`/mw/${item.display_name}`} className="flex items-center overflow-hidden mr-3 group min-h-[48px]">
                                       <span className="relative inline-block mr-3">
-                                        <img className="inline-block rounded-full w-12 h-12 border-2 border-transparent group-hover:border-gray-300 transition-all" src={require('../../asstes/img/default_personal.png').default} alt="" width="48" height="48" loading="lazy" />
+                                        <img className="inline-block rounded-full w-12 h-12 border-2 border-transparent group-hover:border-gray-300 transition-all" src={require('../../asstes/img/personal.png').default} alt="" width="48" height="48" loading="lazy" />
                                       </span>
                                       <h3 className="text-ellipsis overflow-hidden group-hover:text-gray-300 transition-colors leading-tight truncate">{item.display_name}</h3>
                                     </a>

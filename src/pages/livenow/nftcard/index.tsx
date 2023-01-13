@@ -147,7 +147,7 @@ const NFTCard = (props: propspromise): JSX.Element => {
 	)
 
 	const percant = () => {
-		return Number(Number(props.cardData.max_entries_per_user / props.cardData.total_entries * 100).toFixed(2));
+		return Number(Number(props.cardData.max_entries_per_user / props.cardData.total_entries * 100).toFixed(0));
 	}
 
 
@@ -163,28 +163,42 @@ const NFTCard = (props: propspromise): JSX.Element => {
 				</div>
 			</div>
 			<div className="card-detail">
-				<div className="card-name-value">
+				<div className="card-name-value text-base lg:text-2-5xl ">
 					<div className="card-name">{props.cardData.prize.name}</div>
 					<div className="card-value">${Number(props.cardData.prize.value) * price.usd}</div>
 				</div>
 			</div>
-			<div className="card-busd">
-				<span>{props.cardData.prize.value} BUSD</span>
-				<img src={require('../../../asstes/partImg/binance.png').default} alt="" />
+			<div className="card-busd flex justify-between text-base lg:text-2-5xl">
+				<span>
+					<span>{props.cardData.prize.value} BUSD</span>
+					<img src={require('../../../asstes/partImg/binance.png').default} alt="" />
+				</span>
+				{
+					props.cardData.category !== "upcoming" ? <></> :
+						<span className="icon icon-heart-full text-xl lg:text-xl rounded-full bg-grey-radio px-2 py-1">
+							&nbsp;86
+						</span>
+				}
 			</div>
-			<div className="card-progress">
-				<div className="progress-bar">
-					{/* countEntire/total */}
-					<Progress trailColor="#fff" percent={percant()} strokeColor='#1F95FF'  />
-				</div>
-			</div>
-			<div className="card-button">
-				<div className="uppercase link">
-					<Link to={`/productdetail/${props.cardData.id}`} >
-						Enter now
-					</Link>
-				</div>
-			</div>
+
+			{
+				props.cardData.category === "upcoming" ? <></> :
+					<>
+						<div className="card-progress">
+							<div className="progress-bar">
+								{/* countEntire/total */}
+								<Progress trailColor="#fff" percent={percant()} strokeColor='#1F95FF' />
+							</div>
+						</div>
+						<div className="card-button">
+							<div className="uppercase link  text-base lg:text-xl">
+								<Link to={`/productdetail/${props.cardData.id}`} >
+									Enter now
+								</Link>
+							</div>
+						</div>
+					</>
+			}
 		</div>
 	);
 }
