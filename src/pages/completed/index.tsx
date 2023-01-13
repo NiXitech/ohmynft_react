@@ -29,7 +29,7 @@ const Completed = (): JSX.Element => {
 	})
 
 	useEffect(
-		()=> {
+		() => {
 			getRaffleListFun();
 		}, []
 	)
@@ -77,22 +77,30 @@ const Completed = (): JSX.Element => {
 
 	return (
 		<div className="container xxl:px-6rem66 xxxl:px-6rem66">
-			<section className="w-full pb-4 pt-16">
-				<div className="home-page-completed w-fullpb-4 ">
-					<div className="py-6">
-						<Row wrap gutter={[16, { xs: 12, sm: 12, md: 18, lg: 24 }]}>
-							{
-								completedData.featured.map(
-									(completed: RaffleItemData, index: any) => {
-										return <Col  md={{ span: 8 }} lg={{ span: 8 }} xl={{ span: 6 }} span={12} key={index}>
-											<NFTCard cardData={completed}></NFTCard>
-										</Col>
+			<section className="w-full pb-4">
+				{
+					completedData.featured.length === 0 ?
+						<div className="text-center w-full">
+							<h2 className="text-center w-full px-3 lg:text-xl py-3 text-white font-Bold">
+								<span>Nothing to display</span>
+							</h2>
+						</div> :
+						<div className="home-page-completed w-full pb-4 ">
+							<div className="py-6">
+								<Row wrap gutter={[16, { xs: 12, sm: 12, md: 18, lg: 24 }]}>
+									{
+										completedData.featured.map(
+											(completed: RaffleItemData, index: any) => {
+												return <Col md={{ span: 8 }} lg={{ span: 8 }} xl={{ span: 6 }} span={12} key={index}>
+													<NFTCard cardData={completed}></NFTCard>
+												</Col>
+											}
+										)
 									}
-								)
-							}
-						</Row>
-					</div>
-				</div>
+								</Row>
+							</div>
+						</div>
+				}
 			</section>
 		</div>
 	);

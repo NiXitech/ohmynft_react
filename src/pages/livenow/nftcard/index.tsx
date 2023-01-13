@@ -11,7 +11,6 @@ import { getPrice } from "../../../api/services/http/api";
 import { useAccount, useContractRead, useContractWrite, usePrepareContractWrite } from "wagmi";
 import { BigNumber } from "ethers";
 import useDebounce from "../../../libs/usehooks";
-import { toast } from "react-toastify";
 
 
 interface propspromise {

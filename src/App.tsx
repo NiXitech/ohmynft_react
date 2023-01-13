@@ -36,6 +36,7 @@ import Twitter from './pages/twitter';
 import Activity from './pages/Home/Activity';
 
 
+
 function App() {
   const [state, actions] = useStateHook();
   const { isConnected, address } = useAccount()
@@ -102,7 +103,10 @@ function App() {
               </Routes>
           }
         </div>
-        <Footer></Footer>
+        {
+          window.location.href.indexOf('/signup/register') > 0 || window.location.href.indexOf('/signup/verification') > 0  ? <></> :
+            <Footer></Footer>
+        }
         <ToastContainer theme="dark" autoClose={3000} hideProgressBar />
       </Router>
     </>

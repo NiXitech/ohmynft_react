@@ -34,8 +34,6 @@ const Header = (): JSX.Element => {
       to,
       title,
     } = props;
-
-    const location = useLocation();
     let navigate = useNavigate();
     const isActive = location.pathname === to;
 
@@ -114,7 +112,7 @@ const Header = (): JSX.Element => {
             <div className={["header-bg nav-main w-full top-0 left-0 fixed z-30 lg:border-cyan-500 lg:px-8 before:w-full before:h-full before:absolute before:-z-10 before:left-0 before:backdrop-blur-md before:transition-all before:duration-500 lg:before:hidden lg:backdrop-blur-md transition-all duration-500", mobileOpenMenu ? 'before:!bg-black' : ''].join(' ')}>
               <div className="container xxl:px-6rem66 xxxl:px-6rem66">
                 <div className={['flex flex-col lg:flex-row lg:min-h-0 5xl:container 5xl:mx-auto', mobileOpenMenu ? 'min-h-screen' : ''].join(' ')}>
-                  <div className={["flex justify-center lg:items-center border-b border-transparent transition-all lg:!bg-transparent lg:border-0 border-cyan-500", mobileOpenMenu ? '!border-transparent' : ''].join(' ')}  >
+                  <div className={["flex justify-center lg:items-center border-b border-transparent transition-all lg:!bg-transparent lg:border-0 border-cyan-500", mobileOpenMenu ? '!border-transparent' : ''].join(' ')} >
                     {/* <div className="grow w-14 flex items-center lg:hidden">
                     <div className="inline-block p-4 text-cyan-500 text-shadow-cyan cursor-pointer relative top-[2px] py-2 px-4">
                       <span className="icon-ico-discord text-[22px]"></span>
@@ -149,7 +147,7 @@ const Header = (): JSX.Element => {
                         // hasUser
                         // ? <>
                         <>
-                          <NavItem to={'/'} title="Live Now"></NavItem>
+                          <NavItem to={'/'} title={"Live Now"}></NavItem>
                           <NavItem to={'/completed'} title="Completed"></NavItem>
                           <NavItem to={'/activity'} title="Activity"></NavItem>
                           {/* <NavItem to={'/winners'} title="Winners"></NavItem>

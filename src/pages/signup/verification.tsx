@@ -237,18 +237,17 @@ const Verification = (): JSX.Element => {
 
   return (
     <>
-      <div className="w-full relative">
+      <div className="w-full relative bg-black">
         <div className="min-h-screen flex flex-col">
           <main className="flex items-center justify-center py-10 grow">
             <div className="px-2 sm:px-7 py-8 w-full max-w-md rounded-2xl mx-3 text-center"
               style={{
-                border: '6px solid rgba(43,147,255,.43)',
-                background: 'rgba(37,62,89,.61)'
+                background: '#021222'
               }}
             >
-              <h1 className="text-2xl uppercase tracking-widest font-play">Verification code</h1>
-              <p className="text-white/60 mt-4 leading-tight font-medium">Please check your email for the verification code</p>
-              <div className="max-w-[370px] w-full mx-auto mt-3 inline-block">
+              <h1 className="text-2xl uppercase tracking-widest font-Bold">Verification code</h1>
+              {/* <p className="text-white/60 mt-4 leading-tight font-medium">Please check your email for the verification code</p> */}
+              <div className="w-full mt-3 inline-block">
                 <div className="flex justify-between w-full relative mt-3 font-black text-white">
                   {Array.from({ length: pinLength }).map((_, index) => {
                     const focus = index === curFocusIndexRef.current;
@@ -256,10 +255,10 @@ const Verification = (): JSX.Element => {
                       <input
                         key={index}
                         ref={(ref) => (inputsRef.current[index] = ref)}
-                        className="code inline-block mt-0 relative bg-blue-500 border-cyan-500 rounded-lg py-3 px-4 border-2 outline-none focus:border-slate-200 focus:ring-0 autofill:bg-blue-500 transition-all text-center disabled:opacity-40 mt-3 text-xl"
+                        className="code inline-block relative bg-white-1 rounded-lg outline-none focus:border-slate-200 focus:ring-0 autofill:bg-blue-500 transition-all text-center disabled:opacity-40 text-xl border-none w-12 h-12 text-sm font-normal font-Regular"
                         // maxLength={1}
                         size={1}
-                        placeholder="0"
+                        // placeholder="0"
                         autoComplete="off"
                         type="tel"
                         disabled={loading}
@@ -280,12 +279,14 @@ const Verification = (): JSX.Element => {
                 </div>
               </div>
               <p className="w-full inline-block text-red text-sm mt-4">{tipMsg}</p>
-              <button type="submit" className="text-sm tracking-widest p-2 inline-block transition-opacity hover:opacity-90 font-medium" onClick={() => {
+              <button type="submit" className="w-full button-background rounded-full text-white mt-2 font-Regular text-sm tracking-widest p-2 inline-block transition-opacity hover:opacity-90 font-medium h-13" onClick={() => {
+                getResendCodeFun()
+              }}>CONFIRM</button>
+              <button type="submit" className="bg-transparent mt-2 text-blue font-Regular text-sm tracking-widest p-2 inline-block transition-opacity hover:opacity-90 font-medium" onClick={() => {
                 getResendCodeFun()
               }}>Send another code</button>
             </div>
           </main>
-          <Footer></Footer>
         </div>
       </div>
     </>
