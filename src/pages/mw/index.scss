@@ -9,11 +9,11 @@
     h2{
       font-size: .75rem;
       margin-bottom: 0.5rem;
-      font-family: HarmonyOS_Sans_SC_Bold;
+      font-family: HarmonyOS_Sans_Bold;
     }
     a{
       font-size: .44rem;
-      font-family: HarmonyOS_Sans_SC;
+      font-family: HarmonyOS_Sans_Bold;
       margin-bottom: 0.5rem;
       span{
         font-size: .375rem;
@@ -21,18 +21,19 @@
     }
     h3{
       font-size: .44rem;
-      font-family: HarmonyOS_Sans_SC;
+      font-family: HarmonyOS_Sans_Bold;
     }
   }
 }
 .mv-tab{
   border-bottom: 1px solid rgba(255, 255, 255, 0.4);
   margin-top: 1.5rem;
-  font-family: HarmonyOS_Sans_SC_Bold;
+  font-family: HarmonyOS_Sans_Bold;
   .content{
     margin: 0 -1rem;
   }
   button{
     padding: .388rem 1rem;
+    background: transparent;
   }
 }
