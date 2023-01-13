@@ -30,8 +30,8 @@ const ReferralCard = (): JSX.Element => {
 	}
 
 	return (
-		<div className="card-content-referral">
-			<div className="container card-referrals grid grid-cols-1 pt-32 rounded-6xl">
+		<div className="card-content-referral w-full">
+			<div className="container card-referrals grid grid-cols-1 pt-32 rounded-6xl pb-10">
 				<div className="dash-title ">
 					<span className="text-5xl px-12 py-10">
 						Earn Big Rewards With Referrals!
