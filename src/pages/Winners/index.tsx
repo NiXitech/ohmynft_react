@@ -100,7 +100,7 @@ const Winners = (): JSX.Element => {
                                   </div>
                                   <div className="py-3 w-6/12 md:w-4/12 relative">
                                     <a href={`/mw/${item.display_name}`} className="flex items-center overflow-hidden mr-3 group"><span className="relative inline-block mr-2 md:mr-3">
-                                      <img className="inline-block rounded-full w-12 h-12 border-2 border-transparent group-hover:border-gray-300 transition-all" src={require('../../asstes/img/default_personal.png').default} alt="" width="28" height="28" loading="lazy" /></span><h3 className="text-ellipsis overflow-hidden group-hover:text-gray-300 transition-colors font-heavy">{item.display_name}</h3></a>
+                                      <img className="inline-block rounded-full w-12 h-12 border-2 border-transparent group-hover:border-gray-300 transition-all" src={require('../../asstes/img/personal.png').default} alt="" width="28" height="28" loading="lazy" /></span><h3 className="text-ellipsis overflow-hidden group-hover:text-gray-300 transition-colors font-heavy">{item.display_name}</h3></a>
                                   </div>
                                   <div className="flex md:flex w-full pl-2 md:w-5/12 md:pl-0">
                                     <div className="flex md:py-3 w-1/2">

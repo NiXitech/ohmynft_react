@@ -251,7 +251,7 @@ const MWPage = (): JSX.Element => {
                                                             <span className="text-black whitespace-nowrap uppercase">Won by</span>
                                                             <a href="/mw/gc.business" className="flex items-center ml-1 overflow-hidden">
                                                               <span className="relative mr-1">
-                                                                <img className="inline-block rounded-full w-7 h-7" src={require('../../asstes/img/default_personal.png').default} alt="" width="28" height="28" loading="lazy" />
+                                                                <img className="inline-block rounded-full w-7 h-7" src={require('../../asstes/img/personal.png').default} alt="" width="28" height="28" loading="lazy" />
                                                               </span>
                                                               <span className="text-blue-500 whitespace-nowrap text-ellipsis overflow-hidden">{item.winner.display_name}</span>
                                                             </a>
