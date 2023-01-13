@@ -72,7 +72,7 @@ const LiveNow = (props: any) => {
 				liveNowDataTmp.featured.push(ele)
 			} else if (ele.category === 'upcoming') {
 				liveNowDataTmp.upcoming.push(ele)
-			} else {
+			}else {
 				liveNowDataTmp.all.push(ele)
 			}
 		})
@@ -167,6 +167,26 @@ const LiveNow = (props: any) => {
 								</div>
 							</Row> : <></>
 					}
+					<Row wrap gutter={[32, { xs: 12, sm: 12, md: 18, lg: 24 }]}>
+						{
+							liveNowData.upcoming.map((feature: RaffleItemData, index: any) => {
+								return <>
+									<Col md={{ span: 8 }} lg={{ span: 8 }} xl={{ span: 6 }} span={12} key={index}>
+										<NFTCard cardData={feature}></NFTCard>
+									</Col>
+								</>
+							})
+						}
+					</Row>
+
+					{
+						liveNowData.upcoming.length > 0 ? <Row >
+							<div className='livenow-title'>
+								Up Coming
+							</div>
+						</Row> : <></>
+					}
+
 					<Row wrap gutter={[32, { xs: 12, sm: 12, md: 18, lg: 24 }]}>
 						{
 							liveNowData.upcoming.map((feature: RaffleItemData, index: any) => {
