@@ -116,12 +116,7 @@ const Referrals = (): JSX.Element => {
                         {summaryData?.clicks.yesterday}
                       </span>
                     </div>
-                    <div className="flex justify-between mx-3 text-left">
-                      <span>Last 7 days</span>
-                      <span className="text-white">
-                        {summaryData?.clicks.last7Days}
-                      </span>
-                    </div>
+                    
                     <div className="flex justify-between mx-3 text-left">
                       <span>This month</span>
                       <span className="text-white">
@@ -132,11 +127,7 @@ const Referrals = (): JSX.Element => {
                       <span className="text-white">
                         {summaryData?.clicks.lastMonth}</span>
                     </div>
-                    <div className="flex justify-between mx-3 text-left">
-                      <span>Lifetime</span>
-                      <span className="text-white">
-                        {summaryData?.clicks.lifetime}</span>
-                    </div>
+                    
                   </article>
                   <article className="item rounded-xl text-center pt-3 pb-2 last-of-type:col-span-2 md:last-of-type:col-auto">
                     <h2 className=" tracking-wider">Rreferrals</h2>
@@ -153,12 +144,7 @@ const Referrals = (): JSX.Element => {
                       <span className="text-white">
                         {summaryData?.clicks.yesterday}</span>
                     </div>
-                    <div className="flex justify-between mx-3 text-left">
-                      <span>Last 7 days</span>
-                      <span className="text-white">
-                        {summaryData?.referrals.last7Days}
-                      </span>
-                    </div>
+
                     <div className="flex justify-between mx-3 text-left">
                       <span>This month</span>
                       <span className="text-white">
@@ -169,12 +155,6 @@ const Referrals = (): JSX.Element => {
                       <span>Last month</span>
                       <span className="text-white">
                         {summaryData?.referrals.lastMonth}
-                      </span>
-                    </div>
-                    <div className="flex justify-between mx-3 text-left">
-                      <span>Lifetime</span>
-                      <span className="text-white">
-                        {summaryData?.referrals.lifetime}
                       </span>
                     </div>
                   </article>
@@ -189,10 +169,7 @@ const Referrals = (): JSX.Element => {
                       <span>Yesterday</span>
                       <span className="text-white"><span className="icon-ico-eth inline-block top-[2px] mr-1 relative"></span>{summaryData?.revenue.yesterday}</span>
                     </div>
-                    <div className="flex justify-between mx-3 text-left">
-                      <span>Last 7 days</span>
-                      <span className="text-white"><span className="icon-ico-eth inline-block top-[2px] mr-1 relative"></span>{summaryData?.revenue.last7Days}</span>
-                    </div>
+
                     <div className="flex justify-between mx-3 text-left">
                       <span>This month</span>
                       <span className="text-white"><span className="icon-ico-eth inline-block top-[2px] mr-1 relative"></span>{summaryData?.revenue.thisMonth}</span>
@@ -201,10 +178,7 @@ const Referrals = (): JSX.Element => {
                       <span>Last month</span>
                       <span className="text-white"><span className="icon-ico-eth inline-block top-[2px] mr-1 relative"></span>{summaryData?.revenue.lastMonth}</span>
                     </div>
-                    <div className="flex justify-between mx-3 text-left">
-                      <span>Lifetime</span>
-                      <span className="text-white"><span className="icon-ico-eth inline-block top-[2px] mr-1 relative"></span>{summaryData?.revenue.lifetime}</span>
-                    </div>
+
                   </article>
                 </div>
               </div>

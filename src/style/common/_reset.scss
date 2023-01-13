@@ -1574,6 +1574,9 @@ select {
 .top-4 {
   top:1rem
 }
+.top-5 {
+  top:1.2rem;
+}
 .top-6 {
   top:1.5rem
 }
@@ -1624,6 +1627,9 @@ select {
 }
 .left-10 {
   left:2.5rem
+}
+.left-30 {
+  left:9.5rem
 }
 .-top-\[0\.5px\] {
   top:-.5px
@@ -2620,6 +2626,10 @@ select {
   --tw-border-opacity:.46;
   border-color:rgb(63 139 255/var(--tw-border-opacity))
 }
+.border-white-60 {
+  --tw-border-opacity:.6;
+  border-color:rgb(255 255 255/var(--tw-border-opacity))
+}
 .border-transparent {
   border-color:transparent
 }
@@ -2693,6 +2703,9 @@ select {
 .bg-gold {
   --tw-bg-opacity:1;
   background-color:rgb(255 226 179/var(--tw-bg-opacity))
+}
+.bg-grey-6 {
+  background: #443C4A;
 }
 .bg-moreInfo {
   --tw-bg-opacity:.76;
@@ -3309,6 +3322,9 @@ select {
   --tw-text-opacity:1;
   color:rgb(41 153 255/var(--tw-text-opacity))
 }
+.text-blue {
+  color:#3A8AFF
+}
 .text-green {
   --tw-text-opacity:1;
   color:rgb(0 234 105/var(--tw-text-opacity))
@@ -3465,6 +3481,10 @@ select {
 }
 .shadow-black {
   --tw-shadow-color:#000;
+  --tw-shadow:var(--tw-shadow-colored)
+}
+.shadow-white-60 {
+  --tw-shadow-color:rgba(255, 255, 255, 0.6);
   --tw-shadow:var(--tw-shadow-colored)
 }
 .shadow-slate-500 {
@@ -4055,6 +4075,10 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 
 .hover\:z-40:hover {
   z-index: 40
+}
+
+.after\:edit {
+  background: url('../../asstes/partImg/edit.png') no-repeat;
 }
 
 .hover\:-translate-y-\[2px\]:hover {

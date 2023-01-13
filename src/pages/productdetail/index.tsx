@@ -3,7 +3,7 @@
 import _ from "lodash";
 import { useEffect, useState } from "react";
 import './index.scss'
-import { Progress, Divider, Button, InputNumber } from 'antd';
+import { Progress, Divider, Button, InputNumber, Image } from 'antd';
 import TwoColActivity from "../../components/twocolactivity";
 import NFTCard from "../livenow/nftcard";
 // import ConnectWallet from "../../components/connectWallet";
@@ -11,10 +11,13 @@ import useStateHook from '../store';
 import { ActivityItem, CallBackData, RaffleItemData } from "../../types/types";
 import { erc20ABI, useAccount, useContractRead, useContractWrite, useNetwork, usePrepareContractWrite, useSwitchNetwork } from "wagmi";
 import { getPrice, getRaffleActivity, getRaffleInfo } from "../../api/services/http/api";
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { BigNumber, ethers } from "ethers";
 import useDebounce from "../../libs/usehooks";
 import { toast } from "react-toastify";
+import { LStorage } from "../../api/services/cooike/storage";
+import { TimeInterval } from '../../libs/userAgent'
+
 // const client = new Client('AAAAAAAAAAAAAAAAAAAAAMBDdwEAAAAA2BsYVQVgTt6DGuhpdjJBwkHDAMo%3Dch3BD48OENuJ5jEKU8QtTYVhGLKOzP3Mr9PZTLUO8Pn22DdH0K');
 
 /* eslint-disable jsx-a11y/img-redundant-alt */
@@ -152,8 +155,8 @@ const ProductDetail = (): JSX.Element => {
       chainId: 97,
       enabled: false,
       onSuccess(data: any) {
-        console.log('Success', data.entriesLength)
-        setCurrentEntryLens(parseInt(data.entriesLength._hex, 10))
+        // @ts-ignore
+        setCurrentEntryLens(parseInt(Number(data.entriesLength._hex), 10))
       },
       onError(error: any) {
         console.log('Error1212122211', error)
@@ -165,9 +168,6 @@ const ProductDetail = (): JSX.Element => {
       const result: CallBackData = await getRaffleInfo(Number(raffle_id)) as any
       if (result.code === 200) {
         setInfoData(result.data)
-        console.log('-----------555------>', result, isConnected)
-
-
       }
     } catch (error) {
       console.log('%c🀁 error', 'color: #ff0000; font-size: 20px;', error);
@@ -178,7 +178,6 @@ const ProductDetail = (): JSX.Element => {
 
   useEffect(() => {
 
-    console.log('%c🀆 ', 'color: #e50000; font-size: 20px;', BigNumber.from(100));
     if (isConnected && debouncedTokenId) {
       refetchSupply()
     }
@@ -227,7 +226,7 @@ const ProductDetail = (): JSX.Element => {
     overrides: {
       from: address,
       value: ethers.utils.parseEther(JSON.stringify(0)),
-      gasLimit: BigNumber.from(200)
+      gasLimit: BigNumber.from('3100000')
     },
     chainId: 97,
     // cacheTime: 2_000,
@@ -240,7 +239,7 @@ const ProductDetail = (): JSX.Element => {
       console.log('Error1212122211', error.message)
     },
   })
-  const { data, error, isError, write, isLoading } = useContractWrite({
+  const { data, error, isError, write: enterWrite, isLoading } = useContractWrite({
     ...config,
     onSuccess(data: any) {
       console.log('Success useContractWrite', data)
@@ -261,7 +260,7 @@ const ProductDetail = (): JSX.Element => {
     address: '0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee',
     abi: erc20ABI,
     functionName: 'approve',
-    args: ["0xb8Ce6900827C2718E6b07685492Eb75ea08eFEa3", BigNumber.from(1000000000000000)],
+    args: ["0xb8Ce6900827C2718E6b07685492Eb75ea08eFEa3", BigNumber.from('1000000000000000000')],
     overrides: {
       from: address,
     },
@@ -280,9 +279,9 @@ const ProductDetail = (): JSX.Element => {
     ...configApprove,
     onSuccess(data: any) {
       console.log('Success ApproveFun', data)
-      toast.success('The transaction is successful, waiting for block confirmation！')
+      // toast.success('The transaction is successful, waiting for block confirmation！')
       setEntryStatus(true)
-      write?.()
+      enterWrite?.()
     },
     onError(error: any) {
       console.log('Error1212122211 ApproveFun', error.message)
@@ -305,7 +304,6 @@ const ProductDetail = (): JSX.Element => {
     if (chain?.id !== 97) {
       await switchNetwork?.(97)
     }
-    console.log('%c🀂 ', 'color: #aa00ff; font-size: 20px;', address, address);
     setApproveStatus(true)
     await runApprove()
   }
@@ -315,6 +313,23 @@ const ProductDetail = (): JSX.Element => {
     await nbtTokenApprove?.();
   }
 
+
+
+  const getCurrentUserEntries = (list: any) => {
+    if (list) {
+      const userInfo = LStorage.get('LastAuthUser')
+      if (userInfo) {
+        let selectData = _.find(list, ['display_name', userInfo.name])
+
+        return selectData ? selectData.buy_entry_count : 0
+
+      }
+    }
+
+
+    return 0
+
+  }
 
 
 
@@ -416,6 +431,10 @@ const ProductDetail = (): JSX.Element => {
 
   }
 
+
+
+
+
   return (
     <section className="w-full pt-16 pb-4 lg:px-8">
       <div className="container pt-14">
@@ -423,7 +442,16 @@ const ProductDetail = (): JSX.Element => {
           <div className="grid grid-cols-1 flex-center-detail sm:grid-cols-4-6">
             <div>
               <div className="card-img-detail">
-                <img src={require('../../asstes/tmpImg/cardImg.png').default} alt="loading" />
+                <Image
+                  width={'100%'}
+                  height={'100%'}
+                  src={infoData?.prize.image_url}
+                  preview={false}
+                  style={{
+                    borderRadius: '1.5rem'
+                  }}
+                  fallback="data:image/png;base64,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"
+                />
               </div>
 
               <div className="activity-participants px-4 pt-10 md:block hidden ">
@@ -437,119 +465,233 @@ const ProductDetail = (): JSX.Element => {
                   <div className="card-title" title="cardtitle">
                     {infoData?.prize.name}
                   </div>
-                  <Divider className="bg-white/40" />
-                  <div className="card-cols-2">
-                    <div className="color-title">
-                      #{infoData?.prize.token_id}
-                    </div>
-                    <div className="white-title">
-                      {infoData?.prize.value}
-                    </div>
-                  </div>
+                  <Divider className="bg-white/40 my-4" />
 
-                  <div className="card-cols-2 pt-4">
-                    <div className="attention-number pt-6 pb-2">
-                      Total Entries:
-                      <span>&nbsp;{infoData?.total_entries}</span>
-                    </div>
-                  </div>
-
-                  <div className="card-cols-2 pt-2">
-                    <Progress percent={infoData?.total_entries ? currentEntryLens / infoData?.total_entries : 0} showInfo={false} trailColor="#fff" />
-                  </div>
-
-                  <div className="card-cols-2 pt-2">
-                    <div className="attention-number pt-4 pb-2">
-                      Current Entries:
-                      <span>&nbsp;{currentEntryLens}</span>
-                    </div>
-                    <div className="attention-number pt-4 pb-2">
-                      Remaining Entries:
-                      <span>&nbsp;{infoData?.total_entries ? infoData?.total_entries - currentEntryLens : 0}</span>
-                    </div>
-                  </div>
-
-                  <div className="card-cols-2 pt-8">
-                    <div className="attention-number pb-2">
-                      {
-                        infoData?.winner.display_name === '' ? 'Buying more entries increases your odds of winning!' : '已经开奖'
-                      }
-
-                    </div>
-                  </div>
-
-                  <div className="card-cols-2">
-                    <div className="attention-number pt-6 pb-2">
-                      BUSD:
-                      <span>&nbsp;{infoData?.prize.value}</span>
-                      <label className="lable-button">
-                        <Button type="primary" size="small">Maximum limit exceeded.</Button>
-                      </label>
-                    </div>
-                  </div>
-
-                  <div className="card-cols-2">
-                    <div className="attention-number pt-6 pb-2">
-                      Entries:&nbsp;&nbsp;
-                      {/* <InputNumber size="small" min={1} max={10} defaultValue={3} onChange={onChange} /> */}
-                      <div className="count">
-                        <div className="inputGroup">
-                          <button onClick={() => { if (Quantity > 1) { setQuantity(Quantity - 1) } }}>-</button>
-                          <div className="cont-input">
-                            <input id="tentacles" name="tentacles" type="number" value={Quantity} step={1} min="1" max="300"
-                              onBlur={(e) => {
-                                if (e.target.value === '') setQuantity(1)
-                              }}
-                              onChange={(e) => {
-                                console.log('number:--->', e.target.value);
-                                var patrn = /^([1-9]\d*)(\.\d*[1-9])?$/;
-                                if (!patrn.exec(e.target.value)) {
-                                  JSON.stringify(e.target.value).substr(1);
-                                  setQuantity(Number(JSON.stringify(e.target.value).substr(1)));
-                                } else if (Number(e.target.value) > 100) {
-                                  setQuantity(100);
-                                } else {
-                                  setQuantity(Number(e.target.value));
-                                }
-                              }} />
+                  {
+                    infoData?.winner.display_name === ''
+                      ? currentEntryLens === infoData.total_entries
+                        ? <div className="flex justify-between w-full font-thin font-bold text-white">
+                          <div className="">
+                            <i className="icon icon-referals mr-1"></i>
+                            {infoData?.participants.length}
                           </div>
-                          <button onClick={() => { if (Quantity < 300) { setQuantity(Quantity + 1) } }}>+</button>
+                          <div className="">
+                            <span className="mr-1">$</span>{infoData?.prize.value}
+                          </div>
+                          <div className="">
+                            <span className="mr-1">#</span>{infoData?.prize.token_id}
+                          </div>
+                        </div>
+                        : <div className="card-cols-2">
+                          <div className="color-title">
+                            ${infoData?.prize.value}
+                          </div>
+                          <div className="white-title">
+                            #{infoData?.prize.token_id}
+                          </div>
+                        </div>
+                      : <div className="flex justify-between w-full font-thin font-bold text-white">
+                        <div className="">
+                          <i className="icon icon-referals mr-1"></i>
+                          {infoData?.participants.length}
+                        </div>
+                        <div className="">
+                          <span className="mr-1">$</span>{infoData?.prize.value}
+                        </div>
+                        <div className="">
+                          <span className="mr-1">#</span>{infoData?.prize.token_id}
                         </div>
                       </div>
-                      &nbsp;&nbsp;You used 0 of 400 entries
-                    </div>
-                  </div>
 
-                  <div className="card-cols-2 pt-8">
-                    <div className="detail-buy-button">
-                      <Button type="primary" size="large" className="relative"
-                        onClick={() => {
-                          mint()
-                        }}
-                        disabled={mintLoading}
-                      >
+                  }
 
 
-                        <div className={['absolute z-10 flex justify-center align-middle w-full transition-all', mintLoading ? 'opacity-1' : 'opacity-0'].join(' ')}>
-                          <img className="inline-block spinner-border animate-spin-slowing" src={require('../../asstes/img/spinner-white.svg').default} alt="" width="30" height="30" />
+
+                  {
+                    infoData?.winner.display_name === ''
+                      ? currentEntryLens === infoData.total_entries
+                        ? <>
+                          <div className="chooseWinner py-8">
+                            <div className="w-full items-center flex justify-center">
+                              <img src={require('../../asstes/img/hourglass.png').default} alt="" />
+                            </div>
+                            <h1 className="color-title">
+                              FULL
+                            </h1>
+                          </div>
+                        </>
+                        : <>
+                          <div className="card-cols-2 pt-4">
+                            <div className="attention-number pt-6 pb-2">
+                              Total Entries:
+                              <span>&nbsp;{infoData?.total_entries}</span>
+                            </div>
+                          </div>
+
+                          <div className="card-cols-2 pt-2">
+                            <Progress percent={infoData?.total_entries ? (currentEntryLens / infoData?.total_entries) * 100 : 0} showInfo={false} trailColor="#fff" success={{ strokeColor: '#FDE23B' }} />
+                          </div>
+
+                          <div className="card-cols-2 pt-2">
+                            <div className="attention-number pt-4 pb-2">
+                              Current Entries:
+                              <span>&nbsp;{currentEntryLens}</span>
+                            </div>
+                            <div className="attention-number pt-4 pb-2">
+                              Remaining Entries:
+                              <span>&nbsp;{infoData?.total_entries ? infoData?.total_entries - currentEntryLens : 0}</span>
+                            </div>
+                          </div>
+
+                          <div className="card-cols-2 pt-8">
+                            <div className="attention-number pb-2">
+                              Buying more entries increases your odds of winning!
+                            </div>
+                          </div>
+
+                          <div className="card-cols-2">
+                            <div className="attention-number pt-6 pb-2">
+                              BUSD:
+                              <span>&nbsp;{infoData?.prize.value}</span>
+                            </div>
+                          </div>
+                          <div className="card-cols-2">
+                            <div className="attention-number pt-6 pb-2">
+                              Entries:&nbsp;&nbsp;
+                              {/* <InputNumber size="small" min={1} max={10} defaultValue={3} onChange={onChange} /> */}
+                              <div className="count">
+                                <div className="inputGroup">
+                                  <button disabled={getCurrentUserEntries(infoData?.participants)} onClick={() => { if (Quantity > 1) { setQuantity(Quantity - 1) } }}>-</button>
+                                  <div className="cont-input">
+                                    <input
+                                      id="tentacles"
+                                      name="tentacles"
+                                      type="number"
+                                      disabled={infoData ? (getCurrentUserEntries(infoData?.participants) >= infoData?.max_entries_per_user ? true : false) : false}
+                                      value={Quantity}
+                                      step={1} min="1"
+                                      max="300"
+                                      onBlur={(e) => {
+                                        if (e.target.value === '') setQuantity(1)
+                                      }}
+                                      onChange={(e) => {
+                                        console.log('number:--->', e.target.value);
+                                        var patrn = /^([1-9]\d*)(\.\d*[1-9])?$/;
+                                        if (!patrn.exec(e.target.value)) {
+                                          JSON.stringify(e.target.value).substr(1);
+                                          setQuantity(Number(JSON.stringify(e.target.value).substr(1)));
+                                        } else if (Number(e.target.value) > 100) {
+                                          setQuantity(100);
+                                        } else {
+                                          setQuantity(Number(e.target.value));
+                                        }
+                                      }} />
+                                  </div>
+                                  <button
+                                    disabled={getCurrentUserEntries(infoData?.participants)}
+                                    onClick={
+                                      () => {
+                                        if (infoData) {
+                                          if (Quantity < infoData.max_entries_per_user && Quantity < infoData?.total_entries - currentEntryLens) {
+                                            setQuantity(Quantity + 1)
+                                          } else {
+                                            toast.error('Maximum limit exceeded.')
+                                          }
+                                        }
+
+                                      }}
+                                  >+</button>
+                                </div>
+                              </div>
+                              &nbsp;&nbsp;
+                              {
+                                infoData
+                                  ? <>
+                                    You used {getCurrentUserEntries(infoData?.participants)} of {infoData?.max_entries_per_user} entries
+                                  </>
+                                  : ''
+                              }
+                            </div>
+                          </div>
+                        </>
+                      : <>
+                        <div className="winner_info text-center font-Bold">
+                          <h1>ENDED</h1>
+                          <span>{TimeInterval(infoData ? infoData?.close_time : JSON.stringify(new Date()))}</span>
+                          <div className="wineer">
+                            <span className="text-right">Won By</span>
+                            <img src={require('../../asstes/img/personal.png').default} alt="" />
+                            <span className="text-left">Richard Fitzgerald</span>
+                          </div>
                         </div>
+                      </>
+                  }
 
-                        <span className={[' transition-all', mintLoading ? 'opacity-0' : 'opacity-1'].join(' ')}>BUY ENTRY</span>
 
-                      </Button>
-                      {/* <a href="https://twitter.com/intent/tweet?in_reply_to=463440424141459456" className="router-link-active router-link-exact-active inline-block mx-1">Reply</a>
-                      <a className="router-link-active router-link-exact-active inline-block mx-1" href="https://twitter.com/intent/retweet?tweet_id=463440424141459456">Retweet</a>
-                      <a className="router-link-active router-link-exact-active inline-block mx-1" href="https://twitter.com/intent/like?tweet_id=463440424141459456">Like</a> */}
-                    </div>
-                  </div>
 
-                  <div className="md:block lg:block pt-6 font-thin text-xs">
-                    Quick Tip! Gas fees are required for each purchase. You can save a lot of money on gas fees by purchasing multiple entries at once.
-                  </div>
+                  {
+                    infoData?.winner.display_name === ''
+                      ? currentEntryLens === infoData.total_entries
+                        ? <>
+                          <div className="w-full">
+                            <div className=' font-Bold w-full '>
+                              CHOOSING WINNER...
+                            </div>
+
+                          </div>
+                          <div className="md:block lg:block pt-6 font-thin text-xs text-center">
+                            Winner is being drawn！
+                          </div>
+                        </>
+                        :
+                        <>
+                          <div className="card-cols-2 pt-8">
+                            <div className="detail-buy-button">
+                              <Button type="primary" size="large" className="relative"
+                                onClick={() => {
+                                  mint()
+                                }}
+                                disabled={mintLoading}
+                              >
+
+
+                                <div className={['absolute z-10 flex justify-center align-middle w-full transition-all', mintLoading ? 'opacity-1' : 'opacity-0'].join(' ')}>
+                                  <img className="inline-block spinner-border animate-spin-slowing" src={require('../../asstes/img/spinner-white.svg').default} alt="" width="30" height="30" />
+                                </div>
+
+                                <span className={[' transition-all', mintLoading ? 'opacity-0' : 'opacity-1'].join(' ')}>BUY ENTRY</span>
+
+                              </Button>
+
+                            </div>
+                          </div>
+                          <div className="md:block lg:block pt-6 font-thin text-xs">
+                            Quick Tip! Gas fees are required for each purchase. You can save a lot of money on gas fees by purchasing multiple entries at once.
+                          </div>
+                        </>
+
+                      : <>
+                        <div className="w-full">
+                          <Link to={'/completed'} className='hyperlink font-Bold w-full block'>
+                            VIEW MORE COMPETITIONS
+                          </Link>
+
+                        </div>
+                        <div className="md:block lg:block pt-6 font-thin text-xs text-center">
+                          Check out other competitions with BIG rewards waiting for you!
+                        </div>
+                      </>
+                  }
+
+
 
                 </div>
               </div>
 
+
+              {/* <a href="https://twitter.com/intent/tweet?in_reply_to=463440424141459456" className="router-link-active router-link-exact-active inline-block mx-1">Reply</a>
+                      <a className="router-link-active router-link-exact-active inline-block mx-1" href="https://twitter.com/intent/retweet?tweet_id=463440424141459456">Retweet</a>
+                      <a className="router-link-active router-link-exact-active inline-block mx-1" href="https://twitter.com/intent/like?tweet_id=463440424141459456">Like</a> */}
               <div className="flex-center-detail">
                 <div className="share-twitter pl-6">
                   <div className="detail-share-twitter-button pb-10 pt-12">
@@ -568,9 +710,9 @@ const ProductDetail = (): JSX.Element => {
                     {/* <div className="activity-participants px-4 pt-10 md:hidden block">
                       <TwoColActivity tableData={activityData}></TwoColActivity>
                     </div> */}
-                    <div className="end-soon-detail pb-10 pt-4">
+                    {/* <div className="end-soon-detail pb-10 pt-4">
                       End soon
-                    </div>
+                    </div> */}
                   </div>
                 </div>
 

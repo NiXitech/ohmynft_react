@@ -139,11 +139,14 @@ const LiveNow = (props: any) => {
 					</Col>
 				</Row>
 				<div>
-					<Row >
-						<div className='livenow-title'>
-							Featured
-						</div>
-					</Row>
+					{
+						liveNowData.featured.length > 0 ?
+							<Row >
+								<div className='livenow-title'>
+									Featured
+								</div>
+							</Row> : <></>
+					}
 					<Row wrap gutter={[32, { xs: 12, sm: 12, md: 18, lg: 24 }]}>
 						{
 							liveNowData.featured.map((feature: RaffleItemData, index: any) => {
@@ -156,11 +159,14 @@ const LiveNow = (props: any) => {
 						}
 					</Row>
 
-					<Row >
-						<div className='livenow-title'>
-							Ending Soon
-						</div>
-					</Row>
+					{
+						liveNowData.upcoming.length > 0 ?
+							<Row >
+								<div className='livenow-title'>
+									Ending Soon
+								</div>
+							</Row> : <></>
+					}
 					<Row wrap gutter={[32, { xs: 12, sm: 12, md: 18, lg: 24 }]}>
 						{
 							liveNowData.upcoming.map((feature: RaffleItemData, index: any) => {

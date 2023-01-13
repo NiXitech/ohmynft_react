@@ -25,15 +25,14 @@ body{
     color: #fff;
     line-height: 1;
     background: url(./asstes/ohmynftimg/background.png) no-repeat top center;
-    background-size: 100% 100%;
+    background-size: cover;
     background-position: top center;
-    background-attachment: fixed;
 }
 
 .header-bg{
   background-image: url(./asstes/ohmynftimg/background.png);
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background-size: cover;
   background-position: top center;
   border-bottom: 1px solid #3F8BFF;
 }
@@ -79,3 +78,12 @@ body{
     border-color:  rgba(43,147,255,0.28);
   }
 
+//  .uploader-noborder{
+//  .ant-upload.ant-upload-select {
+//     border: none !important;
+//   }
+//  }  
+
+:where(.css-dev-only-do-not-override-k83k30).ant-progress.ant-progress-status-success .ant-progress-bg {
+  background-color: #FDE23B;
+}

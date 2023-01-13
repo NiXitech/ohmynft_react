@@ -179,12 +179,12 @@ export async function getRaffleList(params: {
   offset: number;
   limit: number;
   username?: string,
-  win?:string
+  win?: string
 }) {
   return new Promise((resolve, reject) => {
     http({
       method: "get",
-      url: `/raffle?status=${params.status}&offset=${params.offset}&limit=${params.limit}&username=${params.username||''}&win=${params.win||''}`,
+      url: `/raffle?status=${params.status}&offset=${params.offset}&limit=${params.limit}&username=${params.username || ''}&win=${params.win || ''}`,
     }).then(
       (res) => {
         resolve(res);
@@ -487,6 +487,109 @@ export async function getReferralSummay(ethereum_address: string) {
     http({
       method: "get",
       url: `/referral/statistics/${ethereum_address}`,
+    }).then(
+      (res) => {
+        resolve(res);
+        return res;
+      },
+      (error) => {
+        reject(error);
+      }
+    );
+  });
+}
+
+/**
+ * user change avatar
+ * @returns
+ */
+
+export async function uploadAvatar(params: {
+  ethereum_address: string;
+  image_data: string;
+}) {
+  return new Promise((resolve, reject) => {
+    http({
+      method: "post",
+      url: `/user/setting/uploadImage`,
+      params,
+    }).then(
+      (res) => {
+        resolve(res);
+        return res;
+      },
+      (error) => {
+        reject(error);
+      }
+    );
+  });
+}
+
+
+/**
+ * email ad auth
+ * @returns
+ */
+
+export async function emailNotification(params: {
+  marketing: boolean,
+  ethereum_address: string
+}) {
+  return new Promise((resolve, reject) => {
+    http({
+      method: "post",
+      url: `/user/setting/notification/email`,
+      params,
+    }).then(
+      (res) => {
+        resolve(res);
+        return res;
+      },
+      (error) => {
+        reject(error);
+      }
+    );
+  });
+}
+
+/**
+ * tweet ad auth
+ * @returns
+ */
+
+export async function tweetNotification(params: {
+  twitter: {
+    connect: boolean
+  },
+  ethereum_address: string
+}) {
+  return new Promise((resolve, reject) => {
+    http({
+      method: "post",
+      url: `/user/social/connect`,
+      params,
+    }).then(
+      (res) => {
+        resolve(res);
+        return res;
+      },
+      (error) => {
+        reject(error);
+      }
+    );
+  });
+}
+
+/**
+ * 获取referral Summary信息
+ * @returns
+ */
+
+export async function getNotification(ethereum_address: string) {
+  return new Promise((resolve, reject) => {
+    http({
+      method: "get",
+      url: `/user/setting/${ethereum_address}`,
     }).then(
       (res) => {
         resolve(res);
