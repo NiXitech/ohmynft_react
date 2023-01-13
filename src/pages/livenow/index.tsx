@@ -200,9 +200,9 @@ const LiveNow = (props: any) => {
 						}
 					</Row>
 
-					<div >
+					<Row className='pt-16'>
 						<ReferralCard></ReferralCard>
-					</div>
+					</Row>
 
 					{
 						liveNowData.all.length > 0 ? <Row >
