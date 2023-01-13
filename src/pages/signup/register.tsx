@@ -137,8 +137,8 @@ const RegisterComp = (): JSX.Element => {
                       }}
                     />
 
-                    <span className={["icon2-ico-success text-gold text-2xl top-2 right-2 absolute z-10 transition-all pointer-events-none duration-300 -translate-y-2 opacity-0 input-success:opacity-100 input-success:translate-y-0"].join(' ')}></span>
-                    <span className="icon2-ico-error text-red-[C43434] font-thin px-4 text-sm top-4 right-3 absolute z-10 transition-all pointer-events-none duration-300 translate-y-2 opacity-0 input-error:opacity-100 input-error:translate-y-0"></span>
+                    <span className={["icon icon-right text-gold text-2xl top-2 right-2 absolute z-10 transition-all pointer-events-none duration-300 -translate-y-2 opacity-0 input-success:opacity-100 input-success:translate-y-0"].join(' ')}></span>
+                    <span className="icon icon-error text-red-[C43434] font-thin px-4 text-sm top-4 right-3 absolute z-10 transition-all pointer-events-none duration-300 translate-y-2 opacity-0 input-error:opacity-100 input-error:translate-y-0"></span>
                     <p className="w-full inline-block text-red-[C43434] font-thin px-4 text-sm mt-1">{nameTip}</p>
                   </div>
                   <div className={['mt-3 relative pb-3', checkEmail === null ? "" : checkEmail ? 'input-success-active' : 'input-error-active'].join(' ')}>
@@ -180,12 +180,12 @@ const RegisterComp = (): JSX.Element => {
                         }
                       }}
                     />
-                    <span className="icon2-ico-success text-gold text-2xl top-2 right-2 absolute z-10 transition-all pointer-events-none duration-300 -translate-y-2 opacity-0 input-success:opacity-100 input-success:translate-y-0"></span>
-                    <span className="icon2-ico-error text-red-[C43434] font-thin px-4 text-sm top-4 right-3 absolute z-10 transition-all pointer-events-none duration-300 translate-y-2 opacity-0 input-error:opacity-100 input-error:translate-y-0"></span>
+                    <span className=" icon icon-right text-gold text-2xl top-2 right-2 absolute z-10 transition-all pointer-events-none duration-300 -translate-y-2 opacity-0 input-success:opacity-100 input-success:translate-y-0"></span>
+                    <span className="icon icon-error text-red-[C43434] font-thin px-4 text-sm top-4 right-3 absolute z-10 transition-all pointer-events-none duration-300 translate-y-2 opacity-0 input-error:opacity-100 input-error:translate-y-0"></span>
                     <p className="w-full inline-block text-red-[C43434] font-thin px-4 text-sm mt-1">{emailTip}</p>
                   </div>
                   <button
-                    className="text-md py-6 px-8 text-white rounded-full tracking-widest uppercase transition-all relative disabled:opacity-40 block w-full mt-4"
+                    className="hover:cursor-pointer text-md py-6 px-8 text-white rounded-full tracking-widest uppercase transition-all relative disabled:opacity-40 block w-full mt-4"
                     disabled={checkName && checkEmail ? false : true}
                     onClick={() => {
                       submitRegisterInfo()
@@ -193,8 +193,8 @@ const RegisterComp = (): JSX.Element => {
 
                   >
                     <span className="transition-all font-Bold text-base text-white"> Next </span>
-                    <div className="opacity-0 transition-all absolute flex justify-center align-middle left-0 top-0 w-full h-full pointer-events-none overflow-hidden" role="status">
-                      <img className="inline-block spinner-border animate-spin-slowing" src={require('../../asstes/img/spinner-white.svg').default} alt="" width="30" height="30" />
+                    <div className="opacity-0 transition-all absolute flex justify-center align-middle left-0 top-0 w-full h-full overflow-hidden" role="status">
+                      {/* <img className="inline-block spinner-border animate-spin-slowing" src={require('../../asstes/img/spinner-white.svg').default} alt="" width="30" height="30" /> */}
                     </div>
                   </button>
                 </div>

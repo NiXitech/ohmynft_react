@@ -104,7 +104,7 @@ function App() {
           }
         </div>
         {
-          window.location.href.indexOf('/signup/register') > 0 ? <></> :
+          window.location.href.indexOf('/signup/register') > 0 || window.location.href.indexOf('/signup/verification') > 0  ? <></> :
             <Footer></Footer>
         }
         <ToastContainer theme="dark" autoClose={3000} hideProgressBar />
