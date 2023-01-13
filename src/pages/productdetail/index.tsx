@@ -669,7 +669,7 @@ const ProductDetail = (): JSX.Element => {
                                     onClick={() => {
                                       mint()
                                     }}
-                                    disabled={mintLoading}
+                                    disabled={mintLoading || getCurrentUserEntries(infoData?.participants) >= infoData.max_entries_per_user}
                                   >
 
 
