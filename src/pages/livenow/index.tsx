@@ -59,7 +59,6 @@ const LiveNow = (props: any) => {
 	}
 
 	const seletSortLiveNowData = (data: RaffleItemData[]) => {
-		console.log('data------->', data)
 		if (data === null) return
 		let liveNowDataTmp: any = {
 			featured: [],

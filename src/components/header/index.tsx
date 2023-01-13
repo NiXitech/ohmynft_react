@@ -34,8 +34,6 @@ const Header = (): JSX.Element => {
       to,
       title,
     } = props;
-
-    const location = useLocation();
     let navigate = useNavigate();
     const isActive = location.pathname === to;
 
