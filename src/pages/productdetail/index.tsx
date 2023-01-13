@@ -71,10 +71,13 @@ const ProductDetail = (): JSX.Element => {
 
   const { isConnected, address } = useAccount()
 
+
+
   // 合约查询
   const { data: totalSupplyData, refetch: refetchSupply } = useContractRead(
     {
-      address: `0x${debouncedTokenId?.raffle_id}`,
+      // @ts-ignore
+      address: `${debouncedTokenId?.contract_address}`,
       abi: [
         {
           name: 'raffles',
@@ -153,7 +156,7 @@ const ProductDetail = (): JSX.Element => {
       functionName: 'raffles',
       args: [BigNumber.from(debouncedTokenId?.raffle_id || 0)],
       chainId: 97,
-      enabled: false,
+      enabled: Boolean(debouncedTokenId?.contract_address),
       onSuccess(data: any) {
         // @ts-ignore
         setCurrentEntryLens(parseInt(Number(data.entriesLength._hex), 10))
@@ -179,9 +182,11 @@ const ProductDetail = (): JSX.Element => {
   useEffect(() => {
 
     if (isConnected && debouncedTokenId) {
+
+      console.log('%c🀀 ', 'color: #007300; font-size: 20px;', refetchSupply);
       refetchSupply()
     }
-  }, [debouncedTokenId])
+  }, [debouncedTokenId, infoData])
 
   // 连接钱包
   const connectWallet = (item: any) => {
@@ -196,7 +201,7 @@ const ProductDetail = (): JSX.Element => {
   const debouncedPrice = useDebounce({
     price: infoData?.price_structure.price_in_bnb || 0,
     raffleId: infoData?.raffle_id || 0,
-    count: Quantity,
+    count: Quantity || 0,
     collection: '0x0000000000000000000000000000000000000000',
   }, 0)
 
@@ -206,7 +211,8 @@ const ProductDetail = (): JSX.Element => {
     isError: isPrepareError,
     isSuccess: perSuccess
   } = usePrepareContractWrite({
-    address: `0xb8Ce6900827C2718E6b07685492Eb75ea08eFEa3`,
+    // @ts-ignore
+    address: `${debouncedTokenId?.contract_address}`,
     abi: [
       {
         name: 'buyEntry',
@@ -561,7 +567,7 @@ const ProductDetail = (): JSX.Element => {
                               {/* <InputNumber size="small" min={1} max={10} defaultValue={3} onChange={onChange} /> */}
                               <div className="count">
                                 <div className="inputGroup">
-                                  <button disabled={getCurrentUserEntries(infoData?.participants)} onClick={() => { if (Quantity > 1) { setQuantity(Quantity - 1) } }}>-</button>
+                                  <button disabled={getCurrentUserEntries(infoData?.participants) >= infoData.max_entries_per_user} onClick={() => { if (Quantity > 1) { setQuantity(Quantity - 1) } }}>-</button>
                                   <div className="cont-input">
                                     <input
                                       id="tentacles"
@@ -576,23 +582,29 @@ const ProductDetail = (): JSX.Element => {
                                       }}
                                       onChange={(e) => {
                                         console.log('number:--->', e.target.value);
-                                        var patrn = /^([1-9]\d*)(\.\d*[1-9])?$/;
-                                        if (!patrn.exec(e.target.value)) {
-                                          JSON.stringify(e.target.value).substr(1);
-                                          setQuantity(Number(JSON.stringify(e.target.value).substr(1)));
-                                        } else if (Number(e.target.value) > 100) {
-                                          setQuantity(100);
-                                        } else {
-                                          setQuantity(Number(e.target.value));
+                                        if (infoData) {
+                                          if (infoData.total_entries - currentEntryLens < Number(e.target.value) || getCurrentUserEntries(infoData?.participants) + Number(e.target.value) > infoData.max_entries_per_user) {
+                                            toast.error('Maximum limit exceeded.')
+                                          }
+                                          var patrn = /^([1-9]\d*)(\.\d*[1-9])?$/;
+                                          if (!patrn.exec(e.target.value)) {
+                                            JSON.stringify(e.target.value).substr(1);
+                                            setQuantity(Number(JSON.stringify(e.target.value).substr(1)));
+                                          } else if (Number(e.target.value) > infoData.max_entries_per_user) {
+                                            setQuantity(100);
+                                          } else {
+                                            setQuantity(Number(e.target.value));
+                                          }
                                         }
+
                                       }} />
                                   </div>
                                   <button
-                                    disabled={getCurrentUserEntries(infoData?.participants)}
+                                    disabled={getCurrentUserEntries(infoData?.participants) >= infoData.max_entries_per_user}
                                     onClick={
                                       () => {
                                         if (infoData) {
-                                          if (Quantity < infoData.max_entries_per_user && Quantity < infoData?.total_entries - currentEntryLens) {
+                                          if (getCurrentUserEntries(infoData?.participants) + Quantity < infoData.max_entries_per_user && Quantity < infoData.total_entries - currentEntryLens) {
                                             setQuantity(Quantity + 1)
                                           } else {
                                             toast.error('Maximum limit exceeded.')
