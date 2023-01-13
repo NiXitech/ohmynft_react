@@ -164,7 +164,7 @@ const AccountPage = (): JSX.Element => {
                 >
                   {
                     userImgUrl === '' ?
-                      <div className='w-full h-full flex items-center justify-center user-name-first-word'>
+                      <div className='w-full h-full flex items-center justify-center user-name-first-word uppercase'>
                         {userData.name.substr(0, 1)}
                       </div> :
 

@@ -8,6 +8,7 @@ import { RaffleItemData } from '../../types/types';
 import { LStorage } from '../../api/services/cooike/storage';
 import copy from 'copy-to-clipboard';
 import { toast } from 'react-toastify';
+import ReferralCard from '../referralcard';
 
 const LiveNow = (props: any) => {
 	const [state] = useState({
@@ -72,7 +73,7 @@ const LiveNow = (props: any) => {
 				liveNowDataTmp.featured.push(ele)
 			} else if (ele.category === 'upcoming') {
 				liveNowDataTmp.upcoming.push(ele)
-			}else {
+			} else {
 				liveNowDataTmp.all.push(ele)
 			}
 		})
@@ -197,6 +198,10 @@ const LiveNow = (props: any) => {
 								</>
 							})
 						}
+					</Row>
+
+					<Row className='pt-16'>
+						<ReferralCard></ReferralCard>
 					</Row>
 
 					{

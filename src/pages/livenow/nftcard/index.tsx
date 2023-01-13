@@ -147,7 +147,11 @@ const NFTCard = (props: propspromise): JSX.Element => {
 	)
 
 	const percant = () => {
-		return Number(Number(props.cardData.max_entries_per_user / props.cardData.total_entries * 100).toFixed(0));
+		let  count = 0
+		props.cardData.participants.map((ele)=>{
+			count += ele.buy_entry_count
+		})
+		return Number(Number(count / props.cardData.total_entries * 100).toFixed(0));
 	}
 
 
@@ -190,13 +194,13 @@ const NFTCard = (props: propspromise): JSX.Element => {
 								<Progress trailColor="#fff" percent={percant()} strokeColor='#1F95FF' />
 							</div>
 						</div>
-						<div className="card-button">
-							<div className="uppercase link  text-base lg:text-xl">
-								<Link to={`/productdetail/${props.cardData.id}`} >
+						{/* <div className="card-button"> */}
+							{/* <div className="uppercase link  text-base lg:text-xl"> */}
+								<Link to={`/productdetail/${props.cardData.id}`}  className="w-full rounded-full font-Bold button-background text-center uppercase link text-base lg:text-xl py-5">
 									Enter now
 								</Link>
-							</div>
-						</div>
+							{/* </div> */}
+						{/* </div> */}
 					</>
 			}
 		</div>
