@@ -15,7 +15,7 @@ const ReferralCard = (): JSX.Element => {
 	console.log('userinfo', userinfo)
 
 	const sharetweet = () => {
-		let userLink = 'https://ohmynft.xyz/home/' + userinfo.name;
+		let userLink = process.env.REACT_APP_BASE_URL + '/' + (userinfo.name || '');
 		let shareLink = 'http://twitter.com/share?' +
 			'text=Join me at OH MY NFT, the most convenient place packed with the best giveaway prizes of real-world goods changing the way you win in Web3' +
 			'&url=' + userLink + '&hashtags=WinninginWeb3';
@@ -24,7 +24,7 @@ const ReferralCard = (): JSX.Element => {
 
 	// copy link
 	const copyLink = () => {
-		copy('https://ohmynft.xyz/home/');
+		copy(process.env.REACT_APP_BASE_URL + '');
 		toast.success('Copy succeeded!');
 	}
 
@@ -42,14 +42,15 @@ const ReferralCard = (): JSX.Element => {
 					your referral link.
 				</div>
 
-				{
-					userinfo.address ?
+				{/* {
+					userinfo.address ? */}
 						<div className="id-adress text-sm mt-12 h-16 rounded-4xl">
 							<span className="px-10">
-								{userinfo.name}
+								{ process.env.REACT_APP_BASE_URL + (userinfo.name ? '/' : '') + (userinfo.name || '')}
 							</span>
-						</div> : <></>
-				}
+						</div> 
+						{/* : <></> */}
+				{/* } */}
 
 				<div className="py-10 button-share grid grid-cols-2 w-full gap-2">
 					<a href={tweetShareInfo} rel="noopener noreferrer" target="_blank" className="h-16 text-white rounded-full tracking-widest uppercase items-center ">

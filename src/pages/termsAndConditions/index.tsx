@@ -1,4 +1,4 @@
-import Footer from "../../components/footer";
+// import Footer from "../../components/footer";
 
 const TermsAndConditions = (): JSX.Element => {
   return (
@@ -276,7 +276,7 @@ const TermsAndConditions = (): JSX.Element => {
           </div>
         </div>
       </main>
-      <Footer></Footer>
+      {/* <Footer></Footer> */}
     </>
   );
 }

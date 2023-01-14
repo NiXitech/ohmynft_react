@@ -34,6 +34,7 @@ import UserInfo from './pages/useInfo';
 import Footer from './components/footer';
 import Twitter from './pages/twitter';
 import Activity from './pages/Activity';
+import MyEntries from './pages/myentries';
 
 
 
@@ -85,6 +86,7 @@ function App() {
                 <Route path="/activity" element={<Activity />} />
                 <Route path="/productdetail/:raffle_id" element={<ProductDetail />} />
                 <Route path="/completed" element={<CompletedCard />} />
+                <Route path="/myentries" element={<MyEntries />} />
                 <Route path="/mw/:name" element={<MWPage />} />
                 <Route path="/winners" element={<Winners />} />
                 <Route path="/referrals" element={<Referrals />} />

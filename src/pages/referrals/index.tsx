@@ -17,10 +17,11 @@ const Referrals = (): JSX.Element => {
       getReferralSummayFun()
       // login user 
       let userinfo = LStorage.get('LastAuthUser');
-      setUserLink('https://ohmynft.xyz/home/' + userinfo.name);
+      let linkTmp = process.env.REACT_APP_BASE_URL + '/' + userinfo.name
+      setUserLink(linkTmp);
       let shareLink = 'http://twitter.com/share?' +
         'text=Join me at OH MY NFT, the most convenient place packed with the best giveaway prizes of real-world goods changing the way you win in Web3' +
-        '&url=' + userLink + '&hashtags=WinninginWeb3';
+        '&url=' + linkTmp + '&hashtags=WinninginWeb3';
       setTweetShareInfo(shareLink)
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []
@@ -47,6 +48,11 @@ const Referrals = (): JSX.Element => {
     toast.success('Copy succeeded!');
   }
 
+  const [isActive, setIsActive] = useState('Summary')
+  const cahngeTab = (name: string) => {
+    setIsActive(name)
+  }
+
   return (
     <>
       <main className="flex flex-wrap grow px-2 pb-10 lg:px-8 transition-all duration-300 page-enter:opacity-0 page-enter:-translate-y-4 layout-enter:opacity-0 layout-enter:-translate-y-4 pt-16">
@@ -55,11 +61,13 @@ const Referrals = (): JSX.Element => {
 
             <nav className="flex justify-center md:justify-start referrals-tab">
               <div className="content flex justify-center md:justify-start">
-                <button className="uppercase text-base tracking-wider py-5 grow max-w-[150px] md:grow-0 md:max-w-none md:px-6 md:text-base overflow-hidden relative transition-all hover:text-cyan-500 text-cyan-500"><span>Summary</span>
+                <button className={["uppercase text-base tracking-wider py-5 grow max-w-[150px] md:grow-0 md:max-w-none md:px-6 md:text-base overflow-hidden relative transition-all hover:text-cyan-500 text-cyan-500", isActive === 'Summary' ? "text-blue" : 'text-white/90'].join(' ')} onClick={() => cahngeTab('Summary')}><span>Summary</span>
                 </button>
-                <button className="uppercase text-base tracking-wider py-5 grow max-w-[150px] md:grow-0 md:max-w-none md:px-6 md:text-base overflow-hidden relative transition-all hover:text-cyan-500 text-white"><span>Referrals</span>
+                <button className={["uppercase text-base tracking-wider py-5 grow max-w-[150px] md:grow-0 md:max-w-none md:px-6 md:text-base overflow-hidden relative transition-all hover:text-cyan-500 text-white", isActive === 'Referrals' ? "text-blue" : 'text-white/90'].join(' ')} onClick={() => cahngeTab('Referrals')}>
+                  <span>Referrals</span>
                 </button>
-                <button className="uppercase router-link-active router-link-exact-active text-base tracking-wider py-5 grow max-w-[150px] md:grow-0 md:max-w-none md:px-6 md:text-base overflow-hidden relative transition-all hover:text-cyan-500 text-white"><span>Withdrawals</span>
+                <button className="uppercase router-link-active router-link-exact-active text-base tracking-wider py-5 grow max-w-[150px] md:grow-0 md:max-w-none md:px-6 md:text-base overflow-hidden relative transition-all hover:text-cyan-500 text-white">
+                  <span>Withdrawals</span>
                 </button>
               </div>
             </nav>
@@ -116,7 +124,7 @@ const Referrals = (): JSX.Element => {
                         {summaryData?.clicks.yesterday}
                       </span>
                     </div>
-                    
+
                     <div className="flex justify-between mx-3 text-left">
                       <span>This month</span>
                       <span className="text-white">
@@ -127,10 +135,10 @@ const Referrals = (): JSX.Element => {
                       <span className="text-white">
                         {summaryData?.clicks.lastMonth}</span>
                     </div>
-                    
+
                   </article>
                   <article className="item rounded-xl text-center pt-3 pb-2 last-of-type:col-span-2 md:last-of-type:col-auto">
-                    <h2 className=" tracking-wider">Rreferrals</h2>
+                    <h2 className=" tracking-wider">Referrals</h2>
                     <h3 className=" text-base mb-3">
                       {summaryData?.referrals.lifetime}</h3>
                     <div className="flex justify-between mx-3 text-left">
@@ -184,7 +192,6 @@ const Referrals = (): JSX.Element => {
               </div>
 
             </div>
-
           </section>
         </div>
       </main>

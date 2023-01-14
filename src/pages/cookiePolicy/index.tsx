@@ -1,4 +1,4 @@
-import Footer from "../../components/footer";
+// import Footer from "../../components/footer";
 
 const CookiePolicy = (): JSX.Element => {
   return (
@@ -57,7 +57,7 @@ const CookiePolicy = (): JSX.Element => {
           </div>
         </div>
       </main>
-      <Footer></Footer>
+      {/* <Footer></Footer> */}
     </>
   );
 }

@@ -1,4 +1,4 @@
-import Footer from "../../components/footer";
+// import Footer from "../../components/footer";
 
 const PrivacyPolicy = (): JSX.Element => {
   return (
@@ -115,7 +115,7 @@ const PrivacyPolicy = (): JSX.Element => {
           </div>
         </div>
       </main>
-      <Footer></Footer>
+      {/* <Footer></Footer> */}
     </>
   );
 }

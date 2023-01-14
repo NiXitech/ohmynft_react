@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getAllWinner, getPrice } from "../../api/services/http/api";
-import Footer from "../../components/footer";
+// import Footer from "../../components/footer";
 import { getDollar, TimeInterval } from "../../libs/userAgent";
 import { AllActivityItem, CallBackData } from "../../types/types";
 
@@ -139,7 +139,7 @@ const Winners = (): JSX.Element => {
           </section>
         </div>
       </main>
-      <Footer></Footer>
+      {/* <Footer></Footer> */}
     </>
   );
 }

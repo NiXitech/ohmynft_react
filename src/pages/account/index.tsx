@@ -1,7 +1,6 @@
 import { SetStateAction, useEffect, useState } from 'react';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { message, Switch, Upload } from 'antd';
-import type { UploadChangeParam } from 'antd/es/upload';
 import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface';
 import { emailNotification, getNotification, tweetNotification, uploadAvatar } from '../../api/services/http/api';
 import { LStorage } from '../../api/services/cooike/storage';
@@ -89,7 +88,7 @@ const AccountPage = (): JSX.Element => {
       }) as any
       if (code === 200) {
         setLoadingStatus({ ...loadingStatus, twitter_account_status: false })
-        toast.success('change success');
+        toast.success('Change successful');
       } else {
         toast.error('change failed, please try later!')
       }
@@ -107,7 +106,7 @@ const AccountPage = (): JSX.Element => {
       }) as any
       if (code === 200) {
         setLoadingStatus({ ...loadingStatus, marketing_notify_status: false })
-        toast.success('change success');
+        toast.success('Change successful');
       } else {
         toast.error('change failed, please try later!')
       }
@@ -145,7 +144,7 @@ const AccountPage = (): JSX.Element => {
 
   return (
     <>
-      <main className="flex flex-wrap grow mt-20 lg:mt-16 px-2 lg:px-8 transition-all duration-300 page-enter:opacity-0 page-enter:-translate-y-4 layout-enter:opacity-0 layout-enter:-translate-y-4 pt-16">
+      <main className="flex flex-wrap grow mt-12 lg:mt-12 px-2 lg:px-8 transition-all duration-300 page-enter:opacity-0 page-enter:-translate-y-4 layout-enter:opacity-0 layout-enter:-translate-y-4 pt-16">
         <div className="w-full max-w-[600px] m-auto">
           <section className="text-center mb-6">
             <figure className="relative w-24 h-24 mb-4 cursor-pointer lg:w-32 lg:h-32 inline-block margin-x-auto group animate-fade-in">
