@@ -88,7 +88,7 @@ const Activity = (): JSX.Element => {
                             <div className="py-3 w-6/12 md:w-4/12 relative">
                               <a href={`/mw/${item.display_name}`} className="flex items-center overflow-hidden mr-3 group">
                                 <span className="relative mr-2 md:mr-3">
-                                  <img className="inline-block rounded-full w-12 h-12 border-2 border-transparent group-hover:border-gray-300 transition-all" src={require('../../../asstes/img/personal.png').default} alt="" width="48" height="48" loading="lazy" />
+                                  <img className="inline-block rounded-full w-12 h-12 border-2 border-transparent group-hover:border-gray-300 transition-all" src={require('../../asstes/img/personal.png').default} alt="" width="48" height="48" loading="lazy" />
                                 </span>
                                 <h3 className="text-ellipsis overflow-hidden group-hover:text-gray-300 transition-colors font-heavy">{item.display_name}</h3>
                               </a>
