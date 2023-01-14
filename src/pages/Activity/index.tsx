@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { getAllActivity } from "../../../api/services/http/api";
-import { TimeInterval } from "../../../libs/userAgent";
-import { AllActivityItem, CallBackData } from "../../../types/types";
-// import { CallBackData } from "../../../types/types";
+import { getAllActivity } from "../../api/services/http/api";
+import { TimeInterval } from "../../libs/userAgent";
+import { AllActivityItem, CallBackData } from "../../types/types";
 
 const Activity = (): JSX.Element => {
   const [activityList, setActivityList] = useState([])
@@ -45,7 +44,7 @@ const Activity = (): JSX.Element => {
             {
               loading
                 ? <div className="absolute z-10 flex justify-center align-middle w-full pt-8">
-                  <img className="inline-block spinner-border animate-spin-slowing" src={require('../../../asstes/img/spinner-white.svg').default} alt="" width="30" height="30" />
+                  <img className="inline-block spinner-border animate-spin-slowing" src={require('../../asstes/img/spinner-white.svg').default} alt="" width="30" height="30" />
                 </div>
                 : <section className="text-left text-sm md:text-base whitespace-nowrap w-full mb-4 animate-fade-in">
                   <div className="text-sm md:text-base font-bold lg:sticky z-10 backdrop-blur-md shadow-[0_1px_0_0] shadow-blue-100/50 flex px-6 font-black lg:top-0"

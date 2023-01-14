@@ -13,14 +13,6 @@ import { RaffleItemData } from "../../types/types";
 
 /* eslint-disable jsx-a11y/img-redundant-alt */
 const Completed = (): JSX.Element => {
-	const [state, setstate] = useState({
-		allCardList: [
-			{ cardName: 'NFT01', cardValue: '#1', BUSD: '0.01', unit: 'BUSD', progress: 60 }, { cardName: 'NFT02', cardValue: '#2675', BUSD: '0.01', unit: 'BUSD', progress: 60 }, { cardName: 'NFT03', cardValue: '#3', BUSD: '0.01', unit: 'BUSD', progress: 60 }, { cardName: 'NFT04', cardValue: '#4', BUSD: '0.01', unit: 'BUSD', progress: 60 },
-			{ cardName: 'NFT01', cardValue: '#1', BUSD: '0.01', unit: 'BUSD', progress: 60 }, { cardName: 'NFT02', cardValue: '#2675', BUSD: '0.01', unit: 'BUSD', progress: 60 }, { cardName: 'NFT03', cardValue: '#3', BUSD: '0.01', unit: 'BUSD', progress: 60 }, { cardName: 'NFT04', cardValue: '#4', BUSD: '0.01', unit: 'BUSD', progress: 60 },
-			{ cardName: 'NFT01', cardValue: '#1', BUSD: '0.01', unit: 'BUSD', progress: 60 }, { cardName: 'NFT02', cardValue: '#2675', BUSD: '0.01', unit: 'BUSD', progress: 60 }, { cardName: 'NFT03', cardValue: '#3', BUSD: '0.01', unit: 'BUSD', progress: 60 }, { cardName: 'NFT04', cardValue: '#4', BUSD: '0.01', unit: 'BUSD', progress: 60 }
-		]
-	});
-
 	const [completedData, setCompletedData] = useState({
 		featured: [],
 		upcoming: [],
@@ -41,7 +33,7 @@ const Completed = (): JSX.Element => {
 			const { code, data: { items } } = await getRaffleList({
 				status: 'completed',
 				offset: 0,
-				limit: 100,
+				limit: 100000,
 			}) as any
 			if (code === 200) {
 				seletSortLiveNowData(items);
@@ -62,7 +54,7 @@ const Completed = (): JSX.Element => {
 			all: []
 		};
 		data.forEach((ele: any) => {
-			console.log(ele)
+			// console.log(ele)
 			if (ele.category === "featured") {
 				completedDataTmp.featured.push(ele)
 			} else if (ele.category === 'upcoming') {

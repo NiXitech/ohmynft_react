@@ -5,7 +5,7 @@ import {
   Routes,
   Route,
   Navigate,
-} from 'react-router-dom'
+} from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import './App.scss';
 import 'react-toastify/dist/ReactToastify.css';
@@ -33,7 +33,7 @@ import { LStorage } from './api/services/cooike/storage';
 import UserInfo from './pages/useInfo';
 import Footer from './components/footer';
 import Twitter from './pages/twitter';
-import Activity from './pages/Home/Activity';
+import Activity from './pages/Activity';
 
 
 
