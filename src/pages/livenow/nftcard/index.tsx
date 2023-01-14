@@ -137,8 +137,6 @@ const NFTCard = (props: propspromise): JSX.Element => {
 		}
 	}
 
-
-
 	useEffect(
 		() => {
 			getPriceFun()
@@ -147,17 +145,22 @@ const NFTCard = (props: propspromise): JSX.Element => {
 
 	const percant = () => {
 		let  count = 0
+		// eslint-disable-next-line array-callback-return
 		props.cardData.participants.map((ele)=>{
 			count += ele.buy_entry_count
 		})
 		return Number(Number(count / props.cardData.total_entries * 100).toFixed(0));
 	}
 
+	const navigateTo = ()=> {
+		navigate(`/productdetail/${props.cardData.id}`);
+	}
+
 
 	return (
 		<div className="card-content-nft-card">
 			<div className="card-img">
-				<img src={props.cardData.prize.image_url} alt="" />
+				<img className="cursor-pointer" src={props.cardData.prize.image_url} alt="" onClick={navigateTo}/>
 				<div className="card-id" onClick={() => {
 					// @ts-ignore
 					write()

@@ -1,4 +1,4 @@
-import Footer from "../../components/footer";
+// import Footer from "../../components/footer";
 
 const Notifications = (): JSX.Element => {
   return (
@@ -26,7 +26,7 @@ const Notifications = (): JSX.Element => {
           </section>
         </div>
       </main>
-      <Footer></Footer>
+      {/* <Footer></Footer> */}
     </>
   );
 }

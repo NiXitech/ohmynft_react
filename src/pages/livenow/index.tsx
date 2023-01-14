@@ -31,7 +31,7 @@ const LiveNow = (props: any) => {
 
 	const sharetweet = () => {
 		let userinfo = LStorage.get('LastAuthUser') || {};
-		let userLink = 'https://ohmynft.xyz/home/' + userinfo.name;
+		let userLink = process.env.REACT_APP_BASE_URL + '/' + ( userinfo.name || '' );
 		let shareLink = 'http://twitter.com/share?' +
 			'text=Join me at OH MY NFT, the most convenient place packed with the best giveaway prizes of real-world goods changing the way you win in Web3' +
 			'&url=' + userLink + '&hashtags=WinninginWeb3';
@@ -40,7 +40,7 @@ const LiveNow = (props: any) => {
 
 	// copy link
 	const copyLink = () => {
-		copy('https://ohmynft.xyz/home/');
+		copy(process.env.REACT_APP_BASE_URL + '');
 		toast.success('Copy succeeded!');
 	}
 
@@ -67,7 +67,6 @@ const LiveNow = (props: any) => {
 			all: []
 		};
 		data.forEach((ele: any) => {
-			console.log(ele)
 			if (ele.category === "featured") {
 				liveNowDataTmp.featured.push(ele)
 			} else if (ele.category === 'upcoming') {
@@ -75,7 +74,10 @@ const LiveNow = (props: any) => {
 			} else {
 				liveNowDataTmp.all.push(ele)
 			}
-		})
+		});
+		console.log('liveNowDataTmp', liveNowDataTmp);
+		let endsoon = percant(liveNowDataTmp.featured);
+		liveNowDataTmp.endsoon.push(...endsoon)
 		setLiveData(liveNowDataTmp)
 	}
 
@@ -99,6 +101,28 @@ const LiveNow = (props: any) => {
 		}
 	}
 
+	const percant = (data: any) => {
+		const arr: { participants: any[]; }[] = [];
+		debugger
+		data.map((ele: {
+			total_entries: number; participants: any[];
+		// eslint-disable-next-line array-callback-return
+		}) => {
+			let count = 0
+			ele?.participants.map(
+				// eslint-disable-next-line array-callback-return
+				(element) => {
+					count += element.buy_entry_count
+				}
+			)
+			console.log('count------------->', count)
+			if (Number(Number(count / ele.total_entries * 100).toFixed(0)) >= 85) {
+				arr.push(ele);
+			}
+		})
+		return arr;
+	}
+
 	useEffect(
 		() => {
 			getRaffleListFun();
@@ -119,11 +143,11 @@ const LiveNow = (props: any) => {
 							</div>
 							<Space className="pt-6 flex justify-center md:justify-start">
 								<a href={tweetShareInfo} rel="noopener noreferrer" target="_blank" className=" text-white rounded-full tracking-widest uppercase  transition-all relative disabled:opacity-40  relative flex justify-center items-center mx-auto w-full">
-									<Button className='pr-6' type="primary" shape="round" size="large" >
+									<Button className='pr-6 uppercase' type="primary" shape="round" size="large" >
 										Share On Twitter &nbsp;<span className=" icon-twitter icon"></span>
 									</Button>
 								</a>
-								<Button type="primary" ghost shape="round" size="large" onClick={copyLink}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copy Link&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Button>
+								<Button className='uppercase' type="primary" ghost shape="round" size="large" onClick={copyLink}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copy Link&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Button>
 							</Space>
 						</Space>
 					</Col>
@@ -155,7 +179,7 @@ const LiveNow = (props: any) => {
 					</Row>
 
 					{
-						liveNowData.upcoming.length > 0 ?
+						liveNowData.endsoon.length > 0 ?
 							<Row >
 								<div className='livenow-title'>
 									Ending Soon
@@ -164,7 +188,7 @@ const LiveNow = (props: any) => {
 					}
 					<Row wrap gutter={[32, { xs: 12, sm: 12, md: 18, lg: 24 }]}>
 						{
-							liveNowData.upcoming.map((feature: RaffleItemData, index: any) => {
+							liveNowData.endsoon.map((feature: RaffleItemData, index: any) => {
 								return <>
 									<Col md={{ span: 8 }} lg={{ span: 8 }} xl={{ span: 6 }} span={12} key={index}>
 										<NFTCard cardData={feature}></NFTCard>

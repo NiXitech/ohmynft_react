@@ -211,6 +211,9 @@ const Header = (): JSX.Element => {
                           <NavItem to={'/'} title={"Live Now"} count={liveNowCount}></NavItem>
                           <NavItem to={'/completed'} title="Completed" count={completedCount}></NavItem>
                           <NavItem to={'/activity'} title="Activity" count={activityCount}></NavItem>
+                          {
+                            isConnected && <NavItem to={'/myentries'} title="myentries" count={activityCount}></NavItem>
+                          }
                           {/* <NavItem to={'/winners'} title="Winners"></NavItem>
                           <NavItem to={'/referrals'} title="referrals"></NavItem> */}
 
@@ -240,7 +243,7 @@ const Header = (): JSX.Element => {
                                   >
                                     <h2 className="text-slate-100 ft-18 mb-2 leading-tight animate-fade-in text-white">Why connect?</h2>
                                     <p className="op-6 ft-14 normal-case tracking-normal animate-fade-in">
-                                      ohmynft runs on the blockchain. Taking part requires a personal signature. No private data is shared with us. We will NEVER ask for an ‘Approve All’ state.
+                                      OH MY NFT is a blockchain-based and secure platform. Participation requires you to register your wallet and email. No private data is shared with us.
                                     </p>
                                   </div>
 
@@ -355,8 +358,8 @@ const Header = (): JSX.Element => {
             </div>
             {
               location.pathname === '/' ? <></> :
-                <div className="pt-16 attention-info fixed w-full z-0">
-                  <div className="py-2 text-center">
+                <div className="mt-14 attention-info fixed w-full z-20">
+                  <div className="pt-3 pb-2 text-center backimg">
                     Earn Big Rewards With
                     <span>
                       &nbsp;Referrals！
