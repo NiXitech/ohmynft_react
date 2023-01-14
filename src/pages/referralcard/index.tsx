@@ -1,9 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Button, Space } from "antd";
 import copy from "copy-to-clipboard";
 import _ from "lodash";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import { LStorage } from "../../api/services/cooike/storage";
 import './index.scss'
@@ -47,7 +46,7 @@ const ReferralCard = (): JSX.Element => {
 					userinfo.address ?
 						<div className="id-adress text-sm mt-12 h-16 rounded-4xl">
 							<span className="px-10">
-								2h23u3dio34ids9x9ks0g90s0
+								{userinfo.name}
 							</span>
 						</div> : <></>
 				}

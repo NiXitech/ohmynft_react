@@ -81,17 +81,12 @@ const LiveNow = (props: any) => {
 
 
 	const getRaffleListFun = async () => {
-		// const title = '';
-		// setState({
-		// 	...state, title
-		// })
-
 		try {
 			// 获取全站activity
 			const { code, data: { items } } = await getRaffleList({
 				status: 'live',
 				offset: 0,
-				limit: 100,
+				limit: 100000,
 			}) as any
 			if (code === 200) {
 				seletSortLiveNowData(items);

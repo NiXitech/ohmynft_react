@@ -4,7 +4,9 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAccount, useDisconnect } from 'wagmi';
 import { LStorage } from '../../api/services/cooike/storage';
+import { getAllActivity, getRaffleList } from '../../api/services/http/api';
 import useStateHook from '../../pages/store';
+import { CallBackData, RaffleItemData } from '../../types/types';
 import ConnectWallet from '../connectWallet';
 // import ZenDesk from '../zendesk'
 import './index.scss'
@@ -13,10 +15,8 @@ import './index.scss'
 export type NavItemProps = {
   to: string,
   title: string,
+  count?: number,
 }
-
-
-
 
 const Header = (): JSX.Element => {
   const [state, actions] = useStateHook();
@@ -27,12 +27,16 @@ const Header = (): JSX.Element => {
   const { disconnect } = useDisconnect()
   const location = useLocation();
   const [tipHide, setTipHide] = useState(false);
+  const [liveNowCount, setLiveNowCount] = useState(0)
+  const [completedCount, setCompletedCount] = useState(0)
+  const [activityCount, setActivityCount] = useState(0)
 
 
   const NavItem = (props: NavItemProps): JSX.Element => {
     const {
       to,
       title,
+      count = 0
     } = props;
     let navigate = useNavigate();
     const isActive = location.pathname === to;
@@ -44,7 +48,7 @@ const Header = (): JSX.Element => {
             if (!isActive) navigate(to)
             setMobileOpenMenu(!mobileOpenMenu)
           }}>
-            <span className="inline-block py-1 my-3 uppercase tracking-wider lg:whitespace-nowrap lg:my-0 lg:py-0 lg:mx-0 lg:flex lg:self-center transition-all duration-100 group-hover:text-cyan-500">{title}</span>
+            <span className="inline-block py-1 my-3 uppercase tracking-wider lg:whitespace-nowrap lg:my-0 lg:py-0 lg:mx-0 lg:flex lg:self-center transition-all duration-100 group-hover:text-cyan-500">{title}{count > 0 ? '(' + count + ')' : ''}</span>
           </div>
         </li>
       </>
@@ -63,6 +67,61 @@ const Header = (): JSX.Element => {
     setLastUserName(userData)
   }, [])
 
+  const seletSortLiveNowData = (data: RaffleItemData[], name: string) => {
+    if (data === null) return
+    let liveNowDataTmp: any = {
+      featured: [],
+      upcoming: [],
+      endsoon: [],
+      all: []
+    };
+    data.forEach((ele: any) => {
+      console.log(ele)
+      if (ele.category === "featured") {
+        liveNowDataTmp.featured.push(ele)
+      } else if (ele.category === 'upcoming') {
+        liveNowDataTmp.upcoming.push(ele)
+      } else {
+        liveNowDataTmp.all.push(ele)
+      }
+    })
+    name === 'live' ? setLiveNowCount(liveNowDataTmp.featured.length) : setCompletedCount(liveNowDataTmp.featured.length)
+  }
+
+  const getRaffleListFun = async (name: string) => {
+    try {
+      // 获取全站activity
+      const { code, data: { items } } = await getRaffleList({
+        status: name,
+        offset: 0,
+        limit: 100,
+      }) as any
+      if (code === 200) {
+        seletSortLiveNowData(items, name);
+      } else {
+
+      }
+      console.log('all------activity------->', items);
+    } catch (err) {
+      console.log('getRaffleListFun:', err)
+    }
+  }
+
+  const getAllActivityFun = async () => {
+    try {
+      const result: CallBackData = await getAllActivity({
+        category: 'BuyEntry',
+        offset: 0,
+        limit: 20,
+      }) as any
+
+      if (result.data !== null) {
+        setActivityCount(result.data.length)
+      }
+    } catch (error) {
+      console.log('%c🀂 error', 'color: #006dcc; font-size: 20px;', error);
+    }
+  }
 
 
   useEffect(() => {
@@ -86,8 +145,10 @@ const Header = (): JSX.Element => {
       if (JSON.parse(data).state.data.account !== userInfo.address) {
         Logout()
       }
-
     }
+    getRaffleListFun('live')
+    getRaffleListFun('completed')
+    getAllActivityFun()
   }, [])
 
   const Logout = () => {
@@ -147,9 +208,9 @@ const Header = (): JSX.Element => {
                         // hasUser
                         // ? <>
                         <>
-                          <NavItem to={'/'} title={"Live Now"}></NavItem>
-                          <NavItem to={'/completed'} title="Completed"></NavItem>
-                          <NavItem to={'/activity'} title="Activity"></NavItem>
+                          <NavItem to={'/'} title={"Live Now"} count={liveNowCount}></NavItem>
+                          <NavItem to={'/completed'} title="Completed" count={completedCount}></NavItem>
+                          <NavItem to={'/activity'} title="Activity" count={activityCount}></NavItem>
                           {/* <NavItem to={'/winners'} title="Winners"></NavItem>
                           <NavItem to={'/referrals'} title="referrals"></NavItem> */}
 
