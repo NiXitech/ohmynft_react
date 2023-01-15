@@ -112,7 +112,7 @@ const Winners = (): JSX.Element => {
                                       </div>
                                     </div>
                                     <div className="flex w-1/2 text-right pr-3 justify-end md:py-3 items-center">
-                                      <a href={`https://goerli.etherscan.io/tx/${item.win_tx}`} target="_blank" className="text-sm md:text-base text-blue-500 hover:text-blue-400 font-heavy">
+                                      <a href={`https://testnet.bscscan.com/tx/${item.win_tx}`} target="_blank" className="text-sm md:text-base text-blue-500 hover:text-blue-400 font-heavy">
                                         {TimeInterval(item.create_time)} ago
                                         <span className="icon2-ico-share inline-block top-[2px] relative text-[16px]"></span>
                                       </a>
