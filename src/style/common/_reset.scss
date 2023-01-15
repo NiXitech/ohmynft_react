@@ -346,6 +346,10 @@
   font-family: HarmonyOS_Sans_Regular;
 }
 
+.font-Medium {
+  font-family: HarmonyOS_Sans_Medium;
+}
+
 .font-medium{
   font-family:AvenirMedium;
 }
@@ -1655,6 +1659,12 @@ select {
 }
 .left-4 {
   left:1rem
+}
+.-top-10 {
+  top:-2.5rem
+}
+.-top-12 {
+  top:-3rem
 }
 .-top-16 {
   top:-4rem
@@ -3353,6 +3363,9 @@ select {
 .text-red-\[C43434\] {
   color: #C43434;
 }
+.text-yellow-\[FDE23B\] {
+  color: #FDE23B;
+}
 .text-blue-400 {
   --tw-text-opacity:1;
   color:rgb(41 153 255/var(--tw-text-opacity))
@@ -3436,6 +3449,9 @@ select {
 }
 .opacity-80 {
   opacity:.8
+}
+.opacity-90 {
+  opacity:.9
 }
 .\!opacity-100 {
   opacity:1!important

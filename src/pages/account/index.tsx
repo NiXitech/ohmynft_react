@@ -59,7 +59,6 @@ const AccountPage = (): JSX.Element => {
   const uploadAvatarFunc = async (info: any) => {
     await getBase64(info.file, async (url) => {
       try {
-
         const { code } = await uploadAvatar({
           ethereum_address: userData.address || '',
           image_data: url || ''

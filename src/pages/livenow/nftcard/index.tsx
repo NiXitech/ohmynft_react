@@ -158,7 +158,7 @@ const NFTCard = (props: propspromise): JSX.Element => {
 
 
 	return (
-		<div className="card-content-nft-card">
+		<div className="card-content-nft-card lg:hover:scale-[1.03] ">
 			<div className="card-img">
 				<img className="cursor-pointer" src={props.cardData.prize.image_url} alt="" onClick={navigateTo}/>
 				<div className="card-id" onClick={() => {

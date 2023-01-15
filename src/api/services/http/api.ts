@@ -601,3 +601,25 @@ export async function getNotification(ethereum_address: string) {
     );
   });
 }
+
+/**
+ * 获取 exchange 记录
+ * @returns
+ */
+
+export async function getWithdrawal(ethereum_address: string) {
+  return new Promise((resolve, reject) => {
+    http({
+      method: "get",
+      url: `/withdrawal/${ethereum_address}`,
+    }).then(
+      (res) => {
+        resolve(res);
+        return res;
+      },
+      (error) => {
+        reject(error);
+      }
+    );
+  });
+}
