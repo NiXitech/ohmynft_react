@@ -1,7 +1,7 @@
-import { SetStateAction, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { message, Switch, Upload } from 'antd';
-import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface';
+import type { RcFile } from 'antd/es/upload/interface';
 import { emailNotification, getNotification, tweetNotification, uploadAvatar } from '../../api/services/http/api';
 import { LStorage } from '../../api/services/cooike/storage';
 import './index.scss'
@@ -15,7 +15,7 @@ const AccountPage = (): JSX.Element => {
     require('../../asstes/partImg/edit.png').default
   );
   const [loading, setLoading] = useState(false);
-  const [userImgUrl, setuserImgUrl] = useState('')
+  const [userImgUrl] = useState('')
   const [status, setStatus] = useState(
     {
       marketing_notify: true,

@@ -103,7 +103,6 @@ const LiveNow = (props: any) => {
 
 	const percant = (data: any) => {
 		const arr: { participants: any[]; }[] = [];
-		debugger
 		data.map((ele: {
 			total_entries: number; participants: any[];
 		// eslint-disable-next-line array-callback-return
@@ -115,7 +114,6 @@ const LiveNow = (props: any) => {
 					count += element.buy_entry_count
 				}
 			)
-			console.log('count------------->', count)
 			if (Number(Number(count / ele.total_entries * 100).toFixed(0)) >= 85) {
 				arr.push(ele);
 			}

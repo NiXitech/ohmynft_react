@@ -7,6 +7,7 @@ import { summaryReferrals } from '../../types/types';
 import './index.scss'
 import { LStorage } from "../../api/services/cooike/storage";
 import MyReferral from "../myreferral";
+import WithDrawals from "../withdrawals";
 
 const Referrals = (): JSX.Element => {
   const [summaryData, setSummaryData] = useState<summaryReferrals>();
@@ -69,7 +70,7 @@ const Referrals = (): JSX.Element => {
                 <button className={["uppercase text-base tracking-wider py-5 grow max-w-[150px] md:grow-0 md:max-w-none md:px-6 md:text-base overflow-hidden relative transition-all hover:text-cyan-500 text-white", isActive === 'Referrals' ? "text-blue" : 'text-white/90'].join(' ')} onClick={() => cahngeTab('Referrals')}>
                   <span>Referrals</span>
                 </button>
-                <button className={["uppercase router-link-active router-link-exact-active text-base tracking-wider py-5 grow max-w-[150px] md:grow-0 md:max-w-none md:px-6 md:text-base overflow-hidden relative transition-all hover:text-cyan-500 text-white", isActive === 'Referrals' ? "text-blue" : 'text-white/90'].join(' ')} onClick={() => cahngeTab('Withdrawals')}>
+                <button className={["uppercase router-link-active router-link-exact-active text-base tracking-wider py-5 grow max-w-[150px] md:grow-0 md:max-w-none md:px-6 md:text-base overflow-hidden relative transition-all hover:text-cyan-500 text-white", isActive === 'Withdrawals' ? "text-blue" : 'text-white/90'].join(' ')} onClick={() => cahngeTab('Withdrawals')}>
                   <span>Withdrawals</span>
                 </button>
               </div>
@@ -204,10 +205,10 @@ const Referrals = (): JSX.Element => {
                 <MyReferral></MyReferral> : <></>
             }
 
-            {/* {
+            {
               tab === 'Withdrawals' ?
                 <WithDrawals></WithDrawals> : <></>
-            } */}
+            }
           </section>
         </div>
       </main>
