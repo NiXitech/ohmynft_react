@@ -113,7 +113,6 @@ const MWPage = (): JSX.Element => {
   const [cardList, setCardList] = useState([{ id: 1, checked: false, redeemStatus: false }, { id: 2, checked: false, redeemStatus: false }, { id: 3, checked: false, redeemStatus: false }, { id: 4, checked: false, redeemStatus: false }, { id: 5, checked: false, redeemStatus: false }, { id: 6, checked: false, redeemStatus: false }]);
 
   const checkedItem = (key: number) => {
-    debugger
     const arr: any = [];
     // eslint-disable-next-line array-callback-return
     cardList.map((item, index) => {
