@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import copy from "copy-to-clipboard";
-import { rearg } from "lodash";
+import { Button, Modal } from 'antd';
 import { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 import { toast } from "react-toastify";
@@ -23,6 +23,7 @@ const MWPage = (): JSX.Element => {
   const [price, setPrice] = useState({
     usd: 0
   })
+  const [redeemStatus] = useState(false)
   useEffect(() => {
     window.addEventListener('click', function () {
       setShowSocial(false)
@@ -109,17 +110,105 @@ const MWPage = (): JSX.Element => {
     setLoading(false)
   }
 
+  const [cardList, setCardList] = useState([{ id: 1, checked: false, redeemStatus: true }, { id: 2, checked: false, redeemStatus: false }, { id: 3, checked: false, redeemStatus: false }, { id: 4, checked: false, redeemStatus: false }, { id: 5, checked: false, redeemStatus: false }, { id: 6, checked: false, redeemStatus: false }]);
+
+  const checkedItem = (key: number) => {
+    debugger
+    const arr: any = [];
+    // eslint-disable-next-line array-callback-return
+    cardList.map((item, index) => {
+      if (item.id === key) {
+        item.checked = true
+      } else {
+        item.checked = false
+      }
+      arr.push(item)
+    })
+    setCardList(arr)
+  }
+
+  const WinsCard = (props: any) => {
+    return (
+      <>
+        <article onClick={() => checkedItem(props.cardData.id)} className={["cursor-pointer flex flex-col bg-grey-6 rounded-3xl xl:rounded-3xl transition-all duration-200 lg:hover:scale-[1.03] relative group", props.cardData.checked && !props.cardData.redeemStatus ? 'border-3' : 'border-none'].join(' ')} style={{ borderColor: '#3A8AFF' }}>
+          <figure className="w-full aspect-square rounded-xl overflow-hidden relative z-0 -top-[0.5px]">
+            <div className="relative pt-5 px-5">
+              <img className="transition-all rounded-3xl z-10 relative object-cover h-full w-full block relative z-10 opacity-100" src="https://i.seadn.io/gae/AOUDTbuATAzvgGTS6J3xP2lDNevT0cIvHRCr0xWo8bTtRRnspZPgso2SjSOP_RLQ3COogtEwplZZ0c8ZJvv8BO3Z79KRy9anokdJ?fit=max&amp;w=350&amp;auto=format" alt="Image of Cold Blooded Creepz" width="350" height="350" loading="lazy" decoding="async" draggable="false" />
+              <div style={{ width: 'fit-content' }} className="relative bg-white rounded-full -top-10 z-10 left-0 p-2 px-2 mx-2 text-black ">#123</div>
+            </div>
+          </figure>
+          <div className="px-5 xl:px-5">
+            <div className="flex flex-col">
+              <div className="grow overflow-hidden">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-base xl:text-xl text-white font-Bold relative">victor</h3>
+                  <div className="flex items-center justify-end">
+                    {/* <span className="text-slate-100 font-Bold text-ellipsis overflow-hidden text-base xl:text-xl">∼</span> */}
+                    {/* <img src="https://metawin.com/_nuxt/ico-eth-opacity-black.1761ffc0.svg" alt="ohmynft logo" width="8" height="16" className="inline-block mr-[2px] opacity-80" /> */}
+                    <span className="text-yellow-[FDE23B] font-Bold text-ellipsis overflow-hidden text-base xl:text-xl">0.7 BNB</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="grid grid-cols-3 items-center justify-center pt-4 w-full px-6">
+              <span className="text-white whitespace-nowrap uppercase font-Bold text-base">Won by</span>
+              {/* <a aria-current="page" href="/mw/montereyjack3d" className="router-link-active router-link-exact-active flex items-center ml-1"> */}
+              <span className="relative mr-1 text-center">
+                <img className="inline-block rounded-full" src="https://content.prod.platform.metawin.com/avatars/template/default.png" alt="" width="28" height="28" loading="lazy" />
+              </span>
+              <span className="text-blue text-base font-Bold whitespace-nowrap text-ellipsis overflow-hidden">MontereyJack3D</span>
+              {/* </a> */}
+            </div>
+            <div className="text-white text-center text-base font-Bold uppercase py-4">
+              26 {JSON.stringify(props.cardData.checked)} participants
+            </div>
+          </div>
+          {
+            redeemStatus ?
+              <div className="z-20 w-full h-full absolute bg-grey-6 opacity-90 rounded-3xl xl:rounded-3xl">
+                {
+                  redeemStatus ?
+                    <div className="bg-white text-black rouded-full m-3 m-auto text-center mt-28 w-32 h-32 rounded-full" style={{ lineHeight: '8rem' }} >
+                      Redeemed
+                    </div>
+                    :
+                    <div className="bg-white text-black rouded-full m-3 m-auto text-center mt-28 w-32 h-32 rounded-full" style={{ lineHeight: '8rem' }} >
+                      Reject
+                    </div>
+                }
+              </div>
+              :
+              <></>
+          }
+        </article>
+      </>
+    )
+  }
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const attention = () => {
+    setModalOpen(true)
+  }
+
   return (
     <>
-      <main className="flex flex-wrap grow px-2 pb-10 lg:px-8 transition-all duration-300 page-enter:opacity-0 page-enter:-translate-y-4 layout-enter:opacity-0 layout-enter:-translate-y-4 pt-16">
-        <div className="w-full mx-auto 5xl:container pt-12">
+      {
+        modalOpen && 
+        <div className="fixed w-full h-full bg-black" style={{zIndex: '10000'}} onClick={() => setModalOpen(false)}>
+          <div className="container m-auto">
+            asdfasd
+          </div>
+        </div>
+      }
+      <main className="flex flex-wrap grow pb-10 transition-all duration-300 page-enter:opacity-0 page-enter:-translate-y-4 layout-enter:opacity-0 layout-enter:-translate-y-4 pt-16 container xxl:px-6rem66 xxxl:px-6rem66">
+        <div className="w-full mx-auto pt-12 px-6">
           {
             hasUser
               ? <section className="pt-32 pb-20 flex items-center justify-center flex-col py-10 grow">
                 <h1 className="text-3xl">User not found</h1>
                 <a href="/" className="text-md py-4 px-8 bg-blue-400 text-white rounded-full tracking-widest uppercase hover:bg-blue-500 transition-all focus:bg-blue-500 relative disabled:opacity-40 disabled:hover:bg-blue-500 mt-6 inline-block font-play">Go to homepage</a>
               </section>
-              : <section className="animate-fade-in max-w-7xl mx-auto relative min-h-[50vh]">
+              : <section className="animate-fade-in mx-auto relative min-h-[50vh]">
                 <div className="flex flex-col mt-3 md:flex-row md:py-4">
                   <div className="flex items-center mv-header">
                     <figure className=" avator overflow-hidden flex-none  transition-all relative">
@@ -162,6 +251,10 @@ const MWPage = (): JSX.Element => {
 
                     <button className={['uppercase text-sm tracking-wider grow max-w-[140px] md:grow-0 md:max-w-none overflow-hidden relative transition-all text-white', selectTypeVal === '' ? 'text-cyan-500' : ''].join(' ')} onClick={() => { selectType('') }}>
                       <span>Competitions entered</span>
+                    </button>
+
+                    <button className={['uppercase text-sm tracking-wider grow max-w-[140px] md:grow-0 md:max-w-none overflow-hidden relative transition-all text-white', selectTypeVal === 'wins' ? 'text-cyan-500' : ''].join(' ')} onClick={() => { selectType('wins') }}>
+                      <span>Wins</span>
                     </button>
                   </div>
                   {/* <button className={['uppercase text-sm tracking-wider py-5 grow max-w-[140px] md:grow-0 md:max-w-none md:px-6 md:text-base overflow-hidden relative transition-all hover:text-cyan-500 text-white', selectTypeVal === 'owned' ? 'text-cyan-500' : ''].join(' ')} onClick={() => { selectType('owned') }}>
@@ -333,7 +426,7 @@ const MWPage = (): JSX.Element => {
                                         </article>
                                       </div>
                                     </div>
-                                    <button type="button" className="text-sm tracking-widest mt-4 mb-3 p-2 block mx-auto transition-opacity hover:opacity-90 disabled:opacity-40"> Load more </button>
+                                    <button type="button" className="text-sm tracking-widest mt-4 mb-3 p-2 block mx-auto transition-opacity hover:opacity-90 disabled:opacity-40 bg-tranparent"> Load more </button>
                                   </>
                               }
                             </div>
@@ -343,48 +436,28 @@ const MWPage = (): JSX.Element => {
                                   loading
                                     ? ''
                                     : <>
-                                      <div>
-                                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 lg:gap-4 lg:grid-cols-5 mb-5">
-                                          <article className="flex flex-col bg-white rounded-xl xl:rounded-2xl transition-all duration-200 lg:hover:scale-[1.03] relative group" >
-                                            <figure className="w-full aspect-square rounded-xl overflow-hidden relative z-0 -top-[0.5px] cursor-pointer">
-                                              <div className="relative w-full h-full">
-                                                <img className="transition-all z-10 relative object-cover h-full w-full block relative z-10 opacity-100" src="https://i.seadn.io/gae/AOUDTbuATAzvgGTS6J3xP2lDNevT0cIvHRCr0xWo8bTtRRnspZPgso2SjSOP_RLQ3COogtEwplZZ0c8ZJvv8BO3Z79KRy9anokdJ?fit=max&amp;w=350&amp;auto=format" alt="Image of Cold Blooded Creepz" width="350" height="350" loading="lazy" decoding="async" draggable="false" />
-                                                <div className="absolute z-0 animate-pulse w-full h-full rounded-xl top-0 left-0 p-3 after:flex after:h-full after:rounded-lg after:bg-gray-200 invisible"></div>
-                                              </div>
-                                              <div className="hidden lg:block absolute bg-slate-600 py-1 w-full z-20 bottom-0 text-center translate-y-10 group-hover:translate-y-0 transition-all delay-200">
-                                                <span className="font-bold uppercase tracking-wider text-xs lg:text-sm">More info</span>
-                                              </div>
-                                            </figure>
-                                            <div className="px-2 py-2 xl:px-3">
-                                              <div className="flex flex-col">
-                                                <div className="grow overflow-hidden">
-                                                  <div className="flex">
-                                                    <h2 className="text-sm xl:text-base text-slate-100 font-bold whitespace-nowrap text-ellipsis overflow-hidden">Cold Blooded Creepz</h2>
-                                                    <span className="icon-ico-badge text-blue-500 text-base xl:text-lg relative -top-[2px]"></span>
-                                                  </div>
-                                                  <div className="flex items-center justify-between">
-                                                    <h3 className="text-sm xl:text-base text-slate-800 font-bold relative mr-2">#6315</h3>
-                                                    <div className="flex items-center justify-end">
-                                                      <span className="text-slate-100 font-bold text-ellipsis overflow-hidden text-sm xl:text-base">∼</span>
-                                                      <img src="https://metawin.com/_nuxt/ico-eth-opacity-black.1761ffc0.svg" alt="ohmynft logo" width="8" height="16" className="inline-block mr-[2px] opacity-80" />
-                                                      <span className="text-slate-100 font-bold text-ellipsis overflow-hidden text-sm xl:text-base">1.1</span>
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                              <div className="flex flex-nowrap items-center justify-center text-xs sm:text-sm font-bold pb-1 lg:pt-2 w-full">
-                                                <span className="text-slate-200 whitespace-nowrap uppercase">Won by</span>
-                                                <a aria-current="page" href="/mw/montereyjack3d" className="router-link-active router-link-exact-active flex items-center ml-1"><span className="relative mr-1">
-                                                  <img className="inline-block rounded-full w-7 h-7" src="https://content.prod.platform.metawin.com/avatars/template/default.png" alt="" width="28" height="28" loading="lazy" /></span><span className="text-blue-500 whitespace-nowrap text-ellipsis overflow-hidden">MontereyJack3D</span></a>
-                                              </div>
-                                              <div className="text-slate-200 text-center text-xs font-bold uppercase pt-1 pb-1">
-                                                26 participants
-                                              </div>
-                                            </div>
-                                          </article>
+                                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 lg:gap-4 lg:grid-cols-5 mb-5">
+                                        {
+                                          cardList.map((ele, index) => {
+                                            return (
+                                              <WinsCard key={index} cardData={ele}></WinsCard>
+                                            )
+                                          })
+                                        }
+                                      </div>
+                                      <div className="w-full text-center mt-28">
+                                        <Button onClick={() => { attention() }} className='pr-6 uppercase text-center border-none text-white text-xl font-Medium' ghost shape="round" size="large" style={{
+                                          backgroundColor: '#443C4A',
+                                          height: '4rem',
+                                          width: '19rem'
+                                        }}>
+                                          EXCHANGE
+                                          <span className="pl-2 icon-twitter icon"></span>
+                                        </Button>
+                                        <div className="py-4 font-sm font-Regular text-slate-100">
+                                          Physical delivery coming soon!
                                         </div>
                                       </div>
-                                      <button type="button" className="text-sm tracking-widest mt-4 mb-3 p-2 block mx-auto transition-opacity hover:opacity-90 disabled:opacity-40"> Load more </button>
                                     </>
                                 }
                               </div>
