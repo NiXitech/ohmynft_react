@@ -110,7 +110,7 @@ const MWPage = (): JSX.Element => {
     setLoading(false)
   }
 
-  const [cardList, setCardList] = useState([{ id: 1, checked: false, redeemStatus: true }, { id: 2, checked: false, redeemStatus: false }, { id: 3, checked: false, redeemStatus: false }, { id: 4, checked: false, redeemStatus: false }, { id: 5, checked: false, redeemStatus: false }, { id: 6, checked: false, redeemStatus: false }]);
+  const [cardList, setCardList] = useState([{ id: 1, checked: false, redeemStatus: false }, { id: 2, checked: false, redeemStatus: false }, { id: 3, checked: false, redeemStatus: false }, { id: 4, checked: false, redeemStatus: false }, { id: 5, checked: false, redeemStatus: false }, { id: 6, checked: false, redeemStatus: false }]);
 
   const checkedItem = (key: number) => {
     debugger
