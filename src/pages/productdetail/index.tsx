@@ -45,7 +45,7 @@ const ProductDetail = (): JSX.Element => {
   useEffect(() => {
     actions.setGlobalLoading()
     getRaffleInfoFun()
-    // getPriceFun()
+    getPriceFun()
     getRaffleActivityFun()
   }, [])
 
@@ -488,7 +488,7 @@ const ProductDetail = (): JSX.Element => {
                                 {infoData?.participants.length}
                               </div>
                               <div className="">
-                                <span className="mr-1">$</span>{infoData?.prize.value}
+                                <span className="mr-1">$</span>{Number(infoData?.prize.value) * Number(price.usd)}
                               </div>
                               <div className="">
                                 <span className="mr-1">#</span>{infoData?.prize.token_id}
@@ -496,7 +496,7 @@ const ProductDetail = (): JSX.Element => {
                             </div>
                             : <div className="card-cols-2">
                               <div className="color-title">
-                                ${infoData?.prize.value}
+                                ${Number(infoData?.prize.value) * Number(price.usd)}
                               </div>
                               <div className="white-title">
                                 #{infoData?.prize.token_id}
@@ -508,7 +508,7 @@ const ProductDetail = (): JSX.Element => {
                               {infoData?.participants.length}
                             </div>
                             <div className="">
-                              <span className="mr-1">$</span>{infoData?.prize.value}
+                              <span className="mr-1">$</span>{Number(infoData?.prize.value) * Number(price.usd)}
                             </div>
                             <div className="">
                               <span className="mr-1">#</span>{infoData?.prize.token_id}
@@ -564,7 +564,7 @@ const ProductDetail = (): JSX.Element => {
                               <div className="card-cols-2">
                                 <div className="attention-number pt-6 pb-2">
                                   BUSD:
-                                  <span>&nbsp;{infoData?.prize.value}</span>
+                                  <span>&nbsp;{infoData?.price_structure.price_in_busd}</span>
                                 </div>
                               </div>
                               <div className="card-cols-2">
@@ -717,13 +717,16 @@ const ProductDetail = (): JSX.Element => {
                           <span className=" icon-twitter icon"></span>
                         </Button>
                       </div>
-                      <div className="detail-copy-button pb-10">
-                        <Button ghost size="large">
-                          CONTRACT: j3hd8vned8vjd89d33jj333azvvooemmeladjk
-                          &nbsp;
-                          <span className="icon-copy icon"></span>
-                        </Button>
+                      <div className="px-3 py-4 md:px-4 detail-copy-button my-4">
+                        <div className="text-white text-xs md:text-sm uppercase tracking-wider text-center text-ellipsis overflow-hidden font-heavy">
+                          <a href={`https://testnet.bscscan.com/address/${infoData?.contract_address}`} className="hover:text-gray-300 transition-colors flex content-center items-center justify-center" target="_blank" rel="noreferrer">
+                            <span className=" mr-1">Contract:</span>&nbsp;
+                            <span className="inline-block max-w-sm text-ellipsis overflow-hidden mr-1.5">{infoData?.contract_address}</span>
+                            <span className="icon icon-share inline-block relative"></span>
+                          </a>
+                        </div>
                       </div>
+
                       <div>
                         {/* <div className="activity-participants px-4 pt-10 md:hidden block">
                       <TwoColActivity tableData={activityData}></TwoColActivity>
