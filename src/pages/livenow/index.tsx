@@ -31,7 +31,7 @@ const LiveNow = (props: any) => {
 
 	const sharetweet = () => {
 		let userinfo = LStorage.get('LastAuthUser') || {};
-		let userLink = process.env.REACT_APP_DOMAIN_URL + '/' + ( userinfo.name || '' );
+		let userLink = process.env.REACT_APP_DOMAIN_URL + '/t/' + ( userinfo.name || '' );
 		let shareLink = 'http://twitter.com/share?' +
 			'text=Join me at OH MY NFT, the most convenient place packed with the best giveaway prizes of real-world goods changing the way you win in Web3' +
 			'&url=' + userLink + '&hashtags=WinninginWeb3';
