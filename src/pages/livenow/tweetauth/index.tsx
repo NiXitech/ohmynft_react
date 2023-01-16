@@ -8,7 +8,7 @@ const TweetAuth = (): JSX.Element => {
     //     const result = await twAuthStep1({ oauth_callback: '' })
     //     console.log('tw---tw-----tw-----tw-----------tw-----tw--------tw-------->', result)
     // }
-    const authHandler = (err, data) => {
+    const authHandler = (err: any, data: any) => {
         console.log('1341234123412341234-----------14312312341234-------->', err, data);
     };
     const CONSUMER_KEY = process.env.CONSUMER_KEY + ''
