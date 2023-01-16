@@ -267,7 +267,8 @@ const ProductDetail = (): JSX.Element => {
     address: '0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee',
     abi: erc20ABI,
     functionName: 'approve',
-    args: ["0xb8Ce6900827C2718E6b07685492Eb75ea08eFEa3", BigNumber.from('1000000000000000000')],
+    // @ts-ignore
+    args: [infoData?.contract_address, BigNumber.from('10000000000000000000000')],
     overrides: {
       from: address,
     },
@@ -444,32 +445,33 @@ const ProductDetail = (): JSX.Element => {
   // }, [])
 
 
-  const getWinnerImg = async (displayName: string) => {
+  // const getWinnerImg = async (displayName: string) => {
 
-    return new Promise(async (resolve, rej) => {
-      try {
-        const data: any = await getUserInfo(displayName)
-        if (data.data) {
+  //   return await new Promise(async (resolve, rej) => {
+  //     try {
+  //       const data: any = await getUserInfo(displayName)
+  //       if (data.data) {
 
-          resolve(data.data)
-        }
-      } catch (error) {
-        rej(error)
-      }
-    })
-    // let resultData = undefined
+  //         resolve(data.data)
+  //       }
+  //     } catch (error) {
+  //       rej(error)
+  //     }
+  //   })
+  //   // let resultData = undefined
 
-    // return resultData
-  }
+  //   // return resultData
+  // }
 
-  const getWinnerAvator = async (displayName: any) => {
-    let imgUrl = undefined
-    const data = await getWinnerImg(displayName)
+  const getWinnerAvator = (displayName: any) => {
+    let imgUrl = ''
+    // getWinnerImg(displayName).then((val: any) => {
+    //   if (val.avatar_url) {
+    //     imgUrl = val.avatar_url
+    //   }
 
-    console.log('%c🀄︎ ', 'color: #997326; font-size: 20px;', data);
-    // if (data) {
-    //   imgUrl = data.avatar_url
-    // }
+    // })
+
     return imgUrl
   }
 
@@ -675,7 +677,14 @@ const ProductDetail = (): JSX.Element => {
                               <span>{TimeInterval(infoData ? infoData?.close_time : JSON.stringify(new Date()))}</span>
                               <div className="wineer">
                                 <span className="text-right">Won By</span>
-                                {/* <img src={getWinnerAvator(infoData?.winner.display_name)} alt="" /> */}
+                                {
+                                  getWinnerAvator(infoData?.winner.display_name)
+                                    ? <img src={getWinnerAvator(infoData?.winner.display_name)} alt="" />
+                                    : <div className=' flex items-center justify-center user-name-first-word uppercase default_img rounded-full'>
+                                      {infoData?.winner.display_name.substr(0, 1)}
+                                    </div>
+                                }
+
                                 <span className="text-left">{infoData?.winner.display_name}</span>
                               </div>
                             </div>
@@ -688,7 +697,7 @@ const ProductDetail = (): JSX.Element => {
                         infoData?.winner.display_name === ''
                           ? currentEntryLens === infoData.total_entries
                             ? <>
-                              <div className="w-full">
+                              <div className="w-full chossing-await">
                                 <div className=' font-Bold w-full '>
                                   CHOOSING WINNER...
                                 </div>

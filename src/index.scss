@@ -1,5 +1,9 @@
 iframe {
-  // display: none!important;
+  display: none!important;
+}
+
+iframe[data-product="web_widget"], iframe[title]{
+  display: block!important;
 }
 
 html{

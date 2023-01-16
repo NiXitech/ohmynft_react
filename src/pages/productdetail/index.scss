@@ -259,6 +259,13 @@
         width: 7rem;
         margin: 0 2rem;
       }
+      .default_img{
+        width: 7rem;
+        height: 7rem;
+        margin: 0 2rem;
+        background-color: rgba(0, 0, 0, 0.5);
+        border: 1px solid #fff;
+      }
       span{
         flex: 1;
       }
@@ -280,5 +287,5 @@
     padding: 1.75rem;
     font-size: 2rem;
     border-radius: 3.2rem;
-background: linear-gradient(97deg, #EC0F00 0%, #FCDC66 100%);
+    background: linear-gradient(97deg, #EC0F00 0%, #FCDC66 100%);
   }
