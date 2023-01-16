@@ -18,7 +18,6 @@ interface propspromise {
 }
 /* eslint-disable jsx-a11y/img-redundant-alt */
 const NFTCard = (props: propspromise): JSX.Element => {
-	console.log('props->', props)
 	const [state, setstate] = useState({});
 	const [price, setPrice] = useState({
 		usd: 0
@@ -160,7 +159,7 @@ const NFTCard = (props: propspromise): JSX.Element => {
 	return (
 		<div className="card-content-nft-card lg:hover:scale-[1.03] ">
 			<div className="card-img">
-				<img className="cursor-pointer" src={props.cardData.prize.image_url} alt="" onClick={navigateTo}/>
+				<img className={props.cardData.category === 'upcoming' ?  "pointer-events-none" : "cursor-pointer"} src={props.cardData.prize.image_url} alt="" onClick={navigateTo}/>
 				<div className="card-id" onClick={() => {
 					// @ts-ignore
 					write()

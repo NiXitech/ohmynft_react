@@ -31,7 +31,7 @@ const LiveNow = (props: any) => {
 
 	const sharetweet = () => {
 		let userinfo = LStorage.get('LastAuthUser') || {};
-		let userLink = process.env.REACT_APP_DOMAIN_URL + '/t/' + ( userinfo.name || '' );
+		let userLink = process.env.REACT_APP_DOMAIN_URL + '/t/' + (userinfo.name || '');
 		let shareLink = 'http://twitter.com/share?' +
 			'text=Join me at OH MY NFT, the most convenient place packed with the best giveaway prizes of real-world goods changing the way you win in Web3' +
 			'&url=' + userLink + '&hashtags=WinninginWeb3';
@@ -69,9 +69,11 @@ const LiveNow = (props: any) => {
 		data.forEach((ele: any) => {
 			if (ele.category === "featured") {
 				liveNowDataTmp.featured.push(ele)
-			} else if (ele.category === 'upcoming') {
+			}
+			if (ele.category === 'upcoming') {
 				liveNowDataTmp.upcoming.push(ele)
-			} else {
+			}
+			if (ele.category !== 'upcoming') {
 				liveNowDataTmp.all.push(ele)
 			}
 		});
@@ -105,7 +107,7 @@ const LiveNow = (props: any) => {
 		const arr: { participants: any[]; }[] = [];
 		data.map((ele: {
 			total_entries: number; participants: any[];
-		// eslint-disable-next-line array-callback-return
+			// eslint-disable-next-line array-callback-return
 		}) => {
 			let count = 0
 			ele?.participants.map(
