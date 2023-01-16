@@ -10,7 +10,7 @@ import NFTCard from "../livenow/nftcard";
 import useStateHook from '../store';
 import { ActivityItem, CallBackData, RaffleItemData } from "../../types/types";
 import { erc20ABI, useAccount, useContractRead, useContractWrite, useNetwork, usePrepareContractWrite, useSwitchNetwork } from "wagmi";
-import { getPrice, getRaffleActivity, getRaffleInfo } from "../../api/services/http/api";
+import { getPrice, getRaffleActivity, getRaffleInfo, getUserInfo } from "../../api/services/http/api";
 import { Link, useParams } from "react-router-dom"
 import { BigNumber, ethers } from "ethers";
 import useDebounce from "../../libs/usehooks";
@@ -439,6 +439,42 @@ const ProductDetail = (): JSX.Element => {
   }
 
 
+  // useEffect(() => {
+  //   const data = getWinnerAvator('will')
+  // }, [])
+
+
+  const getWinnerImg = async (displayName: string) => {
+
+    return new Promise(async (resolve, rej) => {
+      try {
+        const data: any = await getUserInfo(displayName)
+        if (data.data) {
+
+          resolve(data.data)
+        }
+      } catch (error) {
+        rej(error)
+      }
+    })
+    // let resultData = undefined
+
+    // return resultData
+  }
+
+  const getWinnerAvator = async (displayName: any) => {
+    let imgUrl = undefined
+    const data = await getWinnerImg(displayName)
+
+    console.log('%c🀄︎ ', 'color: #997326; font-size: 20px;', data);
+    // if (data) {
+    //   imgUrl = data.avatar_url
+    // }
+    return imgUrl
+  }
+
+
+
 
 
 
@@ -587,19 +623,20 @@ const ProductDetail = (): JSX.Element => {
                                             if (e.target.value === '') setQuantity(1)
                                           }}
                                           onChange={(e) => {
-                                            console.log('number:--->', e.target.value);
+                                            let val = e.target.value.replace(/[^\d]/g, '');
+                                            console.log('number:--->', val);
                                             if (infoData) {
-                                              if (infoData.total_entries - currentEntryLens < Number(e.target.value) || getCurrentUserEntries(infoData?.participants) + Number(e.target.value) > infoData.max_entries_per_user) {
+                                              if (infoData.total_entries - currentEntryLens < Number(val) || getCurrentUserEntries(infoData?.participants) + Number(val) > infoData.max_entries_per_user) {
                                                 toast.error('Maximum limit exceeded.')
                                               }
                                               var patrn = /^([1-9]\d*)(\.\d*[1-9])?$/;
-                                              if (!patrn.exec(e.target.value)) {
-                                                JSON.stringify(e.target.value).substr(1);
-                                                setQuantity(Number(JSON.stringify(e.target.value).substr(1)));
-                                              } else if (Number(e.target.value) > infoData.max_entries_per_user) {
+                                              if (!patrn.exec(val)) {
+                                                JSON.stringify(val).substr(1);
+                                                setQuantity(Number(JSON.stringify(val).substr(1)));
+                                              } else if (Number(val) > infoData.max_entries_per_user) {
                                                 setQuantity(100);
                                               } else {
-                                                setQuantity(Number(e.target.value));
+                                                setQuantity(Number(val));
                                               }
                                             }
 
@@ -638,8 +675,8 @@ const ProductDetail = (): JSX.Element => {
                               <span>{TimeInterval(infoData ? infoData?.close_time : JSON.stringify(new Date()))}</span>
                               <div className="wineer">
                                 <span className="text-right">Won By</span>
-                                <img src={require('../../asstes/img/personal.png').default} alt="" />
-                                <span className="text-left">Richard Fitzgerald</span>
+                                {/* <img src={getWinnerAvator(infoData?.winner.display_name)} alt="" /> */}
+                                <span className="text-left">{infoData?.winner.display_name}</span>
                               </div>
                             </div>
                           </>
