@@ -274,24 +274,24 @@ const Header = (): JSX.Element => {
                               </div>
                               <ul className={['flex flex-col absolute z-20 nav-dropdown shadow-2xl rounded-xl top-[52px] overflow-hidden', showSocial ? 'right-0' : 'left-0 hidden'].join(' ')}>
                                 <li className="block whitespace-nowrap">
-                                  <a href={`/mw/${lastUserName.name}`} className="flex w-full items-center px-3 py-3 item transition-all duration-100">
+                                  <a href={`/mw/${lastUserName.name}`} className="flex w-full items-center px-3 py-3 item transition-all duration-100 hover:bg-white/20">
                                     <span className="mr-3 icon-ico icon-personal"></span>
                                     <span className="">My profile</span>
                                   </a>
                                 </li>
                                 <li className="block whitespace-nowrap">
-                                  <a href="/referrals" className="flex w-full items-center px-3 py-3 item transition-all duration-100">
+                                  <a href="/referrals" className="flex w-full items-center px-3 py-3 item transition-all duration-100 hover:bg-white/20">
                                     <span className=" mr-3  icon-ico icon-referals"></span>
                                     <span className="">Referrals</span>
                                   </a>
                                 </li>
                                 <li className="block whitespace-nowrap">
-                                  <a href="/account" className="flex w-full items-center px-3 py-3 item transition-all duration-100">
+                                  <a href="/account" className="flex w-full items-center px-3 py-3 item transition-all duration-100 hover:bg-white/20">
                                     <span className=" mr-3 icon-ico icon-settings"></span>
                                     <span className="">Settings</span>
                                   </a>
                                 </li>
-                                <li className="block whitespace-nowrap"><button className="flex w-full items-center px-3 py-3 transition-all duration-100" onClick={Logout}>
+                                <li className="block whitespace-nowrap"><button className="flex w-full items-center px-3 py-3 transition-all duration-100 bg-transparent hover:bg-white/20" onClick={Logout}>
                                   <span className="icon-logout icon-ico mr-3"></span>
                                   <span className="">Logout</span>
                                 </button>
