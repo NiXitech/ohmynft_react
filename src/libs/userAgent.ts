@@ -113,24 +113,24 @@ export const TimeInterval = (str: string) => {
   if (days === 0) {
     if (hours === 0) {
       if (minutes === 0) {
-        result = seconds + "seconds";
+        result = seconds + " seconds";
         if (seconds === 1) {
           result = "a second";
         }
       } else {
-        result = minutes + "minutes";
+        result = minutes + " minutes";
         if (minutes === 1) {
           result = "a minute";
         }
       }
     } else {
-      result = hours + "hours";
+      result = hours + " hours";
       if (hours === 1) {
         result = "a hour";
       }
     }
   } else {
-    result = days + "days";
+    result = days + " days";
     if (days === 1) {
       result = "a day";
     }
