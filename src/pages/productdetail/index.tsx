@@ -440,40 +440,6 @@ const ProductDetail = (): JSX.Element => {
   }
 
 
-  // useEffect(() => {
-  //   const data = getWinnerAvator('will')
-  // }, [])
-
-
-  // const getWinnerImg = async (displayName: string) => {
-
-  //   return await new Promise(async (resolve, rej) => {
-  //     try {
-  //       const data: any = await getUserInfo(displayName)
-  //       if (data.data) {
-
-  //         resolve(data.data)
-  //       }
-  //     } catch (error) {
-  //       rej(error)
-  //     }
-  //   })
-  //   // let resultData = undefined
-
-  //   // return resultData
-  // }
-
-  const getWinnerAvator = (displayName: any) => {
-    let imgUrl = ''
-    // getWinnerImg(displayName).then((val: any) => {
-    //   if (val.avatar_url) {
-    //     imgUrl = val.avatar_url
-    //   }
-
-    // })
-
-    return imgUrl
-  }
 
 
 
@@ -677,13 +643,16 @@ const ProductDetail = (): JSX.Element => {
                               <span>{TimeInterval(infoData ? infoData?.close_time : JSON.stringify(new Date()))}</span>
                               <div className="wineer">
                                 <span className="text-right">Won By</span>
-                                {
-                                  getWinnerAvator(infoData?.winner.display_name)
+                                {/* {
+                                  infoData?.winner.avatar
                                     ? <img src={getWinnerAvator(infoData?.winner.display_name)} alt="" />
                                     : <div className=' flex items-center justify-center user-name-first-word uppercase default_img rounded-full'>
                                       {infoData?.winner.display_name.substr(0, 1)}
                                     </div>
-                                }
+                                } */}
+                                <div className=' flex items-center justify-center user-name-first-word uppercase default_img rounded-full'>
+                                  {infoData?.winner.display_name.substr(0, 1)}
+                                </div>
 
                                 <span className="text-left">{infoData?.winner.display_name}</span>
                               </div>

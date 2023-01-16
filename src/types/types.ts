@@ -105,6 +105,7 @@ export interface ActivityItem {
   entry_info: EntryCountParams;
   display_name: string;
   create_time: string;
+  avatar: string;
 }
 
 export interface EntryCountParams {
@@ -119,6 +120,7 @@ export interface ParticipantCallback {
 export interface ParticipantItem {
   display_name: string;
   buy_entry_count: number;
+  avatar: string;
 }
 
 export interface UserInfoData {
@@ -164,16 +166,16 @@ export interface AllActivityItem {
 }
 
 export interface summaryReferralsItem {
-  last7Days: "0",
-  lastMonth: "0",
-  lifetime: "0",
-  thisMonth: "0",
-  today: "0",
-  yesterday: "0",
+  last7Days: "0";
+  lastMonth: "0";
+  lifetime: "0";
+  thisMonth: "0";
+  today: "0";
+  yesterday: "0";
 }
 
 export interface summaryReferrals {
-  clicks: summaryReferralsItem,
-  referrals: summaryReferralsItem,
-  revenue: summaryReferralsItem
+  clicks: summaryReferralsItem;
+  referrals: summaryReferralsItem;
+  revenue: summaryReferralsItem;
 }
