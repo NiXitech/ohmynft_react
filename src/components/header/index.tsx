@@ -77,16 +77,11 @@ const Header = (): JSX.Element => {
     };
     if (name === 'live') {
       data.forEach((ele: any) => {
-        console.log(ele)
-        if (ele.category === "featured") {
-          liveNowDataTmp.featured.push(ele)
-        } else if (ele.category === 'upcoming') {
-          liveNowDataTmp.upcoming.push(ele)
-        } else {
+        if (ele.category !== 'upcoming') {
           liveNowDataTmp.all.push(ele)
         }
       })
-      setLiveNowCount(liveNowDataTmp.featured.length)
+      setLiveNowCount(liveNowDataTmp.all.length)
     } else {
       setCompletedCount(data.length)
     }
