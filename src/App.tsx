@@ -32,7 +32,6 @@ import FAQ from './pages/FAQ';
 import { LStorage } from './api/services/cooike/storage';
 import UserInfo from './pages/useInfo';
 import Footer from './components/footer';
-import Twitter from './pages/twitter';
 import Activity from './pages/Activity';
 import MyEntries from './pages/myentries';
 
@@ -99,7 +98,6 @@ function App() {
                 <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
                 <Route path="/userinfo" element={<UserInfo />} />
                 <Route path="/faq" element={<FAQ />} />
-                <Route path="/twitter" element={<Twitter />} />
                 <Route path="/http" element={<HttpPage />} />
                 <Route path="*" element={<Navigate to="/" replace={true} />} />
               </Routes>

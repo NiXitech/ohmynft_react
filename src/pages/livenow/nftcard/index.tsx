@@ -4,13 +4,14 @@ import _ from "lodash";
 import { useEffect, useState } from "react";
 import './index.scss';
 import cardImg from '../../../asstes/tmpImg/cardImg.png';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Progress } from 'antd';
 import { CallBackData, RaffleItemData } from "../../../types/types";
-import { getPrice } from "../../../api/services/http/api";
+import { getPrice, getRaffleInfo } from "../../../api/services/http/api";
 import { useAccount, useContractRead, useContractWrite, usePrepareContractWrite } from "wagmi";
 import { BigNumber } from "ethers";
 import useDebounce from "../../../libs/usehooks";
+import { TimeInterval } from "../../../libs/userAgent";
 
 
 interface propspromise {
@@ -143,23 +144,34 @@ const NFTCard = (props: propspromise): JSX.Element => {
 	)
 
 	const percant = () => {
-		let  count = 0
+		let count = 0
 		// eslint-disable-next-line array-callback-return
-		props.cardData.participants.map((ele)=>{
+		props.cardData.participants.map((ele) => {
 			count += ele.buy_entry_count
 		})
 		return Number(Number(count / props.cardData.total_entries * 100).toFixed(0));
 	}
 
-	const navigateTo = ()=> {
+	const navigateTo = () => {
 		navigate(`/productdetail/${props.cardData.id}`);
 	}
 
+	const getWinnerAvator = (displayName: any) => {
+		let imgUrl = ''
+		// getWinnerImg(displayName).then((val: any) => {
+		//   if (val.avatar_url) {
+		//     imgUrl = val.avatar_url
+		//   }
+
+		// })
+
+		return imgUrl
+	}
 
 	return (
 		<div className="card-content-nft-card lg:hover:scale-[1.03] ">
 			<div className="card-img">
-				<img className={props.cardData.category === 'upcoming' ?  "pointer-events-none" : "cursor-pointer"} src={props.cardData.prize.image_url} alt="" onClick={navigateTo}/>
+				<img className={props.cardData.category === 'upcoming' ? "pointer-events-none" : "cursor-pointer"} src={props.cardData.prize.image_url} alt="" onClick={navigateTo} />
 				<div className="card-id" onClick={() => {
 					// @ts-ignore
 					write()
@@ -174,10 +186,13 @@ const NFTCard = (props: propspromise): JSX.Element => {
 				</div>
 			</div>
 			<div className="card-busd flex justify-between text-base lg:text-2-5xl">
-				<span>
-					<span>{props.cardData.prize.value} BUSD</span>
-					<img src={require('../../../asstes/partImg/binance.png').default} alt="" />
-				</span>
+				{
+					props.cardData.winner.display_name !== '' ? <></> :
+						<span>
+							<span>{props.cardData.prize.value} BUSD</span>
+							<img src={require('../../../asstes/partImg/binance.png').default} alt="" />
+						</span>
+				}
 				{
 					props.cardData.category !== "upcoming" ? <></> :
 						<span className="icon icon-heart-full text-xl lg:text-xl rounded-full bg-grey-radio px-2 py-1">
@@ -191,16 +206,62 @@ const NFTCard = (props: propspromise): JSX.Element => {
 					<>
 						<div className="card-progress">
 							<div className="progress-bar">
-								{/* countEntire/total */}
-								<Progress trailColor="#fff" percent={percant()} strokeColor='#1F95FF' />
+								{
+									props.cardData.winner.display_name === '' ?
+										<>
+											{
+												percant() < 100 ? <Progress trailColor="#fff" percent={percant()} strokeColor='#1F95FF' />
+													:
+													<Progress percent={percant()} showInfo={false} trailColor="#fff" success={{ strokeColor: '#FDE23B' }} />
+											}
+											<div className="text-yellow-[FDE23B] py-1 px-1">
+												{
+													percant() === 100 ? '100%' : ''
+												}
+											</div>
+										</>
+										: <div className="wineer flex items-center justify-center  w-full pb-2">
+											<span className="text-right">Won By</span>
+											{
+												getWinnerAvator(props.cardData?.winner.display_name)
+													? <img src={getWinnerAvator(props.cardData?.winner.display_name)} alt="" />
+													: <div className='flex mx-2 items-center justify-center user-name-first-word uppercase default-img rounded-full'>
+														{props.cardData?.winner.display_name.substr(0, 1)}
+													</div>
+											}
+
+											<span className="text-left">{props.cardData?.winner.display_name}</span>
+										</div>
+
+								}
 							</div>
+
 						</div>
 						{/* <div className="card-button"> */}
-							{/* <div className="uppercase link  text-base lg:text-xl"> */}
-								<Link to={`/productdetail/${props.cardData.id}`}  className="w-full rounded-full font-Bold button-background text-center uppercase link text-base lg:text-xl py-5">
-									Enter now
-								</Link>
-							{/* </div> */}
+						{/* <div className="uppercase link  text-base lg:text-xl"> */}
+						{props.cardData.winner.display_name === '' ? <Link to={`/productdetail/${props.cardData.id}`} className="w-full rounded-full font-Bold button-background text-center uppercase link text-base lg:text-xl py-5"
+							style={{
+								background: `${props.cardData.winner.display_name === '' && percant() > 99 ? 'linear-gradient(104deg, #EC0F00 -1%, #FCDC66 100%)' : ''}`
+							}}
+						>
+							{props.cardData.winner.display_name === '' && percant() > 99 ? 'closed' : 'Enter now'}
+						</Link>
+							:
+							<button
+								disabled
+								className="w-full rounded-full font-Bold button-background text-center uppercase link text-base lg:text-xl py-5 text-white"
+								style={{
+									background: '#7C8893'
+								}}
+							>
+								ended {
+									TimeInterval(props.cardData.close_time)
+								}
+								&nbsp;ago
+							</button>
+						}
+
+						{/* </div> */}
 						{/* </div> */}
 					</>
 			}
