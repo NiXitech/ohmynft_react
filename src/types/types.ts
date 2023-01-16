@@ -146,6 +146,7 @@ export interface WinnerPrizeDataItem {
 }
 
 export interface AllActivityItem {
+  avatar: string;
   category: string;
   display_name: string;
   entry_info: {

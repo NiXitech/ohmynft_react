@@ -73,7 +73,7 @@ const Activity = (): JSX.Element => {
                           return <article key={index} className="border-b border-slate-500 py-3 lg:py-1 flex items-center flex-wrap">
                             <div className="py-3 pl-2 w-6/12 md:w-3/12">
                               <a href={`/competition/${item.raffle_id}`} className="flex items-center mr-3 group pl-6">
-                                <figure className="mr-3 rounded-lg relative overflow-hidden w-14 h-14 flex-none border-linear transition-all">
+                                <figure className="mr-3 rounded-lg relative overflow-hidden w-14 h-14 flex-none transition-all">
                                   <img className="block relative z-10 w-14 rounded-lg" src={item.prize.image_url} width="52" height="52" alt="" loading="lazy" decoding="async" />
                                 </figure>
                                 <div className="grow overflow-hidden">
@@ -88,7 +88,14 @@ const Activity = (): JSX.Element => {
                             <div className="py-3 w-6/12 md:w-4/12 relative">
                               <a href={`/mw/${item.display_name}`} className="flex items-center overflow-hidden mr-3 group">
                                 <span className="relative mr-2 md:mr-3">
-                                  <img className="inline-block rounded-full w-12 h-12 border-2 border-transparent group-hover:border-gray-300 transition-all" src={require('../../asstes/img/personal.png').default} alt="" width="48" height="48" loading="lazy" />
+                                  {
+                                    !item.avatar
+                                      ? <img className="inline-block rounded-full w-12 h-12 border-2 border-transparent group-hover:border-gray-300 transition-all" src={item.avatar} alt="" width="48" height="48" loading="lazy" />
+                                      : <div className='default-img flex items-center justify-center user-name-first-word uppercase default_img rounded-full'>
+                                        {item.display_name.substr(0, 1)}
+                                      </div>
+                                  }
+                                  {/* <img className="inline-block rounded-full w-12 h-12 border-2 border-transparent group-hover:border-gray-300 transition-all" src={require('../../asstes/img/personal.png').default} alt="" width="48" height="48" loading="lazy" /> */}
                                 </span>
                                 <h3 className="text-ellipsis overflow-hidden group-hover:text-gray-300 transition-colors font-heavy">{item.display_name}</h3>
                               </a>

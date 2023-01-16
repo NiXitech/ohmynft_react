@@ -91,3 +91,15 @@ body{
 :where(.css-dev-only-do-not-override-k83k30).ant-progress.ant-progress-status-success .ant-progress-bg {
   background-color: #FDE23B;
 }
+
+
+.default-img.user-name-first-word {
+  font-size: 2rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
