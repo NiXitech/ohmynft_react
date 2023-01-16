@@ -155,7 +155,7 @@ export async function getPrice() {
   return new Promise((resolve, reject) => {
     http({
       method: "get",
-      url: "/crpto/price",
+      url: "/crypto/price",
     }).then(
       (res) => {
         resolve(res);
@@ -178,13 +178,15 @@ export async function getRaffleList(params: {
   status: string;
   offset: number;
   limit: number;
-  username?: string,
-  win?: string
+  username?: string;
+  win?: string;
 }) {
   return new Promise((resolve, reject) => {
     http({
       method: "get",
-      url: `/raffle?status=${params.status}&offset=${params.offset}&limit=${params.limit}&username=${params.username || ''}&win=${params.win || ''}`,
+      url: `/raffle?status=${params.status}&offset=${params.offset}&limit=${
+        params.limit
+      }&username=${params.username || ""}&win=${params.win || ""}`,
     }).then(
       (res) => {
         resolve(res);
@@ -525,15 +527,14 @@ export async function uploadAvatar(params: {
   });
 }
 
-
 /**
  * email ad auth
  * @returns
  */
 
 export async function emailNotification(params: {
-  marketing: boolean,
-  ethereum_address: string
+  marketing: boolean;
+  ethereum_address: string;
 }) {
   return new Promise((resolve, reject) => {
     http({
@@ -559,9 +560,9 @@ export async function emailNotification(params: {
 
 export async function tweetNotification(params: {
   twitter: {
-    connect: boolean
-  },
-  ethereum_address: string
+    connect: boolean;
+  };
+  ethereum_address: string;
 }) {
   return new Promise((resolve, reject) => {
     http({

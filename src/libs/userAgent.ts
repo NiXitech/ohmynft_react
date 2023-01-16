@@ -1,3 +1,5 @@
+import { getUserInfo } from "../api/services/http/api";
+
 export const isMobile = (): boolean => {
   let isMobile: boolean = false;
 
@@ -147,3 +149,30 @@ export const ActivityIsClosed = (str: string) => {
   }
   return false;
 };
+
+// const getWinnerImg = async (displayName: string) => {
+//   return await new Promise(async (resolve, rej) => {
+//     try {
+//       const data: any = await getUserInfo(displayName);
+//       if (data.data) {
+//         resolve(data.data);
+//       }
+//     } catch (error) {
+//       rej(error);
+//     }
+//   });
+//   // let resultData = undefined
+
+//   // return resultData
+// };
+
+// export const getWinnerAvator = (displayName: any) => {
+//   let imgUrl = "";
+//   getWinnerImg(displayName).then((val: any) => {
+//     if (val.avatar_url) {
+//       imgUrl = val.avatar_url;
+//     }
+//   });
+
+//   return imgUrl;
+// };
