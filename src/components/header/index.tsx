@@ -75,17 +75,16 @@ const Header = (): JSX.Element => {
       endsoon: [],
       all: []
     };
-    data.forEach((ele: any) => {
-      console.log(ele)
-      if (ele.category === "featured") {
-        liveNowDataTmp.featured.push(ele)
-      } else if (ele.category === 'upcoming') {
-        liveNowDataTmp.upcoming.push(ele)
-      } else {
-        liveNowDataTmp.all.push(ele)
-      }
-    })
-    name === 'live' ? setLiveNowCount(liveNowDataTmp.featured.length) : setCompletedCount(liveNowDataTmp.featured.length)
+    if (name === 'live') {
+      data.forEach((ele: any) => {
+        if (ele.category !== 'upcoming') {
+          liveNowDataTmp.all.push(ele)
+        }
+      })
+      setLiveNowCount(liveNowDataTmp.all.length)
+    } else {
+      setCompletedCount(data.length)
+    }
   }
 
   const getRaffleListFun = async (name: string) => {
@@ -267,7 +266,7 @@ const Header = (): JSX.Element => {
                     {
                       hasUser
                         ? <>
-                          <div className="hidden lg:flex ml-3 lg:border-white/30 lg:pl-4 lg:ml-0" style={{minWidth: '248px', flexDirection:'row-reverse'}} >
+                          <div className="hidden lg:flex ml-3 lg:border-white/30 lg:pl-4 lg:ml-0" style={{ minWidth: '248px', flexDirection: 'row-reverse' }} >
                             <div className="nav-main-avatar relative mr-2 cursor-pointer group">
                               <div className="relative" onClick={(e) => { e.stopPropagation(); setShowSocial(!showSocial) }}>
                                 <img className="rounded-full border-2 border-white transition-all group-hover:border-cyan-500 p-[1px] border-white" src={require('../../asstes/img/personal.png').default} alt="Your avatar" decoding="async" />
