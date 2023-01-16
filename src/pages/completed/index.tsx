@@ -32,7 +32,9 @@ const Completed = (): JSX.Element => {
 			}) as any
 			if (code === 200) {
 				console.log('items', items);
-				setCompletedData(items)
+				if (items) {
+					setCompletedData(items)
+				}
 			} else {
 				// 提示弹框
 			}

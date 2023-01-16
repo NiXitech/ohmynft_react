@@ -81,7 +81,7 @@ const WithDrawals = (): JSX.Element => {
 
               {
                 true ?
-                  <div className='h-56 w-full overflow-hidden lg:overflow-y-auto overflow-y-auto hideScrollbar'>
+                  <div className='h-56 w-full overflow-hidden lg:overflow-y-auto overflow-y-auto hideScrollbar '>
                     {
                       [1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => {
                         return (

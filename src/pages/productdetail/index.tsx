@@ -10,7 +10,7 @@ import NFTCard from "../livenow/nftcard";
 import useStateHook from '../store';
 import { ActivityItem, CallBackData, RaffleItemData } from "../../types/types";
 import { erc20ABI, useAccount, useContractRead, useContractWrite, useNetwork, usePrepareContractWrite, useSwitchNetwork } from "wagmi";
-import { getPrice, getRaffleActivity, getRaffleInfo } from "../../api/services/http/api";
+import { getPrice, getRaffleActivity, getRaffleInfo, getUserInfo } from "../../api/services/http/api";
 import { Link, useParams } from "react-router-dom"
 import { BigNumber, ethers } from "ethers";
 import useDebounce from "../../libs/usehooks";
@@ -45,7 +45,7 @@ const ProductDetail = (): JSX.Element => {
   useEffect(() => {
     actions.setGlobalLoading()
     getRaffleInfoFun()
-    // getPriceFun()
+    getPriceFun()
     getRaffleActivityFun()
   }, [])
 
@@ -439,6 +439,42 @@ const ProductDetail = (): JSX.Element => {
   }
 
 
+  // useEffect(() => {
+  //   const data = getWinnerAvator('will')
+  // }, [])
+
+
+  const getWinnerImg = async (displayName: string) => {
+
+    return new Promise(async (resolve, rej) => {
+      try {
+        const data: any = await getUserInfo(displayName)
+        if (data.data) {
+
+          resolve(data.data)
+        }
+      } catch (error) {
+        rej(error)
+      }
+    })
+    // let resultData = undefined
+
+    // return resultData
+  }
+
+  const getWinnerAvator = async (displayName: any) => {
+    let imgUrl = undefined
+    const data = await getWinnerImg(displayName)
+
+    console.log('%c🀄︎ ', 'color: #997326; font-size: 20px;', data);
+    // if (data) {
+    //   imgUrl = data.avatar_url
+    // }
+    return imgUrl
+  }
+
+
+
 
 
 
@@ -488,7 +524,7 @@ const ProductDetail = (): JSX.Element => {
                                 {infoData?.participants.length}
                               </div>
                               <div className="">
-                                <span className="mr-1">$</span>{infoData?.prize.value}
+                                <span className="mr-1">$</span>{Number(infoData?.prize.value) * Number(price.usd)}
                               </div>
                               <div className="">
                                 <span className="mr-1">#</span>{infoData?.prize.token_id}
@@ -496,7 +532,7 @@ const ProductDetail = (): JSX.Element => {
                             </div>
                             : <div className="card-cols-2">
                               <div className="color-title">
-                                ${infoData?.prize.value}
+                                ${Number(infoData?.prize.value) * Number(price.usd)}
                               </div>
                               <div className="white-title">
                                 #{infoData?.prize.token_id}
@@ -508,7 +544,7 @@ const ProductDetail = (): JSX.Element => {
                               {infoData?.participants.length}
                             </div>
                             <div className="">
-                              <span className="mr-1">$</span>{infoData?.prize.value}
+                              <span className="mr-1">$</span>{Number(infoData?.prize.value) * Number(price.usd)}
                             </div>
                             <div className="">
                               <span className="mr-1">#</span>{infoData?.prize.token_id}
@@ -564,7 +600,7 @@ const ProductDetail = (): JSX.Element => {
                               <div className="card-cols-2">
                                 <div className="attention-number pt-6 pb-2">
                                   BUSD:
-                                  <span>&nbsp;{infoData?.prize.value}</span>
+                                  <span>&nbsp;{infoData?.price_structure.price_in_busd}</span>
                                 </div>
                               </div>
                               <div className="card-cols-2">
@@ -587,19 +623,20 @@ const ProductDetail = (): JSX.Element => {
                                             if (e.target.value === '') setQuantity(1)
                                           }}
                                           onChange={(e) => {
-                                            console.log('number:--->', e.target.value);
+                                            let val = e.target.value.replace(/[^\d]/g, '');
+                                            console.log('number:--->', val);
                                             if (infoData) {
-                                              if (infoData.total_entries - currentEntryLens < Number(e.target.value) || getCurrentUserEntries(infoData?.participants) + Number(e.target.value) > infoData.max_entries_per_user) {
+                                              if (infoData.total_entries - currentEntryLens < Number(val) || getCurrentUserEntries(infoData?.participants) + Number(val) > infoData.max_entries_per_user) {
                                                 toast.error('Maximum limit exceeded.')
                                               }
                                               var patrn = /^([1-9]\d*)(\.\d*[1-9])?$/;
-                                              if (!patrn.exec(e.target.value)) {
-                                                JSON.stringify(e.target.value).substr(1);
-                                                setQuantity(Number(JSON.stringify(e.target.value).substr(1)));
-                                              } else if (Number(e.target.value) > infoData.max_entries_per_user) {
+                                              if (!patrn.exec(val)) {
+                                                JSON.stringify(val).substr(1);
+                                                setQuantity(Number(JSON.stringify(val).substr(1)));
+                                              } else if (Number(val) > infoData.max_entries_per_user) {
                                                 setQuantity(100);
                                               } else {
-                                                setQuantity(Number(e.target.value));
+                                                setQuantity(Number(val));
                                               }
                                             }
 
@@ -638,8 +675,8 @@ const ProductDetail = (): JSX.Element => {
                               <span>{TimeInterval(infoData ? infoData?.close_time : JSON.stringify(new Date()))}</span>
                               <div className="wineer">
                                 <span className="text-right">Won By</span>
-                                <img src={require('../../asstes/img/personal.png').default} alt="" />
-                                <span className="text-left">Richard Fitzgerald</span>
+                                {/* <img src={getWinnerAvator(infoData?.winner.display_name)} alt="" /> */}
+                                <span className="text-left">{infoData?.winner.display_name}</span>
                               </div>
                             </div>
                           </>
@@ -717,13 +754,16 @@ const ProductDetail = (): JSX.Element => {
                           <span className=" icon-twitter icon"></span>
                         </Button>
                       </div>
-                      <div className="detail-copy-button pb-10">
-                        <Button ghost size="large">
-                          CONTRACT: j3hd8vned8vjd89d33jj333azvvooemmeladjk
-                          &nbsp;
-                          <span className="icon-copy icon"></span>
-                        </Button>
+                      <div className="px-3 py-4 md:px-4 detail-copy-button my-4">
+                        <div className="text-white text-xs md:text-sm uppercase tracking-wider text-center text-ellipsis overflow-hidden font-heavy">
+                          <a href={`https://testnet.bscscan.com/address/${infoData?.contract_address}`} className="hover:text-gray-300 transition-colors flex content-center items-center justify-center" target="_blank" rel="noreferrer">
+                            <span className=" mr-1">Contract:</span>&nbsp;
+                            <span className="inline-block max-w-sm text-ellipsis overflow-hidden mr-1.5">{infoData?.contract_address}</span>
+                            <span className="icon icon-share inline-block relative"></span>
+                          </a>
+                        </div>
                       </div>
+
                       <div>
                         {/* <div className="activity-participants px-4 pt-10 md:hidden block">
                       <TwoColActivity tableData={activityData}></TwoColActivity>
