@@ -37,6 +37,7 @@ import Footer from './components/footer';
 import Activity from './pages/Activity';
 import MyEntries from './pages/myentries';
 import Origin from './pages/origin/Origin';
+import Redeem from './pages/redeem'
 
 
 
@@ -94,6 +95,7 @@ function App() {
                 <Route path="/mw/:name" element={<MWPage />} />
                 <Route path="/winners" element={<Winners />} />
                 <Route path="/referrals" element={<Referrals />} />
+                <Route path="/redeem" element={<Redeem />} />
                 <Route path="/notifications" element={<Notifications />} />
                 <Route path='/signup/register' element={<RegisterComp />} />
                 <Route path='/signup/verification' element={<Verification />} />
