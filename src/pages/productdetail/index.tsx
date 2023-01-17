@@ -239,7 +239,7 @@ const ProductDetail = (): JSX.Element => {
     },
     chainId: 97,
     // cacheTime: 2_000,
-    enabled: EntryStatus,
+    enabled: Boolean(debouncedPrice.count),
     // staleTime: 2_000,
     onSuccess(data: any) {
       console.log('Success', data)
