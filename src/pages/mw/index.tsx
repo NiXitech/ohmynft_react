@@ -192,8 +192,8 @@ const MWPage = (): JSX.Element => {
   return (
     <>
       {
-        modalOpen && 
-        <div className="fixed w-full h-full bg-black" style={{zIndex: '10000'}} onClick={() => setModalOpen(false)}>
+        modalOpen &&
+        <div className="fixed w-full h-full bg-black" style={{ zIndex: '10000' }} onClick={() => setModalOpen(false)}>
           <div className="container m-auto">
             asdfasd
           </div>
@@ -211,8 +211,13 @@ const MWPage = (): JSX.Element => {
                 <div className="flex flex-col mt-3 md:flex-row md:py-4">
                   <div className="flex items-center mv-header">
                     <figure className=" avator overflow-hidden flex-none  transition-all relative">
-                      <img className="block relative z-10 w-full group-hover:opacity-50 transition-opacity" src={require('../../asstes/img/personal.png').default} width="100%" alt="" loading="lazy" />
-                      {/* <span className="icon-ico-edit text-2xl absolute top-3/4 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:top-1/2 transition-all duration-300"></span> */}
+                      {
+                        userInfo?.avatar_url
+                          ? <img className="block relative z-10 w-full group-hover:opacity-50 transition-opacity bg-slate-600" src={userInfo.avatar_url} width="100%" alt="" loading="lazy" />
+                          : <div className='w-full h-full flex items-center rounded-full bg-slate-600 justify-center user-name-first-word uppercase text-xxl'>
+                            {paramsName.name?.substr(0, 1)}
+                          </div>
+                      }
                     </figure>
                     <div className="grow overflow-hidden text">
                       <div className="block">

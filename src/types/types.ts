@@ -128,6 +128,7 @@ export interface UserInfoData {
   address: string;
   created_at: string;
   email: string;
+  avatar_url: string;
 }
 
 export interface WinnerItem {
