@@ -8,10 +8,11 @@ import { RaffleItemData } from '../../types/types';
 import { LStorage } from '../../api/services/cooike/storage';
 import copy from 'copy-to-clipboard';
 import { toast } from 'react-toastify';
-import ReferralCard from '../referralcard';
+import useStateHook from '../../pages/store';
 // import TweetAuth from './tweetauth';
 
 const LiveNow = (props: any) => {
+	const [actionstate, actions] = useStateHook();
 	const [state] = useState({
 		title: 'Feature',
 		textHead: 'COME ON ！',
@@ -30,19 +31,29 @@ const LiveNow = (props: any) => {
 
 	const [tweetShareInfo, setTweetShareInfo] = useState('')
 
+	const userdata = LStorage.get('accessToken');
 	const sharetweet = () => {
-		let userinfo = LStorage.get('LastAuthUser') || {};
-		let userLink = window.location.origin + '/t/' + (userinfo.name || '');
-		let shareLink = 'http://twitter.com/share?' +
-			'text=Join me at OH MY NFT, the most convenient place packed with the best giveaway prizes of real-world goods changing the way you win in Web3' +
-			'&url=' + userLink + '&hashtags=WinninginWeb3';
-		setTweetShareInfo(shareLink)
+		if (userdata) {
+			let userinfo = LStorage.get('LastAuthUser') || {};
+			let userLink = window.location.origin + '/t/' + (userinfo.name || '');
+			let shareLink = 'http://twitter.com/share?' +
+				'text=Join me at OH MY NFT, the most convenient place packed with the best giveaway prizes of real-world goods changing the way you win in Web3' +
+				'&url=' + userLink + '&hashtags=WinninginWeb3';
+			setTweetShareInfo(shareLink)
+		} else {
+			actions.openConnect();
+		}
 	}
+
 
 	// copy link
 	const copyLink = () => {
-		copy(window.location.origin);
-		toast.success('Copy succeeded!');
+		if (userdata) {
+			copy(window.location.origin);
+			toast.success('Copy succeeded!');
+		} else {
+			actions.openConnect();
+		}
 	}
 
 	const BrText = () => {
@@ -113,7 +124,7 @@ const LiveNow = (props: any) => {
 	* data 数组
 	* thresholdstart thresholdend 阈值区间
 	*/
-	const percant = (data: any, thresholdstart:number, thresholdend:number) => {
+	const percant = (data: any, thresholdstart: number, thresholdend: number) => {
 		const arr: { participants: any[]; }[] = [];
 		data.map((ele: {
 			total_entries: number; participants: any[];
@@ -193,7 +204,7 @@ const LiveNow = (props: any) => {
 						{
 							liveNowData.featured.map((feature: RaffleItemData, index: any) => {
 								return <>
-								{/* className={[processPercant(feature) === 100 ? 'hidden' : ''].join(' ')} */}
+									{/* className={[processPercant(feature) === 100 ? 'hidden' : ''].join(' ')} */}
 									<Col md={{ span: 8 }} lg={{ span: 8 }} xl={{ span: 6 }} span={12} key={index}>
 										<NFTCard cardData={feature}></NFTCard>
 									</Col>
@@ -258,8 +269,8 @@ const LiveNow = (props: any) => {
 						{
 							liveNowData.all.map((feature: RaffleItemData, index: any) => {
 								return <>
-								 {/* className={[processPercant(feature) === 100 ? 'hidden' : ''].join(' ')} */}
-									<Col  md={{ span: 8 }} lg={{ span: 8 }} xl={{ span: 6 }} span={12} key={index}>
+									{/* className={[processPercant(feature) === 100 ? 'hidden' : ''].join(' ')} */}
+									<Col md={{ span: 8 }} lg={{ span: 8 }} xl={{ span: 6 }} span={12} key={index}>
 										<NFTCard cardData={feature}></NFTCard>
 									</Col>
 								</>

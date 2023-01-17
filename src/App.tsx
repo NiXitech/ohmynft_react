@@ -36,6 +36,7 @@ import UserInfo from './pages/useInfo';
 import Footer from './components/footer';
 import Activity from './pages/Activity';
 import MyEntries from './pages/myentries';
+import Origin from './pages/origin/Origin';
 
 
 
@@ -103,7 +104,9 @@ function App() {
                 <Route path="/userinfo" element={<UserInfo />} />
                 <Route path="/faq" element={<FAQ />} />
                 <Route path="/http" element={<HttpPage />} />
+                <Route path="/t/:username" element={<Origin />} />
                 <Route path="*" element={<Navigate to="/" replace={true} />} />
+                
               </Routes>
           }
         </div>
