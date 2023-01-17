@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // import Footer from "../../components/footer";
 import copy from "copy-to-clipboard";
 import { toast } from "react-toastify";
@@ -15,7 +16,7 @@ const Referrals = (): JSX.Element => {
   const [summaryData, setSummaryData] = useState<summaryReferrals>();
   const [userLink, setUserLink] = useState('');
   const [tweetShareInfo, setTweetShareInfo] = useState('')
-  const { isConnected, address } = useAccount()
+  const { isConnected } = useAccount()
   const location = useLocation();
   let navigate = useNavigate();
   useEffect(() => {

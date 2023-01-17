@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
 import { Button, Col, Row, Space, Image } from 'antd';
@@ -9,7 +10,7 @@ import { LStorage } from '../../api/services/cooike/storage';
 import copy from 'copy-to-clipboard';
 import { toast } from 'react-toastify';
 import useStateHook from '../../pages/store';
-// import TweetAuth from './tweetauth';
+import TweetAuth from './tweetauth';
 
 const LiveNow = (props: any) => {
 	const [actionstate, actions] = useStateHook();
@@ -174,7 +175,7 @@ const LiveNow = (props: any) => {
 							<div className="slogen-detail pt-2">
 								{state.slogenDetail}
 							</div>
-							{/* <TweetAuth></TweetAuth> */}
+							<TweetAuth></TweetAuth>
 							<Space className="pt-6 flex justify-center md:justify-start">
 								<a href={tweetShareInfo} rel="noopener noreferrer" target="_blank" className=" text-white rounded-full tracking-widest uppercase  transition-all relative disabled:opacity-40  relative flex justify-center items-center mx-auto w-full">
 									<Button className='pr-6 uppercase' type="primary" shape="round" size="large" >

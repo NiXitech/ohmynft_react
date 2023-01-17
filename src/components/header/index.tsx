@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAccount, useDisconnect } from 'wagmi';
 import { LStorage } from '../../api/services/cooike/storage';
-import { getAllActivity, getNotification, getRaffleList, getUserInfo } from '../../api/services/http/api';
+import { getAllActivity, getRaffleList, getUserInfo } from '../../api/services/http/api';
 import useStateHook from '../../pages/store';
 import { AccountUserInfo, CallBackData, RaffleItemData } from '../../types/types';
 import ConnectWallet from '../connectWallet';

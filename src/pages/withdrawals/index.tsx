@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from 'react';
 import { LStorage } from '../../api/services/cooike/storage';
 import './index.scss'

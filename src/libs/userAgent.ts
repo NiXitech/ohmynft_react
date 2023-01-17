@@ -1,4 +1,4 @@
-import { getUserInfo } from "../api/services/http/api";
+// import { getUserInfo } from "../api/services/http/api";
 
 export const isMobile = (): boolean => {
   let isMobile: boolean = false;
