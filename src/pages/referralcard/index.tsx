@@ -15,7 +15,7 @@ const ReferralCard = (): JSX.Element => {
 	console.log('userinfo', userinfo)
 
 	const sharetweet = () => {
-		let userLink = process.env.REACT_APP_DOMAIN_URL + '/t/' + (userinfo.name || '');
+		let userLink = window.location.origin + '/t/' + (userinfo.name || '');
 		let shareLink = 'http://twitter.com/share?' +
 			'text=Join me at OH MY NFT, the most convenient place packed with the best giveaway prizes of real-world goods changing the way you win in Web3' +
 			'&url=' + userLink + '&hashtags=WinninginWeb3';
@@ -24,7 +24,7 @@ const ReferralCard = (): JSX.Element => {
 
 	// copy link
 	const copyLink = () => {
-		copy(process.env.REACT_APP_DOMAIN_URL + '');
+		copy(window.location.origin);
 		toast.success('Copy succeeded!');
 	}
 
@@ -46,7 +46,7 @@ const ReferralCard = (): JSX.Element => {
 					userinfo.address ? */}
 						<div className="id-adress text-sm mt-12 h-16 rounded-4xl">
 							<span className="px-10">
-								{ process.env.REACT_APP_DOMAIN_URL + (userinfo.name ? '/t/' : '') + (userinfo.name || '')}
+								{ window.location.origin + (userinfo.name ? '/t/' : '') + (userinfo.name || '')}
 							</span>
 						</div> 
 						{/* : <></> */}

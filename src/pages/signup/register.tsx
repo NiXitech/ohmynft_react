@@ -185,7 +185,7 @@ const RegisterComp = (): JSX.Element => {
                     <p className="w-full inline-block text-red-[C43434] font-thin px-4 text-sm mt-1">{emailTip}</p>
                   </div>
                   <button
-                    className="hover:cursor-pointer text-md py-6 px-8 text-white rounded-full tracking-widest uppercase transition-all relative disabled:opacity-40 block w-full mt-4 bg-alate-100"
+                    className="hover:cursor-pointer text-md py-6 px-8 text-white rounded-full tracking-widest uppercase transition-all relative disabled:opacity-40 block w-full mt-4 button-background"
                     disabled={checkName && checkEmail ? false : true}
                     onClick={() => {
                       submitRegisterInfo()

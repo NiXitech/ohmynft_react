@@ -624,3 +624,29 @@ export async function getWithdrawal(ethereum_address: string) {
     );
   });
 }
+
+
+/**
+ * tweet ad auth
+ * @returns
+ */
+
+export async function withdrawals(params: {
+  amount: string
+}) {
+  return new Promise((resolve, reject) => {
+    http({
+      method: "post",
+      url: `/withdrawal/info`,
+      params,
+    }).then(
+      (res) => {
+        resolve(res);
+        return res;
+      },
+      (error) => {
+        reject(error);
+      }
+    );
+  });
+}
