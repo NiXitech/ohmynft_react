@@ -627,7 +627,7 @@ export async function getWithdrawal(ethereum_address: string) {
 
 
 /**
- * tweet ad auth
+ * request withdraw
  * @returns
  */
 
@@ -639,6 +639,30 @@ export async function withdrawals(params: {
       method: "post",
       url: `/withdrawal/info`,
       params,
+    }).then(
+      (res) => {
+        resolve(res);
+        return res;
+      },
+      (error) => {
+        reject(error);
+      }
+    );
+  });
+}
+
+
+
+/**
+ * 通过referral链接进来
+ * @returns
+ */
+
+export async function referralPublic(username: string) {
+  return new Promise((resolve, reject) => {
+    http({
+      method: "get",
+      url: `/referral/public/${username}`,
     }).then(
       (res) => {
         resolve(res);

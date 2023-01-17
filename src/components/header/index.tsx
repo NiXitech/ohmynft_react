@@ -290,6 +290,12 @@ const Header = (): JSX.Element => {
                                   </a>
                                 </li>
                                 <li className="block whitespace-nowrap">
+                                  <a href="/redeem" className="flex w-full items-center px-3 py-3 item transition-all duration-100 hover:bg-white/20">
+                                    <span className=" mr-3  icon icon-redeem"></span>
+                                    <span className="">Redeem</span>
+                                  </a>
+                                </li>
+                                <li className="block whitespace-nowrap">
                                   <a href="/account" className="flex w-full items-center px-3 py-3 item transition-all duration-100 hover:bg-white/20">
                                     <span className=" mr-3 icon-ico icon-settings"></span>
                                     <span className="">Settings</span>
