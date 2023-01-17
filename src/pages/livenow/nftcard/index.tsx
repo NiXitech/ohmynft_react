@@ -225,7 +225,7 @@ const NFTCard = (props: propspromise): JSX.Element => {
 											<span className="text-right">Won By</span>
 											{
 												getWinnerAvator(props.cardData?.winner.display_name)
-													? <img src={getWinnerAvator(props.cardData?.winner.display_name)} alt="" />
+													? <img src={props.cardData?.winner.avatar} alt="" />
 													: <div className='flex mx-2 items-center justify-center user-name-first-word uppercase default-img rounded-full'>
 														{props.cardData?.winner.display_name.substr(0, 1)}
 													</div>

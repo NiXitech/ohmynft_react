@@ -98,6 +98,7 @@ export interface PriceStructureItem {
 export interface WinnerInfo {
   display_name: string;
   tx_hash: string;
+  avatar: string;
 }
 
 export interface ActivityItem {

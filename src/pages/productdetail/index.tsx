@@ -184,6 +184,8 @@ const ProductDetail = (): JSX.Element => {
 
     if (isConnected && debouncedTokenId) {
 
+      console.log('%c🀀 ', 'color: #00ff88; font-size: 20px;', chain);
+
       console.log('%c🀀 ', 'color: #007300; font-size: 20px;', refetchSupply);
       refetchSupply()
     }
@@ -667,16 +669,16 @@ const ProductDetail = (): JSX.Element => {
                               <span>{TimeInterval(infoData ? infoData?.close_time : JSON.stringify(new Date()))}</span>
                               <div className="wineer">
                                 <span className="text-right">Won By</span>
-                                {/* {
+                                {
                                   infoData?.winner.avatar
-                                    ? <img src={getWinnerAvator(infoData?.winner.display_name)} alt="" />
-                                    : <div className=' flex items-center justify-center user-name-first-word uppercase default_img rounded-full'>
+                                    ? <img src={infoData?.winner.avatar} alt="" className="rounded-full bg-slate-600" />
+                                    : <div className=' flex items-center justify-center user-name-first-word uppercase default_img rounded-full bg-slate-600'>
                                       {infoData?.winner.display_name.substr(0, 1)}
                                     </div>
-                                } */}
-                                <div className=' flex items-center justify-center user-name-first-word uppercase default_img rounded-full'>
+                                }
+                                {/* <div className=' flex items-center justify-center user-name-first-word uppercase default_img rounded-full'>
                                   {infoData?.winner.display_name.substr(0, 1)}
-                                </div>
+                                </div> */}
 
                                 <span className="text-left">{infoData?.winner.display_name}</span>
                               </div>
