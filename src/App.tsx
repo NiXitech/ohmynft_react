@@ -5,6 +5,8 @@ import {
   Routes,
   Route,
   Navigate,
+  useNavigate,
+  useLocation,
 } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import './App.scss';
@@ -34,6 +36,8 @@ import UserInfo from './pages/useInfo';
 import Footer from './components/footer';
 import Activity from './pages/Activity';
 import MyEntries from './pages/myentries';
+import Origin from './pages/origin/Origin';
+import Redeem from './pages/redeem'
 
 
 
@@ -69,6 +73,8 @@ function App() {
       setLoading(false)
     }, 1500)
 
+
+
   }, [isConnected])
   return (
     <>
@@ -89,6 +95,7 @@ function App() {
                 <Route path="/mw/:name" element={<MWPage />} />
                 <Route path="/winners" element={<Winners />} />
                 <Route path="/referrals" element={<Referrals />} />
+                <Route path="/redeem" element={<Redeem />} />
                 <Route path="/notifications" element={<Notifications />} />
                 <Route path='/signup/register' element={<RegisterComp />} />
                 <Route path='/signup/verification' element={<Verification />} />
@@ -99,12 +106,14 @@ function App() {
                 <Route path="/userinfo" element={<UserInfo />} />
                 <Route path="/faq" element={<FAQ />} />
                 <Route path="/http" element={<HttpPage />} />
+                <Route path="/t/:username" element={<Origin />} />
                 <Route path="*" element={<Navigate to="/" replace={true} />} />
+                
               </Routes>
           }
         </div>
         {
-          window.location.href.indexOf('/signup/register') > 0 || window.location.href.indexOf('/signup/verification') > 0  ? <></> :
+          window.location.href.indexOf('/signup/register') > 0 || window.location.href.indexOf('/signup/verification') > 0 ? <></> :
             <Footer></Footer>
         }
         <ToastContainer theme="dark" autoClose={3000} hideProgressBar />

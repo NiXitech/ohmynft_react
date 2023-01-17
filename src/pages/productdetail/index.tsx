@@ -50,7 +50,7 @@ const ProductDetail = (): JSX.Element => {
   }, [])
 
   const getRaffleActivityFun = async () => {
-    setSubLoading(true)
+    // setSubLoading(true)
     try {
 
       const result: CallBackData = await getRaffleActivity({
@@ -167,7 +167,7 @@ const ProductDetail = (): JSX.Element => {
     })
 
   const getRaffleInfoFun = async () => {
-    setLiading(true)
+    // setLiading(true)
     try {
       const result: CallBackData = await getRaffleInfo(Number(raffle_id)) as any
       if (result.code === 200) {
@@ -183,13 +183,20 @@ const ProductDetail = (): JSX.Element => {
   useEffect(() => {
 
     if (isConnected && debouncedTokenId) {
-
-      console.log('%c🀀 ', 'color: #00ff88; font-size: 20px;', chain);
-
-      console.log('%c🀀 ', 'color: #007300; font-size: 20px;', refetchSupply);
       refetchSupply()
     }
   }, [debouncedTokenId, infoData])
+
+  useEffect(() => {
+    setTimeout(() => {
+
+      console.log('%c🀂 ', 'color: #e5de73; font-size: 20px;', new Date());
+      refetchSupply?.()
+      getRaffleActivityFun()
+      getRaffleInfoFun()
+    }, 5000)
+
+  })
 
   // 连接钱包
   const connectWallet = (item: any) => {

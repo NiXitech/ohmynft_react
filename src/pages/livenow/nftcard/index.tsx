@@ -114,7 +114,6 @@ const NFTCard = (props: propspromise): JSX.Element => {
 			chainId: 97,
 			enabled: false,
 			onSuccess(data: any) {
-				console.log('Success', data)
 			},
 			onError(error: any) {
 				console.log('Error1212122211', error)
@@ -127,7 +126,6 @@ const NFTCard = (props: propspromise): JSX.Element => {
 			setPrice(data.data.BUSD)
 
 
-			console.log('%c🀃 { }', 'color: #00e600; font-size: 20px;', isConnected, address);
 			if (isConnected) {
 				refetchSupply()
 			}

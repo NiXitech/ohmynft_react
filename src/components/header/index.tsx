@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAccount, useDisconnect } from 'wagmi';
 import { LStorage } from '../../api/services/cooike/storage';
-import { getAllActivity, getRaffleList } from '../../api/services/http/api';
+import { getAllActivity, getRaffleList, getUserInfo } from '../../api/services/http/api';
 import useStateHook from '../../pages/store';
-import { CallBackData, RaffleItemData } from '../../types/types';
+import { AccountUserInfo, CallBackData, RaffleItemData } from '../../types/types';
 import ConnectWallet from '../connectWallet';
 // import ZenDesk from '../zendesk'
 import './index.scss'
@@ -30,6 +30,7 @@ const Header = (): JSX.Element => {
   const [liveNowCount, setLiveNowCount] = useState(0)
   const [completedCount, setCompletedCount] = useState(0)
   const [activityCount, setActivityCount] = useState(0)
+  const [accountUserInfo, setUserInfo] = useState<AccountUserInfo>()
 
 
   const NavItem = (props: NavItemProps): JSX.Element => {
@@ -65,6 +66,7 @@ const Header = (): JSX.Element => {
     }, false);
     const userData = LStorage.get('LastAuthUser')
     setLastUserName(userData)
+
   }, [])
 
   const seletSortLiveNowData = (data: RaffleItemData[], name: string) => {
@@ -130,11 +132,12 @@ const Header = (): JSX.Element => {
 
   }, [isConnected])
 
-  const initData = () => {
+  const initData = async () => {
     const data = LStorage.get('accessToken');
     if (data) {
       setHasUser(true)
     }
+    await getStatus()
   }
 
   useEffect(() => {
@@ -161,6 +164,22 @@ const Header = (): JSX.Element => {
       navigate('/')
     }
     // window.location.reload();
+  }
+
+  const getStatus = async () => {
+    try {
+      const userinfo = LStorage.get('LastAuthUser') || {};
+      const { code, data } = await getUserInfo(userinfo.name) as any
+      if (code === 200) {
+        console.log('=========>', data)
+        setUserInfo(data)
+
+      } else {
+
+      }
+    } catch (err) {
+      console.log('emailNotification:', err)
+    }
   }
 
   return (
@@ -274,7 +293,21 @@ const Header = (): JSX.Element => {
                           <div className="hidden lg:flex ml-3 lg:border-white/30 lg:pl-4 lg:ml-0" style={{ minWidth: '248px', flexDirection: 'row-reverse' }} >
                             <div className="nav-main-avatar relative mr-2 cursor-pointer group">
                               <div className="relative" onClick={(e) => { e.stopPropagation(); setShowSocial(!showSocial) }}>
-                                <img className="rounded-full border-2 border-white transition-all group-hover:border-cyan-500 p-[1px] border-white" src={require('../../asstes/img/personal.png').default} alt="Your avatar" decoding="async" />
+                                {/* <img className="rounded-full border-2 border-white transition-all group-hover:border-cyan-500 p-[1px] border-white" src={require('../../asstes/img/personal.png').default} alt="Your avatar" decoding="async" /> */}
+                                {
+                                  accountUserInfo?.avatar
+                                    ? <img className="inline-block rounded-full rounded-full w-12 h-12 border-2 border-transparent group-hover:border-gray-300 transition-all" src={accountUserInfo.avatar} alt="" width="48" height="48" loading="lazy" />
+                                    : <div className=' flex items-center justify-center user-name-first-word uppercase default_img rounded-full  bg-slate-600'
+                                      style={{
+                                        width: '48px',
+                                        height: '48px',
+                                        overflow: 'hidden',
+                                        fontSize: '2rem'
+                                      }}
+                                    >
+                                      {accountUserInfo?.name.substr(0, 1)}
+                                    </div>
+                                }
                               </div>
                               <ul className={['flex flex-col absolute z-20 nav-dropdown shadow-2xl rounded-xl top-[52px] overflow-hidden', showSocial ? 'right-0' : 'left-0 hidden'].join(' ')}>
                                 <li className="block whitespace-nowrap">
@@ -287,6 +320,12 @@ const Header = (): JSX.Element => {
                                   <a href="/referrals" className="flex w-full items-center px-3 py-3 item transition-all duration-100 hover:bg-white/20">
                                     <span className=" mr-3  icon-ico icon-referals"></span>
                                     <span className="">Referrals</span>
+                                  </a>
+                                </li>
+                                <li className="block whitespace-nowrap">
+                                  <a href="/redeem" className="flex w-full items-center px-3 py-3 item transition-all duration-100 hover:bg-white/20">
+                                    <span className=" mr-3  icon icon-redeem"></span>
+                                    <span className="">Redeem</span>
                                   </a>
                                 </li>
                                 <li className="block whitespace-nowrap">

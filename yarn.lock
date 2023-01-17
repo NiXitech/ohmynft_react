@@ -2567,6 +2567,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/hellojs@^1.19.1":
+  version "1.19.1"
+  resolved "https://registry.yarnpkg.com/@types/hellojs/-/hellojs-1.19.1.tgz#1a2784d5219121052a9b5f8324023b969854f763"
+  integrity sha512-k6VJmeZVxElms3gD/O2EP+7STdg/2898BJanXRBqItPf42IPVmzGitb6yJCAUHTvViXCiJFS6wyPmbMTVxraaQ==
+
 "@types/html-minifier-terser@^5.0.0":
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/@types/html-minifier-terser/-/html-minifier-terser-5.1.2.tgz#693b316ad323ea97eed6b38ed1a3cc02b1672b57"
@@ -7840,6 +7845,11 @@ he@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/he/-/he-1.2.0.tgz#84ae65fa7eafb165fddb61566ae14baf05664f0f"
   integrity sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==
+
+hellojs@^1.19.5:
+  version "1.19.5"
+  resolved "https://registry.yarnpkg.com/hellojs/-/hellojs-1.19.5.tgz#b552f8f64c3595ffb0bfaf6627af4665817cb810"
+  integrity sha512-hFlublej5rHFWjGe6MMMmj78otSIXBbrfvtWPZSSRmXKFoLMFlL41PJ1JPS8xwiSIZca2ve8uHoPZUDwU+/8gg==
 
 hex-color-regex@^1.1.0:
   version "1.1.0"

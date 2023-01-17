@@ -1,4 +1,5 @@
 import { AxiosRequestConfig } from "axios";
+import { ReferralList } from "../api/services/http/api";
 
 export const TagColors: string[] = [
   "magenta",
@@ -190,4 +191,12 @@ export interface AccountUserInfo {
   marketing_notify: string;
   twitter_account: string;
   avatar: string;
+}
+
+export interface ReferralListItem {
+  username: string;
+  avatarUrl: string;
+  reward: string;
+  tx_hash: string;
+  created_at: string;
 }
