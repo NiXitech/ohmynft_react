@@ -108,7 +108,7 @@ const TwoColActivity = (props: propsType): JSX.Element => {
                                       </h3>
                                     </a>
                                     <div>
-                                      <a href={`https://testnet.bscscan.com/tx/${item.entry_info.tx_hash}`} target="_blank" className="text-blue-500 hover:text-blue-400" rel="noreferrer">
+                                      <a href={`${process.env.REACT_APP_BROSWER_BNB}/tx/${item.entry_info.tx_hash}`} target="_blank" className="text-blue-500 hover:text-blue-400" rel="noreferrer">
                                         <div className="block text-right text-sm whitespace-nowrap">
                                           {TimeInterval(item.create_time)} ago
                                           <span className="icon2-ico-share inline-block ml-[1px] top-[2px] relative text-sm"></span>

@@ -513,7 +513,7 @@ export async function uploadAvatar(params: {
   return new Promise((resolve, reject) => {
     http({
       method: "post",
-      url: `/user/setting/uploadImage`,
+      url: `/user/settings/uploadImage`,
       params,
     }).then(
       (res) => {
@@ -539,7 +539,7 @@ export async function emailNotification(params: {
   return new Promise((resolve, reject) => {
     http({
       method: "post",
-      url: `/user/setting/notification/email`,
+      url: `/user/settings/notification/email`,
       params,
     }).then(
       (res) => {
@@ -590,7 +590,7 @@ export async function getNotification(ethereum_address: string) {
   return new Promise((resolve, reject) => {
     http({
       method: "get",
-      url: `/user/setting/${ethereum_address}`,
+      url: `/user/settings/${ethereum_address}`,
     }).then(
       (res) => {
         resolve(res);

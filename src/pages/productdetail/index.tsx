@@ -734,7 +734,7 @@ const ProductDetail = (): JSX.Element => {
                       </div>
                       <div className="px-3 py-4 md:px-4 detail-copy-button my-4">
                         <div className="text-white text-xs md:text-sm uppercase tracking-wider text-center text-ellipsis overflow-hidden font-heavy">
-                          <a href={`https://testnet.bscscan.com/address/${infoData?.contract_address}`} className="hover:text-gray-300 transition-colors flex content-center items-center justify-center" target="_blank" rel="noreferrer">
+                          <a href={`${process.env.REACT_APP_BROSWER_BNB}/address/${infoData?.contract_address}`} className="hover:text-gray-300 transition-colors flex content-center items-center justify-center" target="_blank" rel="noreferrer">
                             <span className=" mr-1">Contract:</span>&nbsp;
                             <span className="inline-block max-w-sm text-ellipsis overflow-hidden mr-1.5">{infoData?.contract_address}</span>
                             <span className="icon icon-share inline-block relative"></span>
