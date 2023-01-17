@@ -625,20 +625,34 @@ export async function getWithdrawal(ethereum_address: string) {
   });
 }
 
-
 /**
  * tweet ad auth
  * @returns
  */
 
-export async function withdrawals(params: {
-  amount: string
-}) {
+export async function withdrawals(params: { amount: string }) {
   return new Promise((resolve, reject) => {
     http({
       method: "post",
       url: `/withdrawal/info`,
       params,
+    }).then(
+      (res) => {
+        resolve(res);
+        return res;
+      },
+      (error) => {
+        reject(error);
+      }
+    );
+  });
+}
+
+export async function ReferralList(ethereum_address: string) {
+  return new Promise((resolve, reject) => {
+    http({
+      method: "get",
+      url: `/referral/${ethereum_address}`,
     }).then(
       (res) => {
         resolve(res);

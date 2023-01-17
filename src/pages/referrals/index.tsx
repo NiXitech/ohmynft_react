@@ -8,11 +8,23 @@ import './index.scss'
 import { LStorage } from "../../api/services/cooike/storage";
 import MyReferral from "../myreferral";
 import WithDrawals from "../withdrawals";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useAccount } from "wagmi";
 
 const Referrals = (): JSX.Element => {
   const [summaryData, setSummaryData] = useState<summaryReferrals>();
   const [userLink, setUserLink] = useState('');
   const [tweetShareInfo, setTweetShareInfo] = useState('')
+  const { isConnected, address } = useAccount()
+  const location = useLocation();
+  let navigate = useNavigate();
+  useEffect(() => {
+    const userinfo = LStorage.get('LastAuthUser');
+    console.log('%c🀀 ', 'color: #7f2200; font-size: 20px;', isConnected);
+    if (location.pathname !== '/' && !userinfo) {
+      navigate('/')
+    }
+  }, [])
 
   useEffect(
     () => {

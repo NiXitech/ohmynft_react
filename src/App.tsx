@@ -5,6 +5,8 @@ import {
   Routes,
   Route,
   Navigate,
+  useNavigate,
+  useLocation,
 } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import './App.scss';
@@ -69,6 +71,8 @@ function App() {
       setLoading(false)
     }, 1500)
 
+
+
   }, [isConnected])
   return (
     <>
@@ -104,7 +108,7 @@ function App() {
           }
         </div>
         {
-          window.location.href.indexOf('/signup/register') > 0 || window.location.href.indexOf('/signup/verification') > 0  ? <></> :
+          window.location.href.indexOf('/signup/register') > 0 || window.location.href.indexOf('/signup/verification') > 0 ? <></> :
             <Footer></Footer>
         }
         <ToastContainer theme="dark" autoClose={3000} hideProgressBar />
