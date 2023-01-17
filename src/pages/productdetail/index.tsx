@@ -9,7 +9,7 @@ import NFTCard from "../livenow/nftcard";
 // import ConnectWallet from "../../components/connectWallet";
 import useStateHook from '../store';
 import { ActivityItem, CallBackData, RaffleItemData } from "../../types/types";
-import { erc20ABI, useAccount, useContractRead, useContractWrite, useNetwork, usePrepareContractWrite, useSwitchNetwork } from "wagmi";
+import { erc20ABI, useAccount, useContractRead, useContractWrite, useNetwork, usePrepareContractWrite, useSwitchNetwork, useWaitForTransaction } from "wagmi";
 import { getPrice, getRaffleActivity, getRaffleInfo, getUserInfo } from "../../api/services/http/api";
 import { Link, useParams } from "react-router-dom"
 import { BigNumber, ethers } from "ethers";
@@ -276,20 +276,23 @@ const ProductDetail = (): JSX.Element => {
     enabled: ApproveStatus,
     onSuccess(data: any) {
       console.log('Success', data)
+      setApproveStatus(false)
     },
     onError(error: any) {
       console.log('Error1212122211', error.message)
+      setApproveStatus(false)
     },
   })
 
 
-  const { write: nbtTokenApprove, reset: resetNbtTokenApprove } = useContractWrite({
+  const { data: approveAdta, write: nbtTokenApprove, reset: resetNbtTokenApprove } = useContractWrite({
     ...configApprove,
     onSuccess(data: any) {
       console.log('Success ApproveFun', data)
       // toast.success('The transaction is successful, waiting for block confirmation！')
-      setEntryStatus(true)
-      enterWrite?.()
+
+
+      // enterWrite?.()
     },
     onError(error: any) {
       console.log('Error1212122211 ApproveFun', error.message)
@@ -297,6 +300,21 @@ const ProductDetail = (): JSX.Element => {
       toast.error(error.message)
     },
   })
+
+  const ApproveTransaction = useWaitForTransaction({
+    confirmations: 1,
+    hash: approveAdta?.hash,
+    onSuccess(data) {
+      console.log(" ApproveTransaction useWaitForTransaction STATUS ", EntryStatus);
+      // setEnableHook(false);
+      if (!EntryStatus) {
+        setEntryStatus(true)
+      }
+    },
+    onError(error) {
+      console.log('ApproveTransaction useWaitForTransaction error', error);
+    }
+  });
 
   const { chain } = useNetwork()
   const { chains, pendingChainId, switchNetwork } =
@@ -312,7 +330,10 @@ const ProductDetail = (): JSX.Element => {
     if (chain?.id !== 97) {
       await switchNetwork?.(97)
     }
-    setApproveStatus(true)
+    if (!ApproveStatus) {
+      setApproveStatus(true)
+
+    }
     await runApprove()
   }
 
@@ -734,7 +755,7 @@ const ProductDetail = (): JSX.Element => {
                       </div>
                       <div className="px-3 py-4 md:px-4 detail-copy-button my-4">
                         <div className="text-white text-xs md:text-sm uppercase tracking-wider text-center text-ellipsis overflow-hidden font-heavy">
-                          <a href={`https://testnet.bscscan.com/address/${infoData?.contract_address}`} className="hover:text-gray-300 transition-colors flex content-center items-center justify-center" target="_blank" rel="noreferrer">
+                          <a href={`${process.env.REACT_APP_BROSWER_BNB}/address/${infoData?.contract_address}`} className="hover:text-gray-300 transition-colors flex content-center items-center justify-center" target="_blank" rel="noreferrer">
                             <span className=" mr-1">Contract:</span>&nbsp;
                             <span className="inline-block max-w-sm text-ellipsis overflow-hidden mr-1.5">{infoData?.contract_address}</span>
                             <span className="icon icon-share inline-block relative"></span>

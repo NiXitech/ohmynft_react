@@ -218,7 +218,7 @@ const MWPage = (): JSX.Element => {
                       <div className="block">
                         <h2 className="text-white block truncate font-black">{paramsName.name}
                         </h2>
-                        <a href={`https://goerli.etherscan.io/address/${userInfo?.address}`} className=" transition-colors block truncate" target="_blank" rel="noreferrer" >
+                        <a href={`${process.env.REACT_APP_BROSWER_BNB}/address/${userInfo?.address}`} className=" transition-colors block truncate" target="_blank" rel="noreferrer" >
                           {userInfo?.address}
                           <span className="icon-share inline-block relative ml-1"></span>
                         </a>

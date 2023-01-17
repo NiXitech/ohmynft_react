@@ -79,8 +79,12 @@ const LiveNow = (props: any) => {
 			}
 		});
 		console.log('liveNowDataTmp', liveNowDataTmp);
-		let endsoon = percant(liveNowDataTmp.featured);
-		liveNowDataTmp.endsoon.push(...endsoon)
+		let endsoon = percant(liveNowDataTmp.featured, 70, 101);
+		let featured = percant(liveNowDataTmp.featured, -1, 100);
+		let all = percant(liveNowDataTmp.all, -1, 101);
+		liveNowDataTmp.endsoon = [...endsoon]
+		liveNowDataTmp.featured = [...featured]
+		liveNowDataTmp.all = [...all]
 		setLiveData(liveNowDataTmp)
 	}
 
@@ -104,7 +108,12 @@ const LiveNow = (props: any) => {
 		}
 	}
 
-	const percant = (data: any) => {
+
+	/*
+	* data 数组
+	* thresholdstart thresholdend 阈值区间
+	*/
+	const percant = (data: any, thresholdstart:number, thresholdend:number) => {
 		const arr: { participants: any[]; }[] = [];
 		data.map((ele: {
 			total_entries: number; participants: any[];
@@ -117,12 +126,24 @@ const LiveNow = (props: any) => {
 					count += element.buy_entry_count
 				}
 			)
-			if (Number(Number(count / ele.total_entries * 100).toFixed(0)) >= 85) {
+			const process = Number(Number(count / ele.total_entries * 100).toFixed(0))
+			if (process > thresholdstart && process < thresholdend) {
 				arr.push(ele);
 			}
 		})
 		return arr;
 	}
+
+	// const processPercant = (ele:any) => {
+	// 	let count = 0
+	// 	ele?.participants.map(
+	// 		// eslint-disable-next-line array-callback-return
+	// 		(element:any) => {
+	// 			count += element.buy_entry_count
+	// 		}
+	// 	)
+	// 	return Number(Number(count / ele.total_entries * 100).toFixed(0))
+	// }
 
 	useEffect(
 		() => {
@@ -172,6 +193,7 @@ const LiveNow = (props: any) => {
 						{
 							liveNowData.featured.map((feature: RaffleItemData, index: any) => {
 								return <>
+								{/* className={[processPercant(feature) === 100 ? 'hidden' : ''].join(' ')} */}
 									<Col md={{ span: 8 }} lg={{ span: 8 }} xl={{ span: 6 }} span={12} key={index}>
 										<NFTCard cardData={feature}></NFTCard>
 									</Col>
@@ -220,9 +242,9 @@ const LiveNow = (props: any) => {
 						}
 					</Row>
 
-					<Row className='pt-16'>
+					{/* <Row className='pt-16'>
 						<ReferralCard></ReferralCard>
-					</Row>
+					</Row> */}
 
 					{
 						liveNowData.all.length > 0 ? <Row >
@@ -236,7 +258,8 @@ const LiveNow = (props: any) => {
 						{
 							liveNowData.all.map((feature: RaffleItemData, index: any) => {
 								return <>
-									<Col md={{ span: 8 }} lg={{ span: 8 }} xl={{ span: 6 }} span={12} key={index}>
+								 {/* className={[processPercant(feature) === 100 ? 'hidden' : ''].join(' ')} */}
+									<Col  md={{ span: 8 }} lg={{ span: 8 }} xl={{ span: 6 }} span={12} key={index}>
 										<NFTCard cardData={feature}></NFTCard>
 									</Col>
 								</>

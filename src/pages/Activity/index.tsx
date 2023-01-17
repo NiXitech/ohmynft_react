@@ -106,7 +106,7 @@ const Activity = (): JSX.Element => {
                                 <span className="font-bold font-heavy">{item.entry_info.count}</span>
                               </div>
                               <div className="flex w-1/2 text-right pr-3 justify-end md:py-3 items-center">
-                                <a href={`https://testnet.bscscan.com/tx/${item.entry_info.tx_hash}`} target="_blank" className="text-sm md:text-base text-cyan-500 hover:text-cyan-500 pr-6" rel="noreferrer">
+                                <a href={`${process.env.REACT_APP_BROSWER_BNB}/tx/${item.entry_info.tx_hash}`} target="_blank" className="text-sm md:text-base text-cyan-500 hover:text-cyan-500 pr-6" rel="noreferrer">
                                   {TimeInterval(item.create_time)} ago
                                   <span className="icon2-ico-share inline-block top-1 -right-[3px] relative text-[16px]"></span></a>
                               </div>
