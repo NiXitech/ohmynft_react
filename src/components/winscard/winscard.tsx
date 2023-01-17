@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-const WinsCard = (props): JSX.Element => {
+const WinsCard = (props: any): JSX.Element => {
 
     return (
         <>
-            <article onClick={()=> props.clickCallback(props.cardData.id)} className={["cursor-pointer flex flex-col bg-grey-6 rounded-3xl xl:rounded-3xl transition-all duration-200 lg:hover:scale-[1.03] relative group", props.cardData.checked && !props.cardData.redeemStatus ? 'border-3' : 'border-none'].join(' ')} style={{ borderColor: '#3A8AFF' }}>
+            <article onClick={() => props.clickCallback(props.cardData.id)} className={["cursor-pointer flex flex-col bg-grey-6 rounded-3xl xl:rounded-3xl transition-all duration-200 lg:hover:scale-[1.03] relative group", props.cardData.checked && !props.cardData.redeemStatus ? 'border-3' : 'border-none'].join(' ')} style={{ borderColor: '#3A8AFF' }}>
                 <figure className="w-full aspect-square rounded-xl overflow-hidden relative z-0 -top-[0.5px]">
                     <div className="relative pt-5 px-5">
                         <img className="transition-all rounded-3xl z-10 relative object-cover h-full w-full block relative z-10 opacity-100" src="https://i.seadn.io/gae/AOUDTbuATAzvgGTS6J3xP2lDNevT0cIvHRCr0xWo8bTtRRnspZPgso2SjSOP_RLQ3COogtEwplZZ0c8ZJvv8BO3Z79KRy9anokdJ?fit=max&amp;w=350&amp;auto=format" alt="" width="350" height="350" loading="lazy" decoding="async" draggable="false" />
