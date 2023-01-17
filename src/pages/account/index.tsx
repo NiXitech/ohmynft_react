@@ -6,10 +6,14 @@ import { emailNotification, getNotification, tweetNotification, uploadAvatar } f
 import { LStorage } from '../../api/services/cooike/storage';
 import './index.scss'
 import { toast } from 'react-toastify';
+import { useAccount } from 'wagmi';
+import { AccountUserInfo } from '../../types/types';
 
 
 const AccountPage = (): JSX.Element => {
   const userData = LStorage.get('LastAuthUser')
+  const { address } = useAccount()
+  const [accountUserInfo, setUserInfo] = useState<AccountUserInfo>()
   const [imageUrl, setImageUrl] = useState<string>(
     // 默认头像
     require('../../asstes/partImg/edit.png').default
@@ -120,6 +124,7 @@ const AccountPage = (): JSX.Element => {
       const { code, data } = await getNotification(userinfo.address || '') as any
       if (code === 200) {
         console.log('=========>', data)
+        setUserInfo(data)
         setStatus(
           {
             marketing_notify: data.marketing_notify || true,
@@ -152,6 +157,7 @@ const AccountPage = (): JSX.Element => {
 
               <button className="absolute -right-9 top-1/2 -mt-4 w-12 h-8 text-right transition-all opacity-80 group-hover:opacity-100"><span className="icon-ico-edit text-2xl"></span></button> */}
               <div>
+
                 <Upload
                   name="avatar"
                   listType="picture-card"
@@ -160,17 +166,24 @@ const AccountPage = (): JSX.Element => {
                   customRequest={(info) => { uploadAvatarFunc(info) }}
                   beforeUpload={beforeUpload}
                 >
-                  {
-                    userImgUrl === '' ?
-                      <div className='w-full h-full flex items-center justify-center user-name-first-word uppercase'>
-                        {userData.name.substr(0, 1)}
-                      </div> :
+                  <div className='w-full h-full flex items-center rounded-full bg-slate-600 justify-center user-name-first-word uppercase'>
+                    {accountUserInfo?.name.substr(0, 1)}
+                  </div>
+                  {/* {
+                    accountUserInfo?.avatar === ''
+                      ?
+                      <div className='w-full h-full flex items-center rounded-full bg-slate-600 justify-center user-name-first-word uppercase'>
+                        {accountUserInfo?.name.substr(0, 1)}
+                      </div>
+                      :
 
-                      imageUrl ? <img src={imageUrl} className="w-full rounded-full border-2 border-transparent transition-all"
+                      <img src={accountUserInfo?.avatar} className="w-full rounded-full border-2 border-transparent transition-all bg-slate-600"
                         alt="avatar" style={{ width: '100%' }
-                        } /> : uploadButton
-                  }
+                        } />
+                  } */}
                 </Upload>
+
+
               </div>
 
 

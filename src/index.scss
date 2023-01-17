@@ -103,3 +103,7 @@ body{
   justify-content: center;
   line-height: 1;
 }
+
+.uploader-noborder:where(.css-dev-only-do-not-override-k83k30).ant-upload-wrapper.ant-upload-picture-card-wrapper .ant-upload.ant-upload-select{
+  border: none;
+}
