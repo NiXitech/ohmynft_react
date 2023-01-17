@@ -246,15 +246,17 @@ const ProductDetail = (): JSX.Element => {
       console.log('Error1212122211', error.message)
     },
   })
-  const { data, error, isError, write: enterWrite, isLoading } = useContractWrite({
+  const { data: mintNft, error, isError, write: enterWrite, isLoading } = useContractWrite({
     ...config,
     onSuccess(data: any) {
       console.log('Success useContractWrite', data)
+      setEntryStatus(false)
       setMintLoading(false)
       toast.success('The transaction is successful, waiting for block confirmation！')
     },
     onError(error: any) {
       console.log('Error1212122211 useContractWrite', error.message)
+      setEntryStatus(false)
       toast.error(error.message)
       setMintLoading(false)
     },
@@ -291,7 +293,10 @@ const ProductDetail = (): JSX.Element => {
       console.log('Success ApproveFun', data)
       // toast.success('The transaction is successful, waiting for block confirmation！')
 
-
+      if (!EntryStatus) {
+        setEntryStatus(true)
+        enterWrite?.()
+      }
       // enterWrite?.()
     },
     onError(error: any) {
@@ -303,16 +308,14 @@ const ProductDetail = (): JSX.Element => {
 
   const ApproveTransaction = useWaitForTransaction({
     confirmations: 1,
-    hash: approveAdta?.hash,
+    hash: mintNft?.hash,
     onSuccess(data) {
-      console.log(" ApproveTransaction useWaitForTransaction STATUS ", EntryStatus);
+      console.log(" mintNft useWaitForTransaction STATUS ", EntryStatus);
       // setEnableHook(false);
-      if (!EntryStatus) {
-        setEntryStatus(true)
-      }
+
     },
     onError(error) {
-      console.log('ApproveTransaction useWaitForTransaction error', error);
+      console.log('mintNft useWaitForTransaction error', error);
     }
   });
 

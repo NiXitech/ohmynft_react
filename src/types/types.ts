@@ -180,3 +180,12 @@ export interface summaryReferrals {
   referrals: summaryReferralsItem;
   revenue: summaryReferralsItem;
 }
+
+export interface AccountUserInfo {
+  name: string;
+  address: string;
+  email: string;
+  marketing_notify: string;
+  twitter_account: string;
+  avatar: string;
+}

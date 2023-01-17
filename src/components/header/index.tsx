@@ -149,13 +149,18 @@ const Header = (): JSX.Element => {
     getRaffleListFun('completed')
     getAllActivityFun()
   }, [])
+  let navigate = useNavigate();
 
   const Logout = () => {
+    console.log('%c🀂 location', 'color: #99adcc; font-size: 20px;', location);
     disconnect()
     setHasUser(false)
     LStorage.delete('accessToken');
     LStorage.delete('LastAuthUser');
-    window.location.reload();
+    if (location.pathname !== '/') {
+      navigate('/')
+    }
+    // window.location.reload();
   }
 
   return (

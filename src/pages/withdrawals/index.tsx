@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react';
 import { LStorage } from '../../api/services/cooike/storage';
 import './index.scss'
 import { Button } from 'antd';
-import { getWithdrawal } from '../../api/services/http/api';
+import { getWithdrawal, withdrawals } from '../../api/services/http/api';
+import { toast } from 'react-toastify';
 
 
 const WithDrawals = (): JSX.Element => {
   const userData = LStorage.get('LastAuthUser')
   const [history, setHistory] = useState([])
+  const [amount, setAmount] = useState('')
 
 
   const getWithdrawalFun = async()=> {
@@ -20,6 +22,19 @@ const WithDrawals = (): JSX.Element => {
       }
     }catch(error) {
       console.log('getWithdrawalFun', error)
+    }
+  }
+
+  const withdrawalsFunc = async()=> {
+    try {
+      const { code } = await withdrawals({amount: amount}) as any
+      if (code === 200 ) {
+        toast.success('request succeeded!'); 
+      } else {
+        // fail modal 
+      }
+    } catch (error) {
+      console.log('withdrawalsFunc:', error)
     }
   }
 
@@ -49,7 +64,7 @@ const WithDrawals = (): JSX.Element => {
               </div>
 
               <div className="mt-3 relative input-success-active w-full flex justify-center">
-                <Button className='rounded-full mx-2 border-none' type='primary' style={{ backgroundColor: '#443C4A' }} ghost>001</Button>
+                <Button className='rounded-full mx-2 border-none' type='primary' style={{ backgroundColor: '#443C4A' }} ghost onClick={()=>setAmount('0.01')}>0.001</Button>
                 <Button className='rounded-full mx-2 border-none' type='primary' style={{ backgroundColor: '#443C4A' }} ghost>002</Button>
                 <Button className='rounded-full mx-2 border-none' type='primary' style={{ backgroundColor: '#443C4A' }} ghost>003</Button>
                 <Button className='rounded-full mx-2 border-none' type='primary' style={{ backgroundColor: '#443C4A' }} ghost>002</Button>
@@ -63,7 +78,7 @@ const WithDrawals = (): JSX.Element => {
               </div>
 
               <div className="mt-3 relative input-success-active w-full flex justify-center">
-                <Button className='rounded-full mx-2 w-1/2 h-16 font-Regular font-base border-none' style={{ backgroundColor: '#443C4A' }} ghost>REQUEST WITHDRAWAL</Button>
+                <Button className='rounded-full mx-2 w-1/2 h-16 font-Regular font-base border-none' style={{ backgroundColor: '#443C4A' }} ghost onClick={()=> withdrawalsFunc()}>REQUEST WITHDRAWAL</Button>
               </div>
 
               <div className="mt-3 relative input-success-active w-full flex justify-center py-2">
