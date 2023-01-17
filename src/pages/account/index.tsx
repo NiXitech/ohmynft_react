@@ -166,10 +166,10 @@ const AccountPage = (): JSX.Element => {
                   customRequest={(info) => { uploadAvatarFunc(info) }}
                   beforeUpload={beforeUpload}
                 >
-                  <div className='w-full h-full flex items-center rounded-full bg-slate-600 justify-center user-name-first-word uppercase'>
+                  {/* <div className='w-full h-full flex items-center rounded-full bg-slate-600 justify-center user-name-first-word uppercase'>
                     {accountUserInfo?.name.substr(0, 1)}
-                  </div>
-                  {/* {
+                  </div> */}
+                  {
                     accountUserInfo?.avatar === ''
                       ?
                       <div className='w-full h-full flex items-center rounded-full bg-slate-600 justify-center user-name-first-word uppercase'>
@@ -180,7 +180,7 @@ const AccountPage = (): JSX.Element => {
                       <img src={accountUserInfo?.avatar} className="w-full rounded-full border-2 border-transparent transition-all bg-slate-600"
                         alt="avatar" style={{ width: '100%' }
                         } />
-                  } */}
+                  }
                 </Upload>
 
 

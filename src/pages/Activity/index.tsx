@@ -89,8 +89,8 @@ const Activity = (): JSX.Element => {
                               <a href={`/mw/${item.display_name}`} className="flex items-center overflow-hidden mr-3 group">
                                 <span className="relative mr-2 md:mr-3">
                                   {
-                                    !item.avatar
-                                      ? <img className="inline-block rounded-full w-12 h-12 border-2 border-transparent group-hover:border-gray-300 transition-all" src={item.avatar} alt="" width="48" height="48" loading="lazy" />
+                                    item.avatar
+                                      ? <img className="inline-block rounded-full w-12 h-12 border-2 border-transparent group-hover:border-gray-300 transition-all bg-slate-600" src={item.avatar} alt="" width="48" height="48" loading="lazy" />
                                       : <div className='default-img flex items-center justify-center user-name-first-word uppercase default_img rounded-full'>
                                         {item.display_name.substr(0, 1)}
                                       </div>
