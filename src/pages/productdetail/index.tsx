@@ -184,6 +184,8 @@ const ProductDetail = (): JSX.Element => {
 
     if (isConnected && debouncedTokenId) {
 
+      console.log('%c🀀 ', 'color: #00ff88; font-size: 20px;', chain);
+
       console.log('%c🀀 ', 'color: #007300; font-size: 20px;', refetchSupply);
       refetchSupply()
     }
@@ -237,7 +239,7 @@ const ProductDetail = (): JSX.Element => {
     },
     chainId: 97,
     // cacheTime: 2_000,
-    enabled: EntryStatus,
+    enabled: Boolean(debouncedPrice.count),
     // staleTime: 2_000,
     onSuccess(data: any) {
       console.log('Success', data)
@@ -246,15 +248,17 @@ const ProductDetail = (): JSX.Element => {
       console.log('Error1212122211', error.message)
     },
   })
-  const { data, error, isError, write: enterWrite, isLoading } = useContractWrite({
+  const { data: mintNft, error, isError, write: enterWrite, isLoading } = useContractWrite({
     ...config,
     onSuccess(data: any) {
       console.log('Success useContractWrite', data)
+      setEntryStatus(false)
       setMintLoading(false)
       toast.success('The transaction is successful, waiting for block confirmation！')
     },
     onError(error: any) {
       console.log('Error1212122211 useContractWrite', error.message)
+      setEntryStatus(false)
       toast.error(error.message)
       setMintLoading(false)
     },
@@ -291,7 +295,10 @@ const ProductDetail = (): JSX.Element => {
       console.log('Success ApproveFun', data)
       // toast.success('The transaction is successful, waiting for block confirmation！')
 
-
+      if (!EntryStatus) {
+        setEntryStatus(true)
+        enterWrite?.()
+      }
       // enterWrite?.()
     },
     onError(error: any) {
@@ -303,16 +310,14 @@ const ProductDetail = (): JSX.Element => {
 
   const ApproveTransaction = useWaitForTransaction({
     confirmations: 1,
-    hash: approveAdta?.hash,
+    hash: mintNft?.hash,
     onSuccess(data) {
-      console.log(" ApproveTransaction useWaitForTransaction STATUS ", EntryStatus);
+      console.log(" mintNft useWaitForTransaction STATUS ", EntryStatus);
       // setEnableHook(false);
-      if (!EntryStatus) {
-        setEntryStatus(true)
-      }
+
     },
     onError(error) {
-      console.log('ApproveTransaction useWaitForTransaction error', error);
+      console.log('mintNft useWaitForTransaction error', error);
     }
   });
 
@@ -664,16 +669,16 @@ const ProductDetail = (): JSX.Element => {
                               <span>{TimeInterval(infoData ? infoData?.close_time : JSON.stringify(new Date()))}</span>
                               <div className="wineer">
                                 <span className="text-right">Won By</span>
-                                {/* {
+                                {
                                   infoData?.winner.avatar
-                                    ? <img src={getWinnerAvator(infoData?.winner.display_name)} alt="" />
-                                    : <div className=' flex items-center justify-center user-name-first-word uppercase default_img rounded-full'>
+                                    ? <img src={infoData?.winner.avatar} alt="" className="rounded-full bg-slate-600" />
+                                    : <div className=' flex items-center justify-center user-name-first-word uppercase default_img rounded-full bg-slate-600'>
                                       {infoData?.winner.display_name.substr(0, 1)}
                                     </div>
-                                } */}
-                                <div className=' flex items-center justify-center user-name-first-word uppercase default_img rounded-full'>
+                                }
+                                {/* <div className=' flex items-center justify-center user-name-first-word uppercase default_img rounded-full'>
                                   {infoData?.winner.display_name.substr(0, 1)}
-                                </div>
+                                </div> */}
 
                                 <span className="text-left">{infoData?.winner.display_name}</span>
                               </div>
