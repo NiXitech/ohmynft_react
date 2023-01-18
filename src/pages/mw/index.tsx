@@ -96,7 +96,7 @@ const MWPage = (): JSX.Element => {
         status: 'live',
         offset: 0,
         limit: 100000000,
-        username: 'will',  //paramsName.name || 
+        username: paramsName.name || "",
         win: true
       }) as any
 
