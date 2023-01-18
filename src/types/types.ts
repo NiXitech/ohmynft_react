@@ -190,7 +190,7 @@ export interface AccountUserInfo {
   email: string;
   marketing_notify: string;
   twitter_account: string;
-  avatar: string;
+  avatar_url: string;
 }
 
 export interface ReferralListItem {

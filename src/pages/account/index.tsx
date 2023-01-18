@@ -171,14 +171,14 @@ const AccountPage = (): JSX.Element => {
                     {accountUserInfo?.name.substr(0, 1)}
                   </div> */}
                   {
-                    accountUserInfo?.avatar === ''
+                    accountUserInfo?.avatar_url === ''
                       ?
                       <div className='w-full h-full flex items-center rounded-full bg-slate-600 justify-center user-name-first-word uppercase'>
                         {accountUserInfo?.name.substr(0, 1)}
                       </div>
                       :
 
-                      <img src={accountUserInfo?.avatar} className="w-full rounded-full border-2 border-transparent transition-all bg-slate-600"
+                      <img src={accountUserInfo?.avatar_url} className="w-full rounded-full border-2 border-transparent transition-all bg-slate-600"
                         alt="avatar" style={{ width: '100%' }
                         } />
                   }

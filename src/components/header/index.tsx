@@ -295,12 +295,11 @@ const Header = (): JSX.Element => {
                               <div className="relative" onClick={(e) => { e.stopPropagation(); setShowSocial(!showSocial) }}>
                                 {/* <img className="rounded-full border-2 border-white transition-all group-hover:border-cyan-500 p-[1px] border-white" src={require('../../asstes/img/personal.png').default} alt="Your avatar" decoding="async" /> */}
                                 {
-                                  accountUserInfo?.avatar
-                                    ? <img className="inline-block rounded-full rounded-full w-12 h-12 border-2 border-transparent group-hover:border-gray-300 transition-all" src={accountUserInfo.avatar} alt="" width="48" height="48" loading="lazy" />
-                                    : <div className=' flex items-center justify-center user-name-first-word uppercase default_img rounded-full  bg-slate-600'
+                                  accountUserInfo && accountUserInfo?.avatar_url
+                                    ? <img className="block rounded-full w-12 h-12 transition-all bg-slate-600" src={accountUserInfo.avatar_url} alt="" loading="lazy" />
+                                    : <div className=' flex items-center justify-center  w-12 h-12 user-name-first-word uppercase default_img rounded-full  bg-slate-600'
                                       style={{
-                                        width: '48px',
-                                        height: '48px',
+
                                         overflow: 'hidden',
                                         fontSize: '2rem'
                                       }}
