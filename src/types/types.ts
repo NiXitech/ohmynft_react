@@ -81,6 +81,7 @@ export interface RaffleItemData {
   winner: WinnerInfo;
   total_entries: number;
   airdrop_users: [];
+  checked?:boolean;
 }
 
 export interface PrizeDataItem {

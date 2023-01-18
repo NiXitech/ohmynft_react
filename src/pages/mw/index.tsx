@@ -9,6 +9,7 @@ import { getPrice, getRaffleList, getUserInfo } from "../../api/services/http/ap
 import { ActivityIsClosed, getClosedDate, getDetailClosedDate, getDollar, getQueryVariable, TimeInterval, updateUrl } from "../../libs/userAgent";
 import { CallBackData, RaffleItemData, UserInfoData } from "../../types/types";
 import './index.scss'
+import { type } from "@testing-library/user-event/dist/type";
 
 /* eslint-disable jsx-a11y/img-redundant-alt */
 
@@ -66,8 +67,7 @@ const MWPage = (): JSX.Element => {
   const getPriceFun = async () => {
     try {
       const data: CallBackData = await getPrice() as any
-      setPrice(data.data.price)
-
+      setPrice(data.data.BUSD)
     } catch (error) {
 
     }
@@ -91,61 +91,66 @@ const MWPage = (): JSX.Element => {
 
 
   const getRaffleListFun = async () => {
-    // try {
-    //   const result: CallBackData = await getRaffleList({
-    //     status: 'completed',
-    //     skip: 0,
-    //     take: 100000000,
-    //     username: paramsName.name || ''
-    //   }) as any
+    try {
+      const result: CallBackData = await getRaffleList({
+        status: 'live',
+        offset: 0,
+        limit: 100000000,
+        username: paramsName.name || "",
+        win: true
+      }) as any
 
-    //   if (result.code === 200 && result.data.items !== null) {
-    //     setCompletedData(result.data.items)
-    //   }
-    // } catch (error: any) {
-    //   toast.error(error.message, {
-    //     hideProgressBar: false,
-    //   })
-    // }
+      if (result.code === 200 && result.data.items !== null) {
+        setCompletedData(result.data.items)
+      }
+    } catch (error: any) {
+      toast.error(error.message, {
+        hideProgressBar: false,
+      })
+    }
     setLoading(false)
   }
 
   const [cardList, setCardList] = useState([{ id: 1, checked: false, redeemStatus: false }, { id: 2, checked: false, redeemStatus: false }, { id: 3, checked: false, redeemStatus: false }, { id: 4, checked: false, redeemStatus: false }, { id: 5, checked: false, redeemStatus: false }, { id: 6, checked: false, redeemStatus: false }]);
 
-  const checkedItem = (key: number) => {
-    const arr: any = [];
-    // eslint-disable-next-line array-callback-return
-    cardList.map((item, index) => {
-      if (item.id === key) {
-        item.checked = true
-      } else {
-        item.checked = false
-      }
-      arr.push(item)
-    })
-    setCardList(arr)
+
+  const checkedItem = (key: any) => {
+    // const arr: any = [];
+    // // eslint-disable-next-line array-callback-return
+    // CompletedData.map((item, index) => {
+    //   if (item.id === key) {
+    //     item['checked'] = true
+    //   } else {
+    //     item['checked'] = false
+    //   }
+    //   arr.push(item)
+    // })
+    // setCardList(arr)
+    setselectedid(key);
   }
 
-  const WinsCard = (props: any) => {
+  const [selectedid, setselectedid] = useState(null)
+
+  interface propstype {
+    cardData: RaffleItemData
+  }
+  const WinsCard = (props: propstype) => {
     return (
       <>
-        <article onClick={() => checkedItem(props.cardData.id)} className={["cursor-pointer flex flex-col bg-grey-6 rounded-3xl xl:rounded-3xl transition-all duration-200 lg:hover:scale-[1.03] relative group", props.cardData.checked && !props.cardData.redeemStatus ? 'border-3' : 'border-none'].join(' ')} style={{ borderColor: '#3A8AFF' }}>
+        <article onClick={() => checkedItem(props.cardData.raffle_id)} className={["cursor-pointer flex flex-col bg-grey-6 rounded-3xl xl:rounded-3xl transition-all duration-200 lg:hover:scale-[1.03] relative group", selectedid === props.cardData.raffle_id ? 'border-3' : 'border-none'].join(' ')} style={{ borderColor: '#3A8AFF' }}>
           <figure className="w-full aspect-square rounded-xl overflow-hidden relative z-0 -top-[0.5px]">
             <div className="relative pt-5 px-5">
-              <img className="transition-all rounded-3xl z-10 relative object-cover h-full w-full block relative z-10 opacity-100" src="https://i.seadn.io/gae/AOUDTbuATAzvgGTS6J3xP2lDNevT0cIvHRCr0xWo8bTtRRnspZPgso2SjSOP_RLQ3COogtEwplZZ0c8ZJvv8BO3Z79KRy9anokdJ?fit=max&amp;w=350&amp;auto=format" alt="Image of Cold Blooded Creepz" width="350" height="350" loading="lazy" decoding="async" draggable="false" />
-              <div style={{ width: 'fit-content' }} className="relative bg-white rounded-full -top-10 z-10 left-0 p-2 px-2 mx-2 text-black ">#123</div>
+              <img className="transition-all rounded-3xl z-10 relative object-cover h-full w-full block relative z-10 opacity-100" src={
+                props.cardData.prize.image_url
+              } alt="Image of Cold Blooded Creepz" width="350" height="350" loading="lazy" decoding="async" draggable="false" />
+              <div style={{ width: 'fit-content' }} className="relative bg-white rounded-full -top-10 z-10 left-0 p-2 px-2 mx-2 text-black ">#{props.cardData.id}</div>
             </div>
           </figure>
           <div className="px-5 xl:px-5">
             <div className="flex flex-col">
               <div className="grow overflow-hidden">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-base xl:text-xl text-white font-Bold relative">victor</h3>
-                  <div className="flex items-center justify-end">
-                    {/* <span className="text-slate-100 font-Bold text-ellipsis overflow-hidden text-base xl:text-xl">∼</span> */}
-                    {/* <img src="https://metawin.com/_nuxt/ico-eth-opacity-black.1761ffc0.svg" alt="ohmynft logo" width="8" height="16" className="inline-block mr-[2px] opacity-80" /> */}
-                    <span className="text-yellow-[FDE23B] font-Bold text-ellipsis overflow-hidden text-base xl:text-xl">0.7 BNB</span>
-                  </div>
+                  <h3 className="text-base xl:text-xl text-white font-Bold relative">{props.cardData.prize.name}</h3>
                 </div>
               </div>
             </div>
@@ -153,16 +158,30 @@ const MWPage = (): JSX.Element => {
               <span className="text-white whitespace-nowrap uppercase font-Bold text-base">Won by</span>
               {/* <a aria-current="page" href="/mw/montereyjack3d" className="router-link-active router-link-exact-active flex items-center ml-1"> */}
               <span className="relative mr-1 text-center">
-                <img className="inline-block rounded-full" src="https://content.prod.platform.metawin.com/avatars/template/default.png" alt="" width="28" height="28" loading="lazy" />
+                {
+                  props.cardData.winner.avatar
+                    ?
+                    <img className="inline-block rounded-full bg-slate-600" src={props.cardData.winner.avatar} alt="" width="28" height="28" loading="lazy" />
+                    :
+                    <div className='flex items-center rounded-full bg-slate-600 justify-center user-name-first-word uppercase text-base' style={{
+                      width: '28px',
+                      height: '28px'
+                    }}>
+                      {paramsName.name?.substr(0, 1)}
+                    </div>
+                }
               </span>
               <span className="text-blue text-base font-Bold whitespace-nowrap text-ellipsis overflow-hidden">MontereyJack3D</span>
               {/* </a> */}
             </div>
+            <div className="flex items-center justify-center pt-2">
+              <span className="text-yellow-[FDE23B] font-Bold text-ellipsis overflow-hidden text-base xl:text-xl">{props.cardData.prize.value} BUSD</span>
+            </div>
             <div className="text-white text-center text-base font-Bold uppercase py-4">
-              26 {JSON.stringify(props.cardData.checked)} participants
+              {props.cardData.participants.length || 0} participants
             </div>
           </div>
-          {
+          {/* {
             redeemStatus ?
               <div className="z-20 w-full h-full absolute bg-grey-6 opacity-90 rounded-3xl xl:rounded-3xl">
                 {
@@ -178,7 +197,7 @@ const MWPage = (): JSX.Element => {
               </div>
               :
               <></>
-          }
+          } */}
         </article>
       </>
     )
@@ -442,14 +461,14 @@ const MWPage = (): JSX.Element => {
                                     : <>
                                       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 lg:gap-4 lg:grid-cols-5 mb-5">
                                         {
-                                          cardList.map((ele, index) => {
+                                          CompletedData.map((ele: RaffleItemData, index) => {
                                             return (
                                               <WinsCard key={index} cardData={ele}></WinsCard>
                                             )
                                           })
                                         }
                                       </div>
-                                      <div className="w-full text-center mt-28">
+                                      {/* <div className="w-full text-center mt-28">
                                         <Button onClick={() => { attention() }} className='pr-6 uppercase text-center border-none text-white text-xl font-Medium' ghost shape="round" size="large" style={{
                                           backgroundColor: '#443C4A',
                                           height: '4rem',
@@ -461,7 +480,7 @@ const MWPage = (): JSX.Element => {
                                         <div className="py-4 font-sm font-Regular text-slate-100">
                                           Physical delivery coming soon!
                                         </div>
-                                      </div>
+                                      </div> */}
                                     </>
                                 }
                               </div>

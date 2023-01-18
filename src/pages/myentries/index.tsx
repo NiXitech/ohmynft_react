@@ -8,6 +8,7 @@ import './index.scss'
 import NFTCard from '../livenow/nftcard/index'
 import { getRaffleList } from "../../api/services/http/api";
 import { RaffleItemData } from "../../types/types";
+import { LStorage } from "../../api/services/cooike/storage";
 
 
 
@@ -27,13 +28,15 @@ const MyEntries = (): JSX.Element => {
 	)
 
 
+	const userinfo = LStorage.get('LastAuthUser')
 	const getRaffleListFun = async () => {
 		try {
 			// 获取全站activity
 			const { code, data: { items } } = await getRaffleList({
-				status: 'completed',
+				status: 'live',
 				offset: 0,
 				limit: 100000,
+				username: userinfo.name || ''
 			}) as any
 			if (code === 200) {
 				seletSortLiveNowData(items);
