@@ -685,3 +685,70 @@ export async function referralPublic(username: string) {
     );
   });
 }
+
+/**
+ * 未读通知数
+ * @returns
+ */
+
+export async function unreadCount(ethereum_address: string) {
+  return new Promise((resolve, reject) => {
+    http({
+      method: "get",
+      url: `/notification/count/${ethereum_address}`,
+    }).then(
+      (res) => {
+        resolve(res);
+        return res;
+      },
+      (error) => {
+        reject(error);
+      }
+    );
+  });
+}
+
+/**
+ * 未读通知数
+ * @returns
+ */
+
+export async function getnotification(ethereum_address: string) {
+  return new Promise((resolve, reject) => {
+    http({
+      method: "get",
+      url: `/notification/${ethereum_address}`,
+    }).then(
+      (res) => {
+        resolve(res);
+        return res;
+      },
+      (error) => {
+        reject(error);
+      }
+    );
+  });
+}
+
+/**
+ * 更新通知状态
+ * @returns
+ */
+
+export async function refreshNotification(params: { ethereum_address: string}) {
+  return new Promise((resolve, reject) => {
+    http({
+      method: "post",
+      url: `/notification/change`,
+      params,
+    }).then(
+      (res) => {
+        resolve(res);
+        return res;
+      },
+      (error) => {
+        reject(error);
+      }
+    );
+  });
+}
