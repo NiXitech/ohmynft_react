@@ -30,6 +30,7 @@ const Header = (): JSX.Element => {
   const [liveNowCount, setLiveNowCount] = useState(0)
   const [completedCount, setCompletedCount] = useState(0)
   const [activityCount, setActivityCount] = useState(0)
+  const [myentries, setmyentries] = useState(0)
   const [accountUserInfo, setUserInfo] = useState<AccountUserInfo>()
 
 
@@ -102,7 +103,6 @@ const Header = (): JSX.Element => {
       } else {
 
       }
-      console.log('all------activity------->', items);
     } catch (err) {
       console.log('getRaffleListFun:', err)
     }
@@ -123,6 +123,26 @@ const Header = (): JSX.Element => {
       console.log('%c🀂 error', 'color: #006dcc; font-size: 20px;', error);
     }
   }
+
+  const userinfo = LStorage.get('LastAuthUser')
+	const getRaffleListFunmyentries = async () => {
+		try {
+			// 获取全站activity
+			const { code, data: { items } } = await getRaffleList({
+				status: 'live',
+				offset: 0,
+				limit: 100000,
+				username: userinfo.name || ''
+			}) as any
+			if (code === 200) {
+				setmyentries(items.length);
+			} else {
+				// 提示弹框
+			}
+		} catch (err) {
+			console.log('getRaffleListFun:', err)
+		}
+	}
 
 
   useEffect(() => {
@@ -150,6 +170,7 @@ const Header = (): JSX.Element => {
     }
     getRaffleListFun('live')
     getRaffleListFun('completed')
+    getRaffleListFunmyentries()
     getAllActivityFun()
   }, [])
   let navigate = useNavigate();
@@ -235,7 +256,7 @@ const Header = (): JSX.Element => {
                           <NavItem to={'/completed'} title="Completed" count={completedCount}></NavItem>
                           <NavItem to={'/activity'} title="Activity" count={activityCount}></NavItem>
                           {
-                            isConnected && <NavItem to={'/myentries'} title="myentries" count={activityCount}></NavItem>
+                            isConnected && <NavItem to={'/myentries'} title="myentries" count={myentries}></NavItem>
                           }
                           {/* <NavItem to={'/winners'} title="Winners"></NavItem>
                           <NavItem to={'/referrals'} title="referrals"></NavItem> */}

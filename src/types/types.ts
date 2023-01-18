@@ -194,6 +194,15 @@ export interface AccountUserInfo {
   avatar_url: string;
 }
 
+export interface AccountUserInfoData {
+  name: string;
+  address: string;
+  email: string;
+  marketing_notify: string;
+  twitter_account: string;
+  avatar: string;
+}
+
 export interface ReferralListItem {
   username: string;
   avatarUrl: string;
