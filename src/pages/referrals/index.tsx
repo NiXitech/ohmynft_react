@@ -16,7 +16,7 @@ const Referrals = (): JSX.Element => {
   const [summaryData, setSummaryData] = useState<summaryReferrals>();
   const [userLink, setUserLink] = useState('');
   const [tweetShareInfo, setTweetShareInfo] = useState('')
-  const { isConnected } = useAccount()
+  const { isConnected, address } = useAccount()
   const location = useLocation();
   let navigate = useNavigate();
   useEffect(() => {
@@ -45,8 +45,7 @@ const Referrals = (): JSX.Element => {
   const getReferralSummayFun = async () => {
     try {
       // get referral summary data
-      const ethereum_address = process.env.REACT_APP_CONTRACT_ADDRESS + '';
-      const { code, data } = await getReferralSummay(ethereum_address) as any
+      const { code, data } = await getReferralSummay(JSON.stringify(address)) as any
       if (code === 200 && data) {
         setSummaryData(data);
       } else {
@@ -169,7 +168,7 @@ const Referrals = (): JSX.Element => {
                         <div className="flex justify-between mx-3 text-left">
                           <span>Yesterday</span>
                           <span className="text-white">
-                            {summaryData?.clicks.yesterday}</span>
+                            {summaryData?.referrals.yesterday}</span>
                         </div>
 
                         <div className="flex justify-between mx-3 text-left">
