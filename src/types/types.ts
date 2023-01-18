@@ -81,6 +81,7 @@ export interface RaffleItemData {
   winner: WinnerInfo;
   total_entries: number;
   airdrop_users: [];
+  checked?:boolean;
 }
 
 export interface PrizeDataItem {
@@ -190,7 +191,7 @@ export interface AccountUserInfo {
   email: string;
   marketing_notify: string;
   twitter_account: string;
-  avatar: string;
+  avatar_url: string;
 }
 
 export interface ReferralListItem {

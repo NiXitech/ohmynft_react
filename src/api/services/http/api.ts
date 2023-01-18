@@ -179,7 +179,7 @@ export async function getRaffleList(params: {
   offset: number;
   limit: number;
   username?: string;
-  win?: string;
+  win?: boolean;
 }) {
   return new Promise((resolve, reject) => {
     http({

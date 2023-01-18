@@ -16,9 +16,8 @@ const TweetAuth = (): JSX.Element => {
 
     useEffect(() => {
         hello.init({
-            twitter: 'REm8KjWsthsmKXZoVIYXNn1qqy'
+            twitter: 'MzdPcG9aYWtCaklLUGY3MFM3VVo6MTpjaQ'
         }, {
-            scope: 'email',
             redirect_uri: 'http://localhost:3000/'
         });
     }, [])
@@ -26,16 +25,21 @@ const TweetAuth = (): JSX.Element => {
     const twStepOne = async () => {
         // const result = await twAuthStep1({ oauth_callback: '' })
         // console.log('tw---tw-----tw-----tw-----------tw-----tw--------tw-------->', result)
-        hello('twitter').login();
-        // Listen to signin requests
-        hello.on('auth.login', function (r) {
-            console.log('%c🀅 r', 'color: #33cc99; font-size: 20px;', r);
-            // Get Profile
-            // hello(r.network).api('/me').then(function (p) {
-            //     window.console.log(p) //输出用户信息
+        hello('twitter').login().then((data) => {
+            console.log('%c🀆 data', 'color: #364cd9; font-size: 20px;', data);
 
-            // });
+        }, (err) => {
+            console.log('%c🀅 err', 'color: #ffa280; font-size: 20px;', err);
+
         });
+        // Listen to signin requests
+        // hello.on('auth.login', function (auth) {
+        //     console.log('%c🀅 r', 'color: #33cc99; font-size: 20px;', auth);
+        //     // Get Profile
+        //     hello(auth.network).api('me').then(function (r) {
+        //         alert(JSON.stringify(r));
+        //     });
+        // });
     }
 
     return (
