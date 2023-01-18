@@ -184,9 +184,8 @@ export async function getRaffleList(params: {
   return new Promise((resolve, reject) => {
     http({
       method: "get",
-      url: `/raffle?status=${params.status}&offset=${params.offset}&limit=${
-        params.limit
-      }&username=${params.username || ""}&win=${params.win || ""}`,
+      url: `/raffle?status=${params.status}&offset=${params.offset}&limit=${params.limit
+        }&username=${params.username || ""}&win=${params.win || ""}`,
     }).then(
       (res) => {
         resolve(res);
@@ -630,7 +629,7 @@ export async function getWithdrawal(ethereum_address: string) {
  * @returns
  */
 
-export async function withdrawals(params: { amount: string }) {
+export async function withdrawals(params: { category: string, raffle_id?: string, amount?: string }) {
   return new Promise((resolve, reject) => {
     http({
       method: "post",

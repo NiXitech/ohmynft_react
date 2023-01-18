@@ -31,7 +31,7 @@ const WithDrawals = (): JSX.Element => {
   // request withdraw
   const withdrawalsFunc = async () => {
     try {
-      const { code } = await withdrawals({ amount: amount }) as any
+      const { code } = await withdrawals({category: 'withdraw', amount: amount }) as any
       if (code === 200) {
         toast.success('request succeeded!');
       } else {

@@ -157,7 +157,7 @@ const MWPage = (): JSX.Element => {
             <div className="grid grid-cols-3 items-center justify-center pt-4 w-full px-6">
               <span className="text-white whitespace-nowrap uppercase font-Bold text-base">Won by</span>
               {/* <a aria-current="page" href="/mw/montereyjack3d" className="router-link-active router-link-exact-active flex items-center ml-1"> */}
-              <span className="relative mr-1 text-center">
+              <span className="relative text-center flex justify-center">
                 {
                   props.cardData.winner.avatar
                     ?
@@ -477,7 +477,6 @@ const MWPage = (): JSX.Element => {
                                               <span>Nothing to display</span>
                                             </h2>
                                           </div>
-
                                       }
 
                                     </>
