@@ -41,6 +41,7 @@ const LiveNow = (props: any) => {
 				'text=Join me at OH MY NFT, the most convenient place packed with the best giveaway prizes of real-world goods changing the way you win in Web3' +
 				'&url=' + userLink + '&hashtags=WinninginWeb3';
 			setTweetShareInfo(shareLink)
+			window.open(shareLink,  '_blank');
 		} else {
 			actions.openConnect();
 		}
@@ -160,7 +161,6 @@ const LiveNow = (props: any) => {
 	useEffect(
 		() => {
 			getRaffleListFun();
-			sharetweet()
 		}, []
 	)
 
@@ -177,11 +177,11 @@ const LiveNow = (props: any) => {
 							</div>
 							{/* <TweetAuth></TweetAuth> */}
 							<Space className="pt-6 flex justify-center md:justify-start">
-								<a href={tweetShareInfo} rel="noopener noreferrer" target="_blank" className=" text-white rounded-full tracking-widest uppercase  transition-all relative disabled:opacity-40  relative flex justify-center items-center mx-auto w-full">
-									<Button className='pr-6 uppercase' type="primary" shape="round" size="large" >
+								<div className=" text-white rounded-full tracking-widest uppercase  transition-all relative disabled:opacity-40  relative flex justify-center items-center mx-auto w-full" onClick={() => sharetweet()}>
+									<Button className='pr-6 uppercase' type="primary" shape="round" size="large">
 										Share On Twitter &nbsp;<span className=" icon-twitter icon"></span>
 									</Button>
-								</a>
+								</div>
 								<Button className='uppercase' type="primary" ghost shape="round" size="large" onClick={copyLink}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copy Link&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Button>
 							</Space>
 						</Space>
