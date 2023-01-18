@@ -4,12 +4,16 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAccount, useDisconnect } from 'wagmi';
 import { LStorage } from '../../api/services/cooike/storage';
-import { getAllActivity, getRaffleList, getUserInfo } from '../../api/services/http/api';
+import { getAllActivity, getRaffleList, getUserInfo, unreadCount } from '../../api/services/http/api';
 import useStateHook from '../../pages/store';
 import { AccountUserInfo, CallBackData, RaffleItemData } from '../../types/types';
+import {
+  BellOutlined
+} from '@ant-design/icons';
 import ConnectWallet from '../connectWallet';
 // import ZenDesk from '../zendesk'
 import './index.scss'
+import { Badge } from 'antd';
 // import Script from 'react-load-script';
 
 export type NavItemProps = {
@@ -125,24 +129,24 @@ const Header = (): JSX.Element => {
   }
 
   const userinfo = LStorage.get('LastAuthUser')
-	const getRaffleListFunmyentries = async () => {
-		try {
-			// 获取全站activity
-			const { code, data: { items } } = await getRaffleList({
-				status: 'live',
-				offset: 0,
-				limit: 100000,
-				username: userinfo.name || ''
-			}) as any
-			if (code === 200) {
-				setmyentries(items.length);
-			} else {
-				// 提示弹框
-			}
-		} catch (err) {
-			console.log('getRaffleListFun:', err)
-		}
-	}
+  const getRaffleListFunmyentries = async () => {
+    try {
+      // 获取全站activity
+      const { code, data: { items } } = await getRaffleList({
+        status: 'live',
+        offset: 0,
+        limit: 100000,
+        username: userinfo.name || ''
+      }) as any
+      if (code === 200) {
+        setmyentries(items.length);
+      } else {
+        // 提示弹框
+      }
+    } catch (err) {
+      console.log('getRaffleListFun:', err)
+    }
+  }
 
 
   useEffect(() => {
@@ -160,6 +164,23 @@ const Header = (): JSX.Element => {
     await getStatus()
   }
 
+  const [notification, setNotification] = useState(0)
+  const getunreadCount = async () => {
+    try {
+      let userInfo = LStorage.get('LastAuthUser')
+      const { code, data: {count} } = await unreadCount(userInfo.address || '') as any
+      if (code === 200) {
+        setNotification(Number(count) || 0);
+      }
+    } catch (error) {
+
+    }
+  }
+
+  const toNotification = ()=> {
+    navigate('/notification')
+  }
+
   useEffect(() => {
     const data = LStorage.getWagmi('wagmi.store')
     let userInfo = LStorage.get('LastAuthUser')
@@ -172,6 +193,7 @@ const Header = (): JSX.Element => {
     getRaffleListFun('completed')
     getRaffleListFunmyentries()
     getAllActivityFun()
+    getunreadCount()
   }, [])
   let navigate = useNavigate();
 
@@ -312,7 +334,12 @@ const Header = (): JSX.Element => {
                       hasUser
                         ? <>
                           <div className="hidden lg:flex ml-3 lg:border-white/30 lg:pl-4 lg:ml-0" style={{ minWidth: '248px', flexDirection: 'row-reverse' }} >
-                            <div className="nav-main-avatar relative mr-2 cursor-pointer group">
+                            <div className="nav-main-avatar relative mr-2 cursor-pointer group grid grid-cols-2">
+                              <div className='flex items-center font-base' onClick={()=> toNotification()}>
+                                <Badge style={{ fontSize: '0.25rem' }} count={notification}>
+                                  <BellOutlined style={{ fontSize: '1.5rem', color: '#fff' }} />
+                                </Badge>
+                              </div>
                               <div className="relative" onClick={(e) => { e.stopPropagation(); setShowSocial(!showSocial) }}>
                                 {/* <img className="rounded-full border-2 border-white transition-all group-hover:border-cyan-500 p-[1px] border-white" src={require('../../asstes/img/personal.png').default} alt="Your avatar" decoding="async" /> */}
                                 {
