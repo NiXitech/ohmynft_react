@@ -61,7 +61,7 @@ const Redeem = (): JSX.Element => {
     const redeem = () => {
         if (checkedId && checkedId !== '') {
             withdrawalsFunc(checkedId)
-        }else {
+        } else {
             toast.error('please check item');
         }
     }
@@ -114,24 +114,29 @@ const Redeem = (): JSX.Element => {
                         {
                             CompletedData.map((ele, index) => {
                                 return (
-                                    <WinsCard key={index} cardData={ele} selectedid={selectedid} checkedCallback={(raffle_id:string) => checkedCallback(raffle_id)}></WinsCard>
+                                    <WinsCard key={index} cardData={ele} selectedid={selectedid} checkedCallback={(raffle_id: string) => checkedCallback(raffle_id)}></WinsCard>
                                 )
                             })
                         }
                     </div>
-                    <div className="w-full text-center mt-28">
-                        <Button onClick={() => { attention() }} className='pr-6 button-blue uppercase text-center border-none text-white text-xl font-Medium' ghost shape="round" size="large" style={{
-                            backgroundColor: '#3A8AFF',
-                            height: '4rem',
-                            width: '19rem'
-                        }}>
-                            EXCHANGE
-                            <span className="pl-2 icon-twitter icon"></span>
-                        </Button>
-                        <div className="py-4 font-sm font-Regular text-slate-100">
-                            Physical delivery coming soon!
-                        </div>
-                    </div>
+                    {
+                        CompletedData && CompletedData.length > 0 ?
+                            <div className="w-full text-center mt-28">
+                                <Button onClick={() => { attention() }} className='pr-6 button-blue uppercase text-center border-none text-white text-xl font-Medium' ghost shape="round" size="large" style={{
+                                    backgroundColor: '#3A8AFF',
+                                    height: '4rem',
+                                    width: '19rem'
+                                }}>
+                                    EXCHANGE
+                                    <span className="pl-2 icon-twitter icon"></span>
+                                </Button>
+                                <div className="py-4 font-sm font-Regular text-slate-100">
+                                    Physical delivery coming soon!
+                                </div>
+                            </div>
+                            :
+                            <></>
+                    }
                 </div>
             </div>
         </>
