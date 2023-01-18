@@ -71,7 +71,7 @@ const MyEntries = (): JSX.Element => {
 
 
 	return (
-		<div className="container xxl:px-6rem66 xxxl:px-6rem66">
+		<div className="container xxl:px-6rem66 xxxl:px-6rem66 mt-16 pt-16">
 			<section className="w-full pb-4">
 				{
 					completedData.featured.length === 0 ?

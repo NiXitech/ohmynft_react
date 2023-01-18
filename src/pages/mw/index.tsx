@@ -171,7 +171,7 @@ const MWPage = (): JSX.Element => {
                     </div>
                 }
               </span>
-              <span className="text-blue text-base font-Bold whitespace-nowrap text-ellipsis overflow-hidden">MontereyJack3D</span>
+              <span className="text-blue text-base font-Bold whitespace-nowrap text-ellipsis overflow-hidden">{props.cardData.winner.display_name}</span>
               {/* </a> */}
             </div>
             <div className="flex items-center justify-center pt-2">
@@ -459,28 +459,27 @@ const MWPage = (): JSX.Element => {
                                   loading
                                     ? ''
                                     : <>
-                                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 lg:gap-4 lg:grid-cols-5 mb-5">
-                                        {
-                                          CompletedData.map((ele: RaffleItemData, index) => {
-                                            return (
-                                              <WinsCard key={index} cardData={ele}></WinsCard>
-                                            )
-                                          })
-                                        }
-                                      </div>
-                                      {/* <div className="w-full text-center mt-28">
-                                        <Button onClick={() => { attention() }} className='pr-6 uppercase text-center border-none text-white text-xl font-Medium' ghost shape="round" size="large" style={{
-                                          backgroundColor: '#443C4A',
-                                          height: '4rem',
-                                          width: '19rem'
-                                        }}>
-                                          EXCHANGE
-                                          <span className="pl-2 icon-twitter icon"></span>
-                                        </Button>
-                                        <div className="py-4 font-sm font-Regular text-slate-100">
-                                          Physical delivery coming soon!
-                                        </div>
-                                      </div> */}
+
+                                      {
+                                        CompletedData && CompletedData.length > 0 ?
+                                          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 lg:gap-4 lg:grid-cols-5 mb-5">
+                                            {
+                                              CompletedData.map((ele: RaffleItemData, index) => {
+                                                return (
+                                                  <WinsCard key={index} cardData={ele}></WinsCard>
+                                                )
+                                              })
+                                            }
+                                          </div>
+                                          :
+                                          <div className="text-center w-full py-4">
+                                            <h2 className="text-center w-full px-3 lg:text-xl py-3 text-white animate-fade-in font-heavy">
+                                              <span>Nothing to display</span>
+                                            </h2>
+                                          </div>
+
+                                      }
+
                                     </>
                                 }
                               </div>
