@@ -55,19 +55,19 @@ export const client = createClient({
     //     appName: "Injected",
     //   },
     // }),
-    new WalletConnectConnector({
-      chains,
-      options: {
-        qrcode: true,
-      },
-    }),
-    new InjectedConnector({
-      chains,
-      options: {
-        name: "Default Wallet",
-        shimDisconnect: true,
-      },
-    }),
+    // new WalletConnectConnector({
+    //   chains,
+    //   options: {
+    //     qrcode: true,
+    //   },
+    // }),
+    // new InjectedConnector({
+    //   chains,
+    //   options: {
+    //     name: "Default Wallet",
+    //     shimDisconnect: true,
+    //   },
+    // }),
   ],
   provider,
   webSocketProvider,

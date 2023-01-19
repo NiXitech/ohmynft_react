@@ -316,7 +316,7 @@ const MWPage = (): JSX.Element => {
                                                 CompletedData.map((item, index) => {
                                                   return <article key={index} className="gtm-card-competition flex flex-col rounded-xl xl:rounded-2xl transition-all duration-200 lg:hover:scale-[1.03] relative bg-white">
                                                     <figure className="w-full aspect-square rounded-xl overflow-hidden relative z-0 group -top-[0.5px]">
-                                                      <a href={`/competition/${item.raffle_id}`} className="">
+                                                      <a href={`/productdetail/${item.raffle_id}`} className="">
                                                         <div className="relative w-full h-full">
                                                           <img className="transition-all z-10 relative object-cover h-full w-full block relative z-10 opacity-100" src={item.prize.image_url} alt={`Image of ${item.prize.name}`} width="350" height="350" loading="lazy" decoding="async" draggable="false" />
                                                           <div className="absolute z-0 animate-pulse w-full h-full rounded-xl top-0 left-0 p-3 after:flex after:h-full after:rounded-lg after:bg-gray-200 invisible"></div>
@@ -352,7 +352,7 @@ const MWPage = (): JSX.Element => {
                                                             <div className="absolute left-0 top-0 w-full h-full before:absolute bg-slate-300"></div>
                                                           </div>
                                                           : <div className="rounded-full w-full overflow-hidden relative flex items-center justify-center mt-3 mb-2 py-3 cursor-pointer">
-                                                            <a href={`/competition/${item.raffle_id}`}>
+                                                            <a href={`/productdetail/${item.raffle_id}`}>
                                                               <div className="relative z-10 uppercase tracking-wider font-bold text-xs md:text-sm text-center px-1 min-h-[16px] md:min-h-[20px] text-white font-play">
                                                                 <span className="truncate">Enter now</span>
                                                               </div>
@@ -491,7 +491,7 @@ const MWPage = (): JSX.Element => {
                                         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 lg:gap-4 lg:grid-cols-5 mb-5">
                                           <article className="gtm-card-competition flex flex-col rounded-xl xl:rounded-2xl transition-all duration-200 lg:hover:scale-[1.03] relative cursor-pointer bg-white">
                                             <figure className="w-full aspect-square rounded-xl overflow-hidden relative z-0 group -top-[0.5px]">
-                                              <a href="/competition/1119" className="">
+                                              <a href="/productdetail/1119" className="">
                                                 <div className="relative w-full h-full">
                                                   <img className="transition-all z-10 relative object-cover h-full w-full block relative z-10 opacity-100" src="https://i.seadn.io/gae/1QX69oBVNdNG6CoLaA9OKRTfjJB0uCES7JI8CUNYH9y7JD4HGeu7RmoBWC17jyfOlPhU8dXkgFc8lv0O7XFf-by5QkARiIvaP2_l4ck?fit=max&amp;w=350&amp;auto=format" alt="Image of DeadFellaz" width="350" height="350" loading="lazy" decoding="async" draggable="false" />
                                                   <div className="absolute z-0 animate-pulse w-full h-full rounded-xl top-0 left-0 p-3 after:flex after:h-full after:rounded-lg after:bg-gray-200 invisible"></div>
