@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAccount, useDisconnect } from 'wagmi';
 import { LStorage } from '../../api/services/cooike/storage';
-import { getAllActivity, getRaffleList, getUserInfo, unreadCount } from '../../api/services/http/api';
+import { getAllActivity, getRaffleList, getUserInfo, refreshNotification, unreadCount } from '../../api/services/http/api';
 import useStateHook from '../../pages/store';
 import { AccountUserInfo, CallBackData, RaffleItemData } from '../../types/types';
 import {
@@ -178,8 +178,23 @@ const Header = (): JSX.Element => {
   }
 
   const toNotification = ()=> {
-    navigate('/notification')
+    refreshNotificationFun();
+    getunreadCount();
+    navigate('/notification');
   }
+
+  // 更新消息通知状态
+  const refreshNotificationFun = async () => {
+		try {
+			let userInfo = LStorage.get('LastAuthUser')
+			const { code } = await refreshNotification(userInfo.address || '') as any
+			if (code === 200) {
+				// 
+			}
+		} catch (error) {
+
+		}
+	}
 
   useEffect(() => {
     const data = LStorage.getWagmi('wagmi.store')
