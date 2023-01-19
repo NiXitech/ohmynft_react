@@ -97,7 +97,7 @@ const MWPage = (): JSX.Element => {
         offset: 0,
         limit: 100000000,
         username: paramsName.name || "",
-        win: true
+        win: selectTypeVal === 'wins'
       }) as any
 
       if (result.code === 200 && result.data.items !== null) {
