@@ -111,7 +111,7 @@ const NFTCard = (props: propspromise): JSX.Element => {
 			],
 			functionName: 'raffles',
 			args: [BigNumber.from(debouncedTokenId?.raffle_id || 0)],
-			chainId: 97,
+			chainId: 56,
 			enabled: false,
 			onSuccess(data: any) {
 			},

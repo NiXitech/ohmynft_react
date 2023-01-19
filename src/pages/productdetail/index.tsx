@@ -156,7 +156,7 @@ const ProductDetail = (): JSX.Element => {
       ],
       functionName: 'raffles',
       args: [BigNumber.from(debouncedTokenId?.raffle_id || 0)],
-      chainId: 97,
+      chainId: 56,
       enabled: Boolean(debouncedTokenId?.contract_address),
       onSuccess(data: any) {
         // @ts-ignore
@@ -245,7 +245,7 @@ const ProductDetail = (): JSX.Element => {
       value: ethers.utils.parseEther(JSON.stringify(0)),
       gasLimit: BigNumber.from('3100000')
     },
-    chainId: 97,
+    chainId: 56,
     // cacheTime: 2_000,
     enabled: Boolean(debouncedPrice.count),
     // staleTime: 2_000,
@@ -284,7 +284,7 @@ const ProductDetail = (): JSX.Element => {
     overrides: {
       from: address,
     },
-    chainId: 97,
+    chainId: 56,
     enabled: ApproveStatus,
     onSuccess(data: any) {
       console.log('Success', data)

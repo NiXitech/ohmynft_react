@@ -28,7 +28,7 @@ export function Connect() {
   })
   const { connect, isLoading, connectors, error, pendingConnector } =
     useConnect({
-      chainId: 97,
+      chainId: 56,
       onSuccess: async (data) => {
         getRegistrationFun(data.account)
       },
