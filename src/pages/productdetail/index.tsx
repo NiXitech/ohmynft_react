@@ -3,14 +3,14 @@
 import _ from "lodash";
 import { useEffect, useState } from "react";
 import './index.scss'
-import { Progress, Divider, Button, InputNumber, Image } from 'antd';
+import { Progress, Divider, Button, InputNumber, Image, Row, Col } from 'antd';
 import TwoColActivity from "../../components/twocolactivity";
 import NFTCard from "../livenow/nftcard";
 // import ConnectWallet from "../../components/connectWallet";
 import useStateHook from '../store';
 import { ActivityItem, CallBackData, RaffleItemData } from "../../types/types";
 import { erc20ABI, useAccount, useContractRead, useContractWrite, useNetwork, usePrepareContractWrite, useSwitchNetwork, useWaitForTransaction } from "wagmi";
-import { getPrice, getRaffleActivity, getRaffleInfo, getUserInfo } from "../../api/services/http/api";
+import { getPrice, getRaffleActivity, getRaffleInfo, getRaffleList, getUserInfo } from "../../api/services/http/api";
 import { Link, useParams } from "react-router-dom"
 import { BigNumber, ethers } from "ethers";
 import useDebounce from "../../libs/usehooks";
@@ -47,6 +47,7 @@ const ProductDetail = (): JSX.Element => {
     getRaffleInfoFun()
     getPriceFun()
     getRaffleActivityFun()
+    getRaffleListFun()
   }, [])
 
   const getRaffleActivityFun = async () => {
@@ -395,90 +396,87 @@ const ProductDetail = (): JSX.Element => {
 
   }
 
-  // 连接推特
-  const connectTwitter = () => {
-    // debugger
-    // (async ()=> {
-    //   // try {
-    //     const tweet = await client.tweets.findTweetById("1460323737035677698");
-    //     console.log(tweet.data.text);
-    //   // }catch(err: any) {
-    //   //   console.log('twitter:', err)
-    //   // }
-    // })();
+  const [liveNowData, setLiveData] = useState({
+    featured: [],
+    upcoming: [],
+    endsoon: [],
+    all: []
+  })
 
-    // (async ()=> {
-    //   const tweetId = await findTweetById({id: '1460323737035677698'}) as any;
-    //   console.log('tweetIdData:', tweetId.data)
-    // })()
-    // var axios = require('axios');
-
-    var config = {
-      method: 'get',
-      url: 'https://api.twitter.com/2/users/2873008978/followers',
-      headers: {
-        'Authorization': 'Bearer AAAAAAAAAAAAAAAAAAAAAMBDdwEAAAAA2BsYVQVgTt6DGuhpdjJBwkHDAMo%3Dch3BD48OENuJ5jEKU8QtTYVhGLKOzP3Mr9PZTLUO8Pn22DdH0K',
-        'Cookie': 'guest_id=v1%3A167307959388924842; guest_id_ads=v1%3A167307959388924842; guest_id_marketing=v1%3A167307959388924842; personalization_id="v1_31/mIcn+cScehvYyAjM0rQ=="'
-      }
+  const seletSortLiveNowData = (data: RaffleItemData[]) => {
+    if (data === null) return
+    let liveNowDataTmp: any = {
+      featured: [],
+      upcoming: [],
+      endsoon: [],
+      all: []
     };
-
-    // (async () => {
-    //   const result = await axios
-    //     .get("https://api.twitter.com/2/users/2873008978", {
-    //       headers: {
-    //         'Authorization': 'Bearer AAAAAAAAAAAAAAAAAAAAAMBDdwEAAAAA2BsYVQVgTt6DGuhpdjJBwkHDAMo%3Dch3BD48OENuJ5jEKU8QtTYVhGLKOzP3Mr9PZTLUO8Pn22DdH0K',
-    //         'Cookie': 'guest_id=v1%3A167307959388924842; guest_id_ads=v1%3A167307959388924842; guest_id_marketing=v1%3A167307959388924842; personalization_id="v1_31/mIcn+cScehvYyAjM0rQ=="'
-    //       }
-    //     });
-    //   console.log('----------->', result);
-    // })()
-    // axios
-    //   .get("https://api.twitter.com/2/users/2873008978/followers", {
-    //     headers: {
-    //       'Authorization': 'Bearer AAAAAAAAAAAAAAAAAAAAAMBDdwEAAAAA2BsYVQVgTt6DGuhpdjJBwkHDAMo%3Dch3BD48OENuJ5jEKU8QtTYVhGLKOzP3Mr9PZTLUO8Pn22DdH0K',
-    //       'Cookie': 'guest_id=v1%3A167307959388924842; guest_id_ads=v1%3A167307959388924842; guest_id_marketing=v1%3A167307959388924842; personalization_id="v1_31/mIcn+cScehvYyAjM0rQ=="'
-    //     }
-    //   })
-    //   .then(function (response: any) {
-    //     console.log(JSON.stringify(response.data));
-    //   })
-    //   .catch(function (error: any) {
-    //     console.log(error);
-    //   })
-
-
-
-
-    // (async () => {
-    //   const tweetId = await oauthTweet({ oauth_callback: 'localhost:3000' }) as any;
-    //   console.log('tweetIdData:', tweetId.data)
-    // })()
-    // (async () => {
-    //   try {
-    //     const postTweet = await twitterClient.tweets.createTweet({
-    //       // The text of the Tweet
-    //       text: "Are you excited for the weekend?",
-
-    //       // Options for a Tweet with a poll
-    //       poll: {
-    //         options: ["Yes", "Maybe", "No"],
-    //         duration_minutes: 120,
-    //       },
-    //     });
-    //     console.dir(postTweet, {
-    //       depth: null,
-    //     });
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // })();
-
+    data.forEach((ele: any) => {
+      if (ele.category === "featured") {
+        liveNowDataTmp.featured.push(ele)
+      }
+      if (ele.category === 'upcoming') {
+        liveNowDataTmp.upcoming.push(ele)
+      }
+      if (ele.category !== 'upcoming') {
+        liveNowDataTmp.all.push(ele)
+      }
+    });
+    console.log('liveNowDataTmp', liveNowDataTmp);
+    let endsoon = percant(liveNowDataTmp.featured, 70, 101);
+    let featured = percant(liveNowDataTmp.featured, -1, 100);
+    let all = percant(liveNowDataTmp.all, -1, 101);
+    liveNowDataTmp.endsoon = [...endsoon]
+    liveNowDataTmp.featured = [...featured]
+    liveNowDataTmp.all = [...all]
+    setLiveData(liveNowDataTmp)
   }
 
 
+  const getRaffleListFun = async () => {
+    try {
+      // 获取全站activity
+      const { code, data: { items } } = await getRaffleList({
+        status: 'live',
+        offset: 0,
+        limit: 100000,
+      }) as any
+      if (code === 200) {
+        seletSortLiveNowData(items);
+      } else {
+
+      }
+      console.log('all------activity------->', items);
+    } catch (err) {
+      console.log('getRaffleListFun:', err)
+    }
+  }
 
 
-
+  /*
+  * data 数组
+  * thresholdstart thresholdend 阈值区间
+  */
+  const percant = (data: any, thresholdstart: number, thresholdend: number) => {
+    const arr: { participants: any[]; }[] = [];
+    data.map((ele: {
+      total_entries: number; participants: any[];
+      // eslint-disable-next-line array-callback-return
+    }) => {
+      let count = 0
+      ele?.participants.map(
+        // eslint-disable-next-line array-callback-return
+        (element) => {
+          count += element.buy_entry_count
+        }
+      )
+      const process = Number(Number(count / ele.total_entries * 100).toFixed(0))
+      if (process > thresholdstart && process < thresholdend) {
+        arr.push(ele);
+      }
+    })
+    return arr;
+  }
 
 
 
@@ -766,7 +764,7 @@ const ProductDetail = (): JSX.Element => {
                   <div className="flex-center-detail">
                     <div className="share-twitter pl-6">
                       <div className="detail-share-twitter-button pb-10 pt-12">
-                        <Button ghost size="large" onClick={shareontweet}>Share On Twitter &nbsp;
+                        <Button ghost size="large" onClick={shareontweet}>SHARE THIS COMPETITIONT &nbsp;
                           <span className=" icon-twitter icon"></span>
                         </Button>
                       </div>
@@ -781,12 +779,30 @@ const ProductDetail = (): JSX.Element => {
                       </div>
 
                       <div>
-                        {/* <div className="activity-participants px-4 pt-10 md:hidden block">
-                      <TwoColActivity tableData={activityData}></TwoColActivity>
-                    </div> */}
-                        {/* <div className="end-soon-detail pb-10 pt-4">
-                      End soon
-                    </div> */}
+                        <div className="activity-participants px-4 pt-10 md:hidden block">
+                          <TwoColActivity
+                            subLoading={subLoading} tableData={activityData} participants={infoData?.participants}
+                          ></TwoColActivity>
+                        </div>
+                        {
+                          liveNowData.endsoon.length > 0 ?
+                            <Row >
+                              <div className='livenow-title'>
+                                Ending Soon
+                              </div>
+                            </Row> : <></>
+                        }
+                        <Row wrap gutter={[32, { xs: 12, sm: 12, md: 18, lg: 24 }]}>
+                          {
+                            liveNowData.endsoon.map((feature: RaffleItemData, index: any) => {
+                              return <>
+                                <Col span={12} key={index}>
+                                  <NFTCard cardData={feature}></NFTCard>
+                                </Col>
+                              </>
+                            })
+                          }
+                        </Row>
                       </div>
                     </div>
 
