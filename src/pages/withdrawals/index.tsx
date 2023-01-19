@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { LStorage } from '../../api/services/cooike/storage';
 import './index.scss'
 import { Button } from 'antd';
-import { getNotification, getReferralSummay, getWithdrawal, withdrawals } from '../../api/services/http/api';
+import { getbalance, getNotification, getReferralSummay, getWithdrawal, withdrawals } from '../../api/services/http/api';
 import { toast } from 'react-toastify';
 
 
@@ -12,15 +12,17 @@ const WithDrawals = (): JSX.Element => {
   const [history, setHistory] = useState([])
   const [amount, setAmount] = useState('')
   const [requestSta, setrequestSta] = useState(true)
-  const [historyList,sethistoryList] = useState([])
+  const [historyList, sethistoryList] = useState([])
+  const [requestChecked, setrequestChecked] = useState(true)
 
 
   // get withdraw record
   const getWithdrawalFun = async () => {
     try {
-      const { code, data: { items } } = await getWithdrawal(userData.address) as any
+      const { code, data } = await getWithdrawal(userData.address) as any
+      debugger
       if (code === 200) {
-        setHistory({ ...items })
+        setHistory(data || [])
       } else {
 
       }
@@ -32,7 +34,7 @@ const WithDrawals = (): JSX.Element => {
   // request withdraw
   const withdrawalsFunc = async () => {
     try {
-      const { code } = await withdrawals({category: 'withdraw', amount: amount }) as any
+      const { code } = await withdrawals({ category: 'withdraw', amount: amount }) as any
       if (code === 200) {
         toast.success('request succeeded!');
       } else {
@@ -50,7 +52,7 @@ const WithDrawals = (): JSX.Element => {
     try {
       // get referral summary data
       const ethereum_address = process.env.REACT_APP_CONTRACT_ADDRESS + '';
-      const { code, data } = await getNotification(ethereum_address) as any
+      const { code, data } = await getbalance(ethereum_address) as any
       if (code === 200 && data) {
         setBalance(data.balance || '0')
       } else {
@@ -66,11 +68,10 @@ const WithDrawals = (): JSX.Element => {
     () => {
       getWithdrawalFun()
       getReferralSummayFun();
+      requestCheckedFun();
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []
   )
-
-  const [chekedValue, setchekedValue] = useState('')
 
   const checkReq = (value: string) => {
     if (value) {
@@ -83,12 +84,13 @@ const WithDrawals = (): JSX.Element => {
     }
   }
 
-  // const stepList = ()=> {
-  //   let arr = []
-  //   Number(balance)/
-  // }
-
-
+  const requestCheckedFun = () => {
+    if (Number(balance) > 0.00005) {
+      setrequestChecked(false)
+    } else {
+      setrequestChecked(true)
+    }
+  }
 
   return (
     <>
@@ -101,7 +103,7 @@ const WithDrawals = (): JSX.Element => {
             <form>
               <div className="mt-6 relative input-success-active">
                 <input className="font-Regular text-sm h-16 py-2 rounded-full bg-grey-6 block relative w-full rounded-lg px-6 outline-none focus:border-slate-200 focus:ring-0 autofill:bg-slate-600 transition-all appearance-none hover:appearance-none border-none" name="number" id="number" type="number" placeholder="Enter withdrawal amount"
-                  value={chekedValue}
+                  value={amount}
                   max={balance}
                   onChange={(e) => { checkReq(e.target.value) }}
                 />
@@ -116,13 +118,26 @@ const WithDrawals = (): JSX.Element => {
                   // balance === '0' ? <></>
                   //   :
                   <>
-                    <Button className='rounded-full mx-2 border-none' disabled={requestSta} type='primary' style={{ backgroundColor: '#443C4A' }} ghost onClick={() => setAmount('0.01')}>0.001</Button>
+                    {
+                      [0.1, 0.5, 1, 5, 'MAX'].map((item, index) => {
+                        return (
+                          <Button key={index} className='rounded-full mx-2 border-none' disabled={typeof item === 'number' && Number(item) > Number(balance)} type='primary' style={{ backgroundColor: '#443C4A' }} ghost
+                            onClick={() => {
+                              if (item === 'MAX') {
+                                setAmount(balance)
+                              } else {
+                                setAmount(item + '')
+                              }
+                            }}>{item}</Button>
+                        )
+                      })
+                    }
                   </>
                 }
               </div>
 
               {
-                requestSta && balance !== '0' ?
+                !requestChecked ?
                   <div className="mt-3 relative input-success-active w-full flex justify-center py-2">
                     <p className='text-error-red font-Regular text-sm'>
                       Current balance is insufficient！
@@ -134,7 +149,7 @@ const WithDrawals = (): JSX.Element => {
 
               <div className="mt-3 relative input-success-active w-full flex justify-center">
                 <Button className='rounded-full mx-2 w-1/2 h-16 font-Regular font-base border-none' style={{ backgroundColor: '#443C4A' }}
-                  disabled={requestSta}
+                  disabled={requestChecked}
                   ghost onClick={() => withdrawalsFunc()}>REQUEST WITHDRAWAL</Button>
               </div>
 

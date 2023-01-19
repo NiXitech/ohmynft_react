@@ -102,6 +102,8 @@ const MWPage = (): JSX.Element => {
 
       if (result.code === 200 && result.data.items !== null) {
         setCompletedData(result.data.items)
+      }else {
+        setCompletedData([])
       }
     } catch (error: any) {
       toast.error(error.message, {
