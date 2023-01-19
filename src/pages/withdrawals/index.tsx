@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { LStorage } from '../../api/services/cooike/storage';
 import './index.scss'
 import { Button } from 'antd';
-import { getbalance, getNotification, getReferralSummay, getWithdrawal, withdrawals } from '../../api/services/http/api';
+import { getCurrentInfo, getReferralSummay, getWithdrawal, withdrawals } from '../../api/services/http/api';
 import { toast } from 'react-toastify';
 
 
@@ -13,14 +13,12 @@ const WithDrawals = (): JSX.Element => {
   const [amount, setAmount] = useState('')
   const [requestSta, setrequestSta] = useState(true)
   const [historyList, sethistoryList] = useState([])
-  const [requestChecked, setrequestChecked] = useState(true)
 
 
   // get withdraw record
   const getWithdrawalFun = async () => {
     try {
       const { code, data } = await getWithdrawal(userData.address) as any
-      debugger
       if (code === 200) {
         setHistory(data || [])
       } else {
@@ -52,8 +50,9 @@ const WithDrawals = (): JSX.Element => {
     try {
       // get referral summary data
       const ethereum_address = process.env.REACT_APP_CONTRACT_ADDRESS + '';
-      const { code, data } = await getbalance(ethereum_address) as any
+      const { code, data } = await getCurrentInfo(ethereum_address) as any
       if (code === 200 && data) {
+        console.log('datadatadatadata---------------->', data)
         setBalance(data.balance || '0')
       } else {
         // fail modal 
@@ -74,16 +73,25 @@ const WithDrawals = (): JSX.Element => {
   )
 
   const checkReq = (value: string) => {
-    if (value) {
-      if (Number(value) > 0 && Number(value) < Number(balance)) {
-        setrequestSta(false)
-      } else {
-        setrequestSta(true);
-        toast.error('please check number')
-      }
+    setAmount(value)
+    if(Number(value) > Number(balance) ){
+      setrequestSta(true)
+    } else {
+      setrequestSta(false)
     }
+    // console.log('----000000000-->',Number(value),Number(balance) ,Number(value) > 0 && Number(value) < Number(balance))
+    // if (value) {
+    //   if (Number(value) > 0 && Number(value) < Number(balance)) {
+    //     setrequestSta(false)
+    //   } 
+    //   else {
+    //     setrequestSta(true);
+    //     toast.error('please check number')
+    //   }
+    // }
   }
 
+  const [requestChecked, setrequestChecked] = useState(false)
   const requestCheckedFun = () => {
     if (Number(balance) > 0.00005) {
       setrequestChecked(false)
@@ -137,7 +145,7 @@ const WithDrawals = (): JSX.Element => {
               </div>
 
               {
-                !requestChecked ?
+                requestSta ?
                   <div className="mt-3 relative input-success-active w-full flex justify-center py-2">
                     <p className='text-error-red font-Regular text-sm'>
                       Current balance is insufficient！
@@ -149,7 +157,7 @@ const WithDrawals = (): JSX.Element => {
 
               <div className="mt-3 relative input-success-active w-full flex justify-center">
                 <Button className='rounded-full mx-2 w-1/2 h-16 font-Regular font-base border-none' style={{ backgroundColor: '#443C4A' }}
-                  disabled={requestChecked}
+                  disabled={requestSta}
                   ghost onClick={() => withdrawalsFunc()}>REQUEST WITHDRAWAL</Button>
               </div>
 

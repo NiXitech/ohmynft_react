@@ -764,7 +764,7 @@ const ProductDetail = (): JSX.Element => {
                   <div className="flex-center-detail">
                     <div className="share-twitter pl-6">
                       <div className="detail-share-twitter-button pb-10 pt-12">
-                        <Button ghost size="large" onClick={shareontweet}>SHARE THIS COMPETITIONT &nbsp;
+                        <Button ghost size="large" onClick={shareontweet}>SHARE THIS COMPETITION &nbsp;
                           <span className=" icon-twitter icon"></span>
                         </Button>
                       </div>

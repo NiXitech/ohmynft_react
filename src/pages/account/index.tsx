@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { message, Switch, Upload } from 'antd';
 import type { RcFile } from 'antd/es/upload/interface';
-import { emailNotification, getNotification, tweetNotification, uploadAvatar } from '../../api/services/http/api';
+import { emailNotification, getCurrentInfo, tweetNotification, uploadAvatar } from '../../api/services/http/api';
 import { LStorage } from '../../api/services/cooike/storage';
 import './index.scss'
 import { toast } from 'react-toastify';
@@ -122,7 +122,7 @@ const AccountPage = (): JSX.Element => {
   const getStatus = async () => {
     try {
       const userinfo = LStorage.get('LastAuthUser') || {};
-      const { code, data } = await getNotification(userinfo.address || '') as any
+      const { code, data } = await getCurrentInfo(userinfo.address || '') as any
       if (code === 200) {
         console.log('=========>', data)
         setUserInfo(data)
