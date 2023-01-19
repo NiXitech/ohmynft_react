@@ -243,7 +243,7 @@ const NFTCard = (props: propspromise): JSX.Element => {
 								background: `${props.cardData.winner.display_name === '' && percant() > 99 ? 'linear-gradient(104deg, #EC0F00 -1%, #FCDC66 100%)' : ''}`
 							}}
 						>
-							{props.cardData.winner.display_name === '' && percant() > 99 ? 'closed' : 'Enter now'}
+							{props.cardData.winner.display_name === '' && percant() > 99 ? 'drawing soon' : props.cardData.winner.display_name === '' && percant() > 99 ? 'closed' : 'Enter now'}
 						</Link>
 							:
 							<button
