@@ -51,7 +51,8 @@ const LiveNow = (props: any) => {
 	// copy link
 	const copyLink = () => {
 		if (userdata) {
-			copy(window.location.origin);
+			let userinfo = LStorage.get('LastAuthUser') || {};
+			copy(window.location.origin+ '/t/' + (userinfo.name || ''));
 			toast.success('Copy succeeded!');
 		} else {
 			actions.openConnect();

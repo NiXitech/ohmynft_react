@@ -187,7 +187,7 @@ const Verification = (): JSX.Element => {
     console.log('%c🀂 ', 'color: #aa00ff; font-size: 20px;', value.length);
     if (value.length === 6) {
       setLoading(true)
-      submitVerificationCode()
+      // submitVerificationCode()
     }
   }, [value.length])
 
@@ -280,7 +280,7 @@ const Verification = (): JSX.Element => {
               </div>
               <p className="w-full inline-block text-red text-sm mt-4">{tipMsg}</p>
               <button type="submit" className="w-full button-background rounded-full text-white mt-2 font-Regular text-sm tracking-widest p-2 inline-block transition-opacity hover:opacity-90 font-medium h-13" onClick={() => {
-                getResendCodeFun()
+                submitVerificationCode()
               }}>CONFIRM</button>
               <button type="submit" className="bg-transparent mt-2 text-blue font-Regular text-sm tracking-widest p-2 inline-block transition-opacity hover:opacity-90 font-medium" onClick={() => {
                 getResendCodeFun()

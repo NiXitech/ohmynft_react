@@ -83,6 +83,12 @@ const WithDrawals = (): JSX.Element => {
     }
   }
 
+  // const stepList = ()=> {
+  //   let arr = []
+  //   Number(balance)/
+  // }
+
+
 
   return (
     <>
@@ -95,7 +101,6 @@ const WithDrawals = (): JSX.Element => {
             <form>
               <div className="mt-6 relative input-success-active">
                 <input className="font-Regular text-sm h-16 py-2 rounded-full bg-grey-6 block relative w-full rounded-lg px-6 outline-none focus:border-slate-200 focus:ring-0 autofill:bg-slate-600 transition-all appearance-none hover:appearance-none border-none" name="number" id="number" type="number" placeholder="Enter withdrawal amount"
-                  disabled={Number(balance) === 0}
                   value={chekedValue}
                   max={balance}
                   onChange={(e) => { checkReq(e.target.value) }}
