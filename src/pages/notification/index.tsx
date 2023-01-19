@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { LStorage } from "../../api/services/cooike/storage";
-import { getnotification, refreshNotification } from "../../api/services/http/api";
+import { getnotification } from "../../api/services/http/api";
 import './index.scss'
 
 const Notification = (): JSX.Element => {
@@ -22,29 +22,29 @@ const Notification = (): JSX.Element => {
 	}
 
 	const showDetailInfo = (item: any) => {
-		refreshNotificationFun()
+		// refreshNotificationFun()
 		setdetailInfo(false)
 		settextInfo(item)
 	}
 
-	const refreshNotificationFun = async () => {
-		try {
-			let userInfo = LStorage.get('LastAuthUser')
-			const { code, data } = await refreshNotification(userInfo.address || '') as any
-			if (code === 200) {
-				console.log('nononononononononononononononononono----no---------->', data);
-			}
-		} catch (error) {
+	// const refreshNotificationFun = async () => {
+	// 	try {
+	// 		let userInfo = LStorage.get('LastAuthUser')
+	// 		const { code, data } = await refreshNotification(userInfo.address || '') as any
+	// 		if (code === 200) {
+	// 			// 
+	// 		}
+	// 	} catch (error) {
 
-		}
-	}
+	// 	}
+	// }
 
 	const getnotificationFun = async () => {
 		try {
 			let userInfo = LStorage.get('LastAuthUser')
 			const { code, data } = await getnotification(userInfo.address || '') as any
 			if (code === 200) {
-				setnotiList(data)
+				setnotiList(data || [])
 			}
 		} catch (error) {
 

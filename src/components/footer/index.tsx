@@ -27,7 +27,7 @@ const Footer = (): JSX.Element => {
                   <li className="lg:inline-block"><a href="/privacy-policy" className="text-sm lg:text-xs 2xl:text-sm font-bold tracking-widest uppercase p-3 lg:px-2 xl:px-2 2xl:px-3 inline-block transition-opacity hover:opacity-90">Privacy Policy</a></li>
                   <li className="lg:inline-block"><a href="/cookie-policy" className="text-sm lg:text-xs 2xl:text-sm font-bold tracking-widest uppercase p-3 lg:px-2 xl:px-2 2xl:px-3 inline-block transition-opacity hover:opacity-90">Cookie Policy</a></li>
                   <li className="lg:inline-block"><a href="/terms-and-conditions" className="text-sm lg:text-xs 2xl:text-sm font-bold tracking-widest uppercase p-3 lg:px-2 xl:px-2 2xl:px-3 inline-block transition-opacity hover:opacity-90">Terms and Conditions</a></li>
-                  <li className="lg:inline-block"><a href="https://twitter.com" className="text-sm lg:text-xs 2xl:text-sm font-bold tracking-widest uppercase p-3 lg:px-2 xl:px-2 2xl:px-3 inline-block transition-opacity hover:opacity-90"><span className=" icon-twitter icon"></span></a></li>
+                  <li className="lg:inline-block"><a href="https://twitter.com/OhMyNFT_" className="text-sm lg:text-xs 2xl:text-sm font-bold tracking-widest uppercase p-3 lg:px-2 xl:px-2 2xl:px-3 inline-block transition-opacity hover:opacity-90"><span className=" icon-twitter icon"></span></a></li>
                 </ul>
               </div>
               <div className="text-center mt-10 lg:order-1 lg:mt-0 lg:flex lg:flex-wrap lg:justify-start lg:text-left lg:max-w-[240px] xl:max-w-[280px]">

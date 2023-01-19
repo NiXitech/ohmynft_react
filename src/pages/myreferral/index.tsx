@@ -14,7 +14,7 @@ const MyReferral = (): JSX.Element => {
   const getReferralList = async () => {
     setLoading(true)
     try {
-      const result: CallBackData = await ReferralList(JSON.stringify(address)) as any
+      const result: CallBackData = await ReferralList(address || '') as any
 
       if (result.data !== null) {
         setReferralList(result.data)

@@ -738,7 +738,7 @@ const ProductDetail = (): JSX.Element => {
 
                           : <>
                             <div className="w-full">
-                              <Link to={'/completed'} className='hyperlink font-Bold w-full block'>
+                              <Link to={'/'} className='hyperlink font-Bold w-full block'>
                                 VIEW MORE COMPETITIONS
                               </Link>
 

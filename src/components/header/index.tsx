@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAccount, useDisconnect } from 'wagmi';
 import { LStorage } from '../../api/services/cooike/storage';
-import { getAllActivity, getRaffleList, getUserInfo, unreadCount } from '../../api/services/http/api';
+import { getAllActivity, getRaffleList, getUserInfo, refreshNotification, unreadCount } from '../../api/services/http/api';
 import useStateHook from '../../pages/store';
 import { AccountUserInfo, CallBackData, RaffleItemData } from '../../types/types';
 import {
@@ -168,7 +168,7 @@ const Header = (): JSX.Element => {
   const getunreadCount = async () => {
     try {
       let userInfo = LStorage.get('LastAuthUser')
-      const { code, data: {count} } = await unreadCount(userInfo.address || '') as any
+      const { code, data: { count } } = await unreadCount(userInfo.address || '') as any
       if (code === 200) {
         setNotification(Number(count) || 0);
       }
@@ -177,8 +177,23 @@ const Header = (): JSX.Element => {
     }
   }
 
-  const toNotification = ()=> {
-    navigate('/notification')
+  const toNotification = () => {
+    refreshNotificationFun();
+    getunreadCount();
+    navigate('/notification');
+  }
+
+  // 更新消息通知状态
+  const refreshNotificationFun = async () => {
+    try {
+      let userInfo = LStorage.get('LastAuthUser')
+      const { code } = await refreshNotification(userInfo.address || '') as any
+      if (code === 200) {
+        // 
+      }
+    } catch (error) {
+
+    }
   }
 
   useEffect(() => {
@@ -335,7 +350,7 @@ const Header = (): JSX.Element => {
                         ? <>
                           <div className="hidden lg:flex ml-3 lg:border-white/30 lg:pl-4 lg:ml-0" style={{ minWidth: '248px', flexDirection: 'row-reverse' }} >
                             <div className="nav-main-avatar relative mr-2 cursor-pointer group grid grid-cols-2">
-                              <div className='flex items-center font-base' onClick={()=> toNotification()}>
+                              <div className='flex items-center font-base' onClick={() => toNotification()}>
                                 <Badge style={{ fontSize: '0.25rem' }} count={notification}>
                                   <BellOutlined style={{ fontSize: '1.5rem', color: '#fff' }} />
                                 </Badge>
@@ -451,9 +466,17 @@ const Header = (): JSX.Element => {
                 <div className="mt-14 attention-info fixed w-full z-20">
                   <div className="pt-3 pb-2 text-center backimg">
                     Earn Big Rewards With
-                    <span>
-                      &nbsp;Referrals！
-                    </span>
+                    {hasUser ?
+                      <span>
+                        <a href='/referrals'>
+                          &nbsp;Referrals！
+                        </a>
+                      </span>
+                      :
+                      <span>
+                        &nbsp;Referrals！
+                      </span>
+                    }
                   </div>
                 </div>
             }
