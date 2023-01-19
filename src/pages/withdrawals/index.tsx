@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { LStorage } from '../../api/services/cooike/storage';
 import './index.scss'
 import { Button } from 'antd';
-import { getNotification, getReferralSummay, getWithdrawal, withdrawals } from '../../api/services/http/api';
+import { getCurrentInfo, getReferralSummay, getWithdrawal, withdrawals } from '../../api/services/http/api';
 import { toast } from 'react-toastify';
 
 
@@ -12,7 +12,7 @@ const WithDrawals = (): JSX.Element => {
   const [history, setHistory] = useState([])
   const [amount, setAmount] = useState('')
   const [requestSta, setrequestSta] = useState(true)
-  const [historyList,sethistoryList] = useState([])
+  const [historyList, sethistoryList] = useState([])
 
 
   // get withdraw record
@@ -32,7 +32,7 @@ const WithDrawals = (): JSX.Element => {
   // request withdraw
   const withdrawalsFunc = async () => {
     try {
-      const { code } = await withdrawals({category: 'withdraw', amount: amount }) as any
+      const { code } = await withdrawals({ category: 'withdraw', amount: amount }) as any
       if (code === 200) {
         toast.success('request succeeded!');
       } else {
@@ -50,7 +50,7 @@ const WithDrawals = (): JSX.Element => {
     try {
       // get referral summary data
       const ethereum_address = process.env.REACT_APP_CONTRACT_ADDRESS + '';
-      const { code, data } = await getNotification(ethereum_address) as any
+      const { code, data } = await getCurrentInfo(ethereum_address) as any
       if (code === 200 && data) {
         setBalance(data.balance || '0')
       } else {
