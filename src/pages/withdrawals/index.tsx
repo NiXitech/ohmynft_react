@@ -12,6 +12,7 @@ const WithDrawals = (): JSX.Element => {
   const [history, setHistory] = useState([])
   const [amount, setAmount] = useState('')
   const [requestSta, setrequestSta] = useState(true)
+  const [historyList,sethistoryList] = useState([])
 
 
   // get withdraw record
@@ -149,7 +150,7 @@ const WithDrawals = (): JSX.Element => {
                 true ?
                   <div className='h-56 w-full overflow-hidden lg:overflow-y-auto overflow-y-auto hideScrollbar '>
                     {
-                      [1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => {
+                      historyList.map((item, index) => {
                         return (
                           <div key={index} className="mt-3 relative input-success-active w-full flex justify-between">
                             <p className='font-Regular text-sm text-white py-4 border-b w-full border-slate-100'>BUSD:0.7</p>

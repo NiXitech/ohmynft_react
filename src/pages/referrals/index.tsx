@@ -45,7 +45,7 @@ const Referrals = (): JSX.Element => {
   const getReferralSummayFun = async () => {
     try {
       // get referral summary data
-      const { code, data } = await getReferralSummay(JSON.stringify(address)) as any
+      const { code, data } = await getReferralSummay(address || '') as any
       if (code === 200 && data) {
         setSummaryData(data);
       } else {
