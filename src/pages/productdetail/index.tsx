@@ -188,13 +188,13 @@ const ProductDetail = (): JSX.Element => {
   }, [debouncedTokenId, infoData])
 
   useEffect(() => {
-    setTimeout(() => {
+    // setTimeout(() => {
 
-      console.log('%c🀂 ', 'color: #e5de73; font-size: 20px;', new Date());
-      refetchSupply?.()
-      getRaffleActivityFun()
-      getRaffleInfoFun()
-    }, 5000)
+    //   console.log('%c🀂 ', 'color: #e5de73; font-size: 20px;', new Date());
+    //   refetchSupply?.()
+    //   getRaffleActivityFun()
+    //   getRaffleInfoFun()
+    // }, 5000)
 
   })
 
@@ -300,8 +300,6 @@ const ProductDetail = (): JSX.Element => {
     ...configApprove,
     onSuccess(data: any) {
       console.log('Success ApproveFun', data)
-      // toast.success('The transaction is successful, waiting for block confirmation！')
-
       if (!EntryStatus) {
         setEntryStatus(true)
         enterWrite?.()
@@ -309,32 +307,37 @@ const ProductDetail = (): JSX.Element => {
       // enterWrite?.()
     },
     onError(error: any) {
-      console.log('Error1212122211 ApproveFun', error.message)
       setMintLoading(false)
       toast.error(error.message)
     },
   })
 
-  const ApproveTransaction = useWaitForTransaction({
-    confirmations: 1,
-    hash: mintNft?.hash,
-    onSuccess(data) {
-      console.log(" mintNft useWaitForTransaction STATUS ", EntryStatus);
-      // setEnableHook(false);
+  // const ApproveTransaction = useWaitForTransaction({
+  //   confirmations: 1,
+  //   hash: mintNft?.hash,
+  //   onSuccess(data) {
+  //     // setEnableHook(false);
 
-    },
-    onError(error) {
-      console.log('mintNft useWaitForTransaction error', error);
-    }
-  });
+  //   },
+  //   onError(error) {
+  //   }
+  // });
 
   const { chain } = useNetwork()
   const { chains, pendingChainId, switchNetwork } =
     useSwitchNetwork()
 
   const mint = async () => {
-    if (!isConnected) {
+    const accessToken = LStorage.get('accessToken')
+    console.log('%c🀆 accessToken', 'color: #73998c; font-size: 20px;', accessToken);
+
+    if (!accessToken) {
       actions.openConnect()
+      return
+    }
+    // @ts-ignore
+    if (infoData.total_entries - currentEntryLens < Quantity || getCurrentUserEntries(infoData?.participants) + Quantity > infoData.max_entries_per_user) {
+      toast.error('Maximum limit exceeded.')
       return
     }
     setMintLoading(true)
@@ -635,7 +638,7 @@ const ProductDetail = (): JSX.Element => {
                                                 JSON.stringify(val).substr(1);
                                                 setQuantity(Number(JSON.stringify(val).substr(1)));
                                               } else if (Number(val) > infoData.max_entries_per_user) {
-                                                setQuantity(100);
+                                                setQuantity(infoData.max_entries_per_user - getCurrentUserEntries(infoData?.participants));
                                               } else {
                                                 setQuantity(Number(val));
                                               }
@@ -676,13 +679,15 @@ const ProductDetail = (): JSX.Element => {
                               <span>{TimeInterval(infoData ? infoData?.close_time : JSON.stringify(new Date()))}</span>
                               <div className="wineer">
                                 <span className="text-right">Won By</span>
-                                {
-                                  infoData?.winner.avatar
-                                    ? <img src={infoData?.winner.avatar} alt="" className="rounded-full bg-slate-600" />
-                                    : <div className=' flex items-center justify-center user-name-first-word uppercase default_img rounded-full bg-slate-600'>
-                                      {infoData?.winner.display_name.substr(0, 1)}
-                                    </div>
-                                }
+                                <Link to={`/mw/${infoData?.winner.display_name}`}>
+                                  {
+                                    infoData?.winner.avatar
+                                      ? <img src={infoData?.winner.avatar} alt="" className="rounded-full bg-slate-600" />
+                                      : <div className=' flex items-center justify-center user-name-first-word uppercase default_img rounded-full bg-slate-600'>
+                                        {infoData?.winner.display_name.substr(0, 1)}
+                                      </div>
+                                  }
+                                </Link>
                                 {/* <div className=' flex items-center justify-center user-name-first-word uppercase default_img rounded-full'>
                                   {infoData?.winner.display_name.substr(0, 1)}
                                 </div> */}
