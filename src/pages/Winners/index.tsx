@@ -86,7 +86,7 @@ const Winners = (): JSX.Element => {
                               winnerList.map((item: AllActivityItem, index) => {
                                 return <article className="border-b border-slate-500 py-3 hover:bg-slate-700 flex items-center flex-wrap" key={index}>
                                   <div className="py-3 pl-2 w-6/12 md:w-3/12">
-                                    <a href={`/competition/${item.raffle_id}`} className="flex items-center mr-3 group">
+                                    <a href={`/productdetail/${item.raffle_id}`} className="flex items-center mr-3 group">
                                       <figure className="mr-3 rounded-lg relative overflow-hidden w-14 h-14 flex-none border-linear transition-all">
                                         <img className="block relative z-10 w-14 rounded-lg" src={item.prize.image_url} width="50" height="50" alt="" loading="lazy" decoding="async" />
                                       </figure>
