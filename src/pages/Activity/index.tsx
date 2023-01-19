@@ -72,7 +72,7 @@ const Activity = (): JSX.Element => {
                         activityList.map((item: AllActivityItem, index) => {
                           return <article key={index} className="border-b border-slate-500 py-3 lg:py-1 flex items-center flex-wrap">
                             <div className="py-3 pl-2 w-6/12 md:w-3/12">
-                              <a href={`/competition/${item.raffle_id}`} className="flex items-center mr-3 group pl-6">
+                              <a href={`/productdetail/${item.raffle_id}`} className="flex items-center mr-3 group pl-6">
                                 <figure className="mr-3 rounded-lg relative overflow-hidden w-14 h-14 flex-none transition-all">
                                   <img className="block relative z-10 w-14 rounded-lg" src={item.prize.image_url} width="52" height="52" alt="" loading="lazy" decoding="async" />
                                 </figure>

@@ -466,9 +466,17 @@ const Header = (): JSX.Element => {
                 <div className="mt-14 attention-info fixed w-full z-20">
                   <div className="pt-3 pb-2 text-center backimg">
                     Earn Big Rewards With
-                    <span>
-                      &nbsp;Referrals！
-                    </span>
+                    {hasUser ?
+                      <span>
+                        <a href='/referrals'>
+                          &nbsp;Referrals！
+                        </a>
+                      </span>
+                      :
+                      <span>
+                        &nbsp;Referrals！
+                      </span>
+                    }
                   </div>
                 </div>
             }
