@@ -54,7 +54,7 @@ const Header = (): JSX.Element => {
             if (!isActive) navigate(to)
             setMobileOpenMenu(!mobileOpenMenu)
           }}>
-            <span className="inline-block py-1 my-3 uppercase tracking-wider lg:whitespace-nowrap lg:my-0 lg:py-0 lg:mx-0 lg:flex lg:self-center transition-all duration-100 group-hover:text-cyan-500">{title}{count > 0 ? '(' + count + ')' : ''}</span>
+            <span className="inline-block py-1 my-3 tracking-wider lg:whitespace-nowrap lg:my-0 lg:py-0 lg:mx-0 lg:flex lg:self-center transition-all duration-100 group-hover:text-cyan-500">{title}{count > 0 ? '(' + count + ')' : ''}</span>
           </div>
         </li>
       </>
@@ -293,7 +293,7 @@ const Header = (): JSX.Element => {
                           <NavItem to={'/completed'} title="Completed" count={completedCount}></NavItem>
                           <NavItem to={'/activity'} title="Activity" count={activityCount}></NavItem>
                           {
-                            isConnected && <NavItem to={'/myentries'} title="myentries" count={myentries}></NavItem>
+                            isConnected && <NavItem to={'/myentries'} title="My Entries" count={myentries}></NavItem>
                           }
                           {/* <NavItem to={'/winners'} title="Winners"></NavItem>
                           <NavItem to={'/referrals'} title="referrals"></NavItem> */}
