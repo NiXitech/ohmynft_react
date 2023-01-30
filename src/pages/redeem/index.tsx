@@ -19,7 +19,11 @@ const Redeem = (): JSX.Element => {
     const [checkedId, setCheckedID] = useState('')
     const [selectedid, setselectedid] = useState('')
     const attention = () => {
-        setModalOpen(true)
+        if(checkedId === '') {
+            toast.error('No prize selected')
+        }else {
+            setModalOpen(true)
+        }
     }
 
     const getRaffleListFun = async () => {
@@ -122,12 +126,12 @@ const Redeem = (): JSX.Element => {
                     {
                         CompletedData && CompletedData.length > 0 ?
                             <div className="w-full text-center mt-28">
-                                <Button onClick={() => { attention() }} className='pr-6 button-blue uppercase text-center border-none text-white text-xl font-Medium' ghost shape="round" size="large" style={{
+                                <Button onClick={() => { attention() }} className='pr-6 button-blue text-center border-none text-white text-xl font-Medium' ghost shape="round" size="large" style={{
                                     backgroundColor: '#3A8AFF',
                                     height: '4rem',
                                     width: '19rem'
                                 }}>
-                                    EXCHANGE
+                                    Exchange
                                     <span className="pl-2 icon-twitter icon"></span>
                                 </Button>
                                 <div className="py-4 font-sm font-Regular text-slate-100">
