@@ -102,7 +102,7 @@ const MWPage = (): JSX.Element => {
 
       if (result.code === 200 && result.data.items !== null) {
         setCompletedData(result.data.items)
-      }else {
+      } else {
         setCompletedData([])
       }
     } catch (error: any) {
@@ -468,7 +468,9 @@ const MWPage = (): JSX.Element => {
                                             {
                                               CompletedData.map((ele: RaffleItemData, index) => {
                                                 return (
-                                                  <WinsCard key={index} cardData={ele}></WinsCard>
+                                                  <a href={`/productdetail/${ele.raffle_id}`} className="">
+                                                    <WinsCard key={index} cardData={ele}></WinsCard>
+                                                  </a>
                                                 )
                                               })
                                             }

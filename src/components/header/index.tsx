@@ -350,11 +350,11 @@ const Header = (): JSX.Element => {
                         ? <>
                           <div className="hidden lg:flex ml-3 lg:border-white/30 lg:pl-4 lg:ml-0" style={{ minWidth: '248px', flexDirection: 'row-reverse' }} >
                             <div className="nav-main-avatar relative mr-2 cursor-pointer group grid grid-cols-2">
-                              <div className='flex items-center font-base' onClick={() => toNotification()}>
+                              {/* <div className='flex items-center font-base' onClick={() => toNotification()}>
                                 <Badge style={{ fontSize: '0.25rem' }} count={notification}>
                                   <BellOutlined style={{ fontSize: '1.5rem', color: '#fff' }} />
                                 </Badge>
-                              </div>
+                              </div> */}
                               <div className="relative" onClick={(e) => { e.stopPropagation(); setShowSocial(!showSocial) }}>
                                 {/* <img className="rounded-full border-2 border-white transition-all group-hover:border-cyan-500 p-[1px] border-white" src={require('../../asstes/img/personal.png').default} alt="Your avatar" decoding="async" /> */}
                                 {
