@@ -13,7 +13,8 @@ const Notification = (): JSX.Element => {
 			id: 0,
 			raffle_activity_id: 0,
 			raffle_id: 0,
-			read: false
+			read: false,
+			created_at: ''
 		}
 	])
 
@@ -76,7 +77,7 @@ const Notification = (): JSX.Element => {
 												{item.category || ''}
 											</div>
 											<div className="text-column-time">
-												{item.raffle_activity_id}
+												{item.created_at}
 											</div>
 										</div>
 									)
