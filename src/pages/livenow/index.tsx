@@ -10,7 +10,7 @@ import { LStorage } from '../../api/services/cooike/storage';
 import copy from 'copy-to-clipboard';
 import { toast } from 'react-toastify';
 import useStateHook from '../../pages/store';
-import TweetAuth from './tweetauth';
+// import TweetAuth from './tweetauth';
 
 const LiveNow = (props: any) => {
 	const [actionstate, actions] = useStateHook();
@@ -116,7 +116,6 @@ const LiveNow = (props: any) => {
 			} else {
 
 			}
-			console.log('all------activity------->', items);
 		} catch (err) {
 			console.log('getRaffleListFun:', err)
 		}

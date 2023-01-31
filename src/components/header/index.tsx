@@ -229,9 +229,7 @@ const Header = (): JSX.Element => {
       const userinfo = LStorage.get('LastAuthUser') || {};
       const { code, data } = await getUserInfo(userinfo.name) as any
       if (code === 200) {
-        console.log('=========>', data)
         setUserInfo(data)
-
       } else {
 
       }

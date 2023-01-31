@@ -446,7 +446,6 @@ const ProductDetail = (): JSX.Element => {
       } else {
 
       }
-      console.log('all------activity------->', items);
     } catch (err) {
       console.log('getRaffleListFun:', err)
     }
@@ -626,7 +625,6 @@ const ProductDetail = (): JSX.Element => {
                                           }}
                                           onChange={(e) => {
                                             let val = e.target.value.replace(/[^\d]/g, '');
-                                            console.log('number:--->', val);
                                             if (infoData) {
                                               if (infoData.total_entries - currentEntryLens < Number(val) || getCurrentUserEntries(infoData?.participants) + Number(val) > infoData.max_entries_per_user) {
                                                 toast.error('Maximum limit exceeded.')
