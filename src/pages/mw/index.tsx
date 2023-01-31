@@ -468,7 +468,7 @@ const MWPage = (): JSX.Element => {
                                             {
                                               CompletedData.map((ele: RaffleItemData, index) => {
                                                 return (
-                                                  <a href={`/productdetail/${ele.raffle_id}`} className="">
+                                                  <a href={`/productdetail/${ele.id}`} className="">
                                                     <WinsCard key={index} cardData={ele}></WinsCard>
                                                   </a>
                                                 )

@@ -116,7 +116,6 @@ const LiveNow = (props: any) => {
 			} else {
 
 			}
-			console.log('all------activity------->', items);
 		} catch (err) {
 			console.log('getRaffleListFun:', err)
 		}
